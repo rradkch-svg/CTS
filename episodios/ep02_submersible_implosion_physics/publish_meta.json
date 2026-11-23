@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep02",
+  "slug": "ep02_submersible_implosion_physics",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "Why Deep-Sea Hulls IMPLODE in Milliseconds",
+  "youtube_title_length": 42,
+  "youtube_description": "",
+  "ig_tiktok_caption": "At 3,800 meters down, the ocean presses inward with roughly 400 tons per square foot. Here is the materials-science difference between a titanium sphere and a composite cylinder — and why buckling finishes in 20 milliseconds. Would you ever dive 4,000 meters down? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#physics",
+    "#submarine",
+    "#materialsscience",
+    "#howitworks",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Four thousand meters down inside a certified titanium sphere — would you take the dive? Comment YES or NO",
+  "related_video_slot": "ep01_elevator_safety_brake",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}

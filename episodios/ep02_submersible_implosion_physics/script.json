@@ -1,0 +1,346 @@
+{
+  "episode_id": "ep02",
+  "slug": "ep02_submersible_implosion_physics",
+  "title": "Why Deep-Sea Hulls IMPLODE in Milliseconds",
+  "hook_text": "CRUSHED IN 0.02 SEC",
+  "cta_text": "Comment YES or NO",
+  "bpm": 96,
+  "cover_headline": [
+    "380X OCEAN PRESSURE.",
+    "COLLAPSE IN 0.02 SEC."
+  ],
+  "publish_meta": {
+    "youtube_title": "Why Deep-Sea Hulls IMPLODE in Milliseconds",
+    "youtube_description": "",
+    "ig_tiktok_caption": "At 3,800 meters down, the ocean presses inward with roughly 400 tons per square foot. Here is the materials-science difference between a titanium sphere and a composite cylinder — and why buckling finishes in 20 milliseconds. Would you ever dive 4,000 meters down? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#physics",
+      "#submarine",
+      "#materialsscience",
+      "#howitworks",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Four thousand meters down inside a certified titanium sphere — would you take the dive? Comment YES or NO",
+    "related_video_slot": "ep01_elevator_safety_brake",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "Four thousand meters down, a deep-sea hull can collapse faster than your brain registers pain.",
+      "voice_direction": "Deep, taut opening hook at 1.03x pace; clean hit on collapse.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "hull_pressure_peak",
+      "sfx_cues": [
+        {
+          "name": "deep_sonar_pulse",
+          "offset_s": 0.1,
+          "gain_db": -6.0,
+          "pan": 0.0
+        },
+        {
+          "name": "pressure_rumble",
+          "offset_s": 0.5,
+          "gain_db": -8.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": null,
+      "pause_after_s": 0.15
+    },
+    {
+      "id": "b02_hook_flip",
+      "act": "hook",
+      "narration_text": "It does not leak slowly like a punctured tire. Pure hydrostatic physics erases it.",
+      "voice_direction": "Firm, forensic precision; crisp pitch drop on erases it.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "depth_3800m_scale",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 1.8,
+          "gain_db": -12.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "OCEAN DEPTH",
+        "value": "3,800 METERS"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b03_hydrostatic_math",
+      "act": "mechanism",
+      "narration_text": "Every ten meters down adds another full atmosphere of water pressing inward from every direction.",
+      "voice_direction": "Clear, measured documentary explanation with crisp pacing.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "pressure_stack_arrows",
+      "sfx_cues": [
+        {
+          "name": "pressure_rumble",
+          "offset_s": 0.2,
+          "gain_db": -11.0,
+          "pan": 0.0
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.2,
+          "gain_db": -12.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "EXT PRESSURE",
+        "value": "380 ATM"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b04_force_comparison",
+      "act": "mechanism",
+      "narration_text": "At three thousand eight hundred meters, that equals roughly four hundred tons on every square foot.",
+      "voice_direction": "Heavy authoritative emphasis on four hundred tons.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "tonnage_per_sqft",
+      "sfx_cues": [
+        {
+          "name": "hull_creak",
+          "offset_s": 1.4,
+          "gain_db": -8.0,
+          "pan": -0.2
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.8,
+          "gain_db": -12.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "HULL LOAD",
+        "value": "400 TONS/SQ FT"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b05_titanium_sphere",
+      "act": "mechanism",
+      "narration_text": "That is why deep-ocean submarines use thick titanium spheres. A sphere distributes crushing pressure completely evenly.",
+      "voice_direction": "Confident engineering authority; crisp contrast setup.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "sphere_uniform_stress",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -11.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 1.8,
+          "gain_db": -11.0,
+          "pan": -0.3
+        }
+      ],
+      "callout": {
+        "label": "GOLD STANDARD",
+        "value": "TITANIUM SPHERE"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b06_cylinder_carbon_flaw",
+      "act": "escalation",
+      "narration_text": "Now switch to a carbon-fiber cylinder glued to titanium end-rings. Carbon fiber loves stretching, not crushing.",
+      "voice_direction": "Sharper analytical tension; punchy contrast on stretching, not crushing.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "cylinder_joint_hotspot",
+      "sfx_cues": [
+        {
+          "name": "hull_creak",
+          "offset_s": 0.8,
+          "gain_db": -7.0,
+          "pan": 0.3
+        },
+        {
+          "name": "alarm_ping",
+          "offset_s": 2.9,
+          "gain_db": -9.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "WEAK POINT",
+        "value": "COMPOSITE SEAM"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b07_micro_delamination",
+      "act": "escalation",
+      "narration_text": "Over repeated dives, microscopic cracks split the resin layers inside the wall like separating cardboard.",
+      "voice_direction": "Controlled lowered half-voice tension with clean vocal clarity.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "ply_shear_fatigue",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "glass_crack",
+          "offset_s": 1.5,
+          "gain_db": -7.0,
+          "pan": -0.2
+        },
+        {
+          "name": "hull_creak",
+          "offset_s": 2.7,
+          "gain_db": -6.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "FATIGUE MODE",
+        "value": "DELAMINATION"
+      },
+      "pause_after_s": 0.3
+    },
+    {
+      "id": "b08_buckling_threshold",
+      "act": "escalation",
+      "narration_text": "Unlike steel, which bends with warning, composite hulls stay rigid until one tiny dimple forms.",
+      "voice_direction": "Taut buildup; deliberate micro-pause before dimple forms.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "dimple_instability",
+      "sfx_cues": [
+        {
+          "name": "glass_crack",
+          "offset_s": 2.5,
+          "gain_db": -5.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "FAILURE MODE",
+        "value": "ELASTIC BUCKLING"
+      },
+      "pause_after_s": 0.35
+    },
+    {
+      "id": "b09_twenty_ms_collapse",
+      "act": "climax",
+      "narration_text": "The instant symmetry breaks, ocean pressure snaps the cylinder inward in roughly twenty milliseconds.",
+      "voice_direction": "Decisive, weighty climax hit on snaps and twenty milliseconds.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "implosion_wave_020ms",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -9.0,
+          "pan": 0.0
+        },
+        {
+          "name": "implosion_thud",
+          "offset_s": 2.0,
+          "gain_db": -2.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "COLLAPSE TIME",
+        "value": "20 MILLISECONDS"
+      },
+      "pause_after_s": 0.35
+    },
+    {
+      "id": "b10_adiabatic_compression",
+      "act": "climax",
+      "narration_text": "Water rushes inward faster than a jetliner, violently compressing the trapped air pocket in a blink.",
+      "voice_direction": "Urgent kinetic energy with crisp enunciation.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "air_compression_pulse",
+      "sfx_cues": [
+        {
+          "name": "pressure_rumble",
+          "offset_s": 0.3,
+          "gain_db": -5.0,
+          "pan": 0.0
+        },
+        {
+          "name": "deep_sonar_pulse",
+          "offset_s": 2.6,
+          "gain_db": -9.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "WATER INFLOW",
+        "value": "1,500+ MPH"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b11_nerve_comparison",
+      "act": "climax",
+      "narration_text": "A human visual signal takes over two hundred milliseconds. The physics finishes ten times faster.",
+      "voice_direction": "Sobering, crystal-clear scientific conclusion.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "nerve_bar_comparison",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.2,
+          "gain_db": -11.0,
+          "pan": -0.2
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.4,
+          "gain_db": -11.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "HUMAN NERVE",
+        "value": "250 MILLISECONDS"
+      },
+      "pause_after_s": 0.3
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Would you ever dive four thousand meters down? Comment YES or NO.",
+      "voice_direction": "Crisp, engaging direct closing prompt; clear hit on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        {
+          "name": "deep_sonar_pulse",
+          "offset_s": 0.1,
+          "gain_db": -10.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "YOUR CALL",
+        "value": "YES OR NO"
+      },
+      "pause_after_s": 0.35
+    }
+  ]
+}

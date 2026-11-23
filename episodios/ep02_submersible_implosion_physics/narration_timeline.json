@@ -1,0 +1,93 @@
+{
+  "total_duration_s": 77.6071,
+  "sample_rate_hz": 48000,
+  "beats": [
+    {
+      "id": "b01_hook",
+      "start_s": 0.05,
+      "end_s": 5.6313,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b01_hook_ef9a6eb9b6c7.wav",
+      "narration_text": "Four thousand meters down, a deep-sea hull can collapse faster than your brain registers pain."
+    },
+    {
+      "id": "b02_hook_flip",
+      "start_s": 5.7813,
+      "end_s": 12.3684,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b02_hook_flip_34b872910d08.wav",
+      "narration_text": "It does not leak slowly like a punctured tire. Pure hydrostatic physics erases it."
+    },
+    {
+      "id": "b03_hydrostatic_math",
+      "start_s": 12.6184,
+      "end_s": 18.2549,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b03_hydrostatic_math_867f3616e12e.wav",
+      "narration_text": "Every ten meters down adds another full atmosphere of water pressing inward from every direction."
+    },
+    {
+      "id": "b04_force_comparison",
+      "start_s": 18.5049,
+      "end_s": 24.4158,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b04_force_comparison_6727c1e2b028.wav",
+      "narration_text": "At three thousand eight hundred meters, that equals roughly four hundred tons on every square foot."
+    },
+    {
+      "id": "b05_titanium_sphere",
+      "start_s": 24.6658,
+      "end_s": 31.9894,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b05_titanium_sphere_aa8f9ca0c93e.wav",
+      "narration_text": "That is why deep-ocean submarines use thick titanium spheres. A sphere distributes crushing pressure completely evenly."
+    },
+    {
+      "id": "b06_cylinder_carbon_flaw",
+      "start_s": 32.2394,
+      "end_s": 39.6188,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b06_cylinder_carbon_flaw_046c3b974a2e.wav",
+      "narration_text": "Now switch to a carbon-fiber cylinder glued to titanium end-rings. Carbon fiber loves stretching, not crushing."
+    },
+    {
+      "id": "b07_micro_delamination",
+      "start_s": 39.8688,
+      "end_s": 45.7718,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b07_micro_delamination_ab4b1dfaa03a.wav",
+      "narration_text": "Over repeated dives, microscopic cracks split the resin layers inside the wall like separating cardboard."
+    },
+    {
+      "id": "b08_buckling_threshold",
+      "start_s": 46.0718,
+      "end_s": 52.1318,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b08_buckling_threshold_6afdab8076a8.wav",
+      "narration_text": "Unlike steel, which bends with warning, composite hulls stay rigid until one tiny dimple forms."
+    },
+    {
+      "id": "b09_twenty_ms_collapse",
+      "start_s": 52.4818,
+      "end_s": 58.8871,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b09_twenty_ms_collapse_2e1aa189f2bf.wav",
+      "narration_text": "The instant symmetry breaks, ocean pressure snaps the cylinder inward in roughly twenty milliseconds."
+    },
+    {
+      "id": "b10_adiabatic_compression",
+      "start_s": 59.2371,
+      "end_s": 65.5184,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b10_adiabatic_compression_6def1da6616b.wav",
+      "narration_text": "Water rushes inward faster than a jetliner, violently compressing the trapped air pocket in a blink."
+    },
+    {
+      "id": "b11_nerve_comparison",
+      "start_s": 65.7684,
+      "end_s": 71.8939,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b11_nerve_comparison_9b7fd2cdb5cf.wav",
+      "narration_text": "A human visual signal takes over two hundred milliseconds. The physics finishes ten times faster."
+    },
+    {
+      "id": "b12_cta",
+      "start_s": 72.1939,
+      "end_s": 76.5071,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/cache/tts/b12_cta_a5ce6b2c92c4.wav",
+      "narration_text": "Would you ever dive four thousand meters down? Comment YES or NO."
+    }
+  ],
+  "narration_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/narration_clean.wav",
+  "master_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/audio_master.wav",
+  "envelope_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep02_submersible_implosion_physics/narration_envelope.npy"
+}

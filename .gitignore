@@ -8,6 +8,12 @@ reels/
 # Downloaded open-source fonts (fetched by setup_vm.sh)
 assets/fonts/*.ttf
 
+# Agent scratch & intermediate episode audio caches
+.agents/teamwork/
+episodios/*/cache/
+episodios/*/*.wav
+episodios/*/*.npy
+
 # Python
 __pycache__/
 *.py[cod]

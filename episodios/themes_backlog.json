@@ -1,0 +1,215 @@
+{
+  "channel_name": "FailSafe Lab",
+  "language": "en-US",
+  "selection_rationale": "Selected ep01_elevator_safety_brake (How It Works) and ep02_submersible_implosion_physics (Real Disaster Physics) to prove both pillars of the high-RPM adult engineering niche with maximum visual contrast. Episode 1 showcases articulated rotating 2.5D kinematics (snapping braided cables, spinning centrifugal brass flyweights, under-cab scissor linkages, self-tightening steel wedges biting T-rails, hydraulic oil buffer). Episode 2 showcases continuum hydrostatic physics and materials-science cutaways (3,800m pressure rings, isotropic titanium sphere vs composite cylinder stress heatmaps, micro-ply delamination shearing, and a 20ms vs 250ms nerve-latency comparison bar chart). Both are 100% standalone, factually rigorous, monetization-safe, and directly anchor two flagship 10-minute compilation playlists.",
+  "selected_slugs": [
+    "ep01_elevator_safety_brake",
+    "ep02_submersible_implosion_physics"
+  ],
+  "themes": [
+    {
+      "rank": 1,
+      "theme_id": "theme_01",
+      "slug": "ep01_elevator_safety_brake",
+      "selected_for_production": true,
+      "episode_id": "ep01",
+      "sub_niche": "how_it_works",
+      "youtube_title": "How Elevators STOP When Every Cable Snaps",
+      "frame_0_hook_text": "ALL 8 CABLES SNAPPED",
+      "frame_0_visual_concept": "Extreme 2.5D macro cutaway of eight braided steel hoist cables snapping above an elevator cab frame with flying amber sparks and a pulsing crimson overspeed alert at t=0.0s.",
+      "core_physics": "Modern traction elevators hang from 6 to 8 independent braided steel ropes, each engineered to carry 100% of full cab load. If all ropes somehow severed, an unpowered rooftop overspeed centrifugal governor flywheel trips at +15% rated speed: spring-loaded brass flyweights swing outward, lock the governor rope, and yank under-cab steel linkage rods that jam serrated hardened steel wedges into vertical T-shaped guide rails, turning gravity into self-tightening clamping friction, backed by a hydraulic oil pit buffer.",
+      "camera_shots": [
+        "FRAME0_HERO: Extreme macro cutaway of snapping braided steel hoist cables and glowing crimson overspeed rim light",
+        "ISO_WIDE: Full 2.5D cutaway elevator shaft showing cab, counterweight, eight hoist cables, guide T-rails, and pit buffer",
+        "MACRO_CUTAWAY: Close-up on the rooftop centrifugal overspeed governor wheel as brass flyweights flare outward and catch",
+        "EXPLODED_BLUEPRINT: Under-cab chassis X-ray highlighting linkage rods and load-factor force vectors",
+        "IMPACT_CLOSEUP: High-intensity close-up of hardened serrated wedges biting into vertical steel T-rails with friction sparks"
+      ],
+      "ending_cta": "Comment YES or NO",
+      "youtube_description": "",
+      "ig_tiktok_caption": "Movies lie about falling elevators. Inside every shaft is an unpowered 1853 mechanical trap that turns gravity against itself so you barely drop inches. Knowing that, would you still take the stairs? Comment YES or NO.",
+      "hashtags": [
+        "#engineering",
+        "#howitworks",
+        "#mechanicalengineering",
+        "#elevator",
+        "#physics",
+        "#failsafelab"
+      ],
+      "pinned_comment": "Be honest — knowing every cable could snap and you would barely drop inches, do you still take the stairs? Comment YES or NO",
+      "compilation_group": "Everyday Fail-Safe Engineering (10-Min Compilation)",
+      "standalone_verified": true,
+      "monetization_safety_note": "100% educational mechanical safety engineering rendered in clean 2.5D CAD vector graphics; zero human harm; ai_disclosure=false."
+    },
+    {
+      "rank": 2,
+      "theme_id": "theme_02",
+      "slug": "ep02_submersible_implosion_physics",
+      "selected_for_production": true,
+      "episode_id": "ep02",
+      "sub_niche": "real_disaster_physics",
+      "youtube_title": "Why Deep-Sea Hulls IMPLODE in Milliseconds",
+      "frame_0_hook_text": "CRUSHED IN 0.02 SEC",
+      "frame_0_visual_concept": "Isometric 2.5D pressure-hull cutaway ringed by dense glowing cyan and crimson inward hydrostatic force arrows under a deep-navy volumetric spotlight at t=0.0s.",
+      "core_physics": "Hydrostatic water pressure increases roughly 1 atmosphere every 10 meters, reaching ~380 atmospheres (~400 tons per square foot) at 3,800 meters. Deep-ocean submersibles use isotropic titanium spheres because spherical geometry distributes compressive stress evenly. By contrast, carbon-fiber composite cylinders bonded to titanium end-rings excel in tension but suffer cyclic compressive micro-delamination between resin plies; once a tiny geometric dimple forms, elastic buckling collapses the hull in ~20 milliseconds — over 10x faster than a ~250ms human visual nerve signal — while water rushes inward faster than a jetliner.",
+      "camera_shots": [
+        "FRAME0_HERO: Isometric pressure-hull cutaway surrounded by dense inward cyan/crimson hydrostatic force arrows",
+        "ISO_WIDE: Deep-ocean vertical depth column descending from surface to 3,800 meters with escalating pressure rings",
+        "EXPLODED_BLUEPRINT: Side-by-side stress comparison of emerald-uniform titanium sphere vs crimson-seam carbon-fiber cylinder and 20ms vs 250ms nerve-latency bars",
+        "MACRO_CUTAWAY: Extreme cutaway of stacked carbon-fiber laminate plies shearing apart under cyclic compression",
+        "IMPACT_CLOSEUP: Ultra-slow-motion 0.000s to 0.020s radial elastic buckling wave and adiabatic air-pocket compression pulse"
+      ],
+      "ending_cta": "Comment YES or NO",
+      "youtube_description": "",
+      "ig_tiktok_caption": "At 3,800 meters down, the ocean presses inward with roughly 400 tons per square foot. Here is the materials-science difference between a titanium sphere and a composite cylinder — and why buckling finishes in 20 milliseconds. Would you ever dive 4,000 meters down? Comment YES or NO.",
+      "hashtags": [
+        "#engineering",
+        "#physics",
+        "#submarine",
+        "#materialsscience",
+        "#howitworks",
+        "#failsafelab"
+      ],
+      "pinned_comment": "Four thousand meters down inside a certified titanium sphere — would you take the dive? Comment YES or NO",
+      "compilation_group": "Catastrophic Pressure & Structural Failure Physics (10-Min Compilation)",
+      "standalone_verified": true,
+      "monetization_safety_note": "Strictly educational materials-science and hydrostatic buckling cutaway in stylized 2.5D CAD vector graphics; zero depictions of people, victims, or news footage; ai_disclosure=false."
+    },
+    {
+      "rank": 3,
+      "theme_id": "theme_03",
+      "slug": "ep03_bank_vault_lock",
+      "selected_for_production": false,
+      "episode_id": null,
+      "sub_niche": "how_it_works",
+      "youtube_title": "Inside a Bank Vault Door Built to NEVER Open",
+      "frame_0_hook_text": "20 TONS OF LOCKED STEEL",
+      "frame_0_visual_concept": "Exploded 2.5D X-ray cutaway of a circular 20-ton bank vault door showing 24 solid steel radial locking bolts and a glowing tempered-glass relocker plate at t=0.0s.",
+      "core_physics": "Modern bank vault doors combine radial 4-inch hardened steel bolts driven simultaneously by a geared central cam ring, dual 3-wheel combination fences, a triple-redundant mechanical wind-up time lock that physically blocks opening before morning even with the right code, and a spring-loaded tempered glass relocker sheet that fires permanent deadbolts into the boltwork the instant a drill or torch shatters the glass.",
+      "camera_shots": [
+        "FRAME0_HERO: Macro X-ray of circular vault door boltwork glowing amber and cyan",
+        "EXPLODED_BLUEPRINT: Peeled-back torch-resistant copper-alloy and manganese steel armor layers",
+        "MACRO_CUTAWAY: Dual 3-wheel brass combination tumblers aligning their gates",
+        "ISO_WIDE: Triple-redundant mechanical wind-up time lock escapements ticking in unison",
+        "IMPACT_CLOSEUP: Tempered glass relocker shattering on drill contact and firing crimson deadbolts"
+      ],
+      "ending_cta": "Comment YES or NO",
+      "youtube_description": "",
+      "ig_tiktok_caption": "Even the bank manager cannot open a modern vault after hours — and drilling into the door shatters a hidden glass plate that jams it shut forever. Could any heist crew beat that glass trap? Comment YES or NO.",
+      "hashtags": [
+        "#engineering",
+        "#bankvault",
+        "#howitworks",
+        "#locksmith",
+        "#mechanicalengineering",
+        "#failsafelab"
+      ],
+      "pinned_comment": "Could any safecracker defeat a spring-loaded tempered glass relocker? Comment YES or NO",
+      "compilation_group": "Everyday Fail-Safe Engineering (10-Min Compilation)",
+      "standalone_verified": true,
+      "monetization_safety_note": "Educational mechanical security design cutaway; does not provide actionable bypass instructions; ai_disclosure=false."
+    },
+    {
+      "rank": 4,
+      "theme_id": "theme_04",
+      "slug": "ep04_tacoma_bridge_flutter",
+      "selected_for_production": false,
+      "episode_id": null,
+      "sub_niche": "real_disaster_physics",
+      "youtube_title": "Why Light Wind RIPPED This Steel Bridge Apart",
+      "frame_0_hook_text": "42 MPH WIND TORE STEEL",
+      "frame_0_visual_concept": "Isometric 2.5D suspension bridge deck twisting in violent sinusoidal torsion with glowing cyan airflow ribbons curling into crimson vortices at t=0.0s.",
+      "core_physics": "Contrary to the textbook simple-resonance myth, the 1940 suspension bridge collapse was driven by aeroelastic flutter: solid 8-foot H-shaped plate girders blocked steady 42 mph wind, shedding alternating vortices that fed energy into the deck's torsional twist (negative aerodynamic damping) until vertical suspender cables exceeded tensile yield and snapped in sequence. Modern long-span bridges prevent flutter with streamlined aerodynamic box girders and open wind slots.",
+      "camera_shots": [
+        "FRAME0_HERO: Twisting steel bridge deck cutaway bathed in glowing cyan and crimson wind vortices",
+        "ISO_WIDE: Full suspension span oscillating in asymmetric torsional wave mode",
+        "MACRO_CUTAWAY: Cross-section wind-tunnel flow around solid H-girder walls showing vortex shedding",
+        "IMPACT_CLOSEUP: Vertical suspender cables hitting tensile yield and snapping sequentially",
+        "EXPLODED_BLUEPRINT: Side-by-side aerodynamic comparison of 1940 solid H-girder vs modern slotted box girder"
+      ],
+      "ending_cta": "Comment YES or NO",
+      "youtube_description": "",
+      "ig_tiktok_caption": "Most textbooks blame simple resonance, but steady 42 mph wind actually tore a steel suspension bridge apart through aeroelastic flutter. Did you learn in school that it was just resonance? Comment YES or NO.",
+      "hashtags": [
+        "#engineering",
+        "#civilengineering",
+        "#physics",
+        "#bridges",
+        "#aerodynamics",
+        "#failsafelab"
+      ],
+      "pinned_comment": "Did you learn in school that it was just simple resonance? Comment YES or NO",
+      "compilation_group": "Catastrophic Pressure & Structural Failure Physics (10-Min Compilation)",
+      "standalone_verified": true,
+      "monetization_safety_note": "Historical 1940 civil engineering aerodynamics case study (zero human casualties in historical event); clean CAD vector visuals; ai_disclosure=false."
+    },
+    {
+      "rank": 5,
+      "theme_id": "theme_05",
+      "slug": "ep05_car_differential_gear",
+      "selected_for_production": false,
+      "episode_id": null,
+      "sub_niche": "how_it_works",
+      "youtube_title": "The Genius Gear That Lets Cars TURN Smoothly",
+      "frame_0_hook_text": "1 AXLE. 2 DIFFERENT SPEEDS.",
+      "frame_0_visual_concept": "Gleaming 2.5D isometric brass-and-steel bevel differential gear cage meshing in motion with glowing amber torque streams splitting unevenly left and right at t=0.0s.",
+      "core_physics": "Around any curve, the outer tire travels a longer arc than the inner tire. An open mechanical differential uses a ring-and-pinion carrier holding orbiting bevel spider gears meshed with left and right axle side gears: driving straight, spider gears ride stationary on their pin; cornering, they spin on their axis to subtract RPM from the inner wheel and add equal RPM to the outer wheel — while revealing why one tire on ice steals all traction unless limited-slip clutches intervene.",
+      "camera_shots": [
+        "FRAME0_HERO: Macro 2.5D cutaway of meshing brass spider gears inside a rotating steel differential cage",
+        "ISO_WIDE: Overhead cornering arc telemetry comparing inner 60 RPM wheel vs outer 100 RPM wheel",
+        "EXPLODED_BLUEPRINT: Exploded driveshaft, pinion, ring gear, carrier, spider gears, and half-shafts",
+        "MACRO_CUTAWAY: Close-up kinematic lock in straight drive vs counter-rotation during a turn",
+        "IMPACT_CLOSEUP: Single wheel slipping on cyan ice patch draining torque until limited-slip plates engage"
+      ],
+      "ending_cta": "Comment YES or NO",
+      "youtube_description": "",
+      "ig_tiktok_caption": "One engine drives two wheels at completely different speeds around every corner using zero computers — just pure bevel gear geometry. Have you ever gotten one tire stuck spinning helplessly on ice? Comment YES or NO.",
+      "hashtags": [
+        "#engineering",
+        "#cars",
+        "#howitworks",
+        "#mechanicalengineering",
+        "#gears",
+        "#failsafelab"
+      ],
+      "pinned_comment": "Have you ever had one tire spin helplessly on ice while the other stood completely still? Comment YES or NO",
+      "compilation_group": "Precision Gearboxes & Mechanical Marvels (10-Min Compilation)",
+      "standalone_verified": true,
+      "monetization_safety_note": "100% educational automotive kinematics cutaway; evergreen high-RPM topic; ai_disclosure=false."
+    },
+    {
+      "rank": 6,
+      "theme_id": "theme_06",
+      "slug": "ep06_skywalk_bolt_load",
+      "selected_for_production": false,
+      "episode_id": null,
+      "sub_niche": "real_disaster_physics",
+      "youtube_title": "How One Tiny Bolt Change DOUBLED Steel Stress",
+      "frame_0_hook_text": "1 BOLT CHANGE = 200% LOAD",
+      "frame_0_visual_concept": "High-contrast 2.5D isometric cutaway of a single hexagonal steel nut pressing down on a glowing crimson overloaded welded box-beam flange at t=0.0s.",
+      "core_physics": "Classic textbook statics failure: two stacked suspended atrium walkways were originally specified on a single continuous vertical hanger rod carrying 1W on the upper nut and 1W on the lower nut. Changing to two offset rods for easier assembly hung the lower walkway directly from the upper box beam, channeling 2W (200% bearing and weld shear stress) onto the upper nut until the thin box-beam seam peeled open and pulled through.",
+      "camera_shots": [
+        "FRAME0_HERO: Extreme macro of a steel hex nut concentrating 200% crimson load vectors onto a box-beam seam",
+        "ISO_WIDE: Clean blueprint elevation of two stacked suspended structural beams inside a geometric wireframe frame",
+        "EXPLODED_BLUEPRINT: Free-body diagram comparing original continuous rod (1W + 1W emerald) vs offset rods (2W crimson)",
+        "MACRO_CUTAWAY: Close-up on the welded box-beam flange bending downward under double bearing stress",
+        "IMPACT_CLOSEUP: Slow-motion weld seam opening cleanly in abstract CAD cross-section as load safety margin drops below 1.0"
+      ],
+      "ending_cta": "Comment YES or NO",
+      "youtube_description": "",
+      "ig_tiktok_caption": "Two engineering drawings look almost identical — yet offsetting one steel hanger rod by four inches doubled the stress on a single nut to 200%. Would you have caught that blueprint shortcut? Comment YES or NO.",
+      "hashtags": [
+        "#engineering",
+        "#structuralengineering",
+        "#physics",
+        "#statics",
+        "#architecture",
+        "#failsafelab"
+      ],
+      "pinned_comment": "Be honest — at first glance, would you have spotted why two offset rods doubled the load on the upper nut? Comment YES or NO",
+      "compilation_group": "Catastrophic Pressure & Structural Failure Physics (10-Min Compilation)",
+      "standalone_verified": true,
+      "monetization_safety_note": "Pure abstract textbook statics and free-body diagram cutaway (steel beams, rods, and hex nuts only; zero people or graphic imagery); ai_disclosure=false."
+    }
+  ]
+}
