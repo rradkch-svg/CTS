@@ -220,6 +220,28 @@ def add_crash_test_dummy(
         l_ft = (-0.24, -1.16, 0.0)
         r_kn = (0.24, -0.60, 0.04)
         r_ft = (0.24, -1.16, 0.0)
+    elif pose == "pilot_sub":
+        steer = math.sin(t * 7.5) * 0.08
+        l_el = (-0.42, 0.44 + bob, 0.24)
+        l_ha = (-0.24, 0.50 + bob + steer, 0.56)
+        r_el = (0.42, 0.44 + bob, 0.24)
+        r_ha = (0.24, 0.50 + bob - steer, 0.56)
+        l_kn = (-0.24, -0.32 + bob, 0.44)
+        l_ft = (-0.24, -0.78 + bob, 0.36)
+        r_kn = (0.24, -0.32 + bob, 0.44)
+        r_ft = (0.24, -0.78 + bob, 0.36)
+    elif pose == "sprint_escape":
+        run = math.sin(t * 20.0)
+        run_b = abs(math.cos(t * 20.0)) * 0.14
+        bob = run_b
+        l_el = (-0.56, 0.52 + bob + run * 0.24, 0.16 - run * 0.22)
+        l_ha = (-0.48, 0.82 + bob + run * 0.30, 0.34 - run * 0.28)
+        r_el = (0.56, 0.52 + bob - run * 0.24, 0.16 + run * 0.22)
+        r_ha = (0.48, 0.82 + bob - run * 0.30, 0.34 + run * 0.28)
+        l_kn = (-0.26, -0.44 + bob - run * 0.22, 0.28 + run * 0.30)
+        l_ft = (-0.26, -0.96 + bob - run * 0.28, -0.05 + run * 0.42)
+        r_kn = (0.26, -0.44 + bob + run * 0.22, 0.28 - run * 0.30)
+        r_ft = (0.26, -0.96 + bob + run * 0.28, -0.05 - run * 0.42)
     else:
         sw = math.sin(t * 3.8) * 0.05
         l_el = (-0.54, 0.42 + bob, 0.10)
@@ -232,7 +254,7 @@ def add_crash_test_dummy(
         r_ft = (0.24, -1.16, 0.0)
 
     # Grounded soft ambient-occlusion contact shadow beneath boots
-    if ground_shadow and pose != "panic_freefall":
+    if ground_shadow and pose not in ("panic_freefall", "pilot_sub"):
         scene.add_ground_shadow(_pt(0.0, -1.24, 0.0), 0.62 * scale, 0.55 * scale, opacity=0.52)
 
     # Sculpted 3D Torso, Chrome Belt Ring & Pelvis
