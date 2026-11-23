@@ -88,11 +88,18 @@ if [ -f "pom.xml" ] && command -v mvn >/dev/null 2>&1; then
   mvn -B -q dependency:go-offline || true
 fi
 
+# --- Shorts Factory VM dependencies (ffmpeg, fonts, uv cache) ---
+if [ -f "./setup_vm.sh" ]; then
+  chmod +x ./setup_vm.sh
+  DEBIAN_FRONTEND=noninteractive bash ./setup_vm.sh
+fi
+
 # --- Smoke verification ---
 python3 --version
 python3 -m pytest --version
 uv --version
 poetry --version
+ffmpeg -version | head -n 1
 java -version 2>&1 | head -n 1
 gradle --version | grep -E "^Gradle "
 mvn --version | head -n 1
