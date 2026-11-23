@@ -88,7 +88,7 @@ def build_episode_package(
     )
 
     # Bottom series bar strictly inside y=1470..1560 (clears Reels y=1580 bottom crop!)
-    pill_text = f"2.5D CAD CUTAWAY  •  {brand.handle.upper()}"
+    pill_text = f"3D CAD CUTAWAY  •  {brand.handle.upper()}"
     f_bot = load_font(font_bold, 28)
     pb = draw.textbbox((0, 0), pill_text, font=f_bot)
     pw = (pb[2] - pb[0]) + 60
