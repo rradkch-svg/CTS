@@ -176,10 +176,10 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
             yaw_cam = math.sin(t * 1.4) * 0.35 + 1.55
             cam = Camera3D(eye=(yaw_cam + shake, 0.95, 5.45), target=(0.0, 0.15, 0.0), fov_deg=41.0, cy_offset=55.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, t=t)
             self._add_3d_shaft_rails(sc, y_offset=t * 2.8)
             self._add_3d_elevator_cab(sc, cy=-0.15, locked=False, glow_col=DANGER, dummy_pose="panic_freefall", dummy_emotion="panic", t=t, dummy_yaw=-0.22)
-            self._add_3d_cables(sc, y_bot=1.45, y_top=3.45, count=8, spread=1.75, snapped=8, snap_t=clamp(0.32 + prog * 0.7))
+            self._add_3d_cables(sc, y_bot=1.45, y_top=2.95, count=8, spread=1.75, snapped=8, snap_t=clamp(0.32 + prog * 0.7))
             sc.add_arrow_3d((-2.22, 1.55, 0.25), (-2.22, -0.75, 0.25), DANGER, shaft_r=0.09, head_r=0.22)
             sc.add_arrow_3d((2.22, 1.55, 0.25), (2.22, -0.75, 0.25), DANGER, shaft_r=0.09, head_r=0.22)
             overlays_2d.append(lambda d: draw_sparks(d, 540, 740, t + 0.1, 22, 230, 140, p, seed=11))
@@ -189,7 +189,7 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
             drop = ease_out_cubic(min(1.0, prog / 0.38)) * 0.65
             cam = Camera3D(eye=(-2.1 + prog * 0.7, 0.6, 6.4), target=(0.0, -0.1, 0.0), fov_deg=41.0, cy_offset=55.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.3, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-2.3, span=7.0, step=1.0, t=t)
             self._add_3d_shaft_rails(sc, y_offset=0.0 if locked else prog * 1.8)
             self._add_3d_elevator_cab(
                 sc,
@@ -201,7 +201,7 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
                 t=t,
                 dummy_yaw=0.20,
             )
-            self._add_3d_cables(sc, y_bot=1.95 - drop, y_top=3.6, count=8, spread=1.5, snapped=8, snap_t=0.8)
+            self._add_3d_cables(sc, y_bot=1.95 - drop, y_top=3.05, count=8, spread=1.5, snapped=8, snap_t=0.8)
             if locked:
                 sc.add_arrow_3d((-2.25, -1.2, 0.2), (-2.25, 0.85, 0.2), EMERALD, shaft_r=0.085, head_r=0.20)
                 sc.add_arrow_3d((2.25, -1.2, 0.2), (2.25, 0.85, 0.2), EMERALD, shaft_r=0.085, head_r=0.20)
@@ -213,7 +213,7 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
         elif scene_key == "multi_cable_xray":
             cam = Camera3D(eye=(2.3, 1.25, 6.8), target=(0.0, 0.4, 0.0), fov_deg=41.0, cy_offset=50.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0, t=t)
             self._add_3d_shaft_rails(sc)
             sc.add_gear_3d((0.0, 2.55, 0.0), 0.92, 0.52, 18, t * 1.4, STEEL_MID, rot=(0.0, 0.0, 0.0), metallic=0.72)
             active_rope = int(prog * 8) % 8
@@ -225,9 +225,9 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
         elif scene_key == "single_cable_load_test":
             cam = Camera3D(eye=(-2.0, 0.9, 6.4), target=(0.0, 0.15, 0.0), fov_deg=40.0, cy_offset=50.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, t=t)
             bob = math.sin(t * 2.5) * 0.08
-            self._add_3d_cables(sc, y_bot=1.05 + bob, y_top=3.35, count=8, spread=1.6, single_active=True)
+            self._add_3d_cables(sc, y_bot=1.05 + bob, y_top=3.05, count=8, spread=1.6, single_active=True)
             self._add_3d_elevator_cab(sc, cy=-0.45 + bob, locked=False, glow_col=EMERALD, dummy_pose="explain", dummy_emotion="relief", t=t, dummy_yaw=0.22)
             sc.add_arrow_3d((-2.15, 0.4, 0.2), (-2.15, 2.55, 0.2), EMERALD, shaft_r=0.09, head_r=0.21)
             sc.add_arrow_3d((2.15, 1.3, 0.2), (2.15, -0.95, 0.2), AMBER, shaft_r=0.09, head_r=0.21)
@@ -235,22 +235,22 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
         elif scene_key == "governor_spinning":
             cam = Camera3D(eye=(1.9, 0.85, 5.6), target=(0.0, 0.1, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-1.95, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-1.95, span=7.0, step=1.0, t=t)
             # 3D rooftop steel governor housing + spinning brass flywheel
             sc.add_box((0.55, 0.2, -0.55), (2.6, 2.5, 0.24), STEEL_DARK, metallic=0.55)
             ang = t * 2.8
             sc.add_gear_3d((0.55, 0.2, 0.0), 1.08, 0.34, 18, ang, BRASS, metallic=0.72)
             for sx in (-1, 1):
                 a = ang + (0 if sx == 1 else math.pi)
-                fx = 0.55 + math.cos(a) * 0.55
-                fy = 0.2 + math.sin(a) * 0.55
-                sc.add_sphere((fx, fy, 0.28), 0.18, AMBER, metallic=0.5)
-                sc.add_cylinder((0.55, 0.2, 0.26), (fx, fy, 0.26), 0.035, 0.035, CYAN, segments=8)
+                fx = 0.55 + math.cos(a) * 0.56
+                fy = 0.2 + math.sin(a) * 0.56
+                sc.add_cylinder((0.55, 0.2, 0.34), (fx, fy, 0.34), 0.04, 0.04, CYAN, segments=10, emissive=0.35, bloom=True)
+                sc.add_sphere((fx, fy, 0.38), 0.19, AMBER, metallic=0.55, depth_bias=-0.22)
             # Safety governor rope dropping down shaft
-            sc.add_cylinder((-0.38, 0.2, 0.0), (-0.38, -2.5, 0.0), 0.045, 0.045, CYAN, segments=10, emissive=0.25)
-            sc.add_cylinder((1.48, 0.2, 0.0), (1.48, -2.5, 0.0), 0.045, 0.045, CYAN, segments=10, emissive=0.25)
+            sc.add_cylinder((-0.38, 0.2, 0.0), (-0.38, -2.5, 0.0), 0.045, 0.045, CYAN, segments=10, emissive=0.35, bloom=True)
+            sc.add_cylinder((1.48, 0.2, 0.0), (1.48, -2.5, 0.0), 0.045, 0.045, CYAN, segments=10, emissive=0.35, bloom=True)
             # UNIT-01 standing on lab floor pointing up at governor
-            add_crash_test_dummy(sc, pos=(-1.35, -0.78, 0.55), scale=0.85, yaw=0.35, pose="point_right", emotion="curious", t=t)
+            add_crash_test_dummy(sc, pos=(-1.30, -0.78, 0.55), scale=0.84, yaw=0.35, pose="point_right", emotion="curious", t=t)
 
         elif scene_key == "all_ropes_severed":
             cam = Camera3D(eye=(-1.8 + shake, 0.8, 5.7), target=(-0.2, 0.1, 0.0), fov_deg=41.0, cy_offset=45.0)

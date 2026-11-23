@@ -261,20 +261,19 @@ class SubmersibleImplosionScene(EpisodeScene):
             overlays_2d.append(_unif_lbl)
 
         elif scene_key == "cylinder_joint_hotspot":
-            cam = Camera3D(eye=(1.8, 0.9, 5.9), target=(0.0, 0.05, 0.0), fov_deg=41.0, cy_offset=45.0)
+            cam = Camera3D(eye=(1.8, 0.9, 6.25), target=(0.0, 0.05, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0, rgb=(22, 48, 84))
+            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0, rgb=(22, 48, 84), t=t, underwater=True)
             pulse = 0.55 + 0.45 * math.sin(t * 9.0)
-            self._add_3d_composite_hull(sc, center=(0.45, 0.25, 0.0), half_len=1.32, radius=0.80, seam_stress=pulse)
-            sc.add_arrow_3d((0.45, 2.05, 0.1), (0.45, 1.15, 0.1), DANGER, shaft_r=0.08, head_r=0.19)
-            sc.add_arrow_3d((-0.78, 1.95, 0.1), (-0.78, 1.05, 0.1), DANGER, shaft_r=0.08, head_r=0.19)
-            add_crash_test_dummy(sc, pos=(-1.60, -0.82, 0.85), scale=0.82, yaw=0.36, pose="point_right", emotion="curious", t=t)
+            self._add_3d_composite_hull(sc, center=(0.55, 0.22, 0.0), half_len=1.25, radius=0.76, seam_stress=pulse)
+            sc.add_arrow_3d((0.55, 2.00, 0.1), (0.55, 1.10, 0.1), DANGER, shaft_r=0.08, head_r=0.19)
+            sc.add_arrow_3d((-0.62, 1.92, 0.1), (-0.62, 1.02, 0.1), DANGER, shaft_r=0.08, head_r=0.19)
+            add_crash_test_dummy(sc, pos=(-1.28, -0.82, 0.72), scale=0.74, yaw=0.36, pose="point_right", emotion="curious", t=t)
 
         elif scene_key == "ply_shear_fatigue":
             cam = Camera3D(eye=(2.2, 1.25, 5.9), target=(0.15, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
             sc.add_floor_grid(y_level=-2.15, span=7.0, step=1.0, rgb=(24, 46, 78), t=t, underwater=True)
-            # 7 true 3D extruded carbon-fiber laminate plies shearing apart with glowing crimson cracks
             n_plies = 7
             for i in range(n_plies):
                 sep = (i - 3.0) * ease_in_out_cubic(prog) * 0.16
@@ -293,14 +292,33 @@ class SubmersibleImplosionScene(EpisodeScene):
             cam = Camera3D(eye=(-1.55 + shake * dimple, 0.85, 5.75), target=(0.15, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
             sc.add_floor_grid(y_level=-2.15, span=7.0, step=1.0, rgb=(24, 46, 78), t=t, underwater=True)
-            for i in range(11):
-                u = i / 10.0
+
+            def _wall_y(u: float) -> float:
+                return 0.25 + math.sin(u * math.pi) * 0.45 - math.exp(-((u - 0.5) / 0.15) ** 2) * dimple * 1.05
+
+            # 18 tangent-aligned curved carbon-fiber hull shell segments (silky smooth buckling curve!)
+            n_seg = 18
+            for i in range(n_seg):
+                u = (i + 0.5) / n_seg
+                u_prev = max(0.0, u - 0.03)
+                u_next = min(1.0, u + 0.03)
                 x = -0.85 + u * 2.85
-                arch = math.sin(u * math.pi) * 0.45
-                dent = math.exp(-((u - 0.5) / 0.15) ** 2) * dimple * 1.05
-                y = 0.25 + arch - dent
-                col = lerp_color(STEEL_MID, DANGER, math.exp(-((u - 0.5) / 0.18) ** 2) * dimple)
-                sc.add_box((x, y, 0.0), (0.30, 0.42, 1.35), col, metallic=0.60, emissive=0.35 * dimple if abs(u - 0.5) < 0.16 else 0.0, texture="carbon_weave", bloom=(dimple > 0.35 and abs(u - 0.5) < 0.16))
+                y = _wall_y(u)
+                dx = (u_next - u_prev) * 2.85
+                dy = _wall_y(u_next) - _wall_y(u_prev)
+                slope = math.atan2(dy, dx)
+                heat = math.exp(-((u - 0.5) / 0.17) ** 2) * dimple
+                col = lerp_color(STEEL_MID, DANGER, heat)
+                sc.add_box(
+                    (x, y, 0.0),
+                    (0.22, 0.36, 1.35),
+                    col,
+                    rot=(0.0, 0.0, slope),
+                    metallic=0.62,
+                    emissive=0.45 * heat,
+                    texture="carbon_weave",
+                    bloom=(heat > 0.30),
+                )
             sc.add_arrow_3d((0.58, 2.25 - dimple * 0.5, 0.15), (0.58, 0.95 - dimple * 0.85, 0.15), DANGER, shaft_r=0.095, head_r=0.23)
             add_crash_test_dummy(sc, pos=(-1.28, -0.88, 0.75), scale=0.74, yaw=0.36, pose="brace_impact", emotion="brace", t=t)
 
@@ -334,50 +352,51 @@ class SubmersibleImplosionScene(EpisodeScene):
 
         elif scene_key == "air_compression_pulse":
             squeeze = ease_out_cubic(prog)
-            cam = Camera3D(eye=(shake, 0.55, 5.75), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=30.0)
+            cam = Camera3D(eye=(shake, 0.55, 5.95), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=20.0)
             sc = Scene3D(cam)
             sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, rgb=(24, 44, 76), t=t, underwater=True)
-            core_r = max(0.32, 1.05 * (1.0 - 0.68 * squeeze))
-            sc.add_sphere((0.35, 0.15, 0.0), core_r * 1.45, DANGER, metallic=0.1, emissive=0.80, rim_rgb=AMBER, bloom=True)
-            sc.add_sphere((0.35, 0.15, 0.15), core_r * 0.95, AMBER, metallic=0.1, emissive=0.92, rim_rgb=(255, 255, 220), bloom=True)
-            sc.add_sphere((0.35, 0.15, 0.28), core_r * 0.52, (255, 252, 225), metallic=0.1, emissive=1.0, bloom=True)
-            self._add_3d_radial_pressure_ring(sc, (0.35, 0.15, 0.0), 2.35, core_r + 0.42, 8, CYAN, t * 2.6)
-            add_crash_test_dummy(sc, pos=(-1.32, -0.92, 0.78), scale=0.72, yaw=0.35, pose="brace_impact", emotion="shock", t=t)
+            core_r = max(0.30, 0.92 * (1.0 - 0.65 * squeeze))
+            sc.add_sphere((0.55, 0.30, 0.0), core_r * 1.42, DANGER, metallic=0.1, emissive=0.80, rim_rgb=AMBER, bloom=True)
+            sc.add_sphere((0.55, 0.30, 0.15), core_r * 0.92, AMBER, metallic=0.1, emissive=0.92, rim_rgb=(255, 255, 220), bloom=True)
+            sc.add_sphere((0.55, 0.30, 0.28), core_r * 0.50, (255, 252, 225), metallic=0.1, emissive=1.0, bloom=True)
+            self._add_3d_radial_pressure_ring(sc, (0.55, 0.30, 0.0), 1.82, core_r + 0.36, 8, CYAN, t * 2.6)
+            add_crash_test_dummy(sc, pos=(-1.42, -0.92, 0.72), scale=0.72, yaw=0.35, pose="brace_impact", emotion="shock", t=t)
 
             def _comp_lbl(d: ImageDraw.ImageDraw) -> None:
                 f = load_font(self.font_black, 34)
                 lbl = "ADIABATIC COMPRESSION"
                 bb = d.textbbox((0, 0), lbl, font=f)
-                d.text((540 - (bb[2] - bb[0]) / 2, 1285), lbl, font=f, fill=p.text_highlight, stroke_width=4, stroke_fill=p.ink)
+                d.text((540 - (bb[2] - bb[0]) / 2, 1300), lbl, font=f, fill=p.text_highlight, stroke_width=4, stroke_fill=p.ink)
 
             overlays_2d.append(_comp_lbl)
 
         elif scene_key == "nerve_bar_comparison":
-            cam = Camera3D(eye=(0.4, 0.3, 5.8), target=(0.0, -0.3, 0.0), fov_deg=41.0, cy_offset=110.0)
+            # Clean split layout: UNIT-01 unobstructed on left pointing right at crisp comparison chart!
+            cam = Camera3D(eye=(0.25, 0.35, 5.9), target=(0.0, -0.25, 0.0), fov_deg=41.0, cy_offset=95.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-1.6, span=7.0, step=1.0, rgb=(22, 48, 84))
-            add_crash_test_dummy(sc, pos=(-1.55, -0.50, 0.65), scale=0.72, yaw=0.35, pose="point_right", emotion="curious", t=t)
+            sc.add_floor_grid(y_level=-1.65, span=7.0, step=1.0, rgb=(22, 48, 84), t=t, underwater=True)
+            add_crash_test_dummy(sc, pos=(-1.42, -0.45, 0.55), scale=0.72, yaw=0.38, pose="point_right", emotion="curious", t=t)
 
             def _bars(d: ImageDraw.ImageDraw) -> None:
                 draw_comparison_bars(
                     d,
-                    x0=105,
-                    y0=700,
-                    width=870,
-                    height=370,
+                    x0=325,
+                    y0=715,
+                    width=680,
+                    height=355,
                     items=[
-                        ("HULL IMPLOSION COLLAPSE", "20 MS", 20.0 / 250.0, p.danger),
-                        ("HUMAN VISUAL NERVE SIGNAL", "250 MS", 1.0, p.cyan),
+                        ("HULL IMPLOSION", "20 MS", 20.0 / 250.0, p.danger),
+                        ("HUMAN VISUAL NERVE", "250 MS", 1.0, p.cyan),
                     ],
                     progress=ease_out_cubic(min(1.0, prog * 1.45)),
                     palette=p,
                     font_path=self.font_black,
                 )
-                d.rounded_rectangle([245, 1105, 955, 1188], radius=16, fill=p.surface_panel, outline=p.text_highlight, width=4)
-                f = load_font(self.font_black, 32)
+                d.rounded_rectangle([325, 1105, 1005, 1188], radius=16, fill=p.surface_panel, outline=p.text_highlight, width=4)
+                f = load_font(self.font_black, 28)
                 msg = "10X FASTER THAN HUMAN SIGHT"
                 bb = d.textbbox((0, 0), msg, font=f)
-                d.text((600 - (bb[2] - bb[0]) / 2, 1128), msg, font=f, fill=p.text_highlight)
+                d.text((665 - (bb[2] - bb[0]) / 2, 1130), msg, font=f, fill=p.text_highlight)
 
             overlays_2d.append(_bars)
 

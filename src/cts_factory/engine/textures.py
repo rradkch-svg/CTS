@@ -55,13 +55,18 @@ def get_material_texture(kind: str, size: int = 256) -> np.ndarray:
         return np.stack([pat * 1.04, pat, pat * 0.96], axis=2).astype(np.float32)
 
     if kind == "machined_brass":
-        # Radial/linear turned metallic brass sheen
+        # Fine vertical/diagonal anisotropic brushed CNC-milled brass/gold metal sheen
+        streaks = rng.normal(1.0, 0.04, (h // 8, w)).astype(np.float32)
+        streaks = cv2.resize(streaks, (w, h), interpolation=cv2.INTER_LINEAR)
+        streaks = cv2.GaussianBlur(streaks, (3, 15), 0)
         yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-        r = np.hypot((xx - w * 0.5) / w, (yy - h * 0.5) / h)
-        rings = 0.94 + 0.08 * np.sin(r * 95.0)
-        diag = np.exp(-(((xx / w - yy / h) + 0.15) ** 2) / 0.08) * 0.25
-        tex = np.clip((rings + diag) * ao, 0.45, 1.35)
-        return np.stack([tex * 0.92, tex * 1.02, tex * 1.06], axis=2).astype(np.float32)
+        diag = np.exp(-(((xx / w + yy / h) - 0.90) ** 2) / 0.05) * 0.28
+        tex = np.clip((streaks + diag) * ao, 0.45, 1.38)
+        out = np.stack([tex * 0.88, tex * 1.01, tex * 1.08], axis=2)
+        # Subtle machined recessed chamfer bolts
+        for ry, rx in ((14, 14), (14, w - 14), (h - 14, 14), (h - 14, w - 14)):
+            cv2.circle(out, (rx, ry), 3, (0.48, 0.45, 0.40), -1, lineType=cv2.LINE_AA)
+        return out.astype(np.float32)
 
     if kind == "hazard_plate":
         # Brushed steel with crisp recessed industrial caution stripe along bottom edge

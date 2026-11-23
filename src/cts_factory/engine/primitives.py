@@ -460,7 +460,7 @@ def draw_brand_header(
     bbox = draw.textbbox((0, 0), tag, font=f)
     tw = bbox[2] - bbox[0]
     x = (1080 - tw) // 2
-    y = 175
+    y = 118
     draw.text((x, y), tag, font=f, fill=palette.steel_mid)
     draw.line([(x - 32, y + 14), (x - 10, y + 14)], fill=palette.cyan, width=2)
     draw.line([(x + tw + 10, y + 14), (x + tw + 32, y + 14)], fill=palette.cyan, width=2)
