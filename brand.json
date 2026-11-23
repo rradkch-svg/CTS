@@ -1,0 +1,139 @@
+{
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "goal": "earning_daily_autonomous_shorts",
+  "niche": "engineering_how_it_works_and_real_disasters",
+  "tagline": "Inside the Machine. Before It Breaks.",
+  "anti_clone_note": "100% original en-US adult engineering identity (FailSafe Lab / @FailSafeLab) using deep-blueprint 2.5D projected CAD cutaways, machined steel/brass shading, industrial amber/cyan telemetry, and the authoritative Charon baritone voice — zero overlap with sister survival-storytelling channels, template defaults, or stick-figure What-If channels.",
+  "video_spec": {
+    "resolution": "1080x1920",
+    "fps": 30,
+    "target_duration_sec": [65, 80],
+    "tiktok_1min_monetization_min_sec": 62,
+    "audio_lufs": -14.5,
+    "audio_true_peak_max": -1.0,
+    "audio_lra_max": 4.0,
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "audio_bitrate_kbps": 192,
+    "audio_channels": 2,
+    "video_codec": "libx264",
+    "video_crf": 19,
+    "pixel_format": "yuv420p"
+  },
+  "visual_style": {
+    "type": "2.5d_projected_isometric_cad_vector",
+    "style_decision_rationale": "Selected after /reel-watch audit of DYYsGuTpBKc (Possiblo) and M_t2ZUz7_pc (Iflord). Both references achieve their peak explanatory retention during deep-navy volumetric spotlight cutaways, rim-lit silhouettes, dotted measurement arcs, live comparison bars, and dark-surface yellow pill HUD chips — while their stick-silhouette characters suit lifestyle What-If comedy rather than adult STEM engineering. Programmatic 2.5D projected isometric CAD vector animation in Pillow + NumPy piped to ffmpeg captures that exact dark-stage telemetry magnetism with machined steel/brass bevels, force vectors, and stress heatmaps, runs cleanly at 16-23 fps on 2 CPU cores, avoids clone overlap, and keeps youtube_ai_disclosure_stylized_2d accurately false.",
+    "palette": {
+      "background_dark": "#0B1220",
+      "background_grid": "#15243D",
+      "surface_panel": "#121E33",
+      "steel_dark": "#3A4B63",
+      "steel_mid": "#6E839E",
+      "steel_light": "#B8C7D9",
+      "brass_accent": "#D4A24C",
+      "primary_accent": "#FF8C1A",
+      "secondary_accent": "#00D4FF",
+      "danger_stress": "#FF2E4C",
+      "safe_lock": "#2EE58B",
+      "text_primary": "#F8FAFC",
+      "text_highlight": "#FFC83D",
+      "text_stroke": "#060A12"
+    },
+    "fonts_dir": "assets/fonts",
+    "primary_font": "Montserrat-Black.ttf",
+    "secondary_font": "Montserrat-ExtraBold.ttf",
+    "fallback_font": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "safe_zones": {
+      "top_hook": {
+        "x_min": 90,
+        "x_max": 990,
+        "y_min": 260,
+        "y_max": 460
+      },
+      "captions": {
+        "x_min": 110,
+        "x_max": 930,
+        "y_min": 1380,
+        "y_max": 1520,
+        "max_width_px": 820
+      },
+      "callout_hud": {
+        "x_min": 90,
+        "x_max": 930,
+        "y_min": 490,
+        "y_max": 640
+      },
+      "cover_reels_grid": {
+        "x_min": 90,
+        "x_max": 990,
+        "y_min": 330,
+        "y_max": 1580
+      },
+      "cover_3x4": {
+        "x_min": 90,
+        "x_max": 990,
+        "y_min": 260,
+        "y_max": 1660
+      },
+      "youtube_banner_desktop": {
+        "x_min": 0,
+        "x_max": 2560,
+        "y_min": 508,
+        "y_max": 931
+      },
+      "youtube_banner_mobile": {
+        "x_min": 507,
+        "x_max": 2053,
+        "y_min": 508,
+        "y_max": 931
+      },
+      "youtube_banner_width": 2560,
+      "youtube_banner_height": 1440,
+      "youtube_banner_max_bytes": 6291456
+    },
+    "reference_takeaways": {
+      "DYYsGuTpBKc": "Adopt deep-navy overhead volumetric spotlight cutaways, isometric glowing volumes, dark pill yellow HUD badges, and bold white/yellow outlined headlines; omit stick-figure narrative characters.",
+      "M_t2ZUz7_pc": "Adopt peak-tension frozen metallic Frame 0 framing, warm directional rim-lighting, dotted circular callout arcs, and live comparison bar charts; omit mid-video comment popups and subscribe prompts for 65-80s Shorts."
+    }
+  },
+  "narration": {
+    "provider": "google-genai",
+    "api_version": "v1beta",
+    "models": [
+      "gemini-3.8-flash-tts",
+      "gemini-3.8-flash-lite-tts",
+      "gemini-2.5-flash-preview-tts",
+      "gemini-3.1-flash-tts-preview"
+    ],
+    "voice": "Charon",
+    "pov": "3rd_person_authoritative_engineer",
+    "style_direction": "Authoritative, crisp American English engineering narrator. Fast documentary cadence (1.02x to 1.06x), clean articulation on numbers and mechanical terms, tight dramatic beats before reveals, controlled lowered half-voice tension with clean vocal clarity.",
+    "rate_range": [1.0, 1.08],
+    "silence_trim_db": -52.0,
+    "silence_head_pad_ms": 70,
+    "silence_tail_pad_ms": 90,
+    "avoid_whisper_hiss": true,
+    "continuous_ambient_bed": true
+  },
+  "retention_rules": {
+    "frame_0_hook": "Full-frame peak-tension 2.5D macro cutaway frozen at critical mechanical load + bold two-tone white/yellow outlined top hook text inside y=260..460, x=90..990 + immediate spoken hook at t=0.0s (zero fade-in, zero empty wide shot, zero HUD callout clutter on Beat 1).",
+    "no_mid_video_subscribe_cta": true,
+    "ending_cta": "Low-friction 1-word or 1-number comment prompt tied directly to the engineering scenario (e.g., Comment YES or NO).",
+    "caption_chunk_words": [2, 4],
+    "caption_style": "clean_outlined_no_box",
+    "min_camera_angles": 4
+  },
+  "publishing": {
+    "youtube_title_max_chars": 50,
+    "youtube_title_hashtags": false,
+    "youtube_title_one_uppercase_word": true,
+    "youtube_schedule_fixed_hour": "12:00",
+    "youtube_link_related_video": true,
+    "youtube_ai_disclosure_stylized_2d": false,
+    "never_delete_stalled_shorts": true,
+    "review_metrics_after_hours": 48,
+    "stayed_to_watch_target_pct": 75.0
+  }
+}

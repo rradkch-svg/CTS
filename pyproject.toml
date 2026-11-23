@@ -1,0 +1,23 @@
+[project]
+name = "cts-factory"
+version = "0.1.0"
+description = "CTS Shorts Factory — en-US Engineering, How It Works & Real Disasters 2.5D Vector Video Pipeline"
+requires-python = ">=3.12"
+dependencies = [
+    "pillow>=10.0",
+    "numpy>=2.0",
+    "google-genai>=1.0",
+    "faster-whisper>=1.0",
+    "rapidocr>=3.0",
+    "onnxruntime>=1.20",
+    "imageio-ffmpeg>=0.5",
+    "yt-dlp[default,curl-cffi]>=2026.1",
+]
+
+[tool.uv]
+package = false
+managed = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

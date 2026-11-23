@@ -1,0 +1,346 @@
+{
+  "episode_id": "ep01",
+  "slug": "ep01_elevator_safety_brake",
+  "title": "How Elevators STOP When Every Cable Snaps",
+  "hook_text": "ALL 8 CABLES SNAPPED",
+  "cta_text": "Comment YES or NO",
+  "bpm": 108,
+  "cover_headline": [
+    "ALL CABLES SNAPPED.",
+    "ZERO FREE FALL."
+  ],
+  "publish_meta": {
+    "youtube_title": "How Elevators STOP When Every Cable Snaps",
+    "youtube_description": "",
+    "ig_tiktok_caption": "Movies lie about falling elevators. Inside every shaft is an unpowered 1853 mechanical trap that turns gravity against itself so you barely drop inches. Knowing that, would you still take the stairs? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#howitworks",
+      "#mechanicalengineering",
+      "#elevator",
+      "#physics",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Be honest — knowing every cable could snap and you would barely drop inches, do you still take the stairs? Comment YES or NO",
+    "related_video_slot": "ep02_submersible_implosion_physics",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "Imagine stepping into a skyscraper elevator and hearing every steel cable snap above you.",
+      "voice_direction": "Urgent, punchy hook at 1.04x pace; sharp crisp consonant hit on snap.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "cables_snap_peak",
+      "sfx_cues": [
+        {
+          "name": "cable_snap",
+          "offset_s": 0.2,
+          "gain_db": -3.0,
+          "pan": 0.0
+        },
+        {
+          "name": "alarm_ping",
+          "offset_s": 1.4,
+          "gain_db": -8.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": null,
+      "pause_after_s": 0.15
+    },
+    {
+      "id": "b02_hook_flip",
+      "act": "hook",
+      "narration_text": "Movies show a helpless plunge to the basement. In reality, you barely drop inches.",
+      "voice_direction": "Confident documentary pivot; clean downward emphasis on barely drop inches.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "cab_halts_midshaft",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "wedge_lock_slam",
+          "offset_s": 2.5,
+          "gain_db": -4.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "FREE FALL",
+        "value": "IMPOSSIBLE"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b03_cable_redundancy",
+      "act": "mechanism",
+      "narration_text": "First, modern elevators never hang from one rope. Six to eight braided steel cables share the load.",
+      "voice_direction": "Clear, authoritative engineering cadence with crisp articulation on six to eight.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "multi_cable_xray",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.1,
+          "gain_db": -12.0,
+          "pan": -0.2
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.1,
+          "gain_db": -10.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "STEEL ROPES",
+        "value": "8X REDUNDANT"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b04_load_factor",
+      "act": "mechanism",
+      "narration_text": "Each individual cable is engineered to hold the entire loaded cab on its own.",
+      "voice_direction": "Steady confident emphasis on entire loaded cab.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "single_cable_load_test",
+      "sfx_cues": [
+        {
+          "name": "servo_hum",
+          "offset_s": 0.2,
+          "gain_db": -14.0,
+          "pan": 0.0
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.3,
+          "gain_db": -12.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "SINGLE ROPE",
+        "value": "100% CAPACITY"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b05_governor_intro",
+      "act": "mechanism",
+      "narration_text": "Even better, a separate safety rope loops around a spinning rooftop flywheel called an overspeed governor.",
+      "voice_direction": "Analytical precision; crisp articulation of overspeed governor.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "governor_spinning",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -11.0,
+          "pan": 0.0
+        },
+        {
+          "name": "gear_ratchet",
+          "offset_s": 0.8,
+          "gain_db": -10.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "ROOF SENSOR",
+        "value": "GOVERNOR WHEEL"
+      },
+      "pause_after_s": 0.2
+    },
+    {
+      "id": "b06_what_if_all_cut",
+      "act": "escalation",
+      "narration_text": "Now imagine a freak failure cuts all eight cables at once. Pure mechanics takes over.",
+      "voice_direction": "Rising inquisitive tension; tight pause after at once before pure mechanics.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "all_ropes_severed",
+      "sfx_cues": [
+        {
+          "name": "cable_snap",
+          "offset_s": 1.2,
+          "gain_db": -5.0,
+          "pan": -0.3
+        },
+        {
+          "name": "cable_snap",
+          "offset_s": 1.45,
+          "gain_db": -5.0,
+          "pan": 0.3
+        }
+      ],
+      "callout": {
+        "label": "DROP SPEED",
+        "value": "+15% LIMIT"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b07_centrifugal_trip",
+      "act": "escalation",
+      "narration_text": "The moment the cab speeds up fifteen percent too fast, spring-loaded flyweights swing out and lock the flywheel.",
+      "voice_direction": "Accelerating cadence; hard decisive strike on lock the flywheel.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "flyweights_flare_latch",
+      "sfx_cues": [
+        {
+          "name": "gear_ratchet",
+          "offset_s": 0.3,
+          "gain_db": -8.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 3.1,
+          "gain_db": -4.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "TRIP TRIGGER",
+        "value": "NO ELECTRICITY"
+      },
+      "pause_after_s": 0.3
+    },
+    {
+      "id": "b08_rope_yank_linkage",
+      "act": "escalation",
+      "narration_text": "No computers, no power needed. That stopped rope yanks steel linkage bars underneath the cabin.",
+      "voice_direction": "Controlled intense half-voice authority with clean vocal edge.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "linkage_rod_lift",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.4,
+          "gain_db": -6.0,
+          "pan": -0.2
+        }
+      ],
+      "callout": {
+        "label": "POWER SOURCE",
+        "value": "GRAVITY ITSELF"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b09_wedge_clamp_physics",
+      "act": "climax",
+      "narration_text": "Those bars jam hardened steel wedges into the vertical guide rails. The harder gravity pulls, the tighter they bite.",
+      "voice_direction": "Peak dramatic conviction; punchy climax delivery on tighter they bite.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "wedges_pinch_rails",
+      "sfx_cues": [
+        {
+          "name": "wedge_lock_slam",
+          "offset_s": 0.9,
+          "gain_db": -3.0,
+          "pan": 0.0
+        },
+        {
+          "name": "friction_screech",
+          "offset_s": 1.2,
+          "gain_db": -7.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "CLAMP FORCE",
+        "value": "SELF-LOCKING"
+      },
+      "pause_after_s": 0.35
+    },
+    {
+      "id": "b10_zero_freefall_history",
+      "act": "climax",
+      "narration_text": "Elisha Otis proved this exact fail-safe in eighteen fifty-three by cutting his own rope live.",
+      "voice_direction": "Crisp historical awe; slight lift on cutting his own rope live.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "cab_frozen_spark_fade",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.2,
+          "gain_db": -12.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.7,
+          "gain_db": -9.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "INVENTED",
+        "value": "OTIS 1853"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b11_pit_buffer_backup",
+      "act": "climax",
+      "narration_text": "Even at the shaft floor, a giant hydraulic oil piston waits to cushion any impact.",
+      "voice_direction": "Reassuring, grounded engineering wrap-up.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "hydraulic_buffer_cutaway",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -11.0,
+          "pan": 0.0
+        },
+        {
+          "name": "hydraulic_hiss",
+          "offset_s": 1.5,
+          "gain_db": -8.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "FINAL BACKUP",
+        "value": "OIL BUFFER"
+      },
+      "pause_after_s": 0.3
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Knowing that, would you still take the stairs? Comment YES or NO.",
+      "voice_direction": "Snappy conversational challenge; clear emphasis on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.1,
+          "gain_db": -10.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "YOUR CALL",
+        "value": "YES OR NO"
+      },
+      "pause_after_s": 0.35
+    }
+  ]
+}

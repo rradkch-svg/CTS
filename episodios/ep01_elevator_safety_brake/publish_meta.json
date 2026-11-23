@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep01",
+  "slug": "ep01_elevator_safety_brake",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "How Elevators STOP When Every Cable Snaps",
+  "youtube_title_length": 41,
+  "youtube_description": "",
+  "ig_tiktok_caption": "Movies lie about falling elevators. Inside every shaft is an unpowered 1853 mechanical trap that turns gravity against itself so you barely drop inches. Knowing that, would you still take the stairs? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#howitworks",
+    "#mechanicalengineering",
+    "#elevator",
+    "#physics",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Be honest — knowing every cable could snap and you would barely drop inches, do you still take the stairs? Comment YES or NO",
+  "related_video_slot": "ep02_submersible_implosion_physics",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}
