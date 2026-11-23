@@ -100,12 +100,12 @@ class SubmersibleImplosionScene(EpisodeScene):
         for sx in (-1, 1):
             rx0 = cx + sx * (half_len - 0.16)
             rx1 = cx + sx * (half_len + 0.06)
-            sc.add_cylinder((rx0, cy, cz), (rx1, cy, cz), radius * 1.07, radius * 1.07, ring_col, segments=20, metallic=0.65, emissive=0.35 * clamp(seam_stress))
+            sc.add_cylinder((rx0, cy, cz), (rx1, cy, cz), radius * 1.07, radius * 1.07, ring_col, segments=26, metallic=0.70, emissive=0.45 * clamp(seam_stress), bloom=(seam_stress > 0.4))
 
-        # Segmented 3D carbon-fiber tube showing true inward buckling pinch!
+        # Segmented 3D carbon-fiber tube with realistic twill carbon-weave PBR texture!
         n_seg = 6
         body_col = lerp_color(CARBON_DARK, DANGER, buckling * 0.45)
-        alpha = 0.48 if cutaway_dummy else 1.0
+        alpha = 0.44 if cutaway_dummy else 1.0
         for i in range(n_seg):
             u0 = i / n_seg
             u1 = (i + 1) / n_seg
@@ -113,11 +113,10 @@ class SubmersibleImplosionScene(EpisodeScene):
             x1 = cx - half_len + 0.14 + u1 * (2.0 * (half_len - 0.14))
             r0 = radius * (1.0 - buckling * 0.62 * (math.sin(u0 * math.pi) ** 1.4))
             r1 = radius * (1.0 - buckling * 0.62 * (math.sin(u1 * math.pi) ** 1.4))
-            sc.add_cylinder((x0, cy, cz), (x1, cy, cz), r0, r1, body_col, segments=20, metallic=0.45, caps=False, alpha=alpha)
+            sc.add_cylinder((x0, cy, cz), (x1, cy, cz), r0, r1, body_col, segments=26, metallic=0.52, caps=False, alpha=alpha, texture="carbon_weave" if not cutaway_dummy else None)
 
         if cutaway_dummy:
-            # Crash-Test Dummy visible inside translucent 3D pressure cutaway!
-            add_crash_test_dummy(sc, pos=(cx, cy - 0.18, cz + 0.05), scale=0.62, yaw=-0.18, pose=dummy_pose, emotion=dummy_emotion, t=t)
+            add_crash_test_dummy(sc, pos=(cx, cy - 0.18, cz + 0.05), scale=0.62, yaw=-0.18, pose=dummy_pose, emotion=dummy_emotion, t=t, ground_shadow=False)
 
     def _add_3d_radial_pressure_ring(
         self,
@@ -272,60 +271,59 @@ class SubmersibleImplosionScene(EpisodeScene):
             add_crash_test_dummy(sc, pos=(-1.60, -0.82, 0.85), scale=0.82, yaw=0.36, pose="point_right", emotion="curious", t=t)
 
         elif scene_key == "ply_shear_fatigue":
-            cam = Camera3D(eye=(2.2, 1.25, 5.6), target=(0.15, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
+            cam = Camera3D(eye=(2.2, 1.25, 5.9), target=(0.15, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.15, span=7.0, step=1.0, rgb=(24, 46, 78))
-            # 7 true 3D extruded carbon-fiber laminate plies shearing apart with crimson cracks
+            sc.add_floor_grid(y_level=-2.15, span=7.0, step=1.0, rgb=(24, 46, 78), t=t, underwater=True)
+            # 7 true 3D extruded carbon-fiber laminate plies shearing apart with glowing crimson cracks
             n_plies = 7
             for i in range(n_plies):
                 sep = (i - 3.0) * ease_in_out_cubic(prog) * 0.16
                 py = (i - 3.0) * 0.34 + sep
                 col = CARBON_DARK if i % 2 == 0 else STEEL_DARK
-                sc.add_box((0.55, py, 0.0), (2.75, 0.22, 1.45), col, metallic=0.45)
+                sc.add_box((0.62, py, 0.0), (2.65, 0.22, 1.45), col, metallic=0.52, texture="carbon_weave")
                 if i in (2, 4) and prog > 0.2:
-                    crack_w = clamp((prog - 0.2) * 1.4) * 2.4
-                    sc.add_box((0.55 - 1.2 + crack_w * 0.5, py + 0.16, 0.74), (crack_w, 0.07, 0.08), DANGER, emissive=0.75)
-            sc.add_arrow_3d((0.55, 2.25, 0.2), (0.55, 1.35, 0.2), AMBER, shaft_r=0.085, head_r=0.20)
-            sc.add_arrow_3d((0.55, -2.15, 0.2), (0.55, -1.25, 0.2), AMBER, shaft_r=0.085, head_r=0.20)
-            add_crash_test_dummy(sc, pos=(-1.60, -0.82, 0.90), scale=0.80, yaw=0.38, pose="brace_impact", emotion="shock", t=t)
+                    crack_w = clamp((prog - 0.2) * 1.4) * 2.35
+                    sc.add_box((0.62 - 1.18 + crack_w * 0.5, py + 0.16, 0.74), (crack_w, 0.07, 0.08), DANGER, emissive=0.90, bloom=True)
+            sc.add_arrow_3d((0.62, 2.25, 0.2), (0.62, 1.35, 0.2), AMBER, shaft_r=0.085, head_r=0.20)
+            sc.add_arrow_3d((0.62, -2.15, 0.2), (0.62, -1.25, 0.2), AMBER, shaft_r=0.085, head_r=0.20)
+            add_crash_test_dummy(sc, pos=(-1.28, -0.82, 0.75), scale=0.74, yaw=0.38, pose="brace_impact", emotion="shock", t=t)
 
         elif scene_key == "dimple_instability":
             dimple = ease_out_cubic(clamp((prog - 0.32) / 0.55))
-            cam = Camera3D(eye=(-1.55 + shake * dimple, 0.85, 5.4), target=(0.15, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
+            cam = Camera3D(eye=(-1.55 + shake * dimple, 0.85, 5.75), target=(0.15, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.15, span=7.0, step=1.0, rgb=(24, 46, 78))
-            # Curved segmented 3D hull wall snapping an inward buckling dimple!
+            sc.add_floor_grid(y_level=-2.15, span=7.0, step=1.0, rgb=(24, 46, 78), t=t, underwater=True)
             for i in range(11):
                 u = i / 10.0
-                x = -0.95 + u * 2.95
+                x = -0.85 + u * 2.85
                 arch = math.sin(u * math.pi) * 0.45
                 dent = math.exp(-((u - 0.5) / 0.15) ** 2) * dimple * 1.05
                 y = 0.25 + arch - dent
                 col = lerp_color(STEEL_MID, DANGER, math.exp(-((u - 0.5) / 0.18) ** 2) * dimple)
-                sc.add_box((x, y, 0.0), (0.30, 0.42, 1.35), col, metallic=0.58, emissive=0.25 * dimple if abs(u - 0.5) < 0.16 else 0.0)
-            sc.add_arrow_3d((0.52, 2.25 - dimple * 0.5, 0.15), (0.52, 0.95 - dimple * 0.85, 0.15), DANGER, shaft_r=0.095, head_r=0.23)
-            add_crash_test_dummy(sc, pos=(-1.60, -0.88, 0.92), scale=0.80, yaw=0.36, pose="brace_impact", emotion="brace", t=t)
+                sc.add_box((x, y, 0.0), (0.30, 0.42, 1.35), col, metallic=0.60, emissive=0.35 * dimple if abs(u - 0.5) < 0.16 else 0.0, texture="carbon_weave", bloom=(dimple > 0.35 and abs(u - 0.5) < 0.16))
+            sc.add_arrow_3d((0.58, 2.25 - dimple * 0.5, 0.15), (0.58, 0.95 - dimple * 0.85, 0.15), DANGER, shaft_r=0.095, head_r=0.23)
+            add_crash_test_dummy(sc, pos=(-1.28, -0.88, 0.75), scale=0.74, yaw=0.36, pose="brace_impact", emotion="brace", t=t)
 
         elif scene_key == "implosion_wave_020ms":
             collapse = ease_in_out_cubic(clamp(prog * 1.15))
-            cam = Camera3D(eye=(1.35 + shake, 0.65, 5.3), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=35.0)
+            cam = Camera3D(eye=(1.35 + shake, 0.65, 5.75), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=35.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, rgb=(24, 44, 76))
+            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, rgb=(24, 44, 76), t=t, underwater=True)
             self._add_3d_composite_hull(
                 sc,
-                center=(0.15, 0.15, 0.0),
-                half_len=1.42 * (1.0 - 0.34 * collapse),
-                radius=0.88 * (1.0 - 0.42 * collapse),
+                center=(0.30, 0.15, 0.0),
+                half_len=1.38 * (1.0 - 0.34 * collapse),
+                radius=0.86 * (1.0 - 0.42 * collapse),
                 seam_stress=1.0,
                 buckling=clamp(0.18 + collapse * 0.82),
             )
-            self._add_3d_radial_pressure_ring(sc, (0.15, 0.15, 0.0), 2.55 - 0.65 * collapse, 1.35 - 0.55 * collapse, 12, DANGER, t * 2.0)
-            add_crash_test_dummy(sc, pos=(-1.62, -0.95, 0.95), scale=0.76, yaw=0.38, pose="panic_freefall", emotion="shock", t=t)
+            self._add_3d_radial_pressure_ring(sc, (0.30, 0.15, 0.0), 2.50 - 0.65 * collapse, 1.32 - 0.55 * collapse, 12, DANGER, t * 2.0)
+            add_crash_test_dummy(sc, pos=(-1.32, -0.95, 0.78), scale=0.72, yaw=0.38, pose="panic_freefall", emotion="shock", t=t)
             ms = min(20.0, prog * 22.0)
 
             def _ms_badge(d: ImageDraw.ImageDraw) -> None:
                 if collapse > 0.4:
-                    draw_sparks(d, 555, 960, t, 22, 230, 165, p, seed=131)
+                    draw_sparks(d, 580, 960, t, 22, 230, 165, p, seed=131)
                 f = load_font(self.font_black, 44)
                 label = f"T + {ms:04.1f} MS"
                 bb = d.textbbox((0, 0), label, font=f)
@@ -336,15 +334,15 @@ class SubmersibleImplosionScene(EpisodeScene):
 
         elif scene_key == "air_compression_pulse":
             squeeze = ease_out_cubic(prog)
-            cam = Camera3D(eye=(shake, 0.55, 5.4), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=30.0)
+            cam = Camera3D(eye=(shake, 0.55, 5.75), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=30.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, rgb=(24, 44, 76))
+            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, rgb=(24, 44, 76), t=t, underwater=True)
             core_r = max(0.32, 1.05 * (1.0 - 0.68 * squeeze))
-            sc.add_sphere((0.25, 0.15, 0.0), core_r * 1.45, DANGER, metallic=0.1, emissive=0.75, rim_rgb=AMBER)
-            sc.add_sphere((0.25, 0.15, 0.15), core_r * 0.95, AMBER, metallic=0.1, emissive=0.90, rim_rgb=(255, 255, 220))
-            sc.add_sphere((0.25, 0.15, 0.28), core_r * 0.52, (255, 252, 225), metallic=0.1, emissive=1.0)
-            self._add_3d_radial_pressure_ring(sc, (0.25, 0.15, 0.0), 2.35, core_r + 0.42, 8, CYAN, t * 2.6)
-            add_crash_test_dummy(sc, pos=(-1.62, -0.92, 0.92), scale=0.76, yaw=0.35, pose="brace_impact", emotion="shock", t=t)
+            sc.add_sphere((0.35, 0.15, 0.0), core_r * 1.45, DANGER, metallic=0.1, emissive=0.80, rim_rgb=AMBER, bloom=True)
+            sc.add_sphere((0.35, 0.15, 0.15), core_r * 0.95, AMBER, metallic=0.1, emissive=0.92, rim_rgb=(255, 255, 220), bloom=True)
+            sc.add_sphere((0.35, 0.15, 0.28), core_r * 0.52, (255, 252, 225), metallic=0.1, emissive=1.0, bloom=True)
+            self._add_3d_radial_pressure_ring(sc, (0.35, 0.15, 0.0), 2.35, core_r + 0.42, 8, CYAN, t * 2.6)
+            add_crash_test_dummy(sc, pos=(-1.32, -0.92, 0.78), scale=0.72, yaw=0.35, pose="brace_impact", emotion="shock", t=t)
 
             def _comp_lbl(d: ImageDraw.ImageDraw) -> None:
                 f = load_font(self.font_black, 34)

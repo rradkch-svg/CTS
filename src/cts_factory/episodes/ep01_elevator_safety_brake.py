@@ -98,21 +98,21 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
         dummy_yaw: float = -0.18,
     ) -> None:
         """Open-front 3D steel elevator cab cutaway with Crash-Test Dummy standing inside."""
-        # Rear interior wall & side walls
-        sc.add_box((0.0, cy, -0.95), (2.42, 2.75, 0.14), CAB_INTERIOR, metallic=0.25)
-        sc.add_box((-1.20, cy, 0.0), (0.14, 2.75, 1.92), STEEL_MID, metallic=0.55)
-        sc.add_box((1.20, cy, 0.0), (0.14, 2.75, 1.92), STEEL_MID, metallic=0.55)
-        # Overhead interior LED light bar
-        sc.add_box((0.0, cy + 1.24, -0.20), (1.70, 0.08, 0.24), glow_col, emissive=0.75, metallic=0.1)
+        # Rear interior wall & side walls with brushed metallic / architectural rib PBR textures
+        sc.add_box((0.0, cy, -0.95), (2.42, 2.75, 0.14), CAB_INTERIOR, metallic=0.30, texture="cabin_wall")
+        sc.add_box((-1.20, cy, 0.0), (0.14, 2.75, 1.92), STEEL_MID, metallic=0.58, texture="brushed_steel")
+        sc.add_box((1.20, cy, 0.0), (0.14, 2.75, 1.92), STEEL_MID, metallic=0.58, texture="brushed_steel")
+        # Overhead interior glowing LED light bar (with optical bloom!)
+        sc.add_box((0.0, cy + 1.24, -0.20), (1.70, 0.08, 0.24), glow_col, emissive=0.82, metallic=0.1, bloom=True)
         # Floor deck & safety plank underneath
-        sc.add_box((0.0, cy - 1.40, 0.0), (2.56, 0.24, 2.04), STEEL_MID, metallic=0.6)
+        sc.add_box((0.0, cy - 1.40, 0.0), (2.56, 0.24, 2.04), STEEL_MID, metallic=0.62, texture="brushed_steel")
         plank_col = EMERALD if locked else BRASS
-        sc.add_box((0.0, cy - 1.66, 0.0), (2.78, 0.24, 1.55), plank_col, metallic=0.62, emissive=0.18 if locked else 0.0)
+        sc.add_box((0.0, cy - 1.66, 0.0), (2.78, 0.24, 1.55), plank_col, metallic=0.65, emissive=0.22 if locked else 0.0, texture="hazard_plate", bloom=locked)
         # Twin clamp jaws gripping the vertical T-rails
         for sx in (-1, 1):
-            sc.add_box((sx * 1.48, cy - 1.66, 0.0), (0.36, 0.42, 0.56), EMERALD if locked else AMBER, metallic=0.55, emissive=0.25 if locked else 0.0)
+            sc.add_box((sx * 1.48, cy - 1.66, 0.0), (0.36, 0.42, 0.56), EMERALD if locked else AMBER, metallic=0.60, emissive=0.30 if locked else 0.0, texture="machined_brass", bloom=locked)
         # Roof crosshead beam
-        sc.add_box((0.0, cy + 1.46, 0.0), (2.58, 0.28, 2.04), STEEL_LIGHT, metallic=0.72)
+        sc.add_box((0.0, cy + 1.46, 0.0), (2.58, 0.28, 2.04), STEEL_LIGHT, metallic=0.75, texture="brushed_steel")
 
         # Articulated 3D Crash-Test Dummy INSIDE the 3D cab!
         add_crash_test_dummy(
@@ -297,59 +297,58 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
                 sc.add_sphere((fx, fy, 0.26), 0.22, DANGER if latched else AMBER, metallic=0.45, emissive=0.25 if latched else 0.0)
                 if not latched:
                     sc.add_arrow_3d((fx, fy, 0.30), (cx_g + math.cos(a) * (fw_r + 0.65), cy_g + math.sin(a) * (fw_r + 0.65), 0.30), AMBER, shaft_r=0.05, head_r=0.13)
-            add_crash_test_dummy(sc, pos=(-1.55, -0.78, 0.65), scale=0.82, yaw=0.38, pose="point_right", emotion="shock" if latched else "curious", t=t)
+            add_crash_test_dummy(sc, pos=(-1.22, -0.78, 0.55), scale=0.76, yaw=0.35, pose="point_right", emotion="shock" if latched else "curious", t=t)
             if latched:
                 overlays_2d.append(lambda d: draw_sparks(d, 640, 860, t, 18, 160, 130, p, seed=71))
 
         elif scene_key == "linkage_rod_lift":
             cam = Camera3D(eye=(1.8, 0.95, 5.8), target=(0.0, -0.1, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0, t=t)
             lift = ease_in_out_cubic(prog) * 0.55
             # Under-cab 3D steel beams
-            sc.add_box((0.2, 1.15, 0.0), (3.2, 0.38, 0.85), STEEL_MID, metallic=0.62)
-            sc.add_box((0.2, -0.85, 0.0), (3.4, 0.38, 0.95), STEEL_DARK, metallic=0.58)
+            sc.add_box((0.35, 1.15, 0.0), (3.0, 0.38, 0.85), STEEL_MID, metallic=0.62)
+            sc.add_box((0.35, -0.85, 0.0), (3.2, 0.38, 0.95), STEEL_DARK, metallic=0.58)
             # Stopped cyan rope pulling up on left activator
-            sc.add_cylinder((-1.15, 2.5, 0.25), (-1.15, -0.15 + lift, 0.25), 0.05, 0.05, CYAN, segments=10, emissive=0.35)
-            sc.add_arrow_3d((-1.55, -0.55, 0.35), (-1.55, 1.15, 0.35), CYAN, shaft_r=0.075, head_r=0.18)
+            sc.add_cylinder((-0.95, 2.5, 0.25), (-0.95, -0.15 + lift, 0.25), 0.05, 0.05, CYAN, segments=14, emissive=0.45, bloom=True)
+            sc.add_arrow_3d((-1.30, -0.55, 0.35), (-1.30, 1.15, 0.35), CYAN, shaft_r=0.075, head_r=0.18)
             # Horizontal 3D brass bar & twin scissor linkages lifting wedges
             bar_y = -0.18 + lift
-            sc.add_cylinder((-1.15, bar_y, 0.25), (1.55, bar_y, 0.25), 0.075, 0.075, BRASS, segments=12, metallic=0.72)
+            sc.add_cylinder((-0.95, bar_y, 0.25), (1.65, bar_y, 0.25), 0.075, 0.075, BRASS, segments=16, metallic=0.75)
             for sx in (-1, 1):
-                wx = 0.2 + sx * 1.25
-                sc.add_cylinder((0.2 + sx * 0.55, -0.70, 0.25), (wx, bar_y, 0.25), 0.06, 0.06, STEEL_LIGHT, segments=10)
-                sc.add_box((wx, bar_y + 0.05, 0.25), (0.36, 0.65, 0.42), AMBER, rot=(0.0, 0.0, sx * 0.14), metallic=0.55)
-                sc.add_arrow_3d((wx + sx * 0.42, bar_y - 0.35, 0.35), (wx + sx * 0.42, bar_y + 0.55, 0.35), AMBER, shaft_r=0.06, head_r=0.15)
-            add_crash_test_dummy(sc, pos=(-1.65, -0.95, 1.0), scale=0.76, yaw=0.35, pose="point_right", emotion="engineer", t=t)
+                wx = 0.35 + sx * 1.15
+                sc.add_cylinder((0.35 + sx * 0.50, -0.70, 0.25), (wx, bar_y, 0.25), 0.06, 0.06, STEEL_LIGHT, segments=14)
+                sc.add_box((wx, bar_y + 0.05, 0.25), (0.36, 0.65, 0.42), AMBER, rot=(0.0, 0.0, sx * 0.14), metallic=0.62, texture="machined_brass")
+                sc.add_arrow_3d((wx + sx * 0.40, bar_y - 0.35, 0.35), (wx + sx * 0.40, bar_y + 0.55, 0.35), AMBER, shaft_r=0.06, head_r=0.15)
+            add_crash_test_dummy(sc, pos=(-1.28, -0.95, 0.75), scale=0.72, yaw=0.35, pose="point_right", emotion="engineer", t=t)
 
         elif scene_key == "wedges_pinch_rails":
             # CLIMAX: Massive 3D steel T-rail + twin angled 3D amber hardened wedges jamming inward!
             bite = ease_out_cubic(min(1.0, prog * 1.35))
-            cam = Camera3D(eye=(1.55 + shake, 0.65, 5.1), target=(0.0, 0.05, 0.0), fov_deg=40.0, cy_offset=45.0)
+            cam = Camera3D(eye=(1.55 + shake, 0.65, 5.55), target=(0.0, 0.05, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0, t=t)
             # Massive central 3D steel T-rail
-            sc.add_box((0.25, 0.1, 0.0), (0.42, 4.8, 0.48), STEEL_LIGHT, metallic=0.78)
-            sc.add_box((0.25, 0.1, -0.30), (0.92, 4.8, 0.20), STEEL_DARK, metallic=0.6)
+            sc.add_box((0.45, 0.1, 0.0), (0.42, 4.8, 0.48), STEEL_LIGHT, metallic=0.80)
+            sc.add_box((0.45, 0.1, -0.30), (0.92, 4.8, 0.20), STEEL_DARK, metallic=0.62)
             for sx in (-1, 1):
                 gap = (1.0 - bite) * 0.38
                 wy = -0.35 + bite * 0.52
-                # Outer tapered 3D housing jaw
-                sc.add_box((0.25 + sx * 1.12, 0.0, 0.0), (0.42, 2.35, 0.72), STEEL_DARK, rot=(0.0, 0.0, -sx * 0.08), metallic=0.55)
-                # Sliding hardened 3D wedge
+                sc.add_box((0.45 + sx * 1.10, 0.0, 0.0), (0.42, 2.35, 0.72), STEEL_DARK, rot=(0.0, 0.0, -sx * 0.08), metallic=0.58)
                 sc.add_box(
-                    (0.25 + sx * (0.46 + gap), wy, 0.06),
+                    (0.45 + sx * (0.46 + gap), wy, 0.06),
                     (0.42, 1.42, 0.60),
                     lerp_color(BRASS, AMBER, bite),
                     rot=(0.0, 0.0, -sx * 0.12),
-                    metallic=0.62,
-                    emissive=0.18 * bite,
+                    metallic=0.66,
+                    emissive=0.22 * bite,
+                    texture="machined_brass",
                 )
-                sc.add_arrow_3d((0.25 + sx * 2.15, 0.05, 0.25), (0.25 + sx * 0.85, 0.05, 0.25), DANGER if bite > 0.65 else AMBER, shaft_r=0.095, head_r=0.23)
-            sc.add_arrow_3d((0.25, 2.1, 0.45), (0.25, 0.85, 0.45), CYAN, shaft_r=0.085, head_r=0.20)
-            add_crash_test_dummy(sc, pos=(-1.60, -0.92, 0.90), scale=0.78, yaw=0.35, pose="brace_impact", emotion="shock", t=t)
+                sc.add_arrow_3d((0.45 + sx * 2.05, 0.05, 0.25), (0.45 + sx * 0.85, 0.05, 0.25), DANGER if bite > 0.65 else AMBER, shaft_r=0.095, head_r=0.23)
+            sc.add_arrow_3d((0.45, 2.1, 0.45), (0.45, 0.85, 0.45), CYAN, shaft_r=0.085, head_r=0.20)
+            add_crash_test_dummy(sc, pos=(-1.28, -0.92, 0.72), scale=0.72, yaw=0.38, pose="brace_impact", emotion="shock", t=t)
             if bite > 0.45:
-                overlays_2d.append(lambda d: draw_sparks(d, 555, 940, t, 24, 190, 140, p, seed=91))
+                overlays_2d.append(lambda d: draw_sparks(d, 585, 940, t, 24, 190, 140, p, seed=91))
 
         elif scene_key == "cab_frozen_spark_fade":
             cam = Camera3D(eye=(-1.6 + math.sin(t * 0.8) * 0.4, 0.55, 5.8), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
