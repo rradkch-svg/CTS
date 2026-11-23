@@ -1,0 +1,60 @@
+{
+  "channel_name": "DEFINIR_NOME_DO_CANAL",
+  "handle": "@definir_handle",
+  "language": "en-US",
+  "goal": "earning_daily_autonomous_shorts",
+  "niche": "what_if_survival_and_mysteries",
+  "anti_clone_note": "Keep visual palette, character silhouette, and TTS voice completely distinct from Rota Critica (SHT) to avoid repetitive/inauthentic content flags.",
+  "video_spec": {
+    "resolution": "1080x1920",
+    "fps": 30,
+    "target_duration_sec": [65, 80],
+    "tiktok_1min_monetization_min_sec": 62,
+    "loudness_target_lufs": -14.5,
+    "max_lra_lu": 4.0,
+    "audio_codec": "aac",
+    "audio_sample_rate_hz": 48000,
+    "video_codec": "libx264",
+    "pixel_format": "yuv420p"
+  },
+  "visual_style": {
+    "type": "2d_flat_vector_articulated_animation",
+    "palette": {
+      "background_dark": "#101824",
+      "primary_accent": "#FF5A36",
+      "secondary_accent": "#32E6C5",
+      "text_primary": "#FFFFFF",
+      "text_highlight": "#FFD166"
+    },
+    "fonts_dir": "assets/fonts",
+    "primary_font": "Montserrat-ExtraBold.ttf",
+    "fallback_font": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+  },
+  "narration": {
+    "provider": "google-genai",
+    "model": "gemini-3.8-flash-tts",
+    "voice": "Puck",
+    "pov": "3rd_person_fast_storyteller",
+    "rate_range": [1.0, 1.08],
+    "avoid_whisper_hiss": true,
+    "continuous_ambient_bed": true
+  },
+  "retention_rules": {
+    "frame_0_hook": "Big expressive reacting face filling frame + bold short hook text on top at t=0.0s (never empty wide shot)",
+    "no_mid_video_subscribe_cta": true,
+    "ending_cta": "1-word comment prompt tied to the story (e.g., 'Comment YES or NO' / 'Comment 10')",
+    "caption_chunk_words": [2, 4],
+    "caption_style": "clean_outlined_no_box"
+  },
+  "publishing": {
+    "youtube_title_max_chars": 50,
+    "youtube_title_hashtags": false,
+    "youtube_title_one_uppercase_word": true,
+    "youtube_schedule_fixed_hour": "12:00",
+    "youtube_link_related_video": true,
+    "youtube_ai_disclosure_stylized_2d": false,
+    "never_delete_stalled_shorts": true,
+    "review_metrics_after_hours": 48,
+    "stayed_to_watch_target_pct": 75.0
+  }
+}

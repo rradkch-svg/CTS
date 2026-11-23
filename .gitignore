@@ -1,0 +1,19 @@
+# Secrets (never commit API keys)
+.env
+.env.*
+
+# Reel-watch scratch & quota cache
+reels/
+
+# Downloaded open-source fonts (fetched by setup_vm.sh)
+assets/fonts/*.ttf
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# OS
+.DS_Store
