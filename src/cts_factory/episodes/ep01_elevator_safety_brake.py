@@ -253,74 +253,94 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
             add_crash_test_dummy(sc, pos=(-1.30, -0.78, 0.55), scale=0.84, yaw=0.35, pose="point_right", emotion="curious", t=t)
 
         elif scene_key == "all_ropes_severed":
-            cam = Camera3D(eye=(-1.8 + shake, 0.8, 5.7), target=(-0.2, 0.1, 0.0), fov_deg=41.0, cy_offset=45.0)
+            cam = Camera3D(eye=(-1.50 + shake, 0.72, 6.05), target=(0.14, 0.05, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0, t=t)
             snapped = min(8, 2 + int(prog * 7.5))
-            self._add_3d_cables(sc, y_bot=-1.2, y_top=2.4, count=8, spread=1.8, snapped=snapped, snap_t=prog)
-            add_crash_test_dummy(sc, pos=(-1.45, -0.75, 0.55), scale=0.86, yaw=0.25, pose="brace_impact", emotion="panic", t=t)
-            sc.add_arrow_3d((-0.2, 1.8, 0.45), (-0.2, -0.8, 0.45), DANGER, shaft_r=0.09, head_r=0.22)
+            self._add_3d_cables(sc, y_bot=-1.25, y_top=1.78, count=8, spread=1.36, snapped=snapped, snap_t=prog)
+            add_crash_test_dummy(sc, pos=(-1.48, -0.78, 0.55), scale=0.80, yaw=0.28, pose="brace_impact", emotion="panic", t=t)
+            sc.add_arrow_3d((-0.02, 1.50, 0.45), (-0.02, -0.82, 0.45), DANGER, shaft_r=0.085, head_r=0.20)
             speed_v = clamp(0.45 + prog * 0.48)
             pct = int(round(prog * 18))
-            overlays_2d.append(lambda d: draw_sparks(d, 480, 920, t, 20, 200, 140, p, seed=55))
+            overlays_2d.append(lambda d: draw_sparks(d, 510, 920, t, 20, 180, 130, p, seed=55))
             overlays_2d.append(
                 lambda d, _sv=speed_v, _pct=pct: draw_pressure_gauge(
-                    d, 825, 960, 138, _sv, "OVERSPEED", f"+{_pct}%", p, self.font_black
+                    d, 875, 975, 126, _sv, "OVERSPEED", f"+{_pct}%", p, self.font_black
                 )
             )
 
         elif scene_key == "flyweights_flare_latch":
             latched = prog > 0.62
-            cam = Camera3D(eye=(1.7 + (shake if latched else 0.0), 0.75, 5.4), target=(0.15, 0.05, 0.0), fov_deg=40.0, cy_offset=45.0)
+            cam = Camera3D(eye=(1.45 + (shake if latched else 0.0), 0.72, 6.45), target=(0.12, 0.0, 0.0), fov_deg=40.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.0, span=7.0, step=1.0)
-            # Outer notched 3D steel ratchet ring (12 teeth blocks arranged in circle)
-            cx_g, cy_g = 0.55, 0.25
-            for i in range(12):
-                ra = i * (2 * math.pi / 12)
+            sc.add_floor_grid(y_level=-2.05, span=7.0, step=1.0, t=t)
+            # Cohesive outer 3D steel ratchet housing ring + 12 inward catch teeth
+            cx_g, cy_g = 0.62, 0.08
+            ring_r = 1.32
+            n_ring = 20
+            seg_len = 2.0 * math.pi * ring_r / n_ring + 0.06
+            for i in range(n_ring):
+                ra = i * (2.0 * math.pi / n_ring)
                 sc.add_box(
-                    (cx_g + math.cos(ra) * 1.48, cy_g + math.sin(ra) * 1.48, 0.0),
-                    (0.28, 0.22, 0.36),
+                    (cx_g + math.cos(ra) * ring_r, cy_g + math.sin(ra) * ring_r, -0.04),
+                    (0.15, seg_len, 0.34),
+                    STEEL_DARK,
+                    rot=(0.0, 0.0, ra),
+                    metallic=0.68,
+                )
+            for i in range(12):
+                ra = i * (2.0 * math.pi / 12)
+                sc.add_box(
+                    (cx_g + math.cos(ra) * 1.16, cy_g + math.sin(ra) * 1.16, 0.0),
+                    (0.19, 0.14, 0.32),
                     STEEL_LIGHT,
                     rot=(0.0, 0.0, ra),
-                    metallic=0.72,
+                    metallic=0.76,
                 )
             spin_ang = (prog * 14.0) if not latched else (0.62 * 14.0)
-            sc.add_gear_3d((cx_g, cy_g, 0.0), 0.96, 0.30, 16, spin_ang, BRASS, metallic=0.72)
+            sc.add_gear_3d((cx_g, cy_g, 0.0), 0.80, 0.28, 16, spin_ang, BRASS, metallic=0.74)
             flare = ease_out_cubic(min(1.0, prog / 0.62))
-            fw_r = 0.52 + flare * 0.78
+            fw_r = 0.42 + flare * 0.56
             for sx in (-1, 1):
                 a = spin_ang + (0 if sx == 1 else math.pi)
                 fx = cx_g + math.cos(a) * fw_r
                 fy = cy_g + math.sin(a) * fw_r
-                sc.add_cylinder((cx_g, cy_g, 0.24), (fx, fy, 0.24), 0.055, 0.055, DANGER if latched else AMBER, segments=10)
-                sc.add_sphere((fx, fy, 0.26), 0.22, DANGER if latched else AMBER, metallic=0.45, emissive=0.25 if latched else 0.0)
+                sc.add_cylinder((cx_g, cy_g, 0.32), (fx, fy, 0.32), 0.048, 0.048, DANGER if latched else AMBER, segments=10)
+                sc.add_sphere((fx, fy, 0.36), 0.18, DANGER if latched else AMBER, metallic=0.48, emissive=0.28 if latched else 0.0, depth_bias=-0.22)
                 if not latched:
-                    sc.add_arrow_3d((fx, fy, 0.30), (cx_g + math.cos(a) * (fw_r + 0.65), cy_g + math.sin(a) * (fw_r + 0.65), 0.30), AMBER, shaft_r=0.05, head_r=0.13)
-            add_crash_test_dummy(sc, pos=(-1.22, -0.78, 0.55), scale=0.76, yaw=0.35, pose="point_right", emotion="shock" if latched else "curious", t=t)
+                    sc.add_arrow_3d(
+                        (cx_g + math.cos(a) * (fw_r + 0.16), cy_g + math.sin(a) * (fw_r + 0.16), 0.40),
+                        (cx_g + math.cos(a) * (fw_r + 0.50), cy_g + math.sin(a) * (fw_r + 0.50), 0.40),
+                        CYAN,
+                        shaft_r=0.040,
+                        head_r=0.100,
+                    )
+            add_crash_test_dummy(sc, pos=(-1.52, -0.82, 0.65), scale=0.72, yaw=0.35, pose="point_right", emotion="shock" if latched else "curious", t=t)
             if latched:
-                overlays_2d.append(lambda d: draw_sparks(d, 640, 860, t, 18, 160, 130, p, seed=71))
+                overlays_2d.append(lambda d: draw_sparks(d, 675, 910, t, 18, 160, 130, p, seed=71))
 
         elif scene_key == "linkage_rod_lift":
-            cam = Camera3D(eye=(1.8, 0.95, 5.8), target=(0.0, -0.1, 0.0), fov_deg=41.0, cy_offset=45.0)
+            cam = Camera3D(eye=(1.55, 0.90, 6.65), target=(0.10, -0.05, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
             sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0, t=t)
-            lift = ease_in_out_cubic(prog) * 0.55
-            # Under-cab 3D steel beams
-            sc.add_box((0.35, 1.15, 0.0), (3.0, 0.38, 0.85), STEEL_MID, metallic=0.62)
-            sc.add_box((0.35, -0.85, 0.0), (3.2, 0.38, 0.95), STEEL_DARK, metallic=0.58)
-            # Stopped cyan rope pulling up on left activator
-            sc.add_cylinder((-0.95, 2.5, 0.25), (-0.95, -0.15 + lift, 0.25), 0.05, 0.05, CYAN, segments=14, emissive=0.45, bloom=True)
-            sc.add_arrow_3d((-1.30, -0.55, 0.35), (-1.30, 1.15, 0.35), CYAN, shaft_r=0.075, head_r=0.18)
-            # Horizontal 3D brass bar & twin scissor linkages lifting wedges
-            bar_y = -0.18 + lift
-            sc.add_cylinder((-0.95, bar_y, 0.25), (1.65, bar_y, 0.25), 0.075, 0.075, BRASS, segments=16, metallic=0.75)
+            lift = ease_in_out_cubic(prog) * 0.50
+            # Under-cab 3D steel beams shifted cleanly right of UNIT-01 with headroom for upward arrows
+            cx_l = 0.56
+            sc.add_box((cx_l, 1.46, 0.0), (2.45, 0.32, 0.78), STEEL_MID, metallic=0.62)
+            sc.add_box((cx_l, -0.85, 0.0), (2.55, 0.34, 0.88), STEEL_DARK, metallic=0.58)
+            # Stopped cyan rope pulling up on RIGHT activator (100% inside right margin, clear of top-left badge)
+            rope_x = cx_l + 1.05
+            sc.add_cylinder((rope_x, 2.38, 0.25), (rope_x, -0.18 + lift, 0.25), 0.048, 0.048, CYAN, segments=14, emissive=0.45, bloom=True)
+            sc.add_arrow_3d((rope_x + 0.34, -0.45, 0.35), (rope_x + 0.34, 1.08, 0.35), CYAN, shaft_r=0.065, head_r=0.155)
+            # Horizontal 3D brass bar & twin scissor linkages lifting machined brass wedges
+            bar_y = -0.22 + lift
+            sc.add_cylinder((cx_l - 0.96, bar_y, 0.25), (rope_x, bar_y, 0.25), 0.070, 0.070, BRASS, segments=16, metallic=0.75)
             for sx in (-1, 1):
-                wx = 0.35 + sx * 1.15
-                sc.add_cylinder((0.35 + sx * 0.50, -0.70, 0.25), (wx, bar_y, 0.25), 0.06, 0.06, STEEL_LIGHT, segments=14)
-                sc.add_box((wx, bar_y + 0.05, 0.25), (0.36, 0.65, 0.42), AMBER, rot=(0.0, 0.0, sx * 0.14), metallic=0.62, texture="machined_brass")
-                sc.add_arrow_3d((wx + sx * 0.40, bar_y - 0.35, 0.35), (wx + sx * 0.40, bar_y + 0.55, 0.35), AMBER, shaft_r=0.06, head_r=0.15)
-            add_crash_test_dummy(sc, pos=(-1.28, -0.95, 0.75), scale=0.72, yaw=0.35, pose="point_right", emotion="engineer", t=t)
+                wx = cx_l + sx * 0.78
+                sc.add_cylinder((cx_l + sx * 0.32, -0.70, 0.25), (wx, bar_y, 0.25), 0.055, 0.055, STEEL_LIGHT, segments=14)
+                sc.add_box((wx, bar_y + 0.05, 0.25), (0.32, 0.60, 0.38), AMBER, rot=(0.0, 0.0, sx * 0.14), metallic=0.62, texture="machined_brass")
+                sc.add_arrow_3d((wx, bar_y + 0.44, 0.35), (wx, bar_y + 0.96, 0.35), AMBER, shaft_r=0.052, head_r=0.135)
+            add_crash_test_dummy(sc, pos=(-1.55, -0.95, 0.72), scale=0.72, yaw=0.38, pose="point_right", emotion="engineer", t=t)
 
         elif scene_key == "wedges_pinch_rails":
             # CLIMAX: Massive 3D steel T-rail + twin angled 3D amber hardened wedges jamming inward!
@@ -353,7 +373,7 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
         elif scene_key == "cab_frozen_spark_fade":
             cam = Camera3D(eye=(-1.6 + math.sin(t * 0.8) * 0.4, 0.55, 5.8), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-2.1, span=7.0, step=1.0, t=t)
             self._add_3d_shaft_rails(sc)
             self._add_3d_elevator_cab(sc, cy=0.0, locked=True, glow_col=EMERALD, dummy_pose="relief_wave", dummy_emotion="relief", t=t, dummy_yaw=0.15)
             overlays_2d.append(lambda d: draw_dotted_arc(d, 540, 990, 325, 0, 360, p.emerald, width=4, step_deg=10))
@@ -361,7 +381,7 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
         elif scene_key == "hydraulic_buffer_cutaway":
             cam = Camera3D(eye=(2.0, 0.95, 6.0), target=(0.0, -0.15, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-1.95, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-1.95, span=7.0, step=1.0, t=t)
             compress = ease_in_out_cubic(math.sin(prog * math.pi)) * 0.65
             # Concrete pit floor + 3D cylindrical hydraulic oil buffer
             sc.add_box((0.35, -1.78, 0.0), (4.6, 0.36, 2.4), STEEL_DARK, metallic=0.35)
@@ -374,24 +394,25 @@ class ElevatorSafetyBrakeScene(EpisodeScene):
             add_crash_test_dummy(sc, pos=(-1.40, -0.68, 0.65), scale=0.84, yaw=0.36, pose="point_right", emotion="engineer", t=t)
 
         else:  # verdict_cta_card
-            cam = Camera3D(eye=(math.sin(t * 0.9) * 0.5, 0.55, 5.4), target=(0.0, 0.15, 0.0), fov_deg=41.0, cy_offset=20.0)
+            cam = Camera3D(eye=(math.sin(t * 0.9) * 0.5, 0.55, 5.55), target=(0.0, 0.15, 0.0), fov_deg=41.0, cy_offset=20.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-1.65, span=7.0, step=1.0)
+            sc.add_floor_grid(y_level=-1.65, span=7.0, step=1.0, t=t)
             # Locked 3D elevator frame behind hero dummy
             sc.add_box((-1.85, 0.4, -1.2), (0.20, 4.6, 0.24), STEEL_LIGHT, metallic=0.7)
             sc.add_box((1.85, 0.4, -1.2), (0.20, 4.6, 0.24), STEEL_LIGHT, metallic=0.7)
             sc.add_box((0.0, -0.95, -1.1), (3.1, 0.26, 1.2), EMERALD, metallic=0.5, emissive=0.2)
-            # Hero 3D UNIT-01 centered facing viewer shrugging toward YES / NO!
-            add_crash_test_dummy(sc, pos=(0.0, -0.15, 0.35), scale=1.05, yaw=math.sin(t * 1.8) * 0.12, pose="cta_shrug", emotion="cta", t=t)
+            # Hero 3D UNIT-01 centered facing viewer shrugging cleanly BETWEEN YES / NO pills!
+            add_crash_test_dummy(sc, pos=(0.0, -0.02, 0.35), scale=0.96, yaw=math.sin(t * 1.8) * 0.12, pose="cta_shrug", emotion="cta", t=t)
 
             def _cta_buttons(d: ImageDraw.ImageDraw) -> None:
                 pulse = 1.0 + 0.04 * math.sin(t * 7.0)
-                for label, bx, col in (("YES", 330, p.amber), ("NO", 750, p.emerald)):
-                    bw, bh = int(155 * pulse), int(88 * pulse)
-                    d.rounded_rectangle([bx - bw, 1210, bx + bw, 1210 + bh], radius=18, fill=p.surface_panel, outline=col, width=5)
-                    f = load_font(self.font_black, 48)
+                for label, bx, col in (("YES", 215, p.amber), ("NO", 865, p.emerald)):
+                    bw, bh = int(138 * pulse), int(84 * pulse)
+                    by = 1125
+                    d.rounded_rectangle([bx - bw, by, bx + bw, by + bh], radius=18, fill=p.surface_panel, outline=col, width=5)
+                    f = load_font(self.font_black, 46)
                     bb = d.textbbox((0, 0), label, font=f)
-                    d.text((bx - (bb[2] - bb[0]) / 2, 1210 + (bh - (bb[3] - bb[1])) / 2 - 4), label, font=f, fill=col)
+                    d.text((bx - (bb[2] - bb[0]) / 2, by + (bh - (bb[3] - bb[1])) / 2 - 4), label, font=f, fill=col)
 
             overlays_2d.append(_cta_buttons)
 

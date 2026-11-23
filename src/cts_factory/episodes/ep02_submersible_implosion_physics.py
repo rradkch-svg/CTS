@@ -152,14 +152,14 @@ class SubmersibleImplosionScene(EpisodeScene):
 
         if scene_key == "hull_pressure_peak":
             # FRAME 0 HERO: Huge 3D cutaway pressure hull + wide-eyed UNIT-01 inside + 12 3D crimson radial arrows!
-            cam = Camera3D(eye=(1.4 + math.sin(t * 1.2) * 0.35 + shake, 0.75, 5.5), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
+            cam = Camera3D(eye=(1.35 + math.sin(t * 1.2) * 0.35 + shake, 0.72, 5.95), target=(0.0, -0.04, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.25, span=7.0, step=1.0, rgb=(22, 48, 84))
+            sc.add_floor_grid(y_level=-2.25, span=7.0, step=1.0, rgb=(22, 48, 84), t=t, underwater=True)
             self._add_3d_composite_hull(
                 sc,
-                center=(0.0, 0.05, 0.0),
-                half_len=1.40,
-                radius=0.92,
+                center=(0.0, -0.05, 0.0),
+                half_len=1.32,
+                radius=0.86,
                 seam_stress=0.92,
                 buckling=0.10 + 0.05 * math.sin(t * 14.0),
                 cutaway_dummy=True,
@@ -167,14 +167,14 @@ class SubmersibleImplosionScene(EpisodeScene):
                 dummy_emotion="panic",
                 t=t,
             )
-            self._add_3d_radial_pressure_ring(sc, (0.0, 0.05, 0.0), 2.55, 1.38, 12, DANGER, t)
-            overlays_2d.append(lambda d: draw_sparks(d, 350, 995, t, 10, 90, 90, p, seed=19))
-            overlays_2d.append(lambda d: draw_sparks(d, 730, 995, t, 10, 90, 90, p, seed=29))
+            self._add_3d_radial_pressure_ring(sc, (0.0, -0.05, 0.0), 2.18, 1.26, 12, DANGER, t)
+            overlays_2d.append(lambda d: draw_sparks(d, 355, 1005, t, 10, 90, 90, p, seed=19))
+            overlays_2d.append(lambda d: draw_sparks(d, 725, 1005, t, 10, 90, 90, p, seed=29))
 
         elif scene_key == "depth_3800m_scale":
             cam = Camera3D(eye=(1.6, 0.55, 6.1), target=(0.0, -0.1, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.4, span=7.0, step=1.0, rgb=(20, 48, 84))
+            sc.add_floor_grid(y_level=-2.4, span=7.0, step=1.0, rgb=(20, 48, 84), t=t, underwater=True)
             sub_y = 1.15 - ease_out_cubic(prog) * 2.15
             self._add_3d_composite_hull(
                 sc,
@@ -202,32 +202,32 @@ class SubmersibleImplosionScene(EpisodeScene):
             overlays_2d.append(_depth_ruler)
 
         elif scene_key == "pressure_stack_arrows":
-            cam = Camera3D(eye=(-1.5, 0.7, 6.2), target=(0.35, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
+            cam = Camera3D(eye=(-1.40, 0.68, 6.40), target=(0.25, 0.0, 0.0), fov_deg=41.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, rgb=(20, 48, 84))
+            sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, rgb=(20, 48, 84), t=t, underwater=True)
             self._add_3d_composite_hull(
                 sc,
-                center=(-0.45, 0.0, 0.0),
-                half_len=1.05,
-                radius=0.68,
+                center=(-0.52, -0.18, 0.0),
+                half_len=0.92,
+                radius=0.60,
                 seam_stress=0.5,
                 cutaway_dummy=True,
                 dummy_pose="brace_impact",
                 dummy_emotion="brace",
                 t=t,
             )
-            self._add_3d_radial_pressure_ring(sc, (-0.45, 0.0, 0.0), 2.15, 1.15, 10, CYAN, t)
+            self._add_3d_radial_pressure_ring(sc, (-0.52, -0.18, 0.0), 1.76, 1.00, 10, CYAN, t)
             atm = int(round(1 + prog * 379))
             overlays_2d.append(
                 lambda d, _a=atm, _p=prog: draw_pressure_gauge(
-                    d, 825, 990, 136, clamp(_p * 0.92 + 0.08), "PRESSURE", f"{_a} ATM", p, self.font_black
+                    d, 862, 1005, 128, clamp(_p * 0.92 + 0.08), "PRESSURE", f"{_a} ATM", p, self.font_black
                 )
             )
 
         elif scene_key == "tonnage_per_sqft":
             cam = Camera3D(eye=(2.2, 1.45, 5.7), target=(0.0, -0.1, 0.0), fov_deg=40.0, cy_offset=45.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-1.85, span=7.0, step=1.0, rgb=(22, 48, 84))
+            sc.add_floor_grid(y_level=-1.85, span=7.0, step=1.0, rgb=(22, 48, 84), t=t, underwater=True)
             # True 3D 1 FT x 1 FT steel test plate under massive 3D load vectors
             sc.add_box((0.55, -1.20, 0.0), (2.25, 0.42, 2.25), STEEL_LIGHT, metallic=0.72)
             for ox in (-0.85, -0.42, 0.0, 0.42, 0.85):
@@ -243,20 +243,20 @@ class SubmersibleImplosionScene(EpisodeScene):
             overlays_2d.append(_ton_lbl)
 
         elif scene_key == "sphere_uniform_stress":
-            cam = Camera3D(eye=(-1.5, 0.75, 5.9), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=35.0)
+            cam = Camera3D(eye=(-1.42, 0.72, 6.25), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=35.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-2.15, span=7.0, step=1.0, rgb=(22, 54, 82))
-            # Glossy 3D Phong-shaded Titanium Pressure Sphere!
-            sc.add_sphere((0.52, 0.15, 0.0), 1.05, STEEL_LIGHT, metallic=0.84, rim_rgb=EMERALD)
-            sc.add_sphere((0.52, 0.15, 0.65), 0.42, (20, 95, 130), metallic=0.65, rim_rgb=CYAN)
-            self._add_3d_radial_pressure_ring(sc, (0.52, 0.15, 0.0), 2.15, 1.24, 10, EMERALD, t)
-            add_crash_test_dummy(sc, pos=(-1.55, -0.85, 0.72), scale=0.84, yaw=0.36, pose="point_right", emotion="relief", t=t)
+            sc.add_floor_grid(y_level=-2.15, span=7.0, step=1.0, rgb=(22, 54, 82), t=t, underwater=True)
+            # Glossy 3D Phong-shaded Titanium Pressure Sphere shifted cleanly clear of UNIT-01 & bottom text!
+            sc.add_sphere((0.68, 0.30, 0.0), 0.94, STEEL_LIGHT, metallic=0.84, rim_rgb=EMERALD)
+            sc.add_sphere((0.68, 0.30, 0.58), 0.38, (20, 95, 130), metallic=0.65, rim_rgb=CYAN)
+            self._add_3d_radial_pressure_ring(sc, (0.68, 0.30, 0.0), 1.80, 1.12, 10, EMERALD, t)
+            add_crash_test_dummy(sc, pos=(-1.46, -0.88, 0.72), scale=0.74, yaw=0.36, pose="point_right", emotion="relief", t=t)
 
             def _unif_lbl(d: ImageDraw.ImageDraw) -> None:
                 f = load_font(self.font_bold, 28)
                 lbl = "UNIFORM MEMBRANE STRESS"
                 bb = d.textbbox((0, 0), lbl, font=f)
-                d.text((540 - (bb[2] - bb[0]) / 2, 1305), lbl, font=f, fill=p.emerald)
+                d.text((540 - (bb[2] - bb[0]) / 2, 1320), lbl, font=f, fill=p.emerald, stroke_width=4, stroke_fill=p.ink)
 
             overlays_2d.append(_unif_lbl)
 
@@ -324,29 +324,30 @@ class SubmersibleImplosionScene(EpisodeScene):
 
         elif scene_key == "implosion_wave_020ms":
             collapse = ease_in_out_cubic(clamp(prog * 1.15))
-            cam = Camera3D(eye=(1.35 + shake, 0.65, 5.75), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=35.0)
+            cam = Camera3D(eye=(1.35 + shake, 0.65, 6.20), target=(0.0, 0.0, 0.0), fov_deg=41.0, cy_offset=35.0)
             sc = Scene3D(cam)
             sc.add_floor_grid(y_level=-2.2, span=7.0, step=1.0, rgb=(24, 44, 76), t=t, underwater=True)
             self._add_3d_composite_hull(
                 sc,
-                center=(0.30, 0.15, 0.0),
-                half_len=1.38 * (1.0 - 0.34 * collapse),
-                radius=0.86 * (1.0 - 0.42 * collapse),
+                center=(0.52, 0.25, 0.0),
+                half_len=1.22 * (1.0 - 0.34 * collapse),
+                radius=0.76 * (1.0 - 0.42 * collapse),
                 seam_stress=1.0,
                 buckling=clamp(0.18 + collapse * 0.82),
             )
-            self._add_3d_radial_pressure_ring(sc, (0.30, 0.15, 0.0), 2.50 - 0.65 * collapse, 1.32 - 0.55 * collapse, 12, DANGER, t * 2.0)
-            add_crash_test_dummy(sc, pos=(-1.32, -0.95, 0.78), scale=0.72, yaw=0.38, pose="panic_freefall", emotion="shock", t=t)
+            self._add_3d_radial_pressure_ring(sc, (0.52, 0.25, 0.0), 1.98 - 0.48 * collapse, 1.12 - 0.42 * collapse, 10, DANGER, t * 2.0)
+            add_crash_test_dummy(sc, pos=(-1.38, -0.92, 0.72), scale=0.70, yaw=0.38, pose="panic_freefall", emotion="shock", t=t)
             ms = min(20.0, prog * 22.0)
 
             def _ms_badge(d: ImageDraw.ImageDraw) -> None:
                 if collapse > 0.4:
-                    draw_sparks(d, 580, 960, t, 22, 230, 165, p, seed=131)
-                f = load_font(self.font_black, 44)
+                    draw_sparks(d, 635, 920, t, 22, 210, 155, p, seed=131)
+                f = load_font(self.font_black, 42)
                 label = f"T + {ms:04.1f} MS"
                 bb = d.textbbox((0, 0), label, font=f)
-                d.rounded_rectangle([365, 1235, 715, 1308], radius=14, fill=p.surface_panel, outline=p.danger, width=4)
-                d.text((540 - (bb[2] - bb[0]) / 2, 1246), label, font=f, fill=p.text_highlight)
+                cx_b = 620
+                d.rounded_rectangle([cx_b - 170, 1275, cx_b + 170, 1344], radius=14, fill=p.surface_panel, outline=p.danger, width=4)
+                d.text((cx_b - (bb[2] - bb[0]) / 2, 1286), label, font=f, fill=p.text_highlight)
 
             overlays_2d.append(_ms_badge)
 
@@ -401,21 +402,22 @@ class SubmersibleImplosionScene(EpisodeScene):
             overlays_2d.append(_bars)
 
         else:  # verdict_cta_card
-            cam = Camera3D(eye=(math.sin(t * 0.9) * 0.45, 0.55, 5.4), target=(0.0, 0.15, 0.0), fov_deg=41.0, cy_offset=20.0)
+            cam = Camera3D(eye=(math.sin(t * 0.9) * 0.45, 0.55, 5.55), target=(0.0, 0.15, 0.0), fov_deg=41.0, cy_offset=20.0)
             sc = Scene3D(cam)
-            sc.add_floor_grid(y_level=-1.65, span=7.0, step=1.0, rgb=(20, 50, 82))
+            sc.add_floor_grid(y_level=-1.65, span=7.0, step=1.0, rgb=(20, 50, 82), t=t, underwater=True)
             # Certified 3D Titanium Sphere behind UNIT-01
-            sc.add_sphere((0.0, 0.45, -1.25), 1.12, STEEL_LIGHT, metallic=0.82, rim_rgb=EMERALD)
-            add_crash_test_dummy(sc, pos=(0.0, -0.15, 0.38), scale=1.05, yaw=math.sin(t * 1.8) * 0.12, pose="cta_shrug", emotion="cta", t=t)
+            sc.add_sphere((0.0, 0.45, -1.25), 1.06, STEEL_LIGHT, metallic=0.82, rim_rgb=EMERALD)
+            add_crash_test_dummy(sc, pos=(0.0, -0.02, 0.38), scale=0.96, yaw=math.sin(t * 1.8) * 0.12, pose="cta_shrug", emotion="cta", t=t)
 
             def _cta_buttons(d: ImageDraw.ImageDraw) -> None:
                 pulse = 1.0 + 0.04 * math.sin(t * 7.0)
-                for label, bx, col in (("YES", 330, p.cyan), ("NO", 750, p.amber)):
-                    bw, bh = int(155 * pulse), int(88 * pulse)
-                    d.rounded_rectangle([bx - bw, 1210, bx + bw, 1210 + bh], radius=18, fill=p.surface_panel, outline=col, width=5)
-                    f = load_font(self.font_black, 48)
+                for label, bx, col in (("YES", 215, p.cyan), ("NO", 865, p.amber)):
+                    bw, bh = int(138 * pulse), int(84 * pulse)
+                    by = 1125
+                    d.rounded_rectangle([bx - bw, by, bx + bw, by + bh], radius=18, fill=p.surface_panel, outline=col, width=5)
+                    f = load_font(self.font_black, 46)
                     bb = d.textbbox((0, 0), label, font=f)
-                    d.text((bx - (bb[2] - bb[0]) / 2, 1210 + (bh - (bb[3] - bb[1])) / 2 - 4), label, font=f, fill=col)
+                    d.text((bx - (bb[2] - bb[0]) / 2, by + (bh - (bb[3] - bb[1])) / 2 - 4), label, font=f, fill=col)
 
             overlays_2d.append(_cta_buttons)
 
