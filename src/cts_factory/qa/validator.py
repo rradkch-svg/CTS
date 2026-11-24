@@ -162,6 +162,36 @@ def run_episode_qa(
     if rms["silence_gap_count"] > 0:
         violations.append(f"Detected {rms['silence_gap_count']} silence gaps < -55 dB at {rms['silence_gap_timestamps_s']}")
 
+    # Minimum Visual & Packaging Standards Check (QUALITY_STANDARDS.md)
+    from PIL import Image
+
+    visual_standards: dict[str, Any] = {}
+    cover_path = episode_dir / "cover.png"
+    grid_preview_path = episode_dir / "cover_grid_preview.png"
+    if not cover_path.is_file():
+        violations.append("Missing cover.png (required by QUALITY_STANDARDS.md)")
+    else:
+        with Image.open(cover_path) as cov:
+            cw, ch = cov.size
+            visual_standards["cover_size"] = [cw, ch]
+            if (cw, ch) != (vs.width, vs.height):
+                violations.append(f"Cover size {cw}x{ch} != {vs.width}x{vs.height}")
+            crop_1x1 = np.asarray(cov.crop((0, 420, cw, 1500)).convert("RGB"), dtype=np.float32)
+            crop_std = round(float(crop_1x1.std()), 2)
+            visual_standards["cover_1x1_std"] = crop_std
+            if crop_std < 12.0:
+                violations.append(f"Cover 1:1 center crop looks blank/low-contrast (std={crop_std})")
+    if not grid_preview_path.is_file():
+        violations.append("Missing cover_grid_preview.png (required by QUALITY_STANDARDS.md)")
+
+    script_path = episode_dir / "script.json"
+    if script_path.is_file():
+        script_raw = script_path.read_text(encoding="utf-8")
+        for banned in ("DEG F", "(3 IN IN)"):
+            if banned in script_raw:
+                violations.append(f"Banned formatting token {banned!r} found in script.json")
+        visual_standards["script_format_clean"] = True
+
     reel_watch_out: str | None = None
     if with_reel_watch:
         root = Path(repo_root) if repo_root else Path.cwd()
@@ -203,6 +233,7 @@ def run_episode_qa(
         "ffprobe": probe,
         "ebur128": loud,
         "rms_scan": rms,
+        "visual_standards": visual_standards,
         "reel_watch_stdout": reel_watch_out,
     }
     (episode_dir / "qa_report.json").write_text(

@@ -7,8 +7,11 @@ Este kit traz toda a engenharia validada no projeto piloto, limpa de qualquer re
 .
 ├── .gitignore
 ├── README.md
+├── QUALITY_STANDARDS.md         # Padrão mínimo obrigatório de qualidade visual, 3D, BOLT, safe zones e QA
 ├── brand_template.json          # Renomeie para brand.json e defina nicho/idioma/paleta/voz
 ├── setup_vm.sh                  # Instala ffmpeg, fontes Linux/Montserrat, uv e deps Python
+├── tests/
+│   └── test_visual_standards.py # Gate automático em pytest que valida safe zones, gauges, capas e BOLT
 └── .agents/
     └── skills/
         ├── shorts-factory/      # Skill completa do nosso processo de produção + QA + postagem
