@@ -1,0 +1,352 @@
+{
+  "episode_id": "ep03",
+  "slug": "ep03_bank_vault_lock",
+  "title": "Inside a Bank Vault Door Built to NEVER Open",
+  "hook_text": "20 TONS OF LOCKED STEEL",
+  "cta_text": "Comment YES or NO",
+  "bpm": 106,
+  "cover_headline": [
+    "20 TONS OF STEEL.",
+    "TRAPPED FOREVER."
+  ],
+  "publish_meta": {
+    "youtube_title": "Inside a Bank Vault Door Built to NEVER Open",
+    "youtube_description": "",
+    "ig_tiktok_caption": "Even the bank manager cannot open a modern vault after hours \u2014 and drilling into the door shatters a hidden glass plate that jams it shut forever. Could any heist crew beat that glass trap? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#bankvault",
+      "#howitworks",
+      "#locksmith",
+      "#mechanicalengineering",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Could any safecracker defeat a spring-loaded tempered glass relocker? Comment YES or NO",
+    "related_video_slot": "ep04_tacoma_bridge_flutter",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "Even with the exact vault code tonight, this twenty-ton steel door refuses to budge.",
+      "voice_direction": "Punchy documentary hook at 1.04x pace; crisp weight on twenty-ton steel door.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "vault_door_hero",
+      "sfx_cues": [
+        {
+          "name": "wedge_lock_slam",
+          "offset_s": 0.25,
+          "gain_db": -3.5,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 1.6,
+          "gain_db": -7.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": null,
+      "pause_after_s": 0.18
+    },
+    {
+      "id": "b02_armor_layers",
+      "act": "hook",
+      "narration_text": "Modern bank vaults are layered traps built to turn brute force right against you.",
+      "voice_direction": "Confident engineering pivot with crisp emphasis on layered mechanical traps.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "armor_layers_exploded",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.2,
+          "gain_db": -9.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "DOOR ARMOR",
+        "value": "TORCH-PROOF"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b03_copper_torch_shield",
+      "act": "mechanism",
+      "narration_text": "Behind the skin sit manganese steel and copper plates that drain away torch heat.",
+      "voice_direction": "Analytical clarity on manganese steel and copper alloy.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "copper_heat_shield",
+      "sfx_cues": [
+        {
+          "name": "hydraulic_hiss",
+          "offset_s": 0.5,
+          "gain_db": -9.0,
+          "pan": -0.2
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.6,
+          "gain_db": -12.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "HEAT SHIELD",
+        "value": "COPPER ALLOY"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b04_radial_bolts",
+      "act": "mechanism",
+      "narration_text": "Spin the wheel and a cam ring drives twenty-four solid steel bolts outward.",
+      "voice_direction": "Measured rhythmic precision matching heavy geared steel motion.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "radial_bolts_cam",
+      "sfx_cues": [
+        {
+          "name": "gear_ratchet",
+          "offset_s": 0.3,
+          "gain_db": -7.5,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 3.0,
+          "gain_db": -5.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "LOCK BOLTS",
+        "value": "24 X 4-INCH"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b05_dual_tumblers",
+      "act": "mechanism",
+      "narration_text": "Two separate three-wheel brass locks guard that cam. Every wheel must align one tiny gate.",
+      "voice_direction": "Intricate clockwork fascination; crisp pronunciation of combination locks.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "dual_combination_wheels",
+      "sfx_cues": [
+        {
+          "name": "gear_ratchet",
+          "offset_s": 0.4,
+          "gain_db": -9.0,
+          "pan": -0.25
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 3.2,
+          "gain_db": -10.0,
+          "pan": 0.25
+        }
+      ],
+      "callout": {
+        "label": "DUAL DIALS",
+        "value": "100M COMBOS"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b06_time_lock",
+      "act": "mechanism",
+      "narration_text": "Even with both codes, a triple wind-up time lock blocks the bolts until morning.",
+      "voice_direction": "Authoritative surprise; sharp highlight on triple-redundant.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "triple_time_lock",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.3,
+          "gain_db": -10.0,
+          "pan": -0.2
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 1.1,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 1.9,
+          "gain_db": -10.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "TIME LOCK",
+        "value": "3X WIND-UP"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b07_no_override",
+      "act": "escalation",
+      "narration_text": "No Wi-Fi, no keypad, no manager override. If one clock stops, two backups keep ticking.",
+      "voice_direction": "Cool, confident half-voice authority with clean cadence.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "time_lock_bar_block",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.4,
+          "gain_db": -7.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "OVERRIDE",
+        "value": "IMPOSSIBLE"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b08_drill_attempt",
+      "act": "escalation",
+      "narration_text": "So what happens if a thief drives a carbide drill straight toward the lock?",
+      "voice_direction": "Rising suspenseful question; lean in on carbide drill.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "carbide_drill_approach",
+      "sfx_cues": [
+        {
+          "name": "servo_hum",
+          "offset_s": 0.3,
+          "gain_db": -8.0,
+          "pan": 0.0
+        },
+        {
+          "name": "friction_screech",
+          "offset_s": 1.9,
+          "gain_db": -7.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "ATTACK VECTOR",
+        "value": "CARBIDE DRILL"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b09_glass_relocker_shatter",
+      "act": "climax",
+      "narration_text": "Hidden inside sits tempered glass holding steel cables under heavy spring tension.",
+      "voice_direction": "Tense reveal; crisp emphasis on tempered glass and spring tension.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "glass_relocker_plate",
+      "sfx_cues": [
+        {
+          "name": "alarm_ping",
+          "offset_s": 0.4,
+          "gain_db": -9.0,
+          "pan": 0.0
+        },
+        {
+          "name": "glass_crack",
+          "offset_s": 3.4,
+          "gain_db": -3.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "HIDDEN TRAP",
+        "value": "GLASS RELOCKER"
+      },
+      "pause_after_s": 0.28
+    },
+    {
+      "id": "b10_deadbolts_fire",
+      "act": "climax",
+      "narration_text": "The instant a drill touches that glass, it shatters and fires permanent deadbolts.",
+      "voice_direction": "Peak explosive climax delivery; decisive hit on explodes into dust.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "deadbolts_fire_jam",
+      "sfx_cues": [
+        {
+          "name": "glass_crack",
+          "offset_s": 0.8,
+          "gain_db": -2.5,
+          "pan": 0.0
+        },
+        {
+          "name": "wedge_lock_slam",
+          "offset_s": 1.6,
+          "gain_db": -2.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "RELOCKER FIRED",
+        "value": "PERMA-LOCKED"
+      },
+      "pause_after_s": 0.3
+    },
+    {
+      "id": "b11_vault_sealed",
+      "act": "climax",
+      "narration_text": "Not even the real code works after that. Technicians spend days cutting open their own vault.",
+      "voice_direction": "Grounded, slightly amused documentary awe on cutting open their own vault.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "vault_permanently_sealed",
+      "sfx_cues": [
+        {
+          "name": "pressure_rumble",
+          "offset_s": 0.2,
+          "gain_db": -9.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.9,
+          "gain_db": -8.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "RECOVERY TIME",
+        "value": "DAYS TO OPEN"
+      },
+      "pause_after_s": 0.28
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Could any heist crew beat that glass trap? Comment YES or NO.",
+      "voice_direction": "Snappy conversational challenge with crisp lift on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.1,
+          "gain_db": -10.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "YOUR CALL",
+        "value": "YES OR NO"
+      },
+      "pause_after_s": 0.35
+    }
+  ]
+}

@@ -14,6 +14,7 @@ from cts_factory.engine.renderer import render_episode_video
 from cts_factory.episodes import get_scene
 from cts_factory.packaging.banner import build_channel_banner
 from cts_factory.packaging.cover import build_episode_package
+from cts_factory.publish import run_publish_batch, sync_publish_queue
 from cts_factory.qa.validator import run_episode_qa
 
 
@@ -34,6 +35,18 @@ def main(argv: list[str] | None = None) -> int:
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("build-banner", help="Generate 2560x1440 YouTube channel banner and preview")
+    sub.add_parser("publish-sync", help="Sync publish_queue.json with all QA-passed episodes")
+
+    p_pub = sub.add_parser("publish", help="Auto-publish pending QA-passed episodes via unified connector")
+    p_pub.add_argument("--count", type=int, default=1, help="Max episodes to publish in this run (default: 1)")
+    p_pub.add_argument("--episode", default=None, help="Optional single episode slug to publish")
+    p_pub.add_argument("--batch", default=None, help="Optional batch tag filter (e.g. launch-3, daily)")
+    p_pub.add_argument(
+        "--provider",
+        default="auto",
+        help="Connector: auto | upload_post | postiz | ayrshare | webhook | dry_run",
+    )
+    p_pub.add_argument("--dry-run", action="store_true", help="Validate & preview payload without calling external API")
 
     for name in ("build-audio", "align-captions", "package"):
         p = sub.add_parser(name)
@@ -62,6 +75,29 @@ def main(argv: list[str] | None = None) -> int:
         banner, preview = build_channel_banner(brand, root / "marca", repo_root=root)
         print(json.dumps({"banner": str(banner), "preview": str(preview)}, indent=2))
         return 0
+
+    if args.cmd == "publish-sync":
+        queue = sync_publish_queue(root)
+        summary = {
+            "total": len(queue.items),
+            "pending": sum(1 for i in queue.items if i.status == "pending"),
+            "published": sum(1 for i in queue.items if i.status == "published"),
+            "queue_file": str(root / "publish_queue.json"),
+        }
+        print(json.dumps(summary, indent=2))
+        return 0
+
+    if args.cmd == "publish":
+        res = run_publish_batch(
+            repo_root=root,
+            count=args.count,
+            episode=args.episode or None,
+            batch=args.batch or None,
+            provider=args.provider,
+            dry_run=bool(args.dry_run),
+        )
+        print(json.dumps(res, indent=2, ensure_ascii=False))
+        return 0 if res["failures"] == 0 else 2
 
     brand, script, ep_dir = _load_brand_and_script(args.episode)
     mp4_path = ep_dir / f"{script.slug}.mp4"

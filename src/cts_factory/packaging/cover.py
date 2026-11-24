@@ -22,27 +22,52 @@ def _draw_cover_text_centered(
     font_path: str,
     p: Palette,
 ) -> None:
-    max_w = x_max - x_min - 24
-    font_size = 76
-    while font_size >= 40:
+    max_w = x_max - x_min - 28
+    font_size = 66
+    while font_size >= 38:
         f = load_font(font_path, font_size)
-        widest = max(draw.textbbox((0, 0), ln.upper(), font=f, stroke_width=6)[2] for ln in lines)
+        sp_w = max(16, int(font_size * 0.34))
+        widest = max(
+            sum(draw.textbbox((0, 0), w, font=f, stroke_width=5)[2] for w in ln.upper().split())
+            + sp_w * max(0, len(ln.upper().split()) - 1)
+            for ln in lines
+        )
         if widest <= max_w:
             break
         font_size -= 4
     f = load_font(font_path, font_size)
-    lh = draw.textbbox((0, 0), "Ag", font=f, stroke_width=6)[3] + 10
+    sp_w = max(16, int(font_size * 0.34))
+    lh = draw.textbbox((0, 0), "Ag", font=f, stroke_width=5)[3] + 10
     cx = (x_min + x_max) // 2
     y = y_start
     for idx, raw_ln in enumerate(lines):
-        ln = raw_ln.upper()
-        bb = draw.textbbox((0, 0), ln, font=f, stroke_width=6)
-        tw = bb[2] - bb[0]
+        toks = raw_ln.upper().split()
+        ws = [draw.textbbox((0, 0), w, font=f, stroke_width=5)[2] for w in toks]
+        tw = sum(ws) + sp_w * max(0, len(toks) - 1)
         x = max(x_min, min(x_max - tw, cx - tw // 2))
         col = p.text_highlight if idx == len(lines) - 1 else p.text_primary
-        draw.text((x + 4, y + 5), ln, font=f, fill=p.ink, stroke_width=7, stroke_fill=p.ink)
-        draw.text((x, y), ln, font=f, fill=col, stroke_width=6, stroke_fill=p.ink)
+        for w, ww in zip(toks, ws):
+            draw.text((x + 4, y + 5), w, font=f, fill=p.ink, stroke_width=6, stroke_fill=p.ink)
+            draw.text((x, y), w, font=f, fill=col, stroke_width=5, stroke_fill=p.ink)
+            x += ww + sp_w
         y += lh
+
+
+def _apply_cover_scrims(cover: Image.Image, p: Palette) -> None:
+    """Apply smooth top & bottom dark vignette scrims behind cover typography for effortless legibility."""
+    import numpy as np
+
+    arr = np.array(cover, dtype=np.float32)
+    h, w = arr.shape[:2]
+    ys = np.arange(h, dtype=np.float32)[:, None]
+    # Top scrim strongest over y=380..620, gently feathering out by y=720
+    top_a = np.clip(1.0 - np.maximum(0.0, ys - 560.0) / 160.0, 0.0, 1.0) * 0.62
+    # Bottom scrim strongest below y=1400, gently feathering in from y=1320
+    bot_a = np.clip((ys - 1320.0) / 130.0, 0.0, 1.0) * 0.60
+    alpha = np.maximum(top_a, bot_a)[:, :, None]
+    bg = np.array(p.bg_dark, dtype=np.float32)[None, None, :]
+    blended = arr * (1.0 - alpha) + bg * alpha
+    cover.paste(Image.fromarray(np.clip(blended, 0, 255).astype(np.uint8), mode="RGB"))
 
 
 def build_episode_package(
@@ -52,7 +77,7 @@ def build_episode_package(
     episode_dir: Path,
     repo_root: Path | None = None,
 ) -> dict[str, Path]:
-    """Generate 1080x1920 cover.png, cover_grid_preview.png, publish_meta.json, and checklist."""
+    """Generate 1080x1920 cover.png (1:1 & 3:4 grid safe), cover_grid_preview.png, publish_meta.json, and checklist."""
     episode_dir.mkdir(parents=True, exist_ok=True)
     w, h = brand.video_spec.width, brand.video_spec.height
     p = Palette.from_brand(brand)
@@ -63,39 +88,42 @@ def build_episode_package(
     cover = Image.new("RGB", (w, h), p.bg_dark)
     draw = ImageDraw.Draw(cover)
     scene.render_cover_hero(cover, draw)
+    _apply_cover_scrims(cover, p)
+    draw = ImageDraw.Draw(cover)
 
     font_black = str(brand.visual_style.resolve_font_path("primary", repo_root=repo_root))
     font_bold = str(brand.visual_style.resolve_font_path("secondary", repo_root=repo_root))
 
-    # Top series badge strictly inside Reels grid safe zone (y=345..410)
-    f_series = load_font(font_bold, 28)
+    # Top series badge strictly inside BOTH 1:1 center crop (y=420..1500) AND Reels grid (y=330..1580)
+    f_series = load_font(font_bold, 26)
     badge = f"{brand.channel_name.upper()}  //  EP {script.episode_id[-2:]}"
     bb = draw.textbbox((0, 0), badge, font=f_series)
-    bw = (bb[2] - bb[0]) + 56
+    bw = (bb[2] - bb[0]) + 52
     bx0 = (w - bw) // 2
-    draw.rounded_rectangle([bx0, grid.y_min + 18, bx0 + bw, grid.y_min + 76], radius=14, fill=p.surface_panel, outline=p.cyan, width=3)
-    draw.text((bx0 + 28, grid.y_min + 30), badge, font=f_series, fill=p.cyan)
+    by0 = 432
+    draw.rounded_rectangle([bx0, by0, bx0 + bw, by0 + 52], radius=14, fill=p.surface_panel, outline=p.cyan, width=3)
+    draw.text((bx0 + 26, by0 + (52 - (bb[3] - bb[1])) // 2 - bb[1]), badge, font=f_series, fill=p.cyan)
 
-    # Bold 2-line headline strictly inside y=430..610 (well inside y=330..1580)
+    # Bold 2-line headline cleanly in y=496..640 (well clear of 3D hero center!)
     _draw_cover_text_centered(
         draw,
         lines=script.cover_headline or [script.hook_text],
         x_min=grid.x_min,
         x_max=grid.x_max,
-        y_start=grid.y_min + 102,
+        y_start=498,
         font_path=font_black,
         p=p,
     )
 
-    # Bottom series bar strictly inside y=1470..1560 (clears Reels y=1580 bottom crop!)
-    pill_text = f"2.5D CAD CUTAWAY  •  {brand.handle.upper()}"
-    f_bot = load_font(font_bold, 28)
+    # Bottom series bar strictly inside 1:1 center crop (y=1424..1484 <= 1500!)
+    pill_text = f"3D ENGINEERING  •  {brand.handle.upper()}"
+    f_bot = load_font(font_bold, 26)
     pb = draw.textbbox((0, 0), pill_text, font=f_bot)
-    pw = (pb[2] - pb[0]) + 60
+    pw = (pb[2] - pb[0]) + 56
     px0 = (w - pw) // 2
-    py0 = grid.y_max - 92
-    draw.rounded_rectangle([px0, py0, px0 + pw, py0 + 64], radius=14, fill=p.surface_panel, outline=p.amber, width=3)
-    draw.text((px0 + 30, py0 + 16), pill_text, font=f_bot, fill=p.text_highlight)
+    py0 = 1424
+    draw.rounded_rectangle([px0, py0, px0 + pw, py0 + 58], radius=14, fill=p.surface_panel, outline=p.amber, width=3)
+    draw.text((px0 + 28, py0 + (58 - (pb[3] - pb[1])) // 2 - pb[1]), pill_text, font=f_bot, fill=p.text_highlight)
 
     cover_path = episode_dir / "cover.png"
     cover.save(cover_path, format="PNG", optimize=True)

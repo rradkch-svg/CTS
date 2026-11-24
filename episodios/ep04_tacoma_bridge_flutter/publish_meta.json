@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep04",
+  "slug": "ep04_tacoma_bridge_flutter",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "Why Light Wind RIPPED This Steel Bridge Apart",
+  "youtube_title_length": 45,
+  "youtube_description": "",
+  "ig_tiktok_caption": "Most textbooks blame simple resonance, but steady 42 mph wind actually tore a steel suspension bridge apart through aeroelastic flutter. Did you learn in school that it was just resonance? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#civilengineering",
+    "#physics",
+    "#bridges",
+    "#aerodynamics",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Did you learn in school that it was just simple resonance? Comment YES or NO",
+  "related_video_slot": "ep05_car_differential_gear",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}

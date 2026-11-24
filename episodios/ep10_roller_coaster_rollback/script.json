@@ -1,0 +1,198 @@
+{
+  "episode_id": "ep10",
+  "slug": "ep10_roller_coaster_rollback",
+  "title": "Why Roller Coasters NEVER Roll Backwards",
+  "hook_text": "STUCK AT 200 FEET UP",
+  "cta_text": "Comment YES or NO",
+  "bpm": 110,
+  "cover_headline": [
+    "CHAIN SNAPPED.",
+    "ZERO ROLLBACK."
+  ],
+  "publish_meta": {
+    "youtube_title": "Why Roller Coasters NEVER Roll Backwards",
+    "youtube_description": "",
+    "ig_tiktok_caption": "Hear that loud clack-clack-clack climbing a roller coaster hill? That's an unpowered steel ratchet locking you forward — backed by zero-electricity magnetic eddy-current brakes. Would you still sit in the front row? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#rollercoaster",
+      "#howitworks",
+      "#mechanicalengineering",
+      "#physics",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Bolt waved right before we cut the 200-foot lift chain 😂 Would you sit in the front row knowing this? Comment YES or NO 👇",
+    "related_video_slot": "ep01_elevator_safety_brake",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "Imagine climbing two hundred feet up a roller coaster and hearing the steel lift chain snap.",
+      "voice_direction": "Urgent suspenseful hook at 1.04x pace; sharp hit on snap.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "coaster_chain_snap_hero",
+      "sfx_cues": [
+        { "name": "cable_snap", "offset_s": 0.25, "gain_db": -3.0, "pan": 0.0 },
+        { "name": "alarm_ping", "offset_s": 1.4, "gain_db": -8.5, "pan": 0.0 }
+      ],
+      "callout": null,
+      "pause_after_s": 0.18
+    },
+    {
+      "id": "b02_bolt_wave_hill",
+      "act": "hook",
+      "narration_text": "Hey Bolt, wave down below — we are cutting power right now. Yet your car barely moves an inch.",
+      "voice_direction": "Playful cheeky cue to Bolt, then confident engineering twist.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "bolt_coaster_wave",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.0, "gain_db": -10.0, "pan": 0.0 },
+        { "name": "metal_clank", "offset_s": 2.4, "gain_db": -5.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "ROLLBACK", "value": "IMPOSSIBLE" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b03_clack_sound",
+      "act": "mechanism",
+      "narration_text": "Hear that loud clack-clack-clack on every climb? That is not the chain — it is your fail-safe.",
+      "voice_direction": "Instant 'aha!' clarity; crisp rhythm on clack-clack-clack.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "anti_rollback_ratchet",
+      "sfx_cues": [
+        { "name": "gear_ratchet", "offset_s": 0.3, "gain_db": -6.5, "pan": 0.0 },
+        { "name": "gear_ratchet", "offset_s": 1.5, "gain_db": -6.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "THE CLACK", "value": "SAFETY RATCHET" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b04_chain_dog_teeth",
+      "act": "mechanism",
+      "narration_text": "Beneath each car hangs a steel anti-rollback dog dragging across saw-toothed track notches.",
+      "voice_direction": "Precise mechanical breakdown on anti-rollback dog and saw-toothed.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "chain_dog_closeup",
+      "sfx_cues": [
+        { "name": "gear_ratchet", "offset_s": 0.4, "gain_db": -7.5, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.6, "gain_db": -11.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "UNDER CAR", "value": "STEEL RATCHET DOG" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b05_instant_lock_tooth",
+      "act": "mechanism",
+      "narration_text": "Moving forward, it hops over every tooth. Roll backwards one inch and it jams into solid steel.",
+      "voice_direction": "Decisive mechanical bite on jams into solid steel.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "dog_jams_tooth",
+      "sfx_cues": [
+        { "name": "wedge_lock_slam", "offset_s": 2.0, "gain_db": -3.5, "pan": 0.0 },
+        { "name": "metal_clank", "offset_s": 2.4, "gain_db": -6.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "LOCK TRIGGER", "value": "ZERO POWER" },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b06_three_wheel_bogie",
+      "act": "mechanism",
+      "narration_text": "Even upside down, three wheel sets hug the rail from above, below, and the sides.",
+      "voice_direction": "Reassuring precision; crisp emphasis on above, below, and the sides.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "upstop_wheels_clamp",
+      "sfx_cues": [
+        { "name": "servo_hum", "offset_s": 0.3, "gain_db": -11.0, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.6, "gain_db": -11.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "WHEEL LOCK", "value": "3-WAY CLAMP" },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b07_power_out_brake_question",
+      "act": "escalation",
+      "narration_text": "What if the park loses all electricity while your train hits the station at seventy miles per hour?",
+      "voice_direction": "Rising playful tension; crisp lift on seventy miles per hour.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "train_70mph_blackout",
+      "sfx_cues": [
+        { "name": "alarm_ping", "offset_s": 0.4, "gain_db": -8.5, "pan": 0.0 },
+        { "name": "whoosh_cut", "offset_s": 1.8, "gain_db": -6.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "BLACKOUT", "value": "70 MPH ARRIVAL" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b08_magnetic_eddy_fins",
+      "act": "escalation",
+      "narration_text": "Modern coasters use unpowered permanent magnets flanking thick copper fins bolted underneath every car.",
+      "voice_direction": "Clean physics fascination on permanent magnets and copper fins.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "copper_magnet_fins",
+      "sfx_cues": [
+        { "name": "servo_hum", "offset_s": 0.3, "gain_db": -9.5, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.4, "gain_db": -10.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "MAGNET BRAKE", "value": "COPPER + MAGNETS" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b09_eddy_current_bolt",
+      "act": "climax",
+      "narration_text": "No power needed, Bolt — rushing copper creates eddy currents that push back like invisible honey.",
+      "voice_direction": "Warm triumphant cue to Bolt; vivid emphasis on invisible honey.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "eddy_current_swirls",
+      "sfx_cues": [
+        { "name": "deep_sonar_pulse", "offset_s": 0.4, "gain_db": -8.5, "pan": 0.0 },
+        { "name": "hydraulic_hiss", "offset_s": 1.8, "gain_db": -8.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "EDDY DRAG", "value": "ZERO FRICTION" },
+      "pause_after_s": 0.26
+    },
+    {
+      "id": "b10_spring_fail_closed",
+      "act": "climax",
+      "narration_text": "Final pinch brakes stay open with air pressure, so any blackout springs them clamped shut automatically.",
+      "voice_direction": "Authoritative engineering finality; crisp hit on clamped shut automatically.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "spring_brakes_close",
+      "sfx_cues": [
+        { "name": "hydraulic_hiss", "offset_s": 0.6, "gain_db": -7.5, "pan": 0.0 },
+        { "name": "wedge_lock_slam", "offset_s": 1.8, "gain_db": -4.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "FAIL-CLOSED", "value": "SPRING CLAMP" },
+      "pause_after_s": 0.26
+    },
+    {
+      "id": "b11_bolt_station_stop",
+      "act": "climax",
+      "narration_text": "Smooth stop, Bolt. Pure gravity, steel teeth, and magnets working even in a total blackout.",
+      "voice_direction": "Warm celebratory wrap-up to Bolt.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "bolt_station_victory",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.3, "gain_db": -10.5, "pan": 0.0 },
+        { "name": "metal_clank", "offset_s": 2.3, "gain_db": -9.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "FAIL-SAFE", "value": "100% PASSIVE" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Would you still sit in the front row? Comment YES or NO.",
+      "voice_direction": "Snappy conversational challenge; crisp lift on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.1, "gain_db": -10.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "YOUR CALL", "value": "YES OR NO" },
+      "pause_after_s": 0.35
+    }
+  ]
+}

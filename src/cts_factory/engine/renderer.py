@@ -15,6 +15,30 @@ from cts_factory.engine.materials import Palette
 from cts_factory.engine.primitives import draw_brand_header, draw_hud_callout, draw_top_hook
 from cts_factory.episodes.base import EpisodeScene
 
+_SAFE_BADGE_TOKENS = (
+    "SAFE", "PASSED", "PROTECTED", "FLYABLE", "CUSHION", "AIR MIX",
+    "SMART FIX", "MODERN FIX", "UPGRADE", "LIMITED SLIP", "PASSIVE",
+    "PARACHUTE", "SPLASHDOWN", "KEVLAR", "CATCH", "CONSERVED",
+    "OTIS", "150+", "RE-CHECK", "NEW RULE", "NEAR ZERO", "ZERO FRICTION",
+    "ZERO POWER", "SPRING CLAMP", "IMPOSSIBLE", "50/50", "UNIFORM",
+)
+_DANGER_BADGE_TOKENS = (
+    "FAILURE", "CRATER", "FLAW", "TRAP", "BLACKOUT", "WORST",
+    "BLADE-OFF", "200%", "PEEL", "SNAPPED", "IMPLOSION", "SPIKE",
+    "ZIPPER", "RUNAWAY", "45 DEG", "45°", "3,000+", "DAMAGE", "STUCK",
+    "DELAMINATION", "DIMPLE", "BUCKLING", "0.02", "400 TONS", "OVERSPEED",
+)
+
+
+def resolve_callout_accent(act: str, label: str, value: str, palette: Palette) -> tuple[int, int, int]:
+    """Enforce semantic HUD badge coloring: safe/CTA -> emerald, failure/climax -> danger, telemetry -> cyan."""
+    tag_up = f"{label} {value}".upper()
+    if act == "cta" or any(tok in tag_up for tok in _SAFE_BADGE_TOKENS):
+        return palette.emerald
+    if act in ("escalation", "climax") or any(tok in tag_up for tok in _DANGER_BADGE_TOKENS):
+        return palette.danger
+    return palette.cyan
+
 
 def render_episode_video(
     brand: BrandConfig,
@@ -124,10 +148,11 @@ def render_episode_video(
             if bt.id == script.beats[0].id:
                 draw_top_hook(draw, script.hook_text, brand, palette, repo_root=repo_root)
             elif beat_cfg is not None and beat_cfg.callout is not None:
-                accent = (
-                    palette.danger
-                    if beat_cfg.act in ("escalation", "climax")
-                    else (palette.emerald if beat_cfg.act == "cta" else palette.cyan)
+                accent = resolve_callout_accent(
+                    beat_cfg.act,
+                    beat_cfg.callout.label,
+                    beat_cfg.callout.value,
+                    palette,
                 )
                 draw_hud_callout(
                     draw,

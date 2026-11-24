@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep07",
+  "slug": "ep07_jet_engine_bird_strike",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "How a Jet Engine SURVIVES Swallowing a Bird",
+  "youtube_title_length": 43,
+  "youtube_description": "",
+  "ig_tiktok_caption": "At 500 mph, a single bird hits a jet engine with the kinetic punch of a speeding car — yet modern turbofans survive it without losing thrust. Would you trust a twin-engine jet after a bird strike? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#aviation",
+    "#jetengine",
+    "#howitworks",
+    "#aerospace",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Bolt waved right before the 500 mph test cannon fired 😂 Would you trust flying after a bird strike? Comment YES or NO 👇",
+  "related_video_slot": "ep08_dam_spillway_cavitation",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}

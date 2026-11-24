@@ -1,0 +1,93 @@
+{
+  "total_duration_s": 66.5,
+  "sample_rate_hz": 48000,
+  "beats": [
+    {
+      "id": "b01_hook",
+      "start_s": 0.05,
+      "end_s": 4.75,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b01_hook_3195dc76e251.wav",
+      "narration_text": "At five hundred miles per hour, one bird hits a jet engine with car-crash force."
+    },
+    {
+      "id": "b02_bolt_wave_intro",
+      "start_s": 5.2618,
+      "end_s": 10.6717,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b02_bolt_wave_intro_7ed502d9f2e6.wav",
+      "narration_text": "Hey Bolt, wave before we fire the test cannon. Modern turbofans are built for this."
+    },
+    {
+      "id": "b03_spinner_cone",
+      "start_s": 11.2972,
+      "end_s": 15.8072,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b03_spinner_cone_073cc6f579fa.wav",
+      "narration_text": "First, that sharp painted nose cone deflects heavy mass outward, away from the center."
+    },
+    {
+      "id": "b04_titanium_blades",
+      "start_s": 16.4327,
+      "end_s": 21.8327,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b04_titanium_blades_1af69624fdb4.wav",
+      "narration_text": "Next come wide hollow titanium blades curved like scimitars, spinning at three thousand RPM."
+    },
+    {
+      "id": "b05_centrifugal_fling",
+      "start_s": 22.4581,
+      "end_s": 26.9581,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b05_centrifugal_fling_fcd763b96e58.wav",
+      "narration_text": "Instead of shattering, those flexible blades slice cleanly and fling debris straight outward."
+    },
+    {
+      "id": "b06_bypass_duct",
+      "start_s": 27.5836,
+      "end_s": 33.1236,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b06_bypass_duct_a29e9533cb6f.wav",
+      "narration_text": "Here is the genius secret: over eighty percent of the engine is a hollow bypass tunnel."
+    },
+    {
+      "id": "b07_core_protected",
+      "start_s": 33.8059,
+      "end_s": 38.3059,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b07_core_protected_816d5b4b8a02.wav",
+      "narration_text": "Hold tight, Bolt. Almost the entire impact shoots right around the fiery core and exits safely."
+    },
+    {
+      "id": "b08_blade_off_risk",
+      "start_s": 39.0166,
+      "end_s": 43.7066,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b08_blade_off_risk_906e7eba750a.wav",
+      "narration_text": "Now imagine the worst case: a blade actually snaps loose at full takeoff thrust."
+    },
+    {
+      "id": "b09_kevlar_containment",
+      "start_s": 44.4174,
+      "end_s": 49.4674,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b09_kevlar_containment_8633a1befe49.wav",
+      "narration_text": "A thick Kevlar containment belt wraps the fan and catches flying titanium like a bulletproof hammock."
+    },
+    {
+      "id": "b10_one_engine_fly",
+      "start_s": 50.2634,
+      "end_s": 54.9834,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b10_one_engine_fly_fe5b3c0e0173.wav",
+      "narration_text": "Even if one engine dies completely, every airliner is certified to climb and land on one."
+    },
+    {
+      "id": "b11_bolt_safe_flight",
+      "start_s": 55.6942,
+      "end_s": 60.9042,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b11_bolt_safe_flight_d181d507b3e2.wav",
+      "narration_text": "Nice landing, Bolt. Zero cabin damage, full control, and fail-safe physics keeping flights safe."
+    },
+    {
+      "id": "b12_cta",
+      "start_s": 61.6149,
+      "end_s": 64.4849,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/cache/tts/b12_cta_d90f8ad4888c.wav",
+      "narration_text": "Would you stay calm flying on one engine? Comment YES or NO."
+    }
+  ],
+  "narration_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/narration_clean.wav",
+  "master_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/audio_master.wav",
+  "envelope_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep07_jet_engine_bird_strike/narration_envelope.npy"
+}

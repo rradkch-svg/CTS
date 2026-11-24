@@ -1,0 +1,1372 @@
+{
+  "blocks": [
+    {
+      "start_s": 0.05,
+      "end_s": 1.12,
+      "words": [
+        {
+          "text": "At",
+          "start_s": 0.05,
+          "end_s": 0.26,
+          "emphasize": false
+        },
+        {
+          "text": "five",
+          "start_s": 0.26,
+          "end_s": 0.45,
+          "emphasize": false
+        },
+        {
+          "text": "hundred",
+          "start_s": 0.45,
+          "end_s": 0.64,
+          "emphasize": true
+        },
+        {
+          "text": "miles",
+          "start_s": 0.64,
+          "end_s": 1.12,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 1.12,
+      "end_s": 1.6,
+      "words": [
+        {
+          "text": "per",
+          "start_s": 1.12,
+          "end_s": 1.38,
+          "emphasize": false
+        },
+        {
+          "text": "hour,",
+          "start_s": 1.38,
+          "end_s": 1.6,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 2.12,
+      "end_s": 2.82,
+      "words": [
+        {
+          "text": "one",
+          "start_s": 2.12,
+          "end_s": 2.16,
+          "emphasize": false
+        },
+        {
+          "text": "bird",
+          "start_s": 2.16,
+          "end_s": 2.42,
+          "emphasize": false
+        },
+        {
+          "text": "hits",
+          "start_s": 2.42,
+          "end_s": 2.7,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 2.7,
+          "end_s": 2.82,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 2.82,
+      "end_s": 4.1,
+      "words": [
+        {
+          "text": "jet",
+          "start_s": 2.82,
+          "end_s": 2.94,
+          "emphasize": false
+        },
+        {
+          "text": "engine",
+          "start_s": 2.94,
+          "end_s": 3.18,
+          "emphasize": false
+        },
+        {
+          "text": "with",
+          "start_s": 3.18,
+          "end_s": 3.44,
+          "emphasize": false
+        },
+        {
+          "text": "car-crash",
+          "start_s": 3.44,
+          "end_s": 4.1,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 4.1,
+      "end_s": 4.34,
+      "words": [
+        {
+          "text": "force.",
+          "start_s": 4.1,
+          "end_s": 4.34,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 5.3,
+      "end_s": 5.68,
+      "words": [
+        {
+          "text": "Hey",
+          "start_s": 5.3,
+          "end_s": 5.52,
+          "emphasize": false
+        },
+        {
+          "text": "Bolt,",
+          "start_s": 5.52,
+          "end_s": 5.68,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 6.02,
+      "end_s": 7.02,
+      "words": [
+        {
+          "text": "wave",
+          "start_s": 6.02,
+          "end_s": 6.32,
+          "emphasize": false
+        },
+        {
+          "text": "before",
+          "start_s": 6.32,
+          "end_s": 6.74,
+          "emphasize": false
+        },
+        {
+          "text": "we",
+          "start_s": 6.74,
+          "end_s": 6.86,
+          "emphasize": false
+        },
+        {
+          "text": "fire",
+          "start_s": 6.86,
+          "end_s": 7.02,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 7.02,
+      "end_s": 7.66,
+      "words": [
+        {
+          "text": "the",
+          "start_s": 7.02,
+          "end_s": 7.24,
+          "emphasize": false
+        },
+        {
+          "text": "test",
+          "start_s": 7.24,
+          "end_s": 7.38,
+          "emphasize": false
+        },
+        {
+          "text": "cannon.",
+          "start_s": 7.38,
+          "end_s": 7.66,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 8.92,
+      "end_s": 10.2,
+      "words": [
+        {
+          "text": "Modern",
+          "start_s": 8.92,
+          "end_s": 9.3,
+          "emphasize": false
+        },
+        {
+          "text": "turbofans",
+          "start_s": 9.3,
+          "end_s": 9.92,
+          "emphasize": false
+        },
+        {
+          "text": "are",
+          "start_s": 9.92,
+          "end_s": 10.04,
+          "emphasize": false
+        },
+        {
+          "text": "built",
+          "start_s": 10.04,
+          "end_s": 10.2,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 10.2,
+      "end_s": 10.48,
+      "words": [
+        {
+          "text": "for",
+          "start_s": 10.2,
+          "end_s": 10.34,
+          "emphasize": false
+        },
+        {
+          "text": "this.",
+          "start_s": 10.34,
+          "end_s": 10.48,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 11.297,
+      "end_s": 12.46,
+      "words": [
+        {
+          "text": "First,",
+          "start_s": 11.297,
+          "end_s": 11.52,
+          "emphasize": false
+        },
+        {
+          "text": "that",
+          "start_s": 11.66,
+          "end_s": 11.8,
+          "emphasize": false
+        },
+        {
+          "text": "sharp",
+          "start_s": 11.8,
+          "end_s": 12.06,
+          "emphasize": false
+        },
+        {
+          "text": "painted",
+          "start_s": 12.06,
+          "end_s": 12.46,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 12.46,
+      "end_s": 13.84,
+      "words": [
+        {
+          "text": "nose",
+          "start_s": 12.46,
+          "end_s": 12.78,
+          "emphasize": false
+        },
+        {
+          "text": "cone",
+          "start_s": 12.78,
+          "end_s": 13.16,
+          "emphasize": false
+        },
+        {
+          "text": "deflects",
+          "start_s": 13.16,
+          "end_s": 13.66,
+          "emphasize": false
+        },
+        {
+          "text": "heavy",
+          "start_s": 13.66,
+          "end_s": 13.84,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 13.84,
+      "end_s": 14.48,
+      "words": [
+        {
+          "text": "mass",
+          "start_s": 13.84,
+          "end_s": 14.06,
+          "emphasize": false
+        },
+        {
+          "text": "outward,",
+          "start_s": 14.06,
+          "end_s": 14.48,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 14.48,
+      "end_s": 15.6,
+      "words": [
+        {
+          "text": "away",
+          "start_s": 14.48,
+          "end_s": 14.92,
+          "emphasize": false
+        },
+        {
+          "text": "from",
+          "start_s": 14.92,
+          "end_s": 15.26,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 15.26,
+          "end_s": 15.36,
+          "emphasize": false
+        },
+        {
+          "text": "center.",
+          "start_s": 15.36,
+          "end_s": 15.6,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 16.433,
+      "end_s": 17.6,
+      "words": [
+        {
+          "text": "Next",
+          "start_s": 16.433,
+          "end_s": 16.66,
+          "emphasize": false
+        },
+        {
+          "text": "come",
+          "start_s": 16.66,
+          "end_s": 16.88,
+          "emphasize": false
+        },
+        {
+          "text": "wide",
+          "start_s": 16.88,
+          "end_s": 17.2,
+          "emphasize": false
+        },
+        {
+          "text": "hollow",
+          "start_s": 17.2,
+          "end_s": 17.6,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 17.6,
+      "end_s": 18.92,
+      "words": [
+        {
+          "text": "titanium",
+          "start_s": 17.6,
+          "end_s": 17.98,
+          "emphasize": true
+        },
+        {
+          "text": "blades",
+          "start_s": 17.98,
+          "end_s": 18.44,
+          "emphasize": false
+        },
+        {
+          "text": "curved",
+          "start_s": 18.44,
+          "end_s": 18.92,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 18.92,
+      "end_s": 19.78,
+      "words": [
+        {
+          "text": "like",
+          "start_s": 18.92,
+          "end_s": 19.26,
+          "emphasize": false
+        },
+        {
+          "text": "scimitars,",
+          "start_s": 19.26,
+          "end_s": 19.78,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 20.34,
+      "end_s": 20.9,
+      "words": [
+        {
+          "text": "spinning",
+          "start_s": 20.34,
+          "end_s": 20.44,
+          "emphasize": false
+        },
+        {
+          "text": "at",
+          "start_s": 20.44,
+          "end_s": 20.68,
+          "emphasize": false
+        },
+        {
+          "text": "three",
+          "start_s": 20.68,
+          "end_s": 20.79,
+          "emphasize": false
+        },
+        {
+          "text": "thousand",
+          "start_s": 20.79,
+          "end_s": 20.9,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 20.9,
+      "end_s": 21.42,
+      "words": [
+        {
+          "text": "RPM.",
+          "start_s": 20.9,
+          "end_s": 21.42,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 22.54,
+      "end_s": 23.2,
+      "words": [
+        {
+          "text": "Instead",
+          "start_s": 22.54,
+          "end_s": 22.74,
+          "emphasize": false
+        },
+        {
+          "text": "of",
+          "start_s": 22.74,
+          "end_s": 22.92,
+          "emphasize": false
+        },
+        {
+          "text": "shattering,",
+          "start_s": 22.92,
+          "end_s": 23.2,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 23.46,
+      "end_s": 24.68,
+      "words": [
+        {
+          "text": "those",
+          "start_s": 23.46,
+          "end_s": 23.64,
+          "emphasize": false
+        },
+        {
+          "text": "flexible",
+          "start_s": 23.64,
+          "end_s": 23.9,
+          "emphasize": false
+        },
+        {
+          "text": "blades",
+          "start_s": 23.9,
+          "end_s": 24.32,
+          "emphasize": false
+        },
+        {
+          "text": "slice",
+          "start_s": 24.32,
+          "end_s": 24.68,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 24.68,
+      "end_s": 25.98,
+      "words": [
+        {
+          "text": "cleanly",
+          "start_s": 24.68,
+          "end_s": 25.3,
+          "emphasize": false
+        },
+        {
+          "text": "and",
+          "start_s": 25.3,
+          "end_s": 25.46,
+          "emphasize": false
+        },
+        {
+          "text": "fling",
+          "start_s": 25.46,
+          "end_s": 25.76,
+          "emphasize": false
+        },
+        {
+          "text": "debris",
+          "start_s": 25.76,
+          "end_s": 25.98,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 25.98,
+      "end_s": 26.7,
+      "words": [
+        {
+          "text": "straight",
+          "start_s": 25.98,
+          "end_s": 26.3,
+          "emphasize": false
+        },
+        {
+          "text": "outward.",
+          "start_s": 26.3,
+          "end_s": 26.7,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 27.94,
+      "end_s": 29.14,
+      "words": [
+        {
+          "text": "Here",
+          "start_s": 27.94,
+          "end_s": 28.5,
+          "emphasize": false
+        },
+        {
+          "text": "is",
+          "start_s": 28.5,
+          "end_s": 28.74,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 28.74,
+          "end_s": 28.86,
+          "emphasize": false
+        },
+        {
+          "text": "genius",
+          "start_s": 28.86,
+          "end_s": 29.14,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 29.14,
+      "end_s": 31.08,
+      "words": [
+        {
+          "text": "secret:",
+          "start_s": 29.14,
+          "end_s": 29.5,
+          "emphasize": false
+        },
+        {
+          "text": "over",
+          "start_s": 30.44,
+          "end_s": 30.48,
+          "emphasize": false
+        },
+        {
+          "text": "eighty",
+          "start_s": 30.48,
+          "end_s": 30.76,
+          "emphasize": false
+        },
+        {
+          "text": "percent",
+          "start_s": 30.76,
+          "end_s": 31.08,
+          "emphasize": true
+        }
+      ]
+    },
+    {
+      "start_s": 31.08,
+      "end_s": 31.82,
+      "words": [
+        {
+          "text": "of",
+          "start_s": 31.08,
+          "end_s": 31.16,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 31.16,
+          "end_s": 31.24,
+          "emphasize": false
+        },
+        {
+          "text": "engine",
+          "start_s": 31.24,
+          "end_s": 31.42,
+          "emphasize": false
+        },
+        {
+          "text": "is",
+          "start_s": 31.42,
+          "end_s": 31.82,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 31.82,
+      "end_s": 32.96,
+      "words": [
+        {
+          "text": "a",
+          "start_s": 31.82,
+          "end_s": 31.92,
+          "emphasize": false
+        },
+        {
+          "text": "hollow",
+          "start_s": 31.92,
+          "end_s": 32.12,
+          "emphasize": false
+        },
+        {
+          "text": "bypass",
+          "start_s": 32.12,
+          "end_s": 32.5,
+          "emphasize": false
+        },
+        {
+          "text": "tunnel.",
+          "start_s": 32.5,
+          "end_s": 32.96,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 33.806,
+      "end_s": 34.4,
+      "words": [
+        {
+          "text": "Hold",
+          "start_s": 33.806,
+          "end_s": 34.04,
+          "emphasize": false
+        },
+        {
+          "text": "tight,",
+          "start_s": 34.04,
+          "end_s": 34.22,
+          "emphasize": false
+        },
+        {
+          "text": "Bolt.",
+          "start_s": 34.22,
+          "end_s": 34.4,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 34.62,
+      "end_s": 35.74,
+      "words": [
+        {
+          "text": "Almost",
+          "start_s": 34.62,
+          "end_s": 34.96,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 34.96,
+          "end_s": 35.12,
+          "emphasize": false
+        },
+        {
+          "text": "entire",
+          "start_s": 35.12,
+          "end_s": 35.34,
+          "emphasize": false
+        },
+        {
+          "text": "impact",
+          "start_s": 35.34,
+          "end_s": 35.74,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 35.74,
+      "end_s": 36.72,
+      "words": [
+        {
+          "text": "shoots",
+          "start_s": 35.74,
+          "end_s": 36.08,
+          "emphasize": false
+        },
+        {
+          "text": "right",
+          "start_s": 36.08,
+          "end_s": 36.4,
+          "emphasize": false
+        },
+        {
+          "text": "around",
+          "start_s": 36.4,
+          "end_s": 36.64,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 36.64,
+          "end_s": 36.72,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 36.72,
+      "end_s": 37.66,
+      "words": [
+        {
+          "text": "fiery",
+          "start_s": 36.72,
+          "end_s": 36.93,
+          "emphasize": false
+        },
+        {
+          "text": "core",
+          "start_s": 36.93,
+          "end_s": 37.14,
+          "emphasize": false
+        },
+        {
+          "text": "and",
+          "start_s": 37.14,
+          "end_s": 37.46,
+          "emphasize": false
+        },
+        {
+          "text": "exits",
+          "start_s": 37.46,
+          "end_s": 37.66,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 37.66,
+      "end_s": 38.06,
+      "words": [
+        {
+          "text": "safely.",
+          "start_s": 37.66,
+          "end_s": 38.06,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 39.017,
+      "end_s": 40.18,
+      "words": [
+        {
+          "text": "Now",
+          "start_s": 39.017,
+          "end_s": 39.24,
+          "emphasize": false
+        },
+        {
+          "text": "imagine",
+          "start_s": 39.24,
+          "end_s": 39.66,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 39.66,
+          "end_s": 39.96,
+          "emphasize": false
+        },
+        {
+          "text": "worst",
+          "start_s": 39.96,
+          "end_s": 40.18,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 40.18,
+      "end_s": 41.62,
+      "words": [
+        {
+          "text": "case:",
+          "start_s": 40.18,
+          "end_s": 40.48,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 41.12,
+          "end_s": 41.16,
+          "emphasize": false
+        },
+        {
+          "text": "blade",
+          "start_s": 41.16,
+          "end_s": 41.28,
+          "emphasize": false
+        },
+        {
+          "text": "actually",
+          "start_s": 41.28,
+          "end_s": 41.62,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 41.62,
+      "end_s": 42.74,
+      "words": [
+        {
+          "text": "snaps",
+          "start_s": 41.62,
+          "end_s": 42.0,
+          "emphasize": true
+        },
+        {
+          "text": "loose",
+          "start_s": 42.0,
+          "end_s": 42.28,
+          "emphasize": false
+        },
+        {
+          "text": "at",
+          "start_s": 42.28,
+          "end_s": 42.52,
+          "emphasize": false
+        },
+        {
+          "text": "full",
+          "start_s": 42.52,
+          "end_s": 42.74,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 42.74,
+      "end_s": 43.38,
+      "words": [
+        {
+          "text": "takeoff",
+          "start_s": 42.74,
+          "end_s": 43.18,
+          "emphasize": false
+        },
+        {
+          "text": "thrust.",
+          "start_s": 43.18,
+          "end_s": 43.38,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 44.52,
+      "end_s": 45.62,
+      "words": [
+        {
+          "text": "A",
+          "start_s": 44.52,
+          "end_s": 44.62,
+          "emphasize": false
+        },
+        {
+          "text": "thick",
+          "start_s": 44.62,
+          "end_s": 44.8,
+          "emphasize": false
+        },
+        {
+          "text": "Kevlar",
+          "start_s": 44.8,
+          "end_s": 45.28,
+          "emphasize": false
+        },
+        {
+          "text": "containment",
+          "start_s": 45.28,
+          "end_s": 45.62,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 45.62,
+      "end_s": 46.94,
+      "words": [
+        {
+          "text": "belt",
+          "start_s": 45.62,
+          "end_s": 46.0,
+          "emphasize": false
+        },
+        {
+          "text": "wraps",
+          "start_s": 46.0,
+          "end_s": 46.48,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 46.48,
+          "end_s": 46.74,
+          "emphasize": false
+        },
+        {
+          "text": "fan",
+          "start_s": 46.74,
+          "end_s": 46.94,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 46.94,
+      "end_s": 48.04,
+      "words": [
+        {
+          "text": "and",
+          "start_s": 46.94,
+          "end_s": 47.18,
+          "emphasize": false
+        },
+        {
+          "text": "catches",
+          "start_s": 47.18,
+          "end_s": 47.46,
+          "emphasize": false
+        },
+        {
+          "text": "flying",
+          "start_s": 47.46,
+          "end_s": 47.76,
+          "emphasize": false
+        },
+        {
+          "text": "titanium",
+          "start_s": 47.76,
+          "end_s": 48.04,
+          "emphasize": true
+        }
+      ]
+    },
+    {
+      "start_s": 48.04,
+      "end_s": 49.34,
+      "words": [
+        {
+          "text": "like",
+          "start_s": 48.04,
+          "end_s": 48.52,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 48.52,
+          "end_s": 48.6,
+          "emphasize": false
+        },
+        {
+          "text": "bulletproof",
+          "start_s": 48.6,
+          "end_s": 48.98,
+          "emphasize": false
+        },
+        {
+          "text": "hammock.",
+          "start_s": 48.98,
+          "end_s": 49.34,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 50.263,
+      "end_s": 51.16,
+      "words": [
+        {
+          "text": "Even",
+          "start_s": 50.263,
+          "end_s": 50.52,
+          "emphasize": false
+        },
+        {
+          "text": "if",
+          "start_s": 50.52,
+          "end_s": 50.66,
+          "emphasize": false
+        },
+        {
+          "text": "one",
+          "start_s": 50.66,
+          "end_s": 50.88,
+          "emphasize": false
+        },
+        {
+          "text": "engine",
+          "start_s": 50.88,
+          "end_s": 51.16,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 51.16,
+      "end_s": 51.8,
+      "words": [
+        {
+          "text": "dies",
+          "start_s": 51.16,
+          "end_s": 51.4,
+          "emphasize": false
+        },
+        {
+          "text": "completely,",
+          "start_s": 51.4,
+          "end_s": 51.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 52.26,
+      "end_s": 53.3,
+      "words": [
+        {
+          "text": "every",
+          "start_s": 52.26,
+          "end_s": 52.46,
+          "emphasize": false
+        },
+        {
+          "text": "airliner",
+          "start_s": 52.46,
+          "end_s": 52.84,
+          "emphasize": false
+        },
+        {
+          "text": "is",
+          "start_s": 52.84,
+          "end_s": 53.1,
+          "emphasize": false
+        },
+        {
+          "text": "certified",
+          "start_s": 53.1,
+          "end_s": 53.3,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 53.3,
+      "end_s": 54.4,
+      "words": [
+        {
+          "text": "to",
+          "start_s": 53.3,
+          "end_s": 53.64,
+          "emphasize": false
+        },
+        {
+          "text": "climb",
+          "start_s": 53.64,
+          "end_s": 53.86,
+          "emphasize": false
+        },
+        {
+          "text": "and",
+          "start_s": 53.86,
+          "end_s": 54.18,
+          "emphasize": false
+        },
+        {
+          "text": "land",
+          "start_s": 54.18,
+          "end_s": 54.4,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 54.4,
+      "end_s": 54.8,
+      "words": [
+        {
+          "text": "on",
+          "start_s": 54.4,
+          "end_s": 54.64,
+          "emphasize": false
+        },
+        {
+          "text": "one.",
+          "start_s": 54.64,
+          "end_s": 54.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 55.694,
+      "end_s": 56.32,
+      "words": [
+        {
+          "text": "Nice",
+          "start_s": 55.694,
+          "end_s": 55.88,
+          "emphasize": false
+        },
+        {
+          "text": "landing,",
+          "start_s": 55.88,
+          "end_s": 56.1,
+          "emphasize": false
+        },
+        {
+          "text": "Bolt.",
+          "start_s": 56.1,
+          "end_s": 56.32,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 56.68,
+      "end_s": 57.66,
+      "words": [
+        {
+          "text": "Zero",
+          "start_s": 56.68,
+          "end_s": 57.02,
+          "emphasize": true
+        },
+        {
+          "text": "cabin",
+          "start_s": 57.02,
+          "end_s": 57.36,
+          "emphasize": false
+        },
+        {
+          "text": "damage,",
+          "start_s": 57.36,
+          "end_s": 57.66,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 58.16,
+      "end_s": 58.54,
+      "words": [
+        {
+          "text": "full",
+          "start_s": 58.16,
+          "end_s": 58.22,
+          "emphasize": false
+        },
+        {
+          "text": "control,",
+          "start_s": 58.22,
+          "end_s": 58.54,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 58.78,
+      "end_s": 59.98,
+      "words": [
+        {
+          "text": "and",
+          "start_s": 58.78,
+          "end_s": 58.82,
+          "emphasize": false
+        },
+        {
+          "text": "fail-safe",
+          "start_s": 58.82,
+          "end_s": 59.3,
+          "emphasize": false
+        },
+        {
+          "text": "physics",
+          "start_s": 59.3,
+          "end_s": 59.68,
+          "emphasize": false
+        },
+        {
+          "text": "keeping",
+          "start_s": 59.68,
+          "end_s": 59.98,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 59.98,
+      "end_s": 60.64,
+      "words": [
+        {
+          "text": "flights",
+          "start_s": 59.98,
+          "end_s": 60.28,
+          "emphasize": false
+        },
+        {
+          "text": "safe.",
+          "start_s": 60.28,
+          "end_s": 60.64,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 61.66,
+      "end_s": 62.24,
+      "words": [
+        {
+          "text": "Would",
+          "start_s": 61.66,
+          "end_s": 61.74,
+          "emphasize": false
+        },
+        {
+          "text": "you",
+          "start_s": 61.74,
+          "end_s": 61.86,
+          "emphasize": false
+        },
+        {
+          "text": "stay",
+          "start_s": 61.86,
+          "end_s": 62.04,
+          "emphasize": false
+        },
+        {
+          "text": "calm",
+          "start_s": 62.04,
+          "end_s": 62.24,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 62.24,
+      "end_s": 62.96,
+      "words": [
+        {
+          "text": "flying",
+          "start_s": 62.24,
+          "end_s": 62.48,
+          "emphasize": false
+        },
+        {
+          "text": "on",
+          "start_s": 62.48,
+          "end_s": 62.64,
+          "emphasize": false
+        },
+        {
+          "text": "one",
+          "start_s": 62.64,
+          "end_s": 62.74,
+          "emphasize": false
+        },
+        {
+          "text": "engine?",
+          "start_s": 62.74,
+          "end_s": 62.96,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 63.54,
+      "end_s": 64.34,
+      "words": [
+        {
+          "text": "Comment",
+          "start_s": 63.54,
+          "end_s": 63.64,
+          "emphasize": false
+        },
+        {
+          "text": "YES",
+          "start_s": 63.64,
+          "end_s": 63.86,
+          "emphasize": true
+        },
+        {
+          "text": "or",
+          "start_s": 63.86,
+          "end_s": 64.2,
+          "emphasize": false
+        },
+        {
+          "text": "NO.",
+          "start_s": 64.2,
+          "end_s": 64.34,
+          "emphasize": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,346 @@
+{
+  "episode_id": "ep05",
+  "slug": "ep05_car_differential_gear",
+  "title": "The Genius Gear That Lets Cars TURN Smoothly",
+  "hook_text": "1 AXLE. 2 DIFFERENT SPEEDS.",
+  "cta_text": "Comment YES or NO",
+  "bpm": 110,
+  "cover_headline": [
+    "1 ENGINE.",
+    "2 WHEEL SPEEDS."
+  ],
+  "publish_meta": {
+    "youtube_title": "The Genius Gear That Lets Cars TURN Smoothly",
+    "youtube_description": "",
+    "ig_tiktok_caption": "One engine drives two wheels at completely different speeds around every corner using zero computers \u2014 just pure bevel gear geometry. Have you ever gotten one tire stuck spinning helplessly on ice? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#cars",
+      "#howitworks",
+      "#mechanicalengineering",
+      "#gears",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Have you ever had one tire spin helplessly on ice while the other stood completely still? Comment YES or NO",
+    "related_video_slot": "ep06_skywalk_bolt_load",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "Every time your car turns a corner, your outside tire spins faster than the inside one.",
+      "voice_direction": "Energetic mechanical hook at 1.04x pace; crisp punch on way faster.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "diff_gear_hero",
+      "sfx_cues": [
+        {
+          "name": "gear_ratchet",
+          "offset_s": 0.2,
+          "gain_db": -6.0,
+          "pan": 0.0
+        },
+        {
+          "name": "servo_hum",
+          "offset_s": 1.5,
+          "gain_db": -9.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": null,
+      "pause_after_s": 0.18
+    },
+    {
+      "id": "b02_solid_axle_problem",
+      "act": "hook",
+      "narration_text": "Weld both wheels to one solid axle and your tires shred rubber around every turn.",
+      "voice_direction": "Punchy contrast; crisp emphasis on screech, hop, and shred.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "cornering_arc_skid",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "friction_screech",
+          "offset_s": 2.0,
+          "gain_db": -6.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "SOLID AXLE",
+        "value": "TIRE DRAG"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b03_path_geometry",
+      "act": "mechanism",
+      "narration_text": "From above, the outer tire traces a wider arc, so it must rotate more times per second.",
+      "voice_direction": "Clear geometric intuition; clean lift on much wider arc.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "overhead_arc_rpm",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.3,
+          "gain_db": -11.0,
+          "pan": -0.25
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.2,
+          "gain_db": -11.0,
+          "pan": 0.25
+        }
+      ],
+      "callout": {
+        "label": "TURN DELTA",
+        "value": "60 VS 100 RPM"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b04_exploded_diff",
+      "act": "mechanism",
+      "narration_text": "The fix uses zero computers: a mechanical differential built from beveled steel gears.",
+      "voice_direction": "Confident engineering awe; crisp articulation on mechanical differential.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "diff_exploded_parts",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.4,
+          "gain_db": -8.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "ZERO CHIPS",
+        "value": "PURE GEARS"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b05_pinion_ring_carrier",
+      "act": "mechanism",
+      "narration_text": "Your driveshaft spins a pinion gear that turns a giant ring gear on a rotating cage.",
+      "voice_direction": "Smooth mechanical step-by-step cadence.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "pinion_drives_ring",
+      "sfx_cues": [
+        {
+          "name": "servo_hum",
+          "offset_s": 0.2,
+          "gain_db": -11.0,
+          "pan": 0.0
+        },
+        {
+          "name": "gear_ratchet",
+          "offset_s": 1.6,
+          "gain_db": -8.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "INPUT STAGE",
+        "value": "RING & PINION"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b06_straight_drive_lock",
+      "act": "mechanism",
+      "narration_text": "Inside sit orbiting spider gears meshing with both axles. Driving straight, they never spin.",
+      "voice_direction": "Crisp clarity; intriguing pause before do not spin at all.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "straight_drive_orbit",
+      "sfx_cues": [
+        {
+          "name": "metal_clank",
+          "offset_s": 0.5,
+          "gain_db": -9.5,
+          "pan": 0.0
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.9,
+          "gain_db": -11.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "STRAIGHT LINE",
+        "value": "50 / 50 LOCK"
+      },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b07_corner_spider_spin",
+      "act": "escalation",
+      "narration_text": "Steer into a turn and those spider gears instantly spin like tiny mechanical seesaws.",
+      "voice_direction": "Lively eureka moment; bright emphasis on tiny mechanical seesaws.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "corner_spider_rotation",
+      "sfx_cues": [
+        {
+          "name": "gear_ratchet",
+          "offset_s": 0.4,
+          "gain_db": -7.5,
+          "pan": 0.0
+        },
+        {
+          "name": "servo_hum",
+          "offset_s": 1.8,
+          "gain_db": -10.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "SPIDER GEARS",
+        "value": "SPEED SPLIT"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b08_rpm_conservation",
+      "act": "escalation",
+      "narration_text": "Every RPM lost by the inside tire gets handed straight to the outside tire automatically.",
+      "voice_direction": "Satisfying mathematical precision; smooth cadence.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "rpm_split_bars",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.4,
+          "gain_db": -10.5,
+          "pan": -0.2
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.2,
+          "gain_db": -10.5,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "AVG SPEED",
+        "value": "CONSERVED"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b09_ice_patch_flaw",
+      "act": "escalation",
+      "narration_text": "There is one catch. Put one tire on slick ice and all power dumps there.",
+      "voice_direction": "Playful tension; crisp punch on slick ice and spinning wheel.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "ice_patch_wheel_spin",
+      "sfx_cues": [
+        {
+          "name": "alarm_ping",
+          "offset_s": 0.4,
+          "gain_db": -9.0,
+          "pan": 0.0
+        },
+        {
+          "name": "friction_screech",
+          "offset_s": 2.1,
+          "gain_db": -6.5,
+          "pan": 0.3
+        }
+      ],
+      "callout": {
+        "label": "OPEN DIFF FLAW",
+        "value": "ICE SLIP TRAP"
+      },
+      "pause_after_s": 0.28
+    },
+    {
+      "id": "b10_zero_grip_stuck",
+      "act": "climax",
+      "narration_text": "Because an open differential takes the easiest path, the tire on dry pavement sits frozen.",
+      "voice_direction": "Clear emphatic reveal on path of least resistance and completely frozen.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "dry_tire_frozen_ice",
+      "sfx_cues": [
+        {
+          "name": "servo_hum",
+          "offset_s": 0.3,
+          "gain_db": -8.5,
+          "pan": 0.35
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 3.0,
+          "gain_db": -7.0,
+          "pan": -0.25
+        }
+      ],
+      "callout": {
+        "label": "DRY TIRE",
+        "value": "0 RPM STUCK"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b11_lsd_clutch_fix",
+      "act": "climax",
+      "narration_text": "Performance cars add limited-slip clutch packs that clamp both axles together under slip.",
+      "voice_direction": "Punchy satisfying climax; hard mechanical bite on clamp both axles together.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "lsd_clutch_clamp",
+      "sfx_cues": [
+        {
+          "name": "wedge_lock_slam",
+          "offset_s": 1.2,
+          "gain_db": -3.5,
+          "pan": 0.0
+        },
+        {
+          "name": "gear_ratchet",
+          "offset_s": 2.2,
+          "gain_db": -7.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "UPGRADE",
+        "value": "LIMITED SLIP"
+      },
+      "pause_after_s": 0.28
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Have you ever gotten one tire stuck spinning on ice? Comment YES or NO.",
+      "voice_direction": "Snappy friendly challenge; crisp emphasis on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.1,
+          "gain_db": -10.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "YOUR CALL",
+        "value": "YES OR NO"
+      },
+      "pause_after_s": 0.35
+    }
+  ]
+}

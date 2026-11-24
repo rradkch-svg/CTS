@@ -1,0 +1,198 @@
+{
+  "episode_id": "ep07",
+  "slug": "ep07_jet_engine_bird_strike",
+  "title": "How a Jet Engine SURVIVES Swallowing a Bird",
+  "hook_text": "BIRD HIT AT 500 MPH",
+  "cta_text": "Comment YES or NO",
+  "bpm": 110,
+  "cover_headline": [
+    "500 MPH IMPACT.",
+    "ENGINE STILL RUNS."
+  ],
+  "publish_meta": {
+    "youtube_title": "How a Jet Engine SURVIVES Swallowing a Bird",
+    "youtube_description": "",
+    "ig_tiktok_caption": "At 500 mph, a single bird hits a jet engine with the kinetic punch of a speeding car — yet modern turbofans survive it without losing thrust. Would you trust a twin-engine jet after a bird strike? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#aviation",
+      "#jetengine",
+      "#howitworks",
+      "#aerospace",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Bolt waved right before the 500 mph test cannon fired 😂 Would you trust flying after a bird strike? Comment YES or NO 👇",
+    "related_video_slot": "ep08_dam_spillway_cavitation",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "At five hundred miles per hour, one bird hits a jet engine with car-crash force.",
+      "voice_direction": "Urgent high-RPM aerospace hook; sharp hit on hits and car-crash force.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "turbofan_impact_hero",
+      "sfx_cues": [
+        { "name": "wedge_lock_slam", "offset_s": 0.25, "gain_db": -3.5, "pan": 0.0 },
+        { "name": "alarm_ping", "offset_s": 1.4, "gain_db": -8.5, "pan": 0.0 }
+      ],
+      "callout": null,
+      "pause_after_s": 0.18
+    },
+    {
+      "id": "b02_bolt_wave_intro",
+      "act": "hook",
+      "narration_text": "Hey Bolt, wave before we fire the test cannon. Modern turbofans are built for this.",
+      "voice_direction": "Warm playful narrator talking directly to Bolt, then confident documentary pivot.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "bolt_jet_wave_intro",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.0, "gain_db": -10.0, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 1.6, "gain_db": -11.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "TEST PILOT", "value": "BOLT READY" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b03_spinner_cone",
+      "act": "mechanism",
+      "narration_text": "First, that sharp painted nose cone deflects heavy mass outward, away from the center.",
+      "voice_direction": "Crisp mechanical explanation; emphasize sharp painted nose cone.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "spinner_cone_deflect",
+      "sfx_cues": [
+        { "name": "servo_hum", "offset_s": 0.2, "gain_db": -11.0, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.4, "gain_db": -11.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "NOSE CONE", "value": "OUTWARD DEFLECT" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b04_titanium_blades",
+      "act": "mechanism",
+      "narration_text": "Next come wide hollow titanium blades curved like scimitars, spinning at three thousand RPM.",
+      "voice_direction": "Analytical awe on wide hollow titanium blades.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "titanium_fan_blades",
+      "sfx_cues": [
+        { "name": "gear_ratchet", "offset_s": 0.3, "gain_db": -9.0, "pan": 0.0 },
+        { "name": "metal_clank", "offset_s": 2.3, "gain_db": -8.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "FAN BLADES", "value": "HOLLOW TITANIUM" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b05_centrifugal_fling",
+      "act": "mechanism",
+      "narration_text": "Instead of shattering, those flexible blades slice cleanly and fling debris straight outward.",
+      "voice_direction": "Dynamic kinetic flow; punch on fling debris straight outward.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "blade_radial_fling",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.3, "gain_db": -8.0, "pan": -0.25 },
+        { "name": "metal_clank", "offset_s": 2.1, "gain_db": -7.5, "pan": 0.25 }
+      ],
+      "callout": { "label": "CENTRIFUGAL", "value": "OUTWARD THROW" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b06_bypass_duct",
+      "act": "mechanism",
+      "narration_text": "Here is the genius secret: over eighty percent of the engine is a hollow bypass tunnel.",
+      "voice_direction": "Eureka insight; emphasize eighty percent and hollow bypass tunnel.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "bypass_duct_xray",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.3, "gain_db": -10.5, "pan": 0.0 },
+        { "name": "hydraulic_hiss", "offset_s": 1.9, "gain_db": -9.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "BYPASS RATIO", "value": "80% AROUND CORE" },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b07_core_protected",
+      "act": "escalation",
+      "narration_text": "Hold tight, Bolt. Almost the entire impact shoots right around the fiery core and exits safely.",
+      "voice_direction": "Playful urgent cue to Bolt, then crisp engineering clarity.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "debris_bypass_exit",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.5, "gain_db": -6.5, "pan": 0.0 },
+        { "name": "pressure_rumble", "offset_s": 1.6, "gain_db": -7.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "ENGINE CORE", "value": "PROTECTED" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b08_blade_off_risk",
+      "act": "escalation",
+      "narration_text": "Now imagine the worst case: a blade actually snaps loose at full takeoff thrust.",
+      "voice_direction": "Rising dramatic tension; tight hit on snaps loose.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "blade_off_snap",
+      "sfx_cues": [
+        { "name": "cable_snap", "offset_s": 0.9, "gain_db": -3.5, "pan": 0.0 },
+        { "name": "alarm_ping", "offset_s": 1.6, "gain_db": -8.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "WORST CASE", "value": "BLADE-OFF TEST" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b09_kevlar_containment",
+      "act": "climax",
+      "narration_text": "A thick Kevlar containment belt wraps the fan and catches flying titanium like a bulletproof hammock.",
+      "voice_direction": "Peak triumphant engineering reveal on bulletproof hammock.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "kevlar_catch_climax",
+      "sfx_cues": [
+        { "name": "wedge_lock_slam", "offset_s": 1.0, "gain_db": -3.0, "pan": 0.0 },
+        { "name": "friction_screech", "offset_s": 1.4, "gain_db": -7.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "ARMOR BELT", "value": "KEVLAR CATCH" },
+      "pause_after_s": 0.28
+    },
+    {
+      "id": "b10_one_engine_fly",
+      "act": "climax",
+      "narration_text": "Even if one engine dies completely, every airliner is certified to climb and land on one.",
+      "voice_direction": "Reassuring authority; crisp delivery on climb and land on one.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "thrust_margin_bars",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.3, "gain_db": -10.5, "pan": 0.0 },
+        { "name": "servo_hum", "offset_s": 1.8, "gain_db": -10.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "SINGLE ENGINE", "value": "100% FLYABLE" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b11_bolt_safe_flight",
+      "act": "climax",
+      "narration_text": "Nice landing, Bolt. Zero cabin damage, full control, and fail-safe physics keeping flights safe.",
+      "voice_direction": "Warm celebratory sign-off to Bolt.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "bolt_jet_safe_cruise",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.2, "gain_db": -9.5, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.4, "gain_db": -10.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "TEST RESULT", "value": "100% PASSED" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Would you stay calm flying on one engine? Comment YES or NO.",
+      "voice_direction": "Snappy conversational challenge; crisp lift on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.1, "gain_db": -10.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "YOUR CALL", "value": "YES OR NO" },
+      "pause_after_s": 0.35
+    }
+  ]
+}

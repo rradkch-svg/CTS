@@ -1,0 +1,346 @@
+{
+  "episode_id": "ep06",
+  "slug": "ep06_skywalk_bolt_load",
+  "title": "How One Tiny Bolt Change DOUBLED Steel Stress",
+  "hook_text": "1 BOLT CHANGE = 200% LOAD",
+  "cta_text": "Comment YES or NO",
+  "bpm": 106,
+  "cover_headline": [
+    "1 TINY SHORTCUT.",
+    "200% STEEL LOAD."
+  ],
+  "publish_meta": {
+    "youtube_title": "How One Tiny Bolt Change DOUBLED Steel Stress",
+    "youtube_description": "",
+    "ig_tiktok_caption": "Two engineering drawings look almost identical \u2014 yet offsetting one steel hanger rod by four inches doubled the stress on a single nut to 200%. Would you have caught that blueprint shortcut? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#structuralengineering",
+      "#physics",
+      "#statics",
+      "#architecture",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Be honest \u2014 at first glance, would you have spotted why two offset rods doubled the load on the upper nut? Comment YES or NO",
+    "related_video_slot": "ep01_elevator_safety_brake",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "Two blueprints look nearly identical, yet moving one steel rod doubled stress on a single nut.",
+      "voice_direction": "Urgent analytical hook at 1.04x pace; crisp weight on doubled the stress.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "hex_nut_overload_hero",
+      "sfx_cues": [
+        {
+          "name": "metal_clank",
+          "offset_s": 0.25,
+          "gain_db": -4.0,
+          "pan": 0.0
+        },
+        {
+          "name": "alarm_ping",
+          "offset_s": 1.6,
+          "gain_db": -8.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": null,
+      "pause_after_s": 0.18
+    },
+    {
+      "id": "b02_suspended_beams",
+      "act": "hook",
+      "narration_text": "This famous engineering statics lesson still tricks almost everyone at first glance.",
+      "voice_direction": "Engaging documentary setup; crisp clarity on misses the trap.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "stacked_beams_blueprint",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.3,
+          "gain_db": -11.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "STATICS TRAP",
+        "value": "HIDDEN 2X LOAD"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b03_original_design",
+      "act": "mechanism",
+      "narration_text": "Originally, two stacked walkways hung from one continuous steel rod anchored to the ceiling.",
+      "voice_direction": "Clear, steady structural explanation.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "continuous_rod_original",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.3,
+          "gain_db": -11.0,
+          "pan": -0.2
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.5,
+          "gain_db": -9.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "ORIGINAL PLAN",
+        "value": "1 CONTINUOUS ROD"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b04_balanced_1w_1w",
+      "act": "mechanism",
+      "narration_text": "Check the forces. The bottom nut holds one walkway, and the upper nut holds one walkway.",
+      "voice_direction": "Crisp textbook clarity; balanced cadence on bottom nut and upper nut.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "fbd_balanced_1w",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.4,
+          "gain_db": -10.5,
+          "pan": -0.25
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.2,
+          "gain_db": -10.5,
+          "pan": 0.25
+        }
+      ],
+      "callout": {
+        "label": "NUT BEARING",
+        "value": "1W + 1W SAFE"
+      },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b05_assembly_shortcut",
+      "act": "mechanism",
+      "narration_text": "Threading a forty-foot rod was slow, so builders swapped it for two shorter offset rods.",
+      "voice_direction": "Neutral factual pivot; clear highlight on two shorter offset rods.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "offset_rod_swap",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.2,
+          "gain_db": -9.5,
+          "pan": 0.0
+        },
+        {
+          "name": "gear_ratchet",
+          "offset_s": 1.8,
+          "gain_db": -8.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "FIELD CHANGE",
+        "value": "2 OFFSET RODS"
+      },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b06_load_path_shift",
+      "act": "escalation",
+      "narration_text": "Both drawings look almost identical. Now trace the invisible load path inside the upper beam.",
+      "voice_direction": "Rising suspense; sharp emphasis on invisible load path.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "load_path_trace",
+      "sfx_cues": [
+        {
+          "name": "alarm_ping",
+          "offset_s": 0.5,
+          "gain_db": -9.0,
+          "pan": 0.0
+        },
+        {
+          "name": "pressure_rumble",
+          "offset_s": 2.0,
+          "gain_db": -8.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "LOAD PATH",
+        "value": "REROUTED"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b07_double_force_2w",
+      "act": "escalation",
+      "narration_text": "The lower walkway now hangs from the upper beam. One upper nut carries both walkways.",
+      "voice_direction": "Sharp eureka punch; strong vocal weight on both walkways at once.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "fbd_overloaded_2w",
+      "sfx_cues": [
+        {
+          "name": "wedge_lock_slam",
+          "offset_s": 1.8,
+          "gain_db": -4.5,
+          "pan": 0.0
+        },
+        {
+          "name": "hull_creak",
+          "offset_s": 2.6,
+          "gain_db": -6.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "UPPER NUT",
+        "value": "2W = 200% LOAD"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b08_box_beam_flange",
+      "act": "escalation",
+      "narration_text": "Worse, two welded steel channels left a thin hollow seam right above that washer.",
+      "voice_direction": "Forensic precision; crisp emphasis on thin steel channels and hollow seam.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "box_beam_flange_bend",
+      "sfx_cues": [
+        {
+          "name": "hull_creak",
+          "offset_s": 0.3,
+          "gain_db": -5.5,
+          "pan": 0.0
+        },
+        {
+          "name": "friction_screech",
+          "offset_s": 2.5,
+          "gain_db": -7.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "WELD SEAM",
+        "value": "THIN FLANGE"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b09_flange_pull_through",
+      "act": "climax",
+      "narration_text": "Under two hundred percent bearing stress, the flange curled downward until the nut pulled through.",
+      "voice_direction": "Peak controlled climax; crisp emphasis on pulled cleanly through.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "nut_pull_through_cad",
+      "sfx_cues": [
+        {
+          "name": "hull_creak",
+          "offset_s": 0.3,
+          "gain_db": -5.0,
+          "pan": 0.0
+        },
+        {
+          "name": "cable_snap",
+          "offset_s": 2.4,
+          "gain_db": -3.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "FAILURE MODE",
+        "value": "FLANGE PEEL"
+      },
+      "pause_after_s": 0.3
+    },
+    {
+      "id": "b10_stress_bar_chart",
+      "act": "climax",
+      "narration_text": "Even the original beam barely met code. Doubling the force dropped safety below one.",
+      "voice_direction": "Sober engineering precision; clear delivery of below one point zero.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "stress_ratio_bars",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.3,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "alarm_ping",
+          "offset_s": 2.6,
+          "gain_db": -8.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "SAFETY FACTOR",
+        "value": "< 1.0 FAILURE"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b11_peer_review_rule",
+      "act": "climax",
+      "narration_text": "That edit rewrote engineering codes forever: every field change requires a fresh free-body diagram.",
+      "voice_direction": "Authoritative documentary takeaway; crisp emphasis on free-body diagram.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "reinforced_plate_fix",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.4,
+          "gain_db": -8.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "NEW RULE",
+        "value": "RE-CHECK FBD"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Would you have caught that blueprint shortcut? Comment YES or NO.",
+      "voice_direction": "Snappy conversational challenge; punchy emphasis on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.1,
+          "gain_db": -10.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "YOUR CALL",
+        "value": "YES OR NO"
+      },
+      "pause_after_s": 0.35
+    }
+  ]
+}

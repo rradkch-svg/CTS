@@ -1,0 +1,93 @@
+{
+  "total_duration_s": 77.5987,
+  "sample_rate_hz": 48000,
+  "beats": [
+    {
+      "id": "b01_hook",
+      "start_s": 0.05,
+      "end_s": 6.49,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b01_hook_0f051da6f2b7.wav",
+      "narration_text": "In nineteen forty, a steady forty-two mile per hour breeze twisted a steel bridge like rubber."
+    },
+    {
+      "id": "b02_myth_bust",
+      "start_s": 6.67,
+      "end_s": 13.3056,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b02_myth_bust_f7f13432c310.wav",
+      "narration_text": "Most textbooks blame simple resonance. Engineers later proved that story is completely wrong."
+    },
+    {
+      "id": "b03_slender_design",
+      "start_s": 13.5256,
+      "end_s": 18.8036,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b03_slender_design_83db45bf9a47.wav",
+      "narration_text": "To cut costs, the narrow deck used solid eight-foot steel walls along both sides."
+    },
+    {
+      "id": "b04_wind_blockage",
+      "start_s": 19.0236,
+      "end_s": 24.9392,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b04_wind_blockage_bba63cfc1471.wav",
+      "narration_text": "Instead of letting wind pass through trusses, those solid walls acted like giant sails."
+    },
+    {
+      "id": "b05_vortex_shedding",
+      "start_s": 25.1592,
+      "end_s": 31.4379,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b05_vortex_shedding_e05fafdd5634.wav",
+      "narration_text": "Steady wind peeled swirling vortices off the edges, nudging the roadway into a twist."
+    },
+    {
+      "id": "b06_flutter_feedback",
+      "start_s": 31.6779,
+      "end_s": 37.7781,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b06_flutter_feedback_79fa26a3d026.wav",
+      "narration_text": "Then aeroelastic flutter took over. The tilted deck reshaped the airflow around it."
+    },
+    {
+      "id": "b07_negative_damping",
+      "start_s": 38.0281,
+      "end_s": 44.2004,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b07_negative_damping_18ffacba68f4.wav",
+      "narration_text": "Every upward pitch let wind push even harder in the same direction. Zero damping."
+    },
+    {
+      "id": "b08_suspender_overload",
+      "start_s": 44.4504,
+      "end_s": 51.7345,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b08_suspender_overload_559292cddbf2.wav",
+      "narration_text": "One curb plunged twenty-eight feet while the other soared, stretching steel suspenders past yield."
+    },
+    {
+      "id": "b09_zipper_snap",
+      "start_s": 51.9845,
+      "end_s": 57.8911,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b09_zipper_snap_a8c5e0f72d76.wav",
+      "narration_text": "When the first cable snapped, its load unzipped six hundred feet of bridge in sequence."
+    },
+    {
+      "id": "b10_modern_fix",
+      "start_s": 58.1911,
+      "end_s": 65.2557,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b10_modern_fix_bbd4157bc61b.wav",
+      "narration_text": "Today, engineers wind-tunnel test every span and slice open air slots through streamlined box girders."
+    },
+    {
+      "id": "b11_comparison_bars",
+      "start_s": 65.5057,
+      "end_s": 71.508,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b11_comparison_bars_e5d9d2f83754.wav",
+      "narration_text": "That lesson raised safe flutter wind speeds from forty-two miles per hour past one hundred fifty."
+    },
+    {
+      "id": "b12_cta",
+      "start_s": 71.758,
+      "end_s": 76.4987,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/cache/tts/b12_cta_51899ce479b3.wav",
+      "narration_text": "Did you learn in school that it was just resonance? Comment YES or NO."
+    }
+  ],
+  "narration_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/narration_clean.wav",
+  "master_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/audio_master.wav",
+  "envelope_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep04_tacoma_bridge_flutter/narration_envelope.npy"
+}

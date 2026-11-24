@@ -1,0 +1,93 @@
+{
+  "total_duration_s": 66.5,
+  "sample_rate_hz": 48000,
+  "beats": [
+    {
+      "id": "b01_hook",
+      "start_s": 0.05,
+      "end_s": 6.2857,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b01_hook_fa9674a47ec6.wav",
+      "narration_text": "Two blueprints look nearly identical, yet moving one steel rod doubled stress on a single nut."
+    },
+    {
+      "id": "b02_suspended_beams",
+      "start_s": 6.7897,
+      "end_s": 10.9227,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b02_suspended_beams_2cf8eee140ff.wav",
+      "narration_text": "This famous engineering statics lesson still tricks almost everyone at first glance."
+    },
+    {
+      "id": "b03_original_design",
+      "start_s": 11.5387,
+      "end_s": 16.1879,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b03_original_design_7f52e710a68a.wav",
+      "narration_text": "Originally, two stacked walkways hung from one continuous steel rod anchored to the ceiling."
+    },
+    {
+      "id": "b04_balanced_1w_1w",
+      "start_s": 16.8039,
+      "end_s": 21.3508,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b04_balanced_1w_1w_abd6c672c808.wav",
+      "narration_text": "Check the forces. The bottom nut holds one walkway, and the upper nut holds one walkway."
+    },
+    {
+      "id": "b05_assembly_shortcut",
+      "start_s": 22.0228,
+      "end_s": 26.6087,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b05_assembly_shortcut_c283c5dc37fb.wav",
+      "narration_text": "Threading a forty-foot rod was slow, so builders swapped it for two shorter offset rods."
+    },
+    {
+      "id": "b06_load_path_shift",
+      "start_s": 27.2807,
+      "end_s": 32.6736,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b06_load_path_shift_21cffcbe3565.wav",
+      "narration_text": "Both drawings look almost identical. Now trace the invisible load path inside the upper beam."
+    },
+    {
+      "id": "b07_double_force_2w",
+      "start_s": 33.3736,
+      "end_s": 38.1261,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b07_double_force_2w_5a59691fa439.wav",
+      "narration_text": "The lower walkway now hangs from the upper beam. One upper nut carries both walkways."
+    },
+    {
+      "id": "b08_box_beam_flange",
+      "start_s": 38.8261,
+      "end_s": 43.2122,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b08_box_beam_flange_79d146ead8ab.wav",
+      "narration_text": "Worse, two welded steel channels left a thin hollow seam right above that washer."
+    },
+    {
+      "id": "b09_flange_pull_through",
+      "start_s": 43.9122,
+      "end_s": 48.7814,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b09_flange_pull_through_fba21ed1b00f.wav",
+      "narration_text": "Under two hundred percent bearing stress, the flange curled downward until the nut pulled through."
+    },
+    {
+      "id": "b10_stress_bar_chart",
+      "start_s": 49.6214,
+      "end_s": 54.1503,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b10_stress_bar_chart_56f1dd041d6d.wav",
+      "narration_text": "Even the original beam barely met code. Doubling the force dropped safety below one."
+    },
+    {
+      "id": "b11_peer_review_rule",
+      "start_s": 54.8503,
+      "end_s": 60.5761,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b11_peer_review_rule_50f880d4c3a1.wav",
+      "narration_text": "That edit rewrote engineering codes forever: every field change requires a fresh free-body diagram."
+    },
+    {
+      "id": "b12_cta",
+      "start_s": 61.2761,
+      "end_s": 64.6079,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/cache/tts/b12_cta_5ee012da0807.wav",
+      "narration_text": "Would you have caught that blueprint shortcut? Comment YES or NO."
+    }
+  ],
+  "narration_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/narration_clean.wav",
+  "master_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/audio_master.wav",
+  "envelope_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep06_skywalk_bolt_load/narration_envelope.npy"
+}

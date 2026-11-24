@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep03",
+  "slug": "ep03_bank_vault_lock",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "Inside a Bank Vault Door Built to NEVER Open",
+  "youtube_title_length": 44,
+  "youtube_description": "",
+  "ig_tiktok_caption": "Even the bank manager cannot open a modern vault after hours — and drilling into the door shatters a hidden glass plate that jams it shut forever. Could any heist crew beat that glass trap? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#bankvault",
+    "#howitworks",
+    "#locksmith",
+    "#mechanicalengineering",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Could any safecracker defeat a spring-loaded tempered glass relocker? Comment YES or NO",
+  "related_video_slot": "ep04_tacoma_bridge_flutter",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}

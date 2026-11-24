@@ -1,0 +1,198 @@
+{
+  "episode_id": "ep08",
+  "slug": "ep08_dam_spillway_cavitation",
+  "title": "How Tiny Water Bubbles EAT Solid Concrete",
+  "hook_text": "BUBBLES ATE 40 FT OF CONCRETE",
+  "cta_text": "Comment YES or NO",
+  "bpm": 108,
+  "cover_headline": [
+    "TINY BUBBLES.",
+    "CONCRETE DESTROYED."
+  ],
+  "publish_meta": {
+    "youtube_title": "How Tiny Water Bubbles EAT Solid Concrete",
+    "youtube_description": "",
+    "ig_tiktok_caption": "At 100 mph down a giant dam spillway, microscopic vapor bubbles collapse with 100,000 PSI micro-jets that chew straight through solid concrete — until engineers inject air cushions. Would you stand at the base of a full spillway? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#civilengineering",
+      "#fluidmechanics",
+      "#physics",
+      "#dam",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Bolt really waved right before we opened the 100 mph floodgates 😂 Would you stand below a full spillway? Comment YES or NO 👇",
+    "related_video_slot": "ep09_spacecraft_heat_shield",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "In nineteen eighty-three, tiny water bubbles chewed a forty-foot cavern straight through solid concrete.",
+      "voice_direction": "Urgent engineering mystery hook; sharp punch on forty-foot cavern.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "dam_cavitation_hero",
+      "sfx_cues": [
+        { "name": "pressure_rumble", "offset_s": 0.15, "gain_db": -5.5, "pan": 0.0 },
+        { "name": "wedge_lock_slam", "offset_s": 1.6, "gain_db": -4.5, "pan": 0.0 }
+      ],
+      "callout": null,
+      "pause_after_s": 0.18
+    },
+    {
+      "id": "b02_bolt_wave_dam",
+      "act": "hook",
+      "narration_text": "Hey Bolt, give us a wave before we open the floodgates. Water should never carve rock this fast.",
+      "voice_direction": "Friendly playful cue to Bolt, then curious physics pivot.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "bolt_dam_wave_intro",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.0, "gain_db": -10.0, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 1.6, "gain_db": -11.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "FLOW SPEED", "value": "100 MPH FLOOD" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b03_bernoulli_drop",
+      "act": "mechanism",
+      "narration_text": "When floodwater rockets down a spillway at one hundred miles per hour, one tiny bump changes everything.",
+      "voice_direction": "Clear fluid dynamics buildup; crisp articulation on one tiny bump.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "spillway_bump_flow",
+      "sfx_cues": [
+        { "name": "hydraulic_hiss", "offset_s": 0.3, "gain_db": -8.0, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.4, "gain_db": -11.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "SURFACE FLAW", "value": "1-INCH BUMP" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b04_cold_boiling",
+      "act": "mechanism",
+      "narration_text": "Speeding water lifts off, dropping local pressure so low that freezing water actually boils into bubbles.",
+      "voice_direction": "Fascinated physics reveal on freezing water actually boils.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "cold_water_boils",
+      "sfx_cues": [
+        { "name": "deep_sonar_pulse", "offset_s": 0.3, "gain_db": -10.0, "pan": 0.0 },
+        { "name": "hydraulic_hiss", "offset_s": 1.9, "gain_db": -8.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "LOW PRESSURE", "value": "COLD BOILING" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b05_bubble_collapse",
+      "act": "escalation",
+      "narration_text": "Milliseconds downstream, pressure returns and crushes every bubble in a violent microscopic implosion.",
+      "voice_direction": "Rising intensity; sharp crisp hit on microscopic implosion.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "micro_bubble_implode",
+      "sfx_cues": [
+        { "name": "glass_crack", "offset_s": 1.2, "gain_db": -4.0, "pan": 0.0 },
+        { "name": "wedge_lock_slam", "offset_s": 2.1, "gain_db": -4.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "CAVITATION", "value": "MICRO IMPLOSION" },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b06_microjet_punch",
+      "act": "escalation",
+      "narration_text": "Each bubble fires a needle-thin water jet at over one hundred thousand pounds per square inch.",
+      "voice_direction": "Shocked precision; punch on one hundred thousand pounds.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "microjet_100k_psi",
+      "sfx_cues": [
+        { "name": "cable_snap", "offset_s": 0.6, "gain_db": -4.0, "pan": -0.2 },
+        { "name": "cable_snap", "offset_s": 1.2, "gain_db": -4.0, "pan": 0.2 }
+      ],
+      "callout": { "label": "JET SPIKE", "value": "100,000+ PSI" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b07_pitting_snowball",
+      "act": "escalation",
+      "narration_text": "Watch out, Bolt. Millions of micro-hammers dig a pit, triggering even bigger bubbles in a chain reaction.",
+      "voice_direction": "Playful warning to Bolt, accelerating into chain reaction.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "concrete_pit_snowball",
+      "sfx_cues": [
+        { "name": "pressure_rumble", "offset_s": 0.2, "gain_db": -6.0, "pan": 0.0 },
+        { "name": "hull_creak", "offset_s": 1.9, "gain_db": -6.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "FEEDBACK", "value": "RUNAWAY EROSION" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b08_concrete_cavern",
+      "act": "climax",
+      "narration_text": "Within hours, roaring water ripped away steel rebar and carved a four-story crater inside the tunnel.",
+      "voice_direction": "Peak dramatic climax; crisp punch on four-story crater.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "four_story_crater",
+      "sfx_cues": [
+        { "name": "wedge_lock_slam", "offset_s": 0.7, "gain_db": -3.0, "pan": 0.0 },
+        { "name": "pressure_rumble", "offset_s": 1.5, "gain_db": -5.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "DAMAGE", "value": "40-FT CRATER" },
+      "pause_after_s": 0.28
+    },
+    {
+      "id": "b09_aeration_ramp_fix",
+      "act": "climax",
+      "narration_text": "The fix sounds crazy: angled steel ramps launch water cleanly off the concrete floor.",
+      "voice_direction": "Smart eureka twist; bright clarity on angled steel ramps.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "aeration_ramp_cutaway",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.2, "gain_db": -9.0, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.4, "gain_db": -10.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "SMART FIX", "value": "AIR RAMP SLOT" },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b10_air_cushion_bolt",
+      "act": "climax",
+      "narration_text": "Nice move, Bolt. That slot sucks air underneath, creating a soft cushion that absorbs every shockwave.",
+      "voice_direction": "Warm appreciative cue to Bolt; crisp explanation of air cushion.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "air_cushion_shield",
+      "sfx_cues": [
+        { "name": "hydraulic_hiss", "offset_s": 0.4, "gain_db": -8.5, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.5, "gain_db": -10.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "AIR MIX", "value": "8% STOPS DAMAGE" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b11_pressure_bars",
+      "act": "climax",
+      "narration_text": "Just eight percent air drops concrete erosion to near zero, protecting mega-dams for decades.",
+      "voice_direction": "Confident documentary resolution.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "cavitation_bars",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.3, "gain_db": -11.0, "pan": 0.0 },
+        { "name": "metal_clank", "offset_s": 2.3, "gain_db": -9.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "EROSION", "value": "NEAR ZERO" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Would you stand below a full spillway? Comment YES or NO.",
+      "voice_direction": "Snappy conversational challenge; crisp lift on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.1, "gain_db": -10.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "YOUR CALL", "value": "YES OR NO" },
+      "pause_after_s": 0.35
+    }
+  ]
+}

@@ -1,0 +1,1462 @@
+{
+  "blocks": [
+    {
+      "start_s": 0.05,
+      "end_s": 1.24,
+      "words": [
+        {
+          "text": "Imagine",
+          "start_s": 0.05,
+          "end_s": 0.42,
+          "emphasize": false
+        },
+        {
+          "text": "climbing",
+          "start_s": 0.42,
+          "end_s": 0.68,
+          "emphasize": false
+        },
+        {
+          "text": "two",
+          "start_s": 0.68,
+          "end_s": 0.96,
+          "emphasize": false
+        },
+        {
+          "text": "hundred",
+          "start_s": 0.96,
+          "end_s": 1.24,
+          "emphasize": true
+        }
+      ]
+    },
+    {
+      "start_s": 1.24,
+      "end_s": 2.36,
+      "words": [
+        {
+          "text": "feet",
+          "start_s": 1.24,
+          "end_s": 1.88,
+          "emphasize": false
+        },
+        {
+          "text": "up",
+          "start_s": 1.88,
+          "end_s": 2.1,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 2.1,
+          "end_s": 2.2,
+          "emphasize": false
+        },
+        {
+          "text": "roller",
+          "start_s": 2.2,
+          "end_s": 2.36,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 2.36,
+      "end_s": 3.66,
+      "words": [
+        {
+          "text": "coaster",
+          "start_s": 2.36,
+          "end_s": 2.74,
+          "emphasize": false
+        },
+        {
+          "text": "and",
+          "start_s": 2.74,
+          "end_s": 3.24,
+          "emphasize": false
+        },
+        {
+          "text": "hearing",
+          "start_s": 3.24,
+          "end_s": 3.44,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 3.44,
+          "end_s": 3.66,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 3.66,
+      "end_s": 4.86,
+      "words": [
+        {
+          "text": "steel",
+          "start_s": 3.66,
+          "end_s": 3.92,
+          "emphasize": false
+        },
+        {
+          "text": "lift",
+          "start_s": 3.92,
+          "end_s": 4.2,
+          "emphasize": false
+        },
+        {
+          "text": "chain",
+          "start_s": 4.2,
+          "end_s": 4.46,
+          "emphasize": false
+        },
+        {
+          "text": "snap.",
+          "start_s": 4.46,
+          "end_s": 4.86,
+          "emphasize": true
+        }
+      ]
+    },
+    {
+      "start_s": 5.5,
+      "end_s": 5.72,
+      "words": [
+        {
+          "text": "Hey",
+          "start_s": 5.5,
+          "end_s": 5.64,
+          "emphasize": false
+        },
+        {
+          "text": "Bolt,",
+          "start_s": 5.64,
+          "end_s": 5.72,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 6.12,
+      "end_s": 7.22,
+      "words": [
+        {
+          "text": "wave",
+          "start_s": 6.12,
+          "end_s": 6.38,
+          "emphasize": false
+        },
+        {
+          "text": "down",
+          "start_s": 6.38,
+          "end_s": 6.62,
+          "emphasize": false
+        },
+        {
+          "text": "below",
+          "start_s": 6.62,
+          "end_s": 6.8,
+          "emphasize": false
+        },
+        {
+          "text": "—",
+          "start_s": 6.8,
+          "end_s": 7.22,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 7.22,
+      "end_s": 7.94,
+      "words": [
+        {
+          "text": "we",
+          "start_s": 7.22,
+          "end_s": 7.26,
+          "emphasize": false
+        },
+        {
+          "text": "are",
+          "start_s": 7.26,
+          "end_s": 7.34,
+          "emphasize": false
+        },
+        {
+          "text": "cutting",
+          "start_s": 7.34,
+          "end_s": 7.58,
+          "emphasize": false
+        },
+        {
+          "text": "power",
+          "start_s": 7.58,
+          "end_s": 7.94,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 7.94,
+      "end_s": 8.6,
+      "words": [
+        {
+          "text": "right",
+          "start_s": 7.94,
+          "end_s": 8.32,
+          "emphasize": false
+        },
+        {
+          "text": "now.",
+          "start_s": 8.32,
+          "end_s": 8.6,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 9.22,
+      "end_s": 10.34,
+      "words": [
+        {
+          "text": "Yet",
+          "start_s": 9.22,
+          "end_s": 9.72,
+          "emphasize": false
+        },
+        {
+          "text": "your",
+          "start_s": 9.72,
+          "end_s": 9.84,
+          "emphasize": false
+        },
+        {
+          "text": "car",
+          "start_s": 9.84,
+          "end_s": 10.06,
+          "emphasize": false
+        },
+        {
+          "text": "barely",
+          "start_s": 10.06,
+          "end_s": 10.34,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 10.34,
+      "end_s": 11.14,
+      "words": [
+        {
+          "text": "moves",
+          "start_s": 10.34,
+          "end_s": 10.76,
+          "emphasize": false
+        },
+        {
+          "text": "an",
+          "start_s": 10.76,
+          "end_s": 10.88,
+          "emphasize": false
+        },
+        {
+          "text": "inch.",
+          "start_s": 10.88,
+          "end_s": 11.14,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 11.72,
+      "end_s": 13.26,
+      "words": [
+        {
+          "text": "Hear",
+          "start_s": 11.72,
+          "end_s": 11.86,
+          "emphasize": false
+        },
+        {
+          "text": "that",
+          "start_s": 11.86,
+          "end_s": 11.96,
+          "emphasize": false
+        },
+        {
+          "text": "loud",
+          "start_s": 11.96,
+          "end_s": 12.24,
+          "emphasize": false
+        },
+        {
+          "text": "clack-clack-clack",
+          "start_s": 12.24,
+          "end_s": 13.26,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 13.26,
+      "end_s": 13.88,
+      "words": [
+        {
+          "text": "on",
+          "start_s": 13.26,
+          "end_s": 13.42,
+          "emphasize": false
+        },
+        {
+          "text": "every",
+          "start_s": 13.42,
+          "end_s": 13.6,
+          "emphasize": false
+        },
+        {
+          "text": "climb?",
+          "start_s": 13.6,
+          "end_s": 13.88,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 14.58,
+      "end_s": 15.08,
+      "words": [
+        {
+          "text": "That",
+          "start_s": 14.58,
+          "end_s": 14.72,
+          "emphasize": false
+        },
+        {
+          "text": "is",
+          "start_s": 14.72,
+          "end_s": 14.82,
+          "emphasize": false
+        },
+        {
+          "text": "not",
+          "start_s": 14.82,
+          "end_s": 14.96,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 14.96,
+          "end_s": 15.08,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 15.08,
+      "end_s": 15.8,
+      "words": [
+        {
+          "text": "chain",
+          "start_s": 15.08,
+          "end_s": 15.28,
+          "emphasize": false
+        },
+        {
+          "text": "—",
+          "start_s": 15.28,
+          "end_s": 15.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 15.8,
+      "end_s": 16.68,
+      "words": [
+        {
+          "text": "it",
+          "start_s": 15.8,
+          "end_s": 15.88,
+          "emphasize": false
+        },
+        {
+          "text": "is",
+          "start_s": 15.88,
+          "end_s": 15.96,
+          "emphasize": false
+        },
+        {
+          "text": "your",
+          "start_s": 15.96,
+          "end_s": 16.1,
+          "emphasize": false
+        },
+        {
+          "text": "fail-safe.",
+          "start_s": 16.1,
+          "end_s": 16.68,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 17.38,
+      "end_s": 18.32,
+      "words": [
+        {
+          "text": "Beneath",
+          "start_s": 17.38,
+          "end_s": 17.58,
+          "emphasize": false
+        },
+        {
+          "text": "each",
+          "start_s": 17.58,
+          "end_s": 17.78,
+          "emphasize": false
+        },
+        {
+          "text": "car",
+          "start_s": 17.78,
+          "end_s": 18.06,
+          "emphasize": false
+        },
+        {
+          "text": "hangs",
+          "start_s": 18.06,
+          "end_s": 18.32,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 18.32,
+      "end_s": 20.02,
+      "words": [
+        {
+          "text": "a",
+          "start_s": 18.32,
+          "end_s": 18.44,
+          "emphasize": false
+        },
+        {
+          "text": "steel",
+          "start_s": 18.44,
+          "end_s": 18.76,
+          "emphasize": false
+        },
+        {
+          "text": "anti-rollback",
+          "start_s": 18.76,
+          "end_s": 19.74,
+          "emphasize": false
+        },
+        {
+          "text": "dog",
+          "start_s": 19.74,
+          "end_s": 20.02,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 20.02,
+      "end_s": 21.9,
+      "words": [
+        {
+          "text": "dragging",
+          "start_s": 20.02,
+          "end_s": 20.66,
+          "emphasize": false
+        },
+        {
+          "text": "across",
+          "start_s": 20.66,
+          "end_s": 21.16,
+          "emphasize": false
+        },
+        {
+          "text": "saw-toothed",
+          "start_s": 21.16,
+          "end_s": 21.9,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 21.9,
+      "end_s": 22.62,
+      "words": [
+        {
+          "text": "track",
+          "start_s": 21.9,
+          "end_s": 22.16,
+          "emphasize": false
+        },
+        {
+          "text": "notches.",
+          "start_s": 22.16,
+          "end_s": 22.62,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 23.193,
+      "end_s": 23.72,
+      "words": [
+        {
+          "text": "Moving",
+          "start_s": 23.193,
+          "end_s": 23.34,
+          "emphasize": false
+        },
+        {
+          "text": "forward,",
+          "start_s": 23.34,
+          "end_s": 23.72,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 24.0,
+      "end_s": 24.92,
+      "words": [
+        {
+          "text": "it",
+          "start_s": 24.0,
+          "end_s": 24.26,
+          "emphasize": false
+        },
+        {
+          "text": "hops",
+          "start_s": 24.26,
+          "end_s": 24.42,
+          "emphasize": false
+        },
+        {
+          "text": "over",
+          "start_s": 24.42,
+          "end_s": 24.7,
+          "emphasize": false
+        },
+        {
+          "text": "every",
+          "start_s": 24.7,
+          "end_s": 24.92,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 24.92,
+      "end_s": 25.14,
+      "words": [
+        {
+          "text": "tooth.",
+          "start_s": 24.92,
+          "end_s": 25.14,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 25.86,
+      "end_s": 27.06,
+      "words": [
+        {
+          "text": "Roll",
+          "start_s": 25.86,
+          "end_s": 26.04,
+          "emphasize": false
+        },
+        {
+          "text": "backwards",
+          "start_s": 26.04,
+          "end_s": 26.3,
+          "emphasize": false
+        },
+        {
+          "text": "one",
+          "start_s": 26.3,
+          "end_s": 26.74,
+          "emphasize": false
+        },
+        {
+          "text": "inch",
+          "start_s": 26.74,
+          "end_s": 27.06,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 27.06,
+      "end_s": 28.04,
+      "words": [
+        {
+          "text": "and",
+          "start_s": 27.06,
+          "end_s": 27.24,
+          "emphasize": false
+        },
+        {
+          "text": "it",
+          "start_s": 27.24,
+          "end_s": 27.32,
+          "emphasize": false
+        },
+        {
+          "text": "jams",
+          "start_s": 27.32,
+          "end_s": 27.6,
+          "emphasize": false
+        },
+        {
+          "text": "into",
+          "start_s": 27.6,
+          "end_s": 28.04,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 28.04,
+      "end_s": 28.7,
+      "words": [
+        {
+          "text": "solid",
+          "start_s": 28.04,
+          "end_s": 28.36,
+          "emphasize": false
+        },
+        {
+          "text": "steel.",
+          "start_s": 28.36,
+          "end_s": 28.7,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 29.391,
+      "end_s": 30.16,
+      "words": [
+        {
+          "text": "Even",
+          "start_s": 29.391,
+          "end_s": 29.471,
+          "emphasize": false
+        },
+        {
+          "text": "upside",
+          "start_s": 29.471,
+          "end_s": 29.84,
+          "emphasize": false
+        },
+        {
+          "text": "down,",
+          "start_s": 29.84,
+          "end_s": 30.16,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 30.42,
+      "end_s": 31.6,
+      "words": [
+        {
+          "text": "three",
+          "start_s": 30.42,
+          "end_s": 30.72,
+          "emphasize": false
+        },
+        {
+          "text": "wheel",
+          "start_s": 30.72,
+          "end_s": 30.98,
+          "emphasize": false
+        },
+        {
+          "text": "sets",
+          "start_s": 30.98,
+          "end_s": 31.28,
+          "emphasize": false
+        },
+        {
+          "text": "hug",
+          "start_s": 31.28,
+          "end_s": 31.6,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 31.6,
+      "end_s": 32.46,
+      "words": [
+        {
+          "text": "the",
+          "start_s": 31.6,
+          "end_s": 31.78,
+          "emphasize": false
+        },
+        {
+          "text": "rail",
+          "start_s": 31.78,
+          "end_s": 31.96,
+          "emphasize": false
+        },
+        {
+          "text": "from",
+          "start_s": 31.96,
+          "end_s": 32.18,
+          "emphasize": false
+        },
+        {
+          "text": "above,",
+          "start_s": 32.18,
+          "end_s": 32.46,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 32.78,
+      "end_s": 33.88,
+      "words": [
+        {
+          "text": "below,",
+          "start_s": 32.78,
+          "end_s": 33.06,
+          "emphasize": false
+        },
+        {
+          "text": "and",
+          "start_s": 33.42,
+          "end_s": 33.54,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 33.54,
+          "end_s": 33.64,
+          "emphasize": false
+        },
+        {
+          "text": "sides.",
+          "start_s": 33.64,
+          "end_s": 33.88,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 34.6,
+      "end_s": 35.08,
+      "words": [
+        {
+          "text": "What",
+          "start_s": 34.6,
+          "end_s": 34.72,
+          "emphasize": false
+        },
+        {
+          "text": "if",
+          "start_s": 34.72,
+          "end_s": 34.8,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 34.8,
+          "end_s": 34.9,
+          "emphasize": false
+        },
+        {
+          "text": "park",
+          "start_s": 34.9,
+          "end_s": 35.08,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 35.08,
+      "end_s": 36.62,
+      "words": [
+        {
+          "text": "loses",
+          "start_s": 35.08,
+          "end_s": 35.38,
+          "emphasize": false
+        },
+        {
+          "text": "all",
+          "start_s": 35.38,
+          "end_s": 35.74,
+          "emphasize": false
+        },
+        {
+          "text": "electricity",
+          "start_s": 35.74,
+          "end_s": 36.16,
+          "emphasize": false
+        },
+        {
+          "text": "while",
+          "start_s": 36.16,
+          "end_s": 36.62,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 36.62,
+      "end_s": 37.42,
+      "words": [
+        {
+          "text": "your",
+          "start_s": 36.62,
+          "end_s": 36.74,
+          "emphasize": false
+        },
+        {
+          "text": "train",
+          "start_s": 36.74,
+          "end_s": 37.04,
+          "emphasize": false
+        },
+        {
+          "text": "hits",
+          "start_s": 37.04,
+          "end_s": 37.28,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 37.28,
+          "end_s": 37.42,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 37.42,
+      "end_s": 38.58,
+      "words": [
+        {
+          "text": "station",
+          "start_s": 37.42,
+          "end_s": 37.76,
+          "emphasize": false
+        },
+        {
+          "text": "at",
+          "start_s": 37.76,
+          "end_s": 37.92,
+          "emphasize": false
+        },
+        {
+          "text": "seventy",
+          "start_s": 37.92,
+          "end_s": 38.32,
+          "emphasize": false
+        },
+        {
+          "text": "miles",
+          "start_s": 38.32,
+          "end_s": 38.58,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 38.58,
+      "end_s": 38.98,
+      "words": [
+        {
+          "text": "per",
+          "start_s": 38.58,
+          "end_s": 38.8,
+          "emphasize": false
+        },
+        {
+          "text": "hour?",
+          "start_s": 38.8,
+          "end_s": 38.98,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 39.58,
+      "end_s": 41.02,
+      "words": [
+        {
+          "text": "Modern",
+          "start_s": 39.58,
+          "end_s": 39.84,
+          "emphasize": false
+        },
+        {
+          "text": "coasters",
+          "start_s": 39.84,
+          "end_s": 40.22,
+          "emphasize": false
+        },
+        {
+          "text": "use",
+          "start_s": 40.22,
+          "end_s": 40.44,
+          "emphasize": false
+        },
+        {
+          "text": "unpowered",
+          "start_s": 40.44,
+          "end_s": 41.02,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 41.02,
+      "end_s": 42.42,
+      "words": [
+        {
+          "text": "permanent",
+          "start_s": 41.02,
+          "end_s": 41.46,
+          "emphasize": false
+        },
+        {
+          "text": "magnets",
+          "start_s": 41.46,
+          "end_s": 41.86,
+          "emphasize": false
+        },
+        {
+          "text": "flanking",
+          "start_s": 42.28,
+          "end_s": 42.42,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 42.42,
+      "end_s": 43.8,
+      "words": [
+        {
+          "text": "thick",
+          "start_s": 42.42,
+          "end_s": 42.76,
+          "emphasize": false
+        },
+        {
+          "text": "copper",
+          "start_s": 42.76,
+          "end_s": 43.12,
+          "emphasize": false
+        },
+        {
+          "text": "fins",
+          "start_s": 43.12,
+          "end_s": 43.48,
+          "emphasize": false
+        },
+        {
+          "text": "bolted",
+          "start_s": 43.48,
+          "end_s": 43.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 43.8,
+      "end_s": 44.82,
+      "words": [
+        {
+          "text": "underneath",
+          "start_s": 43.8,
+          "end_s": 44.12,
+          "emphasize": false
+        },
+        {
+          "text": "every",
+          "start_s": 44.12,
+          "end_s": 44.6,
+          "emphasize": false
+        },
+        {
+          "text": "car.",
+          "start_s": 44.6,
+          "end_s": 44.82,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 45.54,
+      "end_s": 46.02,
+      "words": [
+        {
+          "text": "No",
+          "start_s": 45.54,
+          "end_s": 45.58,
+          "emphasize": true
+        },
+        {
+          "text": "power",
+          "start_s": 45.58,
+          "end_s": 45.8,
+          "emphasize": false
+        },
+        {
+          "text": "needed,",
+          "start_s": 45.8,
+          "end_s": 46.02,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 46.12,
+      "end_s": 46.76,
+      "words": [
+        {
+          "text": "Bolt",
+          "start_s": 46.12,
+          "end_s": 46.24,
+          "emphasize": false
+        },
+        {
+          "text": "—",
+          "start_s": 46.24,
+          "end_s": 46.76,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 46.76,
+      "end_s": 47.72,
+      "words": [
+        {
+          "text": "rushing",
+          "start_s": 46.76,
+          "end_s": 46.9,
+          "emphasize": false
+        },
+        {
+          "text": "copper",
+          "start_s": 46.9,
+          "end_s": 47.3,
+          "emphasize": false
+        },
+        {
+          "text": "creates",
+          "start_s": 47.3,
+          "end_s": 47.72,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 47.72,
+      "end_s": 48.7,
+      "words": [
+        {
+          "text": "eddy",
+          "start_s": 47.72,
+          "end_s": 48.04,
+          "emphasize": false
+        },
+        {
+          "text": "currents",
+          "start_s": 48.04,
+          "end_s": 48.24,
+          "emphasize": false
+        },
+        {
+          "text": "that",
+          "start_s": 48.24,
+          "end_s": 48.46,
+          "emphasize": false
+        },
+        {
+          "text": "push",
+          "start_s": 48.46,
+          "end_s": 48.7,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 48.7,
+      "end_s": 49.8,
+      "words": [
+        {
+          "text": "back",
+          "start_s": 48.7,
+          "end_s": 49.0,
+          "emphasize": false
+        },
+        {
+          "text": "like",
+          "start_s": 49.0,
+          "end_s": 49.24,
+          "emphasize": false
+        },
+        {
+          "text": "invisible",
+          "start_s": 49.24,
+          "end_s": 49.5,
+          "emphasize": false
+        },
+        {
+          "text": "honey.",
+          "start_s": 49.5,
+          "end_s": 49.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 50.82,
+      "end_s": 51.64,
+      "words": [
+        {
+          "text": "Final",
+          "start_s": 50.82,
+          "end_s": 50.86,
+          "emphasize": false
+        },
+        {
+          "text": "pinch",
+          "start_s": 50.86,
+          "end_s": 51.08,
+          "emphasize": false
+        },
+        {
+          "text": "brakes",
+          "start_s": 51.08,
+          "end_s": 51.32,
+          "emphasize": false
+        },
+        {
+          "text": "stay",
+          "start_s": 51.32,
+          "end_s": 51.64,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 51.64,
+      "end_s": 52.62,
+      "words": [
+        {
+          "text": "open",
+          "start_s": 51.64,
+          "end_s": 52.0,
+          "emphasize": false
+        },
+        {
+          "text": "with",
+          "start_s": 52.0,
+          "end_s": 52.18,
+          "emphasize": false
+        },
+        {
+          "text": "air",
+          "start_s": 52.18,
+          "end_s": 52.34,
+          "emphasize": false
+        },
+        {
+          "text": "pressure,",
+          "start_s": 52.34,
+          "end_s": 52.62,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 53.0,
+      "end_s": 54.14,
+      "words": [
+        {
+          "text": "so",
+          "start_s": 53.0,
+          "end_s": 53.12,
+          "emphasize": false
+        },
+        {
+          "text": "any",
+          "start_s": 53.12,
+          "end_s": 53.36,
+          "emphasize": false
+        },
+        {
+          "text": "blackout",
+          "start_s": 53.36,
+          "end_s": 53.66,
+          "emphasize": false
+        },
+        {
+          "text": "springs",
+          "start_s": 53.66,
+          "end_s": 54.14,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 54.14,
+      "end_s": 55.46,
+      "words": [
+        {
+          "text": "them",
+          "start_s": 54.14,
+          "end_s": 54.42,
+          "emphasize": false
+        },
+        {
+          "text": "clamped",
+          "start_s": 54.42,
+          "end_s": 54.72,
+          "emphasize": false
+        },
+        {
+          "text": "shut",
+          "start_s": 54.72,
+          "end_s": 54.98,
+          "emphasize": false
+        },
+        {
+          "text": "automatically.",
+          "start_s": 54.98,
+          "end_s": 55.46,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 56.185,
+      "end_s": 56.96,
+      "words": [
+        {
+          "text": "Smooth",
+          "start_s": 56.185,
+          "end_s": 56.5,
+          "emphasize": false
+        },
+        {
+          "text": "stop,",
+          "start_s": 56.5,
+          "end_s": 56.76,
+          "emphasize": true
+        },
+        {
+          "text": "Bolt.",
+          "start_s": 56.76,
+          "end_s": 56.96,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 57.46,
+      "end_s": 57.96,
+      "words": [
+        {
+          "text": "Pure",
+          "start_s": 57.46,
+          "end_s": 57.68,
+          "emphasize": false
+        },
+        {
+          "text": "gravity,",
+          "start_s": 57.68,
+          "end_s": 57.96,
+          "emphasize": true
+        }
+      ]
+    },
+    {
+      "start_s": 58.5,
+      "end_s": 58.86,
+      "words": [
+        {
+          "text": "steel",
+          "start_s": 58.5,
+          "end_s": 58.64,
+          "emphasize": false
+        },
+        {
+          "text": "teeth,",
+          "start_s": 58.64,
+          "end_s": 58.86,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 59.28,
+      "end_s": 60.42,
+      "words": [
+        {
+          "text": "and",
+          "start_s": 59.28,
+          "end_s": 59.36,
+          "emphasize": false
+        },
+        {
+          "text": "magnets",
+          "start_s": 59.36,
+          "end_s": 59.68,
+          "emphasize": false
+        },
+        {
+          "text": "working",
+          "start_s": 59.68,
+          "end_s": 60.04,
+          "emphasize": false
+        },
+        {
+          "text": "even",
+          "start_s": 60.04,
+          "end_s": 60.42,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 60.42,
+      "end_s": 61.28,
+      "words": [
+        {
+          "text": "in",
+          "start_s": 60.42,
+          "end_s": 60.6,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 60.6,
+          "end_s": 60.68,
+          "emphasize": false
+        },
+        {
+          "text": "total",
+          "start_s": 60.68,
+          "end_s": 60.92,
+          "emphasize": false
+        },
+        {
+          "text": "blackout.",
+          "start_s": 60.92,
+          "end_s": 61.28,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 62.08,
+      "end_s": 62.54,
+      "words": [
+        {
+          "text": "Would",
+          "start_s": 62.08,
+          "end_s": 62.14,
+          "emphasize": false
+        },
+        {
+          "text": "you",
+          "start_s": 62.14,
+          "end_s": 62.22,
+          "emphasize": false
+        },
+        {
+          "text": "still",
+          "start_s": 62.22,
+          "end_s": 62.38,
+          "emphasize": false
+        },
+        {
+          "text": "sit",
+          "start_s": 62.38,
+          "end_s": 62.54,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 62.54,
+      "end_s": 62.96,
+      "words": [
+        {
+          "text": "in",
+          "start_s": 62.54,
+          "end_s": 62.66,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 62.66,
+          "end_s": 62.7,
+          "emphasize": false
+        },
+        {
+          "text": "front",
+          "start_s": 62.7,
+          "end_s": 62.8,
+          "emphasize": false
+        },
+        {
+          "text": "row?",
+          "start_s": 62.8,
+          "end_s": 62.96,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 63.76,
+      "end_s": 65.02,
+      "words": [
+        {
+          "text": "Comment",
+          "start_s": 63.76,
+          "end_s": 63.94,
+          "emphasize": false
+        },
+        {
+          "text": "YES",
+          "start_s": 63.94,
+          "end_s": 64.24,
+          "emphasize": true
+        },
+        {
+          "text": "or",
+          "start_s": 64.24,
+          "end_s": 64.86,
+          "emphasize": false
+        },
+        {
+          "text": "NO.",
+          "start_s": 64.86,
+          "end_s": 65.02,
+          "emphasize": true
+        }
+      ]
+    }
+  ]
+}

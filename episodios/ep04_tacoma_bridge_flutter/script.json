@@ -1,0 +1,352 @@
+{
+  "episode_id": "ep04",
+  "slug": "ep04_tacoma_bridge_flutter",
+  "title": "Why Light Wind RIPPED This Steel Bridge Apart",
+  "hook_text": "42 MPH WIND TORE STEEL",
+  "cta_text": "Comment YES or NO",
+  "bpm": 108,
+  "cover_headline": [
+    "42 MPH WIND.",
+    "STEEL BRIDGE TORN."
+  ],
+  "publish_meta": {
+    "youtube_title": "Why Light Wind RIPPED This Steel Bridge Apart",
+    "youtube_description": "",
+    "ig_tiktok_caption": "Most textbooks blame simple resonance, but steady 42 mph wind actually tore a steel suspension bridge apart through aeroelastic flutter. Did you learn in school that it was just resonance? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#civilengineering",
+      "#physics",
+      "#bridges",
+      "#aerodynamics",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Did you learn in school that it was just simple resonance? Comment YES or NO",
+    "related_video_slot": "ep05_car_differential_gear",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "In nineteen forty, a steady forty-two mile per hour breeze twisted a steel bridge like rubber.",
+      "voice_direction": "Urgent documentary hook at 1.04x pace; crisp punch on twisted and rubber.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "bridge_twist_hero",
+      "sfx_cues": [
+        {
+          "name": "pressure_rumble",
+          "offset_s": 0.15,
+          "gain_db": -6.0,
+          "pan": 0.0
+        },
+        {
+          "name": "hull_creak",
+          "offset_s": 1.8,
+          "gain_db": -5.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": null,
+      "pause_after_s": 0.18
+    },
+    {
+      "id": "b02_myth_bust",
+      "act": "hook",
+      "narration_text": "Most textbooks blame simple resonance. Engineers later proved that story is completely wrong.",
+      "voice_direction": "Authoritative myth-busting pivot; sharp emphasis on actually wrong.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "suspension_span_wave",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.0,
+          "gain_db": -10.0,
+          "pan": 0.0
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.3,
+          "gain_db": -11.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "TEXTBOOK MYTH",
+        "value": "NOT RESONANCE"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b03_slender_design",
+      "act": "mechanism",
+      "narration_text": "To cut costs, the narrow deck used solid eight-foot steel walls along both sides.",
+      "voice_direction": "Clear structural explanation; distinct emphasis on solid eight-foot-tall.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "solid_h_girder_profile",
+      "sfx_cues": [
+        {
+          "name": "metal_clank",
+          "offset_s": 0.4,
+          "gain_db": -9.0,
+          "pan": -0.2
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.4,
+          "gain_db": -12.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "SIDE WALLS",
+        "value": "8-FT SOLID STEEL"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b04_wind_blockage",
+      "act": "mechanism",
+      "narration_text": "Instead of letting wind pass through trusses, those solid walls acted like giant sails.",
+      "voice_direction": "Vivid physical clarity; crisp emphasis on giant flat sails.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "wind_tunnel_vortices",
+      "sfx_cues": [
+        {
+          "name": "hydraulic_hiss",
+          "offset_s": 0.2,
+          "gain_db": -7.5,
+          "pan": 0.0
+        },
+        {
+          "name": "pressure_rumble",
+          "offset_s": 2.0,
+          "gain_db": -9.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "AIRFLOW",
+        "value": "BLOCKED WALL"
+      },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b05_vortex_shedding",
+      "act": "mechanism",
+      "narration_text": "Steady wind peeled swirling vortices off the edges, nudging the roadway into a twist.",
+      "voice_direction": "Fluid rhythmic cadence describing alternating vortices.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "alternating_vortex_twist",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.4,
+          "gain_db": -8.0,
+          "pan": -0.3
+        },
+        {
+          "name": "whoosh_cut",
+          "offset_s": 2.0,
+          "gain_db": -8.0,
+          "pan": 0.3
+        }
+      ],
+      "callout": {
+        "label": "WIND FORCE",
+        "value": "VORTEX TORQUE"
+      },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b06_flutter_feedback",
+      "act": "escalation",
+      "narration_text": "Then aeroelastic flutter took over. The tilted deck reshaped the airflow around it.",
+      "voice_direction": "Rising intensity; crystal clear pronunciation of aeroelastic flutter.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "aeroelastic_flutter_loop",
+      "sfx_cues": [
+        {
+          "name": "alarm_ping",
+          "offset_s": 0.4,
+          "gain_db": -9.0,
+          "pan": 0.0
+        },
+        {
+          "name": "hull_creak",
+          "offset_s": 2.1,
+          "gain_db": -6.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "TRUE CAUSE",
+        "value": "FLUTTER LOOP"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b07_negative_damping",
+      "act": "escalation",
+      "narration_text": "Every upward pitch let wind push even harder in the same direction. Zero damping.",
+      "voice_direction": "Accelerating urgency; decisive punch on zero damping.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "torsion_45_degrees",
+      "sfx_cues": [
+        {
+          "name": "pressure_rumble",
+          "offset_s": 0.2,
+          "gain_db": -6.0,
+          "pan": 0.0
+        },
+        {
+          "name": "friction_screech",
+          "offset_s": 2.4,
+          "gain_db": -7.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "DECK ROLL",
+        "value": "45 DEG TWIST"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b08_suspender_overload",
+      "act": "escalation",
+      "narration_text": "One curb plunged twenty-eight feet while the other soared, stretching steel suspenders past yield.",
+      "voice_direction": "Tight dramatic tension; sharp articulation of twenty-eight feet.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "suspenders_stretching",
+      "sfx_cues": [
+        {
+          "name": "hull_creak",
+          "offset_s": 0.3,
+          "gain_db": -5.0,
+          "pan": -0.2
+        },
+        {
+          "name": "cable_snap",
+          "offset_s": 2.9,
+          "gain_db": -4.0,
+          "pan": 0.2
+        }
+      ],
+      "callout": {
+        "label": "CABLE STRESS",
+        "value": "PAST YIELD"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b09_zipper_snap",
+      "act": "climax",
+      "narration_text": "When the first cable snapped, its load unzipped six hundred feet of bridge in sequence.",
+      "voice_direction": "Peak dramatic climax; crisp hit on snapped and unzipping.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "cables_unzip_collapse",
+      "sfx_cues": [
+        {
+          "name": "cable_snap",
+          "offset_s": 0.4,
+          "gain_db": -3.0,
+          "pan": -0.35
+        },
+        {
+          "name": "cable_snap",
+          "offset_s": 0.85,
+          "gain_db": -3.0,
+          "pan": 0.0
+        },
+        {
+          "name": "wedge_lock_slam",
+          "offset_s": 1.6,
+          "gain_db": -3.5,
+          "pan": 0.3
+        }
+      ],
+      "callout": {
+        "label": "FAILURE MODE",
+        "value": "ZIPPER SNAP"
+      },
+      "pause_after_s": 0.3
+    },
+    {
+      "id": "b10_modern_fix",
+      "act": "climax",
+      "narration_text": "Today, engineers wind-tunnel test every span and slice open air slots through streamlined box girders.",
+      "voice_direction": "Reassuring engineering mastery; crisp lift on equalizes instantly.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "modern_slotted_girder",
+      "sfx_cues": [
+        {
+          "name": "whoosh_cut",
+          "offset_s": 0.2,
+          "gain_db": -9.5,
+          "pan": 0.0
+        },
+        {
+          "name": "ui_tick",
+          "offset_s": 2.8,
+          "gain_db": -10.5,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "MODERN FIX",
+        "value": "SLOTTED DECK"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b11_comparison_bars",
+      "act": "climax",
+      "narration_text": "That lesson raised safe flutter wind speeds from forty-two miles per hour past one hundred fifty.",
+      "voice_direction": "Confident documentary resolution; clean lift on over one hundred fifty.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "flutter_speed_comparison",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.3,
+          "gain_db": -11.0,
+          "pan": 0.0
+        },
+        {
+          "name": "metal_clank",
+          "offset_s": 2.7,
+          "gain_db": -9.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "SAFE WIND",
+        "value": "150+ MPH"
+      },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Did you learn in school that it was just resonance? Comment YES or NO.",
+      "voice_direction": "Snappy conversational challenge; punchy emphasis on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        {
+          "name": "ui_tick",
+          "offset_s": 0.1,
+          "gain_db": -10.0,
+          "pan": 0.0
+        }
+      ],
+      "callout": {
+        "label": "YOUR CALL",
+        "value": "YES OR NO"
+      },
+      "pause_after_s": 0.35
+    }
+  ]
+}

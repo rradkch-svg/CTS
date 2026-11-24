@@ -1,0 +1,197 @@
+{
+  "episode_id": "ep09",
+  "slug": "ep09_spacecraft_heat_shield",
+  "title": "How a 3-Inch Shield Survives 5,000°F Reentry",
+  "hook_text": "5,000°F PLASMA WALL",
+  "cta_text": "Comment YES or NO",
+  "bpm": 108,
+  "cover_headline": [
+    "5,000°F PLASMA.",
+    "3-INCH SHIELD."
+  ],
+  "publish_meta": {
+    "youtube_title": "How a 3-Inch Shield Survives 5,000°F Reentry",
+    "youtube_description": "",
+    "ig_tiktok_caption": "At 17,500 mph, a spacecraft slams into Earth's atmosphere inside a 5,000°F plasma fireball — hotter than molten steel — yet stays room temperature inside thanks to a blunt bow shock and ablative charring. Would you ride a capsule back from orbit? Comment YES or NO.",
+    "hashtags": [
+      "#engineering",
+      "#space",
+      "#aerospace",
+      "#physics",
+      "#howitworks",
+      "#failsafelab"
+    ],
+    "pinned_comment": "Bolt waved goodbye to orbit at 17,500 mph 😂 Would you ride a reentry capsule back to Earth? Comment YES or NO 👇",
+    "related_video_slot": "ep10_roller_coaster_rollback",
+    "schedule_hour": "12:00",
+    "ai_disclosure": false
+  },
+  "beats": [
+    {
+      "id": "b01_hook",
+      "act": "hook",
+      "narration_text": "Dropping from orbit at seventeen thousand miles per hour wraps a capsule in five-thousand-degree plasma.",
+      "voice_direction": "High-stakes aerospace hook; crisp punch on five-thousand-degree plasma.",
+      "camera_preset": "FRAME0_HERO",
+      "scene_key": "capsule_plasma_hero",
+      "sfx_cues": [
+        { "name": "pressure_rumble", "offset_s": 0.15, "gain_db": -5.0, "pan": 0.0 },
+        { "name": "alarm_ping", "offset_s": 1.4, "gain_db": -8.0, "pan": 0.0 }
+      ],
+      "callout": null,
+      "pause_after_s": 0.18
+    },
+    {
+      "id": "b02_bolt_wave_orbit",
+      "act": "hook",
+      "narration_text": "Buckle up, Bolt — wave goodbye to space. Outside burns hotter than steel, yet inside stays cool.",
+      "voice_direction": "Playful warm cue to Bolt, then awe-filled physics contrast.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "bolt_capsule_wave",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.0, "gain_db": -9.5, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 1.6, "gain_db": -11.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "REENTRY SPEED", "value": "17,000 MPH" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b03_not_friction",
+      "act": "mechanism",
+      "narration_text": "Most people blame air friction. Actually, extreme air compression ahead of the hull creates that fire.",
+      "voice_direction": "Sharp myth-busting clarity on extreme air compression.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "air_compression_shock",
+      "sfx_cues": [
+        { "name": "hydraulic_hiss", "offset_s": 0.3, "gain_db": -8.5, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.4, "gain_db": -11.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "HEAT SOURCE", "value": "AIR COMPRESSION" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b04_pointy_vs_blunt",
+      "act": "mechanism",
+      "narration_text": "A pointy nose would slice straight into the shockwave and melt. So engineers flip it backward.",
+      "voice_direction": "Clever paradox reveal; emphasize flip it backward.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "sharp_vs_blunt_nose",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.2, "gain_db": -9.5, "pan": 0.0 },
+        { "name": "metal_clank", "offset_s": 2.4, "gain_db": -8.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "AERODYNAMICS", "value": "BLUNT BELLY" },
+      "pause_after_s": 0.22
+    },
+    {
+      "id": "b05_detached_bow_shock",
+      "act": "mechanism",
+      "narration_text": "Entering blunt-end first creates a detached bow shock that deflects ninety-eight percent of the heat.",
+      "voice_direction": "Analytical awe on detached bow shock and ninety-eight percent.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "detached_bow_shock",
+      "sfx_cues": [
+        { "name": "pressure_rumble", "offset_s": 0.3, "gain_db": -8.0, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.5, "gain_db": -10.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "BOW SHOCK", "value": "98% DEFLECTED" },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b06_bolt_relax_gap",
+      "act": "escalation",
+      "narration_text": "Relax, Bolt — that curve traps a dead-air buffer ahead of you. Still, two percent is brutal.",
+      "voice_direction": "Reassuring banter to Bolt, then tight pivot on two percent is brutal.",
+      "camera_preset": "MACRO_CUTAWAY",
+      "scene_key": "bolt_bow_shock_gap",
+      "sfx_cues": [
+        { "name": "alarm_ping", "offset_s": 2.0, "gain_db": -9.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "REMAINING HEAT", "value": "3,000+ °F" },
+      "pause_after_s": 0.24
+    },
+    {
+      "id": "b07_ablative_shield",
+      "act": "escalation",
+      "narration_text": "For the rest, the capsule wears a three-inch resin honeycomb shield built to burn away on purpose.",
+      "voice_direction": "Fascinated clarity on burn away on purpose.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "ablative_layers_cutaway",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.2, "gain_db": -9.5, "pan": 0.0 },
+        { "name": "hydraulic_hiss", "offset_s": 1.8, "gain_db": -8.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "SHIELD TYPE", "value": "ABLATIVE CHAR" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b08_char_vapor_carry",
+      "act": "climax",
+      "narration_text": "Outer resin chars into glowing gas, physically carrying heat away while cool layers insulate inside.",
+      "voice_direction": "Peak energetic physics clarity; punch on carrying heat away.",
+      "camera_preset": "IMPACT_CLOSEUP",
+      "scene_key": "ablative_gas_shedding",
+      "sfx_cues": [
+        { "name": "pressure_rumble", "offset_s": 0.2, "gain_db": -6.0, "pan": 0.0 },
+        { "name": "hydraulic_hiss", "offset_s": 1.6, "gain_db": -6.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "COOLING", "value": "SACRIFICIAL GAS" },
+      "pause_after_s": 0.26
+    },
+    {
+      "id": "b09_temp_comparison",
+      "act": "climax",
+      "narration_text": "Outside hits five thousand degrees Fahrenheit. Just three inches away inside Bolt's cabin, it stays seventy-two.",
+      "voice_direction": "Dramatic contrast; crisp punch on seventy-two.",
+      "camera_preset": "EXPLODED_BLUEPRINT",
+      "scene_key": "temp_gradient_bars",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.4, "gain_db": -10.5, "pan": -0.2 },
+        { "name": "ui_tick", "offset_s": 2.4, "gain_db": -10.5, "pan": 0.2 }
+      ],
+      "callout": { "label": "CABIN TEMP", "value": "72°F SAFE" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b10_chutes_deploy",
+      "act": "climax",
+      "narration_text": "Once air brakes away ninety-nine percent of orbital speed, three giant parachutes bloom open.",
+      "voice_direction": "Triumphant soaring release on three giant parachutes bloom open.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "triple_chute_descent",
+      "sfx_cues": [
+        { "name": "whoosh_cut", "offset_s": 0.8, "gain_db": -6.0, "pan": 0.0 },
+        { "name": "wedge_lock_slam", "offset_s": 1.6, "gain_db": -7.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "FINAL BRAKE", "value": "3X PARACHUTES" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b11_splashdown_bolt",
+      "act": "climax",
+      "narration_text": "Welcome home, Bolt. From a blazing plasma fireball to a gentle seventeen mile per hour splashdown.",
+      "voice_direction": "Warm celebratory sign-off to Bolt.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "bolt_ocean_splashdown",
+      "sfx_cues": [
+        { "name": "hydraulic_hiss", "offset_s": 0.6, "gain_db": -8.0, "pan": 0.0 },
+        { "name": "ui_tick", "offset_s": 2.4, "gain_db": -10.5, "pan": 0.0 }
+      ],
+      "callout": { "label": "SPLASHDOWN", "value": "17 MPH SAFE" },
+      "pause_after_s": 0.25
+    },
+    {
+      "id": "b12_cta",
+      "act": "cta",
+      "narration_text": "Would you ride a capsule back from orbit? Comment YES or NO.",
+      "voice_direction": "Snappy conversational challenge; crisp lift on YES or NO.",
+      "camera_preset": "ISO_WIDE",
+      "scene_key": "verdict_cta_card",
+      "sfx_cues": [
+        { "name": "ui_tick", "offset_s": 0.1, "gain_db": -10.0, "pan": 0.0 }
+      ],
+      "callout": { "label": "YOUR CALL", "value": "YES OR NO" },
+      "pause_after_s": 0.35
+    }
+  ]
+}

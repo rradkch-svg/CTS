@@ -1,0 +1,93 @@
+{
+  "total_duration_s": 76.63,
+  "sample_rate_hz": 48000,
+  "beats": [
+    {
+      "id": "b01_hook",
+      "start_s": 0.05,
+      "end_s": 6.6,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b01_hook_543f2cbb0915.wav",
+      "narration_text": "In nineteen eighty-three, tiny water bubbles chewed a forty-foot cavern straight through solid concrete."
+    },
+    {
+      "id": "b02_bolt_wave_dam",
+      "start_s": 6.78,
+      "end_s": 13.29,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b02_bolt_wave_dam_8bdb0e5ec65c.wav",
+      "narration_text": "Hey Bolt, give us a wave before we open the floodgates. Water should never carve rock this fast."
+    },
+    {
+      "id": "b03_bernoulli_drop",
+      "start_s": 13.51,
+      "end_s": 20.04,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b03_bernoulli_drop_03edc3dfd69a.wav",
+      "narration_text": "When floodwater rockets down a spillway at one hundred miles per hour, one tiny bump changes everything."
+    },
+    {
+      "id": "b04_cold_boiling",
+      "start_s": 20.26,
+      "end_s": 26.78,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b04_cold_boiling_3938353a6692.wav",
+      "narration_text": "Speeding water lifts off, dropping local pressure so low that freezing water actually boils into bubbles."
+    },
+    {
+      "id": "b05_bubble_collapse",
+      "start_s": 27.0,
+      "end_s": 33.53,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b05_bubble_collapse_919c6ee8a6b3.wav",
+      "narration_text": "Milliseconds downstream, pressure returns and crushes every bubble in a violent microscopic implosion."
+    },
+    {
+      "id": "b06_microjet_punch",
+      "start_s": 33.77,
+      "end_s": 39.27,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b06_microjet_punch_7639c1ba49ff.wav",
+      "narration_text": "Each bubble fires a needle-thin water jet at over one hundred thousand pounds per square inch."
+    },
+    {
+      "id": "b07_pitting_snowball",
+      "start_s": 39.52,
+      "end_s": 45.94,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b07_pitting_snowball_58c9f1283cf0.wav",
+      "narration_text": "Watch out, Bolt. Millions of micro-hammers dig a pit, triggering even bigger bubbles in a chain reaction."
+    },
+    {
+      "id": "b08_concrete_cavern",
+      "start_s": 46.19,
+      "end_s": 52.95,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b08_concrete_cavern_34f30339bae0.wav",
+      "narration_text": "Within hours, roaring water ripped away steel rebar and carved a four-story crater inside the tunnel."
+    },
+    {
+      "id": "b09_aeration_ramp_fix",
+      "start_s": 53.23,
+      "end_s": 58.68,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b09_aeration_ramp_fix_2ef92e83c255.wav",
+      "narration_text": "The fix sounds crazy: angled steel ramps launch water cleanly off the concrete floor."
+    },
+    {
+      "id": "b10_air_cushion_bolt",
+      "start_s": 58.92,
+      "end_s": 65.56,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b10_air_cushion_bolt_64e816f3d5b0.wav",
+      "narration_text": "Nice move, Bolt. That slot sucks air underneath, creating a soft cushion that absorbs every shockwave."
+    },
+    {
+      "id": "b11_pressure_bars",
+      "start_s": 65.81,
+      "end_s": 71.6,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b11_pressure_bars_e395a54dda3f.wav",
+      "narration_text": "Just eight percent air drops concrete erosion to near zero, protecting mega-dams for decades."
+    },
+    {
+      "id": "b12_cta",
+      "start_s": 71.85,
+      "end_s": 75.53,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/cache/tts/b12_cta_c599aeeac44d.wav",
+      "narration_text": "Would you stand below a full spillway? Comment YES or NO."
+    }
+  ],
+  "narration_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/narration_clean.wav",
+  "master_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/audio_master.wav",
+  "envelope_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep08_dam_spillway_cavitation/narration_envelope.npy"
+}
