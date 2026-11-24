@@ -139,6 +139,7 @@ def add_crash_test_dummy(
     t: float = 0.0,
     tilt_z: float = 0.0,
     ground_shadow: bool = True,
+    show_legs: bool = True,
 ) -> None:
     """Add sculpted studio 3D Crash-Test Dummy ('UNIT-01' v2) with clearcoat shading & LED bloom."""
     R = rot_matrix(0.0, yaw, tilt_z)
@@ -172,10 +173,10 @@ def add_crash_test_dummy(
         r_kn = (0.32, -0.40 + bob, 0.38)
         r_ft = (0.30, -0.88 + bob - wave * 0.6, 0.14)
     elif pose == "brace_impact":
-        l_el = (-0.52, 0.84 + bob, 0.35)
-        l_ha = (-0.22, 1.16 + bob, 0.42)
-        r_el = (0.52, 0.84 + bob, 0.35)
-        r_ha = (0.22, 1.16 + bob, 0.42)
+        l_el = (-0.64, 0.80 + bob, 0.26)
+        l_ha = (-0.48, 1.10 + bob, 0.32)
+        r_el = (0.64, 0.80 + bob, 0.26)
+        r_ha = (0.48, 1.10 + bob, 0.32)
         l_kn = (-0.28, -0.46 + bob, 0.34)
         l_ft = (-0.26, -0.98 + bob, 0.02)
         r_kn = (0.28, -0.46 + bob, 0.34)
@@ -254,7 +255,7 @@ def add_crash_test_dummy(
         r_ft = (0.24, -1.16, 0.0)
 
     # Grounded soft ambient-occlusion contact shadow beneath boots
-    if ground_shadow and pose not in ("panic_freefall", "pilot_sub"):
+    if ground_shadow and show_legs and pose not in ("panic_freefall", "pilot_sub"):
         scene.add_ground_shadow(_pt(0.0, -1.24, 0.0), 0.62 * scale, 0.55 * scale, opacity=0.52)
 
     # Sculpted 3D Torso, Chrome Belt Ring & Pelvis
@@ -293,9 +294,10 @@ def add_crash_test_dummy(
         scene.add_sphere(_pt(*ha), 0.115 * scale, DUMMY_JOINT, metallic=0.62)
 
     # Articulated 3D Legs & Industrial Boots
-    for hip, kn, ft in ((l_hip, l_kn, l_ft), (r_hip, r_kn, r_ft)):
-        scene.add_sphere(_pt(*hip), 0.135 * scale, DUMMY_JOINT, metallic=0.68)
-        scene.add_capsule(_pt(*hip), _pt(*kn), 0.135 * scale, 0.112 * scale, DUMMY_SHELL, metallic=0.42, segments=12)
-        scene.add_sphere(_pt(*kn), 0.118 * scale, DUMMY_JOINT, metallic=0.68)
-        scene.add_capsule(_pt(*kn), _pt(*ft), 0.105 * scale, 0.092 * scale, DUMMY_SHELL, metallic=0.42, segments=12)
-        scene.add_sphere(_pt(ft[0], ft[1] - 0.04, ft[2] + 0.09), 0.13 * scale, DUMMY_JOINT, metallic=0.65, squash_y=0.70)
+    if show_legs:
+        for hip, kn, ft in ((l_hip, l_kn, l_ft), (r_hip, r_kn, r_ft)):
+            scene.add_sphere(_pt(*hip), 0.135 * scale, DUMMY_JOINT, metallic=0.68)
+            scene.add_capsule(_pt(*hip), _pt(*kn), 0.135 * scale, 0.112 * scale, DUMMY_SHELL, metallic=0.42, segments=12)
+            scene.add_sphere(_pt(*kn), 0.118 * scale, DUMMY_JOINT, metallic=0.68)
+            scene.add_capsule(_pt(*kn), _pt(*ft), 0.105 * scale, 0.092 * scale, DUMMY_SHELL, metallic=0.42, segments=12)
+            scene.add_sphere(_pt(ft[0], ft[1] - 0.04, ft[2] + 0.09), 0.13 * scale, DUMMY_JOINT, metallic=0.65, squash_y=0.70)

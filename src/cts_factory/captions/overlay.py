@@ -47,26 +47,28 @@ def draw_caption(
     tokens = [w.text.upper() for w in block.words]
 
     # Pick largest crisp font size that fits cleanly inside max_width (<= 820px) and safe height
-    font_size = 64
+    font_size = 56
     font = _load_font(font_path, font_size)
-    space_w = 18
-    while font_size >= 38:
+    space_w = 20
+    while font_size >= 36:
         font = _load_font(font_path, font_size)
-        space_w = max(12, int(font_size * 0.28))
-        widths = [draw.textbbox((0, 0), tok, font=font, stroke_width=6)[2] for tok in tokens]
+        space_w = max(16, int(font_size * 0.36))
+        widths = [draw.textbbox((0, 0), tok, font=font, stroke_width=5)[2] for tok in tokens]
         total_w = sum(widths) + space_w * max(0, len(tokens) - 1)
-        if total_w <= max_width - 12:
+        if total_w <= max_width - 20:
             break
         font_size -= 4
 
-    widths = [draw.textbbox((0, 0), tok, font=font, stroke_width=6)[2] for tok in tokens]
+    widths = [draw.textbbox((0, 0), tok, font=font, stroke_width=5)[2] for tok in tokens]
     total_w = sum(widths) + space_w * max(0, len(tokens) - 1)
-    sample_box = draw.textbbox((0, 0), "Ag", font=font, stroke_width=6)
+    sample_box = draw.textbbox((0, 0), "Ag", font=font, stroke_width=5)
     line_h = sample_box[3] - sample_box[1]
 
-    # Clamp X strictly inside [sz.x_min, sz.x_max]
-    x = max(sz.x_min, min(sz.x_max - total_w, center_x - total_w // 2))
-    y_base = max(sz.y_min + 4, min(sz.y_max - line_h - 4, center_y - line_h // 2))
+    # Keep captions strictly inside [sz.x_min, min(sz.x_max, 860)] and cleanly near top of caption safe band (<= 1420)
+    safe_x_max = min(sz.x_max, 875)
+    safe_cx = (sz.x_min + safe_x_max) // 2
+    x = max(sz.x_min, min(safe_x_max - total_w, safe_cx - total_w // 2))
+    y_base = max(sz.y_min + 2, min(1418 - line_h, sz.y_min + 12))
 
     # Determine which word is currently spoken (fallback to last word <= t)
     active_idx = 0

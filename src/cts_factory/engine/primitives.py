@@ -265,8 +265,11 @@ def draw_pressure_gauge(
     reading: str,
     palette: Palette,
     font_path: str,
+    invert_scale: bool = False,
 ) -> None:
-    """Draw a high-contrast engineering pressure/speed dial with live sweeping needle."""
+    """Draw a high-contrast engineering dial strictly inside safe zones with auto-fitted typography."""
+    # Strict TikTok/Reels/Shorts right-UI safe clamp (x_max <= 855, x_min >= 52)
+    cx = max(52.0 + radius + 8.0, min(855.0 - radius - 8.0, cx))
     v = clamp(value_0_to_1)
     draw.ellipse(
         [cx - radius - 6, cy - radius - 6, cx + radius + 6, cy + radius + 6],
@@ -280,33 +283,60 @@ def draw_pressure_gauge(
         outline=palette.steel_light,
         width=2,
     )
-    # Color arc segments (green -> amber -> crimson)
+    # Color arc segments (green -> amber -> crimson, or reversed if invert_scale)
     for seg_i in range(24):
         frac = seg_i / 24.0
         a = math.radians(140.0 + frac * 260.0)
-        col = palette.emerald if frac < 0.55 else (palette.amber if frac < 0.80 else palette.danger)
+        eff = (1.0 - frac) if invert_scale else frac
+        col = palette.emerald if eff < 0.55 else (palette.amber if eff < 0.80 else palette.danger)
         p_in = (cx + math.cos(a) * radius * 0.76, cy + math.sin(a) * radius * 0.76)
         p_out = (cx + math.cos(a) * radius * 0.90, cy + math.sin(a) * radius * 0.90)
         draw.line([p_in, p_out], fill=col, width=4)
 
-    # Needle
+    # Needle drawn BEFORE readout plate so needle never crosses over text!
     needle_ang = math.radians(140.0 + v * 260.0)
-    nx = cx + math.cos(needle_ang) * radius * 0.72
-    ny = cy + math.sin(needle_ang) * radius * 0.72
-    draw.line([(cx, cy), (nx, ny)], fill=palette.danger if v > 0.78 else palette.amber, width=5)
-    draw.ellipse([cx - 8, cy - 8, cx + 8, cy + 8], fill=palette.text_primary, outline=palette.ink, width=2)
+    nx = cx + math.cos(needle_ang) * radius * 0.70
+    ny = cy + math.sin(needle_ang) * radius * 0.70
+    eff_v = (1.0 - v) if invert_scale else v
+    needle_col = palette.danger if eff_v > 0.78 else (palette.emerald if eff_v < 0.45 else palette.amber)
+    draw.line([(cx, cy), (nx, ny)], fill=needle_col, width=5)
+    draw.ellipse([cx - 7, cy - 7, cx + 7, cy + 7], fill=palette.text_primary, outline=palette.ink, width=2)
 
-    f_lbl = load_font(font_path, max(16, int(radius * 0.19)))
-    f_val = load_font(font_path, max(20, int(radius * 0.26)))
+    # Crisp dark readout backing pill inside lower half of dial so text never collides with needle/ticks
+    max_txt_w = radius * 1.46
+    lbl_sz = max(12, int(radius * 0.17))
+    while lbl_sz > 11:
+        f_lbl = load_font(font_path, lbl_sz)
+        lb = draw.textbbox((0, 0), label, font=f_lbl)
+        if (lb[2] - lb[0]) <= max_txt_w:
+            break
+        lbl_sz -= 1
+    f_lbl = load_font(font_path, lbl_sz)
     lb = draw.textbbox((0, 0), label, font=f_lbl)
+
+    val_sz = max(14, int(radius * 0.23))
+    while val_sz > 12:
+        f_val = load_font(font_path, val_sz)
+        vb = draw.textbbox((0, 0), reading, font=f_val)
+        if (vb[2] - vb[0]) <= max_txt_w:
+            break
+        val_sz -= 1
+    f_val = load_font(font_path, val_sz)
     vb = draw.textbbox((0, 0), reading, font=f_val)
-    draw.text((cx - (lb[2] - lb[0]) / 2, cy + radius * 0.20), label, font=f_lbl, fill=palette.steel_light)
-    draw.text(
-        (cx - (vb[2] - vb[0]) / 2, cy + radius * 0.44),
-        reading,
-        font=f_val,
-        fill=palette.text_highlight if v > 0.75 else palette.cyan,
+
+    plate_w = min(radius * 1.62, max(lb[2] - lb[0], vb[2] - vb[0]) + 18)
+    plate_y0 = cy + radius * 0.16
+    plate_y1 = cy + radius * 0.76
+    draw.rounded_rectangle(
+        [cx - plate_w * 0.5, plate_y0, cx + plate_w * 0.5, plate_y1],
+        radius=8,
+        fill=(10, 18, 30),
+        outline=palette.steel_dark,
+        width=1,
     )
+    val_col = palette.emerald if invert_scale and v > 0.6 else (palette.text_highlight if eff_v > 0.72 else palette.cyan)
+    draw.text((cx - (lb[2] - lb[0]) / 2, plate_y0 + 5 - lb[1]), label, font=f_lbl, fill=palette.steel_light)
+    draw.text((cx - (vb[2] - vb[0]) / 2, plate_y0 + (plate_y1 - plate_y0) * 0.48 - vb[1]), reading, font=f_val, fill=val_col)
 
 
 def draw_comparison_bars(
@@ -320,8 +350,16 @@ def draw_comparison_bars(
     palette: Palette,
     font_path: str,
 ) -> None:
-    """Draw a sleek live comparison bar chart (e.g., 20 MS IMPLOSION vs 250 MS HUMAN NERVE)."""
-    p = clamp(progress)
+    """Draw a sleek live comparison bar chart strictly inside x <= 860 (TikTok/Reels/Shorts safe)."""
+    # Strict right safe-zone clamp so right-aligned numbers are NEVER hidden under platform UI!
+    max_x1 = 860.0
+    if x0 + width > max_x1:
+        width = min(width, max_x1 - max(72.0, x0))
+        if width < 520.0:
+            x0 = max(72.0, max_x1 - 540.0)
+            width = max_x1 - x0
+
+    p = clamp(max(0.45, progress))
     draw.rounded_rectangle(
         [x0, y0, x0 + width, y0 + height],
         radius=18,
@@ -329,34 +367,81 @@ def draw_comparison_bars(
         outline=palette.steel_mid,
         width=3,
     )
-    f_lbl = load_font(font_path, 26)
-    f_val = load_font(font_path, 30)
     n = max(1, len(items))
-    row_h = (height - 44) / n
+    row_h = (height - 40) / n
+    pad_x = 22
     for idx, (label, val_str, frac, color) in enumerate(items):
-        ry = y0 + 24 + idx * row_h
-        draw.text((x0 + 26, ry), label, font=f_lbl, fill=palette.text_primary)
+        ry = y0 + 20 + idx * row_h
+        # Auto-fit label & value fonts so they never collide on narrower safe-zone widths
+        f_lbl_sz = 24
+        f_val_sz = 26
+        while f_lbl_sz > 16:
+            f_lbl = load_font(font_path, f_lbl_sz)
+            f_val = load_font(font_path, f_val_sz)
+            lw = draw.textbbox((0, 0), label, font=f_lbl)[2]
+            vw = draw.textbbox((0, 0), val_str, font=f_val)[2]
+            if lw + vw + 24 <= width - pad_x * 2:
+                break
+            f_lbl_sz -= 2
+            f_val_sz = max(18, f_val_sz - 2)
+        f_lbl = load_font(font_path, f_lbl_sz)
+        f_val = load_font(font_path, f_val_sz)
+        draw.text((x0 + pad_x, ry), label, font=f_lbl, fill=palette.text_primary)
         vb = draw.textbbox((0, 0), val_str, font=f_val)
-        draw.text((x0 + width - 26 - (vb[2] - vb[0]), ry - 2), val_str, font=f_val, fill=color)
+        draw.text((x0 + width - pad_x - (vb[2] - vb[0]), ry - 1), val_str, font=f_val, fill=color)
 
-        bar_y = ry + 38
-        bar_h = min(38.0, row_h * 0.36)
-        bar_max_w = width - 52
+        bar_y = ry + 34
+        bar_h = min(34.0, row_h * 0.36)
+        bar_max_w = width - pad_x * 2
         draw.rounded_rectangle(
-            [x0 + 26, bar_y, x0 + 26 + bar_max_w, bar_y + bar_h],
+            [x0 + pad_x, bar_y, x0 + pad_x + bar_max_w, bar_y + bar_h],
             radius=8,
             fill=palette.bg_dark,
             outline=palette.steel_dark,
             width=2,
         )
-        fill_w = max(16.0, bar_max_w * clamp(frac) * p)
+        eff_frac = clamp(frac)
+        if eff_frac > 0.005:
+            fill_w = max(10.0, bar_max_w * eff_frac * p)
+            draw.rounded_rectangle(
+                [x0 + pad_x, bar_y, x0 + pad_x + fill_w, bar_y + bar_h],
+                radius=8,
+                fill=color,
+                outline=palette.ink,
+                width=2,
+            )
+
+
+def draw_cta_buttons(
+    draw: ImageDraw.ImageDraw,
+    t: float,
+    palette: Palette,
+    font_path: str,
+    by: int = 1140,
+    left_bx: int = 235,
+    right_bx: int = 720,
+    right_col: tuple[int, int, int] | None = None,
+) -> None:
+    """Draw YES / NO verdict pills strictly inside TikTok/Reels/Shorts safe zone (x <= 855)."""
+    pulse = 1.0 + 0.035 * math.sin(t * 7.0)
+    bw = int(116 * pulse)
+    bh = int(76 * pulse)
+    # Guarantee right edge <= 852
+    right_bx = min(right_bx, 852 - bw)
+    r_col = right_col or palette.amber
+    f = load_font(font_path, 42)
+    for label, bx, col in (("YES", left_bx, palette.cyan), ("NO", right_bx, r_col)):
         draw.rounded_rectangle(
-            [x0 + 26, bar_y, x0 + 26 + fill_w, bar_y + bar_h],
-            radius=8,
-            fill=color,
-            outline=palette.ink,
-            width=2,
+            [bx - bw, by, bx + bw, by + bh],
+            radius=18,
+            fill=palette.surface_panel,
+            outline=col,
+            width=5,
         )
+        bb = draw.textbbox((0, 0), label, font=f)
+        tw = bb[2] - bb[0]
+        th = bb[3] - bb[1]
+        draw.text((bx - tw / 2 - bb[0], by + (bh - th) / 2 - bb[1]), label, font=f, fill=col)
 
 
 def draw_top_hook(
@@ -373,35 +458,46 @@ def draw_top_hook(
     words = hook_text.strip().upper().split()
     if len(words) >= 4:
         mid = len(words) // 2
+        # Avoid splitting number from unit (e.g. "40" / "FT")
+        if mid > 1 and words[mid - 1].replace(",", "").replace(".", "").isdigit():
+            mid -= 1
         lines = [" ".join(words[:mid]), " ".join(words[mid:])]
     else:
         lines = [hook_text.strip().upper()]
 
-    # Fit strictly inside sz.width and sz.height
-    font_size = 86 if len(lines) == 1 else 74
-    while font_size >= 40:
+    font_size = 82 if len(lines) == 1 else 70
+    while font_size >= 38:
         font = load_font(font_path, font_size)
-        max_w = max(draw.textbbox((0, 0), ln, font=font, stroke_width=6)[2] for ln in lines)
-        line_h = draw.textbbox((0, 0), "Ag", font=font, stroke_width=6)[3]
-        total_h = line_h * len(lines) + (12 if len(lines) > 1 else 0)
-        if max_w <= sz.width - 16 and total_h <= sz.height - 10:
+        sp_w = max(18, int(font_size * 0.34))
+        max_w = max(
+            sum(draw.textbbox((0, 0), w, font=font, stroke_width=5)[2] for w in ln.split())
+            + sp_w * max(0, len(ln.split()) - 1)
+            for ln in lines
+        )
+        line_h = draw.textbbox((0, 0), "Ag", font=font, stroke_width=5)[3]
+        total_h = line_h * len(lines) + (14 if len(lines) > 1 else 0)
+        if max_w <= sz.width - 20 and total_h <= sz.height - 10:
             break
         font_size -= 4
 
     font = load_font(font_path, font_size)
-    line_h = draw.textbbox((0, 0), "Ag", font=font, stroke_width=6)[3]
-    gap = 12 if len(lines) > 1 else 0
+    sp_w = max(18, int(font_size * 0.34))
+    line_h = draw.textbbox((0, 0), "Ag", font=font, stroke_width=5)[3]
+    gap = 14 if len(lines) > 1 else 0
     total_h = line_h * len(lines) + gap
     y = sz.y_min + max(0, (sz.height - total_h) // 2)
     cx = (sz.x_min + sz.x_max) // 2
 
     for idx, ln in enumerate(lines):
-        bbox = draw.textbbox((0, 0), ln, font=font, stroke_width=6)
-        tw = bbox[2] - bbox[0]
+        toks = ln.split()
+        ws = [draw.textbbox((0, 0), w, font=font, stroke_width=5)[2] for w in toks]
+        tw = sum(ws) + sp_w * max(0, len(toks) - 1)
         x = max(sz.x_min, min(sz.x_max - tw, cx - tw // 2))
         fill = palette.text_highlight if idx == len(lines) - 1 else palette.text_primary
-        draw.text((x + 4, y + 5), ln, font=font, fill=palette.ink, stroke_width=7, stroke_fill=palette.ink)
-        draw.text((x, y), ln, font=font, fill=fill, stroke_width=6, stroke_fill=palette.ink)
+        for w, ww in zip(toks, ws):
+            draw.text((x + 4, y + 5), w, font=font, fill=palette.ink, stroke_width=6, stroke_fill=palette.ink)
+            draw.text((x, y), w, font=font, fill=fill, stroke_width=5, stroke_fill=palette.ink)
+            x += ww + sp_w
         y += line_h + gap
 
 
@@ -414,37 +510,35 @@ def draw_hud_callout(
     progress: float = 1.0,
     repo_root: Path | None = None,
 ) -> None:
-    """Draw sleek dark-navy telemetry pill strictly inside x=90..930, y=490..640 (Beats 2-12 only)."""
+    """Draw sleek dark-navy telemetry pill strictly inside x=90..850, y=490..610 (Beats 2-12 only)."""
     sz = brand.visual_style.safe_zones.callout_hud
     font_lbl_path = str(brand.visual_style.resolve_font_path("secondary", repo_root=repo_root))
     font_val_path = str(brand.visual_style.resolve_font_path("primary", repo_root=repo_root))
 
-    f_lbl = load_font(font_lbl_path, 22)
-    f_val = load_font(font_val_path, 38)
+    f_lbl = load_font(font_lbl_path, 21)
+    f_val = load_font(font_val_path, 35)
 
     lbl = callout.label.upper()
     val = callout.value.upper()
     lb = draw.textbbox((0, 0), lbl, font=f_lbl)
     vb = draw.textbbox((0, 0), val, font=f_val)
     inner_w = max(lb[2] - lb[0], vb[2] - vb[0])
-    box_w = min(sz.width - 10, max(280, inner_w + 68))
-    box_h = min(sz.height - 12, 114)
+    box_w = min(sz.width - 10, max(260, inner_w + 64))
+    box_h = min(sz.height - 20, 106)
 
-    # Slide-in settle over first 0.25s of beat
     slide = int((1.0 - clamp(progress * 4.0)) * -22)
     x0 = sz.x_min + slide
-    y0 = sz.y_min + (sz.height - box_h) // 2
-    x1 = min(sz.x_max, x0 + box_w)
+    y0 = sz.y_min + 6
+    x1 = min(min(sz.x_max, 855), x0 + box_w)
     y1 = y0 + box_h
 
     accent = accent_color or palette.cyan
     draw.rounded_rectangle([x0 + 4, y0 + 5, x1 + 4, y1 + 5], radius=16, fill=(4, 7, 14))
     draw.rounded_rectangle([x0, y0, x1, y1], radius=16, fill=palette.surface_panel, outline=accent, width=3)
-    # Left glowing telemetry bar
-    draw.rounded_rectangle([x0 + 12, y0 + 16, x0 + 22, y1 - 16], radius=4, fill=accent)
+    draw.rounded_rectangle([x0 + 12, y0 + 14, x0 + 22, y1 - 14], radius=4, fill=accent)
 
-    draw.text((x0 + 38, y0 + 16), lbl, font=f_lbl, fill=palette.steel_light)
-    draw.text((x0 + 38, y0 + 48), val, font=f_val, fill=palette.text_highlight)
+    draw.text((x0 + 36, y0 + 14), lbl, font=f_lbl, fill=palette.steel_light)
+    draw.text((x0 + 36, y0 + 44), val, font=f_val, fill=palette.text_highlight)
 
 
 def draw_brand_header(
@@ -453,14 +547,14 @@ def draw_brand_header(
     palette: Palette,
     repo_root: Path | None = None,
 ) -> None:
-    """Subtle non-intrusive top engineering header above y=230 (never collides with hook/HUD)."""
+    """Crisp non-intrusive top engineering header above y=230."""
     font_path = str(brand.visual_style.resolve_font_path("secondary", repo_root=repo_root))
-    f = load_font(font_path, 22)
+    f = load_font(font_path, 23)
     tag = f"{brand.channel_name.upper()}  //  CAD TELEMETRY"
     bbox = draw.textbbox((0, 0), tag, font=f)
     tw = bbox[2] - bbox[0]
     x = (1080 - tw) // 2
-    y = 118
-    draw.text((x, y), tag, font=f, fill=palette.steel_mid)
-    draw.line([(x - 32, y + 14), (x - 10, y + 14)], fill=palette.cyan, width=2)
-    draw.line([(x + tw + 10, y + 14), (x + tw + 32, y + 14)], fill=palette.cyan, width=2)
+    y = 116
+    draw.text((x, y), tag, font=f, fill=(166, 188, 214))
+    draw.line([(x - 36, y + 14), (x - 12, y + 14)], fill=palette.cyan, width=3)
+    draw.line([(x + tw + 12, y + 14), (x + tw + 36, y + 14)], fill=palette.cyan, width=3)

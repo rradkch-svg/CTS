@@ -124,11 +124,26 @@ def render_episode_video(
             if bt.id == script.beats[0].id:
                 draw_top_hook(draw, script.hook_text, brand, palette, repo_root=repo_root)
             elif beat_cfg is not None and beat_cfg.callout is not None:
-                accent = (
-                    palette.danger
-                    if beat_cfg.act in ("escalation", "climax")
-                    else (palette.emerald if beat_cfg.act == "cta" else palette.cyan)
+                tag_up = f"{beat_cfg.callout.label} {beat_cfg.callout.value}".upper()
+                safe_tokens = (
+                    "SAFE", "PASSED", "PROTECTED", "FLYABLE", "CUSHION", "AIR MIX",
+                    "SMART FIX", "MODERN FIX", "UPGRADE", "LIMITED SLIP", "PASSIVE",
+                    "PARACHUTE", "SPLASHDOWN", "KEVLAR", "CATCH", "CONSERVED",
+                    "OTIS", "150+", "RE-CHECK", "NEW RULE", "NEAR ZERO", "ZERO FRICTION",
+                    "ZERO POWER", "SPRING CLAMP", "IMPOSSIBLE", "50/50", "UNIFORM",
                 )
+                danger_tokens = (
+                    "FAILURE", "CRATER", "FLAW", "TRAP", "BLACKOUT", "WORST",
+                    "BLADE-OFF", "200%", "PEEL", "SNAPPED", "IMPLOSION", "SPIKE",
+                    "ZIPPER", "RUNAWAY", "45 DEG", "45°", "3,000+", "DAMAGE", "STUCK",
+                    "DELAMINATION", "DIMPLE", "BUCKLING", "0.02", "400 TONS", "OVERSPEED",
+                )
+                if beat_cfg.act == "cta" or any(tok in tag_up for tok in safe_tokens):
+                    accent = palette.emerald
+                elif beat_cfg.act in ("escalation", "climax") or any(tok in tag_up for tok in danger_tokens):
+                    accent = palette.danger
+                else:
+                    accent = palette.cyan
                 draw_hud_callout(
                     draw,
                     beat_cfg.callout,

@@ -49,6 +49,21 @@ class Camera3D:
     cy_offset: float = 0.0
 
     def __post_init__(self) -> None:
+        self._cached_eye: tuple[float, float, float] | None = None
+        self._cached_target: tuple[float, float, float] | None = None
+        self._cached_fov: float | None = None
+        self._sync_camera()
+
+    def _sync_camera(self) -> None:
+        if (
+            self._cached_eye == self.eye
+            and self._cached_target == self.target
+            and self._cached_fov == self.fov_deg
+        ):
+            return
+        self._cached_eye = self.eye
+        self._cached_target = self.target
+        self._cached_fov = self.fov_deg
         self._eye = np.array(self.eye, dtype=np.float32)
         self._target = np.array(self.target, dtype=np.float32)
         forward = _normalize(self._target - self._eye)
@@ -58,6 +73,7 @@ class Camera3D:
         self._focal = (self.width * 0.5) / math.tan(math.radians(self.fov_deg * 0.5))
 
     def world_to_cam(self, pts: np.ndarray) -> np.ndarray:
+        self._sync_camera()
         return (pts - self._eye[None, :]) @ self._R.T
 
     def project(self, cam_pts: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -304,6 +320,7 @@ class Scene3D:
         rgb: tuple[int, int, int],
         width: int = 2,
         bloom: bool = False,
+        depth_bias: float = 0.0,
     ) -> None:
         pts = np.array([p0, p1], dtype=np.float32)
         cam_pts = self.cam.world_to_cam(pts)
@@ -313,7 +330,7 @@ class Scene3D:
         bgr = (rgb[2], rgb[1], rgb[0])
         pt0 = (int(round(uv[0, 0])), int(round(uv[0, 1])))
         pt1 = (int(round(uv[1, 0])), int(round(uv[1, 1])))
-        self._items.append(_RenderItem(float(np.mean(z)), "line", (pt0, pt1, bgr, width)))
+        self._items.append(_RenderItem(float(np.mean(z)) + depth_bias, "line", (pt0, pt1, bgr, width)))
         if bloom:
             self._bloom_items.append(("line", (pt0, pt1, bgr, width + 3)))
 
@@ -352,7 +369,7 @@ class Scene3D:
             _RenderItem(z + depth_bias, "sphere", (u, v, pr, pr * squash_y, rgb, metallic, rim_rgb, emissive))
         )
         if bloom or emissive >= 0.45:
-            self._bloom_items.append(("circle", (int(round(u)), int(round(v)), max(4, int(round(pr * 0.95))), (rgb[2], rgb[1], rgb[0]), max(0.4, emissive))))
+            self._bloom_items.append(("circle", (int(round(u)), int(round(v)), max(4, int(round(pr * 0.92))), (rgb[2], rgb[1], rgb[0]), max(0.35, emissive * 0.85))))
         return (u, v, pr)
 
     def add_capsule(
@@ -364,9 +381,9 @@ class Scene3D:
         rgb: tuple[int, int, int],
         metallic: float = 0.38,
         rim_rgb: tuple[int, int, int] = (80, 220, 255),
-        segments: int = 14,
+        segments: int = 16,
     ) -> None:
-        """Silky-smooth 22-segment Phong-lit tapered 3D capsule with rounded clearcoat caps."""
+        """Silky-smooth multi-segment Phong-lit tapered 3D capsule with rounded clearcoat caps."""
         self.add_cylinder(p0, p1, r0, r1, rgb, segments=segments, metallic=metallic, caps=False, rim_rgb=rim_rgb, outline_w=0)
         self.add_sphere(p0, r0 * 0.995, rgb, metallic=metallic, rim_rgb=rim_rgb)
         self.add_sphere(p1, r1 * 0.995, rgb, metallic=metallic, rim_rgb=rim_rgb)
@@ -404,7 +421,10 @@ class Scene3D:
             (0, 4, 7, 3),  # -X
             (1, 2, 6, 5),  # +X
         )
-        use_tex = None if emissive >= 0.45 else texture
+        eff_tex = texture
+        if eff_tex == "brushed_steel" and metallic < 0.25:
+            eff_tex = "concrete"
+        use_tex = None if emissive >= 0.45 else eff_tex
         c_cam = self.cam.world_to_cam(np.array([center], dtype=np.float32))[0]
         w_cam = self.cam.world_to_cam(w_verts)
         for f in faces:
@@ -551,6 +571,37 @@ class Scene3D:
         self.add_cylinder(tuple(a.tolist()), tuple(mid.tolist()), shaft_r, shaft_r, rgb, segments=16, metallic=0.25, emissive=0.52, caps=True, bloom=True)
         self.add_cylinder(tuple(mid.tolist()), tuple(b.tolist()), head_r, 0.004, rgb, segments=18, metallic=0.25, emissive=0.62, caps=True, bloom=True)
 
+    def add_coil_spring(
+        self,
+        p0: tuple[float, float, float],
+        p1: tuple[float, float, float],
+        coil_radius: float = 0.16,
+        wire_radius: float = 0.032,
+        turns: int = 5,
+        rgb: tuple[int, int, int] = (176, 194, 216),
+        metallic: float = 0.78,
+    ) -> None:
+        """True 3D helical steel coil spring connecting p0 to p1."""
+        a = np.array(p0, dtype=np.float32)
+        b = np.array(p1, dtype=np.float32)
+        axis = b - a
+        length = float(np.linalg.norm(axis))
+        if length < 1e-4:
+            return
+        w_ax = axis / length
+        ref = np.array([0.0, 1.0, 0.0], dtype=np.float32) if abs(w_ax[1]) < 0.9 else np.array([1.0, 0.0, 0.0], dtype=np.float32)
+        u_ax = _normalize(np.cross(ref, w_ax))
+        v_ax = _normalize(np.cross(w_ax, u_ax))
+        steps = max(12, turns * 8)
+        pts = []
+        for s in range(steps + 1):
+            frac = s / float(steps)
+            ang = frac * turns * 2.0 * math.pi
+            pt = a + axis * frac + coil_radius * (math.cos(ang) * u_ax + math.sin(ang) * v_ax)
+            pts.append(tuple(pt.tolist()))
+        for q0, q1 in zip(pts[:-1], pts[1:]):
+            self.add_cylinder(q0, q1, wire_radius, wire_radius, rgb, segments=6, metallic=metallic, caps=False)
+
     def add_floor_grid(
         self,
         y_level: float = -2.0,
@@ -561,30 +612,28 @@ class Scene3D:
         particles: bool = True,
         underwater: bool = False,
     ) -> None:
-        """Atmospheric 3D perspective lab floor grid + floating 3D bokeh/dust/underwater particles."""
+        """Atmospheric 3D perspective lab floor grid (strictly behind foreground geometry) + subtle bokeh."""
         n = int(span / step)
         for i in range(-n, n + 1):
             coord = i * step
-            # Fade outer lines softly into background mist
-            fade = max(0.28, 1.0 - abs(coord) / (span + 1.0))
+            fade = max(0.24, 1.0 - abs(coord) / (span + 1.0))
             col = (int(rgb[0] * fade), int(rgb[1] * fade), int(rgb[2] * fade))
-            self.add_line_3d((coord, y_level, -span), (coord, y_level, span), col, width=2)
-            self.add_line_3d((-span, y_level, coord), (span, y_level, coord), col, width=2)
+            self.add_line_3d((coord, y_level, -span), (coord, y_level, span), col, width=2, depth_bias=50.0)
+            self.add_line_3d((-span, y_level, coord), (span, y_level, coord), col, width=2, depth_bias=50.0)
 
         if particles:
-            pcol_bgr = (255, 230, 120) if underwater else (255, 215, 180)
-            for i in range(14):
-                px = math.sin(i * 4.17 + 0.5) * 3.4
-                py_base = -1.8 + ((i * 0.43 + t * (0.42 if underwater else 0.14)) % 4.6)
-                pz = -2.2 + ((i * 1.31) % 3.8)
+            pcol_bgr = (210, 195, 115) if underwater else (185, 165, 145)
+            for i in range(10):
+                px = math.sin(i * 4.17 + 0.5) * 2.35
+                py_base = -1.6 + ((i * 0.47 + t * (0.38 if underwater else 0.12)) % 4.2)
+                pz = -2.6 + ((i * 1.11) % 2.4)
                 u, v, z, sc = self.cam.project_point((px, py_base, pz))
-                if z > 0.4:
-                    pr = max(2, int(round((0.024 + (i % 3) * 0.011) * sc)))
+                if z > 1.2 and 80 < u < self.cam.width - 140:
+                    pr = max(2, min(6, int(round((0.014 + (i % 2) * 0.006) * sc))))
                     iu, iv = int(round(u)), int(round(v))
                     self.add_custom_2d(
-                        z,
+                        z + 20.0,
                         lambda c, _u=iu, _v=iv, _r=pr, _col=pcol_bgr: cv2.circle(c, (_u, _v), _r, _col, -1, lineType=cv2.LINE_AA),
-                        bloom_fn=lambda b, _u=iu // 4, _v=iv // 4, _r=max(1, pr // 3), _col=pcol_bgr: cv2.circle(b, (_u, _v), _r, _col, -1, lineType=cv2.LINE_AA),
                     )
 
     def add_custom_2d(self, depth_z: float, fn: Callable[[np.ndarray], None], bloom_fn: Callable[[np.ndarray], None] | None = None) -> None:
@@ -647,7 +696,7 @@ class Scene3D:
             elif item.kind == "custom":
                 item.payload[0](canvas)
 
-        # --- Studio Post-Processing: Quarter-Res Multi-Scale Optical Bloom (ultra fast!) ---
+        # --- Studio Post-Processing: Controlled Quarter-Res Optical Bloom (crisp, zero whiteout!) ---
         if self._bloom_items:
             H, W = canvas.shape[:2]
             bw, bh = max(1, W // 4), max(1, H // 4)
@@ -668,9 +717,9 @@ class Scene3D:
                 elif bkind == "custom":
                     bpay[0](bloom_buf)
 
-            glow_tight = cv2.GaussianBlur(bloom_buf, (15, 15), 0)
-            glow_wide = cv2.GaussianBlur(bloom_buf, (39, 39), 0)
-            glow_mix = cv2.addWeighted(glow_tight, 0.55, glow_wide, 0.55, 0.0)
+            glow_tight = cv2.GaussianBlur(bloom_buf, (13, 13), 0)
+            glow_wide = cv2.GaussianBlur(bloom_buf, (31, 31), 0)
+            glow_mix = cv2.addWeighted(glow_tight, 0.36, glow_wide, 0.32, 0.0)
             glow_full = cv2.resize(glow_mix, (W, H), interpolation=cv2.INTER_LINEAR)
             canvas = cv2.add(canvas, glow_full)
 

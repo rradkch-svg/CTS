@@ -1,4 +1,4 @@
-"""Episode 07: How a Jet Engine SURVIVES Swallowing a Bird — True 3D Turbofan + BOLT's Yellow Mini-Jet."""
+"""Episode 07: How a Jet Engine SURVIVES Swallowing a Bird — Upgraded True 3D Turbofan + BOLT's Yellow Mini-Jet."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ from cts_factory.engine.dummy import add_crash_test_dummy
 from cts_factory.engine.materials import Palette, build_stage_background, lerp_color
 from cts_factory.engine.primitives import (
     draw_comparison_bars,
+    draw_cta_buttons,
     draw_pressure_gauge,
     draw_sparks,
     load_font,
@@ -22,14 +23,14 @@ from cts_factory.engine.renderer3d import Camera3D, Scene3D, rot_matrix
 from cts_factory.episodes.base import EpisodeScene, register_scene
 
 TITANIUM_LIGHT = (196, 212, 232)
-TITANIUM_MID = (122, 142, 170)
+TITANIUM_MID = (124, 144, 172)
 TITANIUM_DARK = (54, 68, 92)
 CARBON_DARK = (34, 44, 62)
 JET_YELLOW = (255, 206, 36)
 JET_YELLOW_DARK = (224, 152, 22)
 JET_NAVY = (24, 38, 60)
 GLASS_BLUE = (42, 168, 220)
-KEVLAR_GOLD = (238, 186, 62)
+KEVLAR_GOLD = (232, 182, 58)
 CORE_ORANGE = (255, 118, 28)
 AMBER = (255, 146, 28)
 CYAN = (0, 212, 255)
@@ -38,44 +39,47 @@ EMERALD = (46, 229, 139)
 
 
 def _build_sky_backdrop_bgr(w: int, h: int, horizon_y: int = 1280) -> np.ndarray:
-    """Crisp open-air aerospace twilight sky + warm golden horizon glow + distant cloud deck (BGR)."""
+    """Smooth twilight aerospace sky with soft feathered horizon and blurred cloud layer (BGR)."""
     ys = np.linspace(0.0, 1.0, h, dtype=np.float32)[:, None]
     xs = np.linspace(-1.0, 1.0, w, dtype=np.float32)[None, :]
     hy = horizon_y / float(h)
 
-    img = np.zeros((h, w, 3), dtype=np.float32)
-    sky_mask = (ys < hy).astype(np.float32)
+    # Smooth continuous atmospheric blend across horizon (no hard razor edge!)
+    below = 1.0 / (1.0 + np.exp(-(ys - hy) * 28.0))
+    above = 1.0 - below
+
     sky_t = np.clip(ys / max(0.01, hy), 0.0, 1.0)
-    sky_r = 12.0 + 52.0 * (sky_t ** 2.4) + 65.0 * (sky_t ** 5.2)
-    sky_g = 26.0 + 98.0 * (sky_t ** 1.7) + 48.0 * (sky_t ** 4.2)
-    sky_b = 64.0 + 118.0 * (sky_t ** 1.3) + 18.0 * (sky_t ** 3.8)
+    sky_r = 12.0 + 46.0 * (sky_t ** 2.2) + 58.0 * (sky_t ** 4.8)
+    sky_g = 24.0 + 92.0 * (sky_t ** 1.7) + 46.0 * (sky_t ** 4.0)
+    sky_b = 58.0 + 114.0 * (sky_t ** 1.3) + 22.0 * (sky_t ** 3.6)
 
-    sun_glow = np.exp(-((xs / 0.56) ** 2 + ((ys - hy * 0.90) / 0.14) ** 2))
-    sky_r = sky_r + 64.0 * sun_glow
-    sky_g = sky_g + 54.0 * sun_glow
-    sky_b = sky_b + 26.0 * sun_glow
+    sun_glow = np.exp(-((xs / 0.62) ** 2 + ((ys - hy * 0.94) / 0.14) ** 2))
+    sky_r = sky_r + 56.0 * sun_glow
+    sky_g = sky_g + 46.0 * sun_glow
+    sky_b = sky_b + 24.0 * sun_glow
 
-    deck_mask = 1.0 - sky_mask
     deck_t = np.clip((ys - hy) / max(0.01, 1.0 - hy), 0.0, 1.0)
-    deck_r = 38.0 * (1.0 - deck_t * 0.65) + 14.0 * deck_t
-    deck_g = 56.0 * (1.0 - deck_t * 0.62) + 22.0 * deck_t
-    deck_b = 88.0 * (1.0 - deck_t * 0.52) + 42.0 * deck_t
+    deck_r = 46.0 * (1.0 - deck_t * 0.65) + 14.0 * deck_t
+    deck_g = 64.0 * (1.0 - deck_t * 0.62) + 22.0 * deck_t
+    deck_b = 98.0 * (1.0 - deck_t * 0.55) + 40.0 * deck_t
 
-    img[:, :, 2] = sky_r * sky_mask + deck_r * deck_mask
-    img[:, :, 1] = sky_g * sky_mask + deck_g * deck_mask
-    img[:, :, 0] = sky_b * sky_mask + deck_b * deck_mask
+    img = np.zeros((h, w, 3), dtype=np.float32)
+    img[:, :, 2] = sky_r * above + deck_r * below
+    img[:, :, 1] = sky_g * above + deck_g * below
+    img[:, :, 0] = sky_b * above + deck_b * below
     bgr = np.clip(img, 0, 255).astype(np.uint8)
 
-    # Soft cloud wisps near horizon
+    # Soft Gaussian-blurred atmospheric cloud puffs (never flat hard ellipses!)
+    cloud_layer = np.zeros((h, w, 3), dtype=np.uint8)
     rng = np.random.default_rng(707)
-    for _ in range(18):
-        cx = int(rng.integers(40, w - 40))
-        cy = int(rng.integers(horizon_y - 90, horizon_y + 220))
-        rx = int(rng.integers(90, 220))
-        ry = int(rng.integers(14, 34))
-        overlay = bgr.copy()
-        cv2.ellipse(overlay, (cx, cy), (rx, ry), 0, 0, 360, (148, 136, 128), -1, lineType=cv2.LINE_AA)
-        cv2.addWeighted(overlay, 0.16, bgr, 0.84, 0, bgr)
+    for _ in range(14):
+        cx = int(rng.integers(60, w - 60))
+        cy = int(rng.integers(horizon_y - 70, horizon_y + 120))
+        rx = int(rng.integers(110, 240))
+        ry = int(rng.integers(24, 52))
+        cv2.ellipse(cloud_layer, (cx, cy), (rx, ry), 0, 0, 360, (140, 128, 122), -1, lineType=cv2.LINE_AA)
+    cloud_layer = cv2.GaussianBlur(cloud_layer, (61, 35), 0)
+    bgr = cv2.addWeighted(bgr, 1.0, cloud_layer, 0.28, 0)
     return bgr
 
 
@@ -125,6 +129,40 @@ class JetEngineBirdStrikeScene(EpisodeScene):
         self.font_bold = str(brand.visual_style.resolve_font_path("secondary"))
         self.beat_map = {b.id: (b.camera_preset, b.scene_key) for b in script.beats}
 
+    def _add_shell_arc(
+        self,
+        sc: Scene3D,
+        _p,
+        x0: float,
+        r0: float,
+        x1: float,
+        r1: float,
+        ang_start: float,
+        ang_end: float,
+        steps: int,
+        rgb: tuple[int, int, int],
+        metallic: float = 0.65,
+        emissive: float = 0.0,
+        bloom: bool = False,
+        bulge_fn=None,
+    ) -> None:
+        """Continuous sectioned 3D cylindrical shell (real metallic cutaway casing, NOT wire sticks!)."""
+        angs = np.linspace(ang_start, ang_end, steps + 1)
+        for i in range(steps):
+            a0, a1 = float(angs[i]), float(angs[i + 1])
+            b0 = bulge_fn(a0) if bulge_fn else 0.0
+            b1 = bulge_fn(a1) if bulge_fn else 0.0
+            q = np.array(
+                [
+                    _p(x0, math.sin(a0) * (r0 + b0), math.cos(a0) * (r0 + b0)),
+                    _p(x0, math.sin(a1) * (r0 + b1), math.cos(a1) * (r0 + b1)),
+                    _p(x1, math.sin(a1) * (r1 + b1), math.cos(a1) * (r1 + b1)),
+                    _p(x1, math.sin(a0) * (r1 + b0), math.cos(a0) * (r1 + b0)),
+                ],
+                dtype=np.float32,
+            )
+            sc.add_quad(q, rgb=rgb, metallic=metallic, emissive=emissive, double_sided=True, bevel_edge=False, bloom=bloom)
+
     def _add_3d_turbofan(
         self,
         sc: Scene3D,
@@ -141,7 +179,7 @@ class JetEngineBirdStrikeScene(EpisodeScene):
         show_core_fire: bool = True,
         bypass_highlight: float = 0.0,
     ) -> None:
-        """Detailed 3D High-Bypass Turbofan (inlet +X, exhaust -X, vertical +Y)."""
+        """Detailed 3D High-Bypass Turbofan with real sectioned shell cutaway and wide-chord fan blades."""
         R = rot_matrix(0.0, yaw, pitch)
         origin = np.array(center, dtype=np.float32)
 
@@ -149,123 +187,126 @@ class JetEngineBirdStrikeScene(EpisodeScene):
             v = np.array([x * scale, y * scale, z * scale], dtype=np.float32)
             return tuple((origin + R @ v).tolist())
 
-        # Outer nacelle cowling rings (intake lip -> mid fan cowl -> rear exhaust)
-        if not cutaway:
-            sc.add_cylinder(_p(1.38, 0.0, 0.0), _p(1.12, 0.0, 0.0), 1.38 * scale, 1.54 * scale, TITANIUM_LIGHT, segments=18, metallic=0.82, caps=False)
-            sc.add_cylinder(_p(1.12, 0.0, 0.0), _p(-0.95, 0.0, 0.0), 1.54 * scale, 1.46 * scale, TITANIUM_MID, segments=18, metallic=0.62, caps=False)
-            sc.add_cylinder(_p(-0.95, 0.0, 0.0), _p(-1.82, 0.0, 0.0), 1.46 * scale, 1.06 * scale, TITANIUM_DARK, segments=16, metallic=0.68, caps=False)
-            # Yellow FailSafe racing stripe around nacelle
-            sc.add_cylinder(_p(0.65, 0.0, 0.0), _p(0.32, 0.0, 0.0), 1.56 * scale, 1.56 * scale, JET_YELLOW, segments=18, metallic=0.45, caps=False)
-        else:
-            # Cutaway structural upper/lower arc rails so internal fan, bypass duct, and fiery core stay crystal clear!
-            for ang in np.linspace(-math.pi * 0.85, math.pi * 0.25, 9):
-                ry = math.sin(ang) * 1.46
-                rz = math.cos(ang) * 1.46
-                sc.add_cylinder(_p(1.22, ry, rz), _p(-1.55, ry * 0.82, rz * 0.82), 0.075 * scale, 0.065 * scale, TITANIUM_MID, segments=8, metallic=0.70)
-            # Inlet silver intake hoop
-            for i in range(16):
-                a0 = i * (2.0 * math.pi / 16)
-                a1 = (i + 1) * (2.0 * math.pi / 16)
-                if math.cos(a0) > 0.35 and math.sin(a0) > -0.25:
-                    continue
-                sc.add_cylinder(
-                    _p(1.25, math.sin(a0) * 1.42, math.cos(a0) * 1.42),
-                    _p(1.25, math.sin(a1) * 1.42, math.cos(a1) * 1.42),
-                    0.095 * scale,
-                    0.095 * scale,
-                    TITANIUM_LIGHT,
-                    segments=8,
-                    metallic=0.84,
-                )
+        # Structural overhead mounting pylon so the engine is grounded in aerospace context
+        sc.add_box(_p(-0.15, 1.72, -0.15), (1.35 * scale, 0.56 * scale, 0.34 * scale), TITANIUM_DARK, rot=(0.0, yaw, pitch), metallic=0.72, texture="painted_metal")
 
-        # Golden Kevlar containment belt wrapping the fan plane!
+        if not cutaway:
+            sc.add_cylinder(_p(1.38, 0.0, 0.0), _p(1.12, 0.0, 0.0), 1.38 * scale, 1.54 * scale, TITANIUM_LIGHT, segments=26, metallic=0.80, caps=False)
+            sc.add_cylinder(_p(1.12, 0.0, 0.0), _p(-0.95, 0.0, 0.0), 1.54 * scale, 1.46 * scale, TITANIUM_MID, segments=26, metallic=0.62, caps=False)
+            sc.add_cylinder(_p(-0.95, 0.0, 0.0), _p(-1.82, 0.0, 0.0), 1.46 * scale, 1.06 * scale, TITANIUM_DARK, segments=22, metallic=0.68, caps=False)
+            # Clean non-overlapping yellow racing accent band (slightly larger radius on narrow strip)
+            sc.add_cylinder(_p(0.56, 0.0, 0.0), _p(0.30, 0.0, 0.0), 1.565 * scale, 1.565 * scale, JET_YELLOW, segments=26, metallic=0.45, caps=False)
+        else:
+            # REAL sectioned 210° metallic cutaway nacelle (back & bottom wall solid, front-top cleanly cut away!)
+            a_s, a_e = math.pi * 0.42, math.pi * 1.72
+            self._add_shell_arc(sc, _p, 1.34, 1.40, 1.08, 1.52, a_s, a_e, 14, TITANIUM_LIGHT, metallic=0.80)
+            self._add_shell_arc(sc, _p, 1.08, 1.52, -0.95, 1.44, a_s, a_e, 14, TITANIUM_MID, metallic=0.62)
+            self._add_shell_arc(sc, _p, -0.95, 1.44, -1.78, 1.06, a_s, a_e, 12, TITANIUM_DARK, metallic=0.68)
+            # Crisp glowing cyan machined section edge rims along the cutaway edges
+            for edge_a in (a_s, a_e):
+                ey, ez = math.sin(edge_a) * 1.48, math.cos(edge_a) * 1.48
+                sc.add_cylinder(_p(1.22, ey * 0.96, ez * 0.96), _p(-1.68, ey * 0.74, ez * 0.74), 0.045 * scale, 0.040 * scale, TITANIUM_LIGHT, segments=8, metallic=0.85)
+
+        # Wide woven Kevlar containment belt wrapping the fan plane!
         if kevlar_glow > 0.02 or cutaway:
             k_col = lerp_color(KEVLAR_GOLD, AMBER, clamp(kevlar_glow, 0.0, 1.0))
-            k_segs = 18
-            for i in range(k_segs):
-                a0 = i * (2.0 * math.pi / k_segs)
-                a1 = (i + 1) * (2.0 * math.pi / k_segs)
-                if cutaway and math.cos(a0) > 0.45 and math.sin(a0) > -0.1:
-                    continue
-                b0 = kevlar_bulge * math.exp(-((a0 - 0.55) / 0.55) ** 2)
-                b1 = kevlar_bulge * math.exp(-((a1 - 0.55) / 0.55) ** 2)
-                r0 = 1.56 + b0
-                r1 = 1.56 + b1
-                sc.add_cylinder(
-                    _p(0.68, math.sin(a0) * r0, math.cos(a0) * r0),
-                    _p(0.68, math.sin(a1) * r1, math.cos(a1) * r1),
-                    0.12 * scale,
-                    0.12 * scale,
-                    k_col,
-                    segments=8,
-                    metallic=0.35,
-                    emissive=0.45 * kevlar_glow,
-                    bloom=kevlar_glow > 0.35,
-                )
+            ka0 = math.pi * 0.34 if cutaway else 0.0
+            ka1 = math.pi * 1.78 if cutaway else math.pi * 2.0
+            self._add_shell_arc(
+                sc,
+                _p,
+                0.92,
+                1.56,
+                0.42,
+                1.56,
+                ka0,
+                ka1,
+                16,
+                k_col,
+                metallic=0.35,
+                emissive=0.28 * kevlar_glow,
+                bloom=kevlar_glow > 0.55,
+                bulge_fn=lambda a: kevlar_bulge * math.exp(-((a - 1.25) / 0.45) ** 2),
+            )
 
-        # Inner high-pressure compressor & combustor core (only ~20% diameter!)
-        sc.add_cylinder(_p(0.32, 0.0, 0.0), _p(-1.45, 0.0, 0.0), 0.52 * scale, 0.44 * scale, TITANIUM_DARK, segments=14, metallic=0.75)
-        if show_core_fire:
-            sc.add_cylinder(_p(-0.35, 0.0, 0.0), _p(-1.12, 0.0, 0.0), 0.56 * scale, 0.48 * scale, CORE_ORANGE, segments=14, emissive=0.82, bloom=True)
-            sc.add_cylinder(_p(-1.42, 0.0, 0.0), _p(-2.08, 0.0, 0.0), 0.38 * scale, 0.08 * scale, TITANIUM_MID, segments=12, metallic=0.72)
+        # Inner high-pressure compressor & combustor core (only ~20% cross-section!)
+        sc.add_cylinder(_p(0.32, 0.0, 0.0), _p(-1.45, 0.0, 0.0), 0.48 * scale, 0.42 * scale, TITANIUM_DARK, segments=16, metallic=0.75)
+        # Only glow core fire inside cutaway (NEVER bleed bloom through closed opaque nacelle!)
+        if show_core_fire and cutaway:
+            sc.add_cylinder(_p(-0.32, 0.0, 0.0), _p(-1.10, 0.0, 0.0), 0.52 * scale, 0.45 * scale, CORE_ORANGE, segments=16, emissive=0.68, bloom=True)
+            sc.add_cylinder(_p(-1.42, 0.0, 0.0), _p(-2.05, 0.0, 0.0), 0.36 * scale, 0.08 * scale, TITANIUM_MID, segments=14, metallic=0.72)
+        elif not cutaway:
+            sc.add_cylinder(_p(-1.42, 0.0, 0.0), _p(-2.02, 0.0, 0.0), 0.36 * scale, 0.08 * scale, TITANIUM_MID, segments=14, metallic=0.72)
 
-        # Glowing cyan bypass duct airflow ribbons (the 80% outer ring around the core!)
+        # Smooth glowing cyan bypass airflow streamlines inside the 80% outer bypass duct
         if bypass_highlight > 0.05:
-            for lane in range(6):
-                la = lane * (math.pi / 3.0) + 0.3
+            for lane in range(5):
+                la = math.pi * 0.55 + lane * (math.pi * 0.26)
                 ly = math.sin(la) * 0.98
                 lz = math.cos(la) * 0.98
-                phase = (spin * 0.25 + lane * 0.19) % 1.0
-                fx0 = 0.65 - phase * 1.95
-                fx1 = fx0 - 0.45
+                phase = (spin * 0.22 + lane * 0.20) % 1.0
+                fx0 = 0.65 - phase * 1.90
+                fx1 = fx0 - 0.52
                 sc.add_cylinder(
                     _p(fx0, ly, lz),
                     _p(fx1, ly * 0.90, lz * 0.90),
-                    0.055 * scale,
-                    0.032 * scale,
+                    0.048 * scale,
+                    0.026 * scale,
                     CYAN,
-                    segments=6,
-                    emissive=0.85 * bypass_highlight,
+                    segments=8,
+                    emissive=0.72 * bypass_highlight,
                     bloom=True,
                 )
 
-        # Sharp painted spinner nose cone with spiral indicator band
-        sc.add_cylinder(_p(0.84, 0.0, 0.0), _p(1.56, 0.0, 0.0), 0.44 * scale, 0.04 * scale, CARBON_DARK, segments=16, metallic=0.55)
-        sc.add_sphere(_p(1.54, 0.0, 0.0), 0.055 * scale, TITANIUM_LIGHT, metallic=0.85)
-        # White spiral swirl markers on the rotating spinner
-        for k in range(5):
-            kt = k / 4.0
-            sx = 0.92 + kt * 0.52
-            sr = (0.42 * (1.0 - kt) + 0.07)
-            sa = spin + kt * 2.8
-            sc.add_sphere(_p(sx, math.sin(sa) * sr, math.cos(sa) * sr), 0.052 * scale, (242, 248, 255), emissive=0.35)
+        # Sharp painted spinner nose cone with flush spiral stripe (no bulging warts!)
+        sc.add_cylinder(_p(0.84, 0.0, 0.0), _p(1.56, 0.0, 0.0), 0.44 * scale, 0.04 * scale, CARBON_DARK, segments=22, metallic=0.55)
+        sc.add_sphere(_p(1.54, 0.0, 0.0), 0.048 * scale, TITANIUM_LIGHT, metallic=0.85)
+        for k in range(8):
+            kt0 = k / 8.0
+            kt1 = (k + 1) / 8.0
+            sx0, sx1 = 0.92 + kt0 * 0.54, 0.92 + kt1 * 0.54
+            sr0, sr1 = 0.40 * (1.0 - kt0) + 0.05, 0.40 * (1.0 - kt1) + 0.05
+            sa0, sa1 = spin + kt0 * 3.8, spin + kt1 * 3.8
+            sc.add_cylinder(
+                _p(sx0, math.sin(sa0) * sr0, math.cos(sa0) * sr0),
+                _p(sx1, math.sin(sa1) * sr1, math.cos(sa1) * sr1),
+                0.026 * scale,
+                0.022 * scale,
+                (244, 248, 255),
+                segments=6,
+                emissive=0.25,
+            )
 
-        # 14 curved wide-chord hollow titanium fan blades
+        # 14 wide-chord curved titanium fan blades (proper flat twisted airfoil paddles, NOT thin bike spokes!)
         n_blades = 14
         for bi in range(n_blades):
             ang = spin + bi * (2.0 * math.pi / n_blades)
             if bi == missing_blade_idx:
-                # Flying detached blade hitting the Kevlar ring!
-                rad_fly = 0.65 + detached_blade_t * 0.78
-                fly_a = 0.55
-                b_col = lerp_color(TITANIUM_LIGHT, DANGER, clamp(detached_blade_t * 1.2, 0.0, 1.0))
+                # Detached titanium blade flying outward until it slams directly INTO the Kevlar containment belt!
+                fly_a = 1.25
+                rad_fly = 0.72 + detached_blade_t * 0.76
+                b_col = lerp_color(TITANIUM_LIGHT, AMBER, clamp(detached_blade_t * 1.1, 0.0, 1.0))
                 sc.add_box(
-                    _p(0.66, math.sin(fly_a) * rad_fly, math.cos(fly_a) * rad_fly),
-                    (0.14 * scale, 0.62 * scale, 0.22 * scale),
+                    _p(0.68, math.sin(fly_a) * rad_fly, math.cos(fly_a) * rad_fly),
+                    (0.24 * scale, 0.68 * scale, 0.06 * scale),
                     b_col,
-                    rot=(fly_a + detached_blade_t * 0.9, yaw + 0.35, pitch),
+                    rot=(fly_a - math.pi * 0.5 + detached_blade_t * 0.35, yaw + 0.32, pitch),
                     metallic=0.82,
-                    emissive=0.30 if detached_blade_t > 0.3 else 0.0,
+                    emissive=0.25 if detached_blade_t > 0.4 else 0.0,
+                    texture="brushed_steel",
                 )
                 continue
-            by = math.sin(ang) * 0.88
-            bz = math.cos(ang) * 0.88
-            # Blade root -> twisted wide-chord tip
-            tip_a = ang + 0.16
-            ty = math.sin(tip_a) * 1.32
-            tz = math.cos(tip_a) * 1.32
-            sc.add_cylinder(_p(0.76, math.sin(ang) * 0.38, math.cos(ang) * 0.38), _p(0.68, by, bz), 0.085 * scale, 0.11 * scale, TITANIUM_LIGHT, segments=6, metallic=0.84)
-            sc.add_cylinder(_p(0.68, by, bz), _p(0.62, ty, tz), 0.11 * scale, 0.082 * scale, TITANIUM_MID, segments=6, metallic=0.86)
+            r_mid = 0.88
+            by = math.sin(ang) * r_mid
+            bz = math.cos(ang) * r_mid
+            sc.add_box(
+                _p(0.70, by, bz),
+                (0.26 * scale, 0.94 * scale, 0.048 * scale),
+                TITANIUM_LIGHT if bi % 2 == 0 else TITANIUM_MID,
+                rot=(ang - math.pi * 0.5, yaw + 0.35, pitch),
+                metallic=0.84,
+                texture="brushed_steel",
+            )
 
     def _add_3d_yellow_minijet(
         self,
@@ -279,9 +320,11 @@ class JetEngineBirdStrikeScene(EpisodeScene):
         with_pilot: bool = True,
         pilot_pose: str = "pilot_sub",
         pilot_emotion: str = "curious",
-        afterburner: bool = True,
+        afterburner_left: bool = True,
+        afterburner_right: bool = True,
+        afterburner_main: bool = True,
     ) -> None:
-        """BOLT's Signature 3D Yellow Mini-Jet (nose +X, tail -X, top +Y)."""
+        """BOLT's Signature 3D Yellow Mini-Jet (zero Z-fighting, clean cockpit, independent twin pods)."""
         R = rot_matrix(roll, yaw, pitch)
         origin = np.array(center, dtype=np.float32)
 
@@ -289,68 +332,95 @@ class JetEngineBirdStrikeScene(EpisodeScene):
             v = np.array([x * scale, y * scale, z * scale], dtype=np.float32)
             return tuple((origin + R @ v).tolist())
 
-        # Streamlined yellow fuselage loft (pointed nose -> cockpit mid -> tapered tail)
-        loft = [(1.65, 0.08), (1.10, 0.34), (0.35, 0.48), (-0.65, 0.44), (-1.55, 0.24)]
+        # Smooth 22-segment streamlined fuselage loft (zero overlapping Z-fighting cylinders!)
+        loft = [(1.66, 0.08), (1.12, 0.34), (0.36, 0.48), (-0.64, 0.44), (-1.54, 0.24)]
         for (x0, r0), (x1, r1) in zip(loft[:-1], loft[1:]):
-            sc.add_cylinder(_p(x0, 0.0, 0.0), _p(x1, 0.0, 0.0), r0 * scale, r1 * scale, JET_YELLOW, segments=16, metallic=0.48, caps=False)
+            sc.add_cylinder(_p(x0, 0.0, 0.0), _p(x1, 0.0, 0.0), r0 * scale, r1 * scale, JET_YELLOW, segments=22, metallic=0.45, caps=False)
         sc.add_sphere(_p(1.66, 0.0, 0.0), 0.095 * scale, TITANIUM_LIGHT, metallic=0.85)
-        # Navy racing stripe along fuselage
-        sc.add_cylinder(_p(0.75, -0.02, 0.0), _p(-0.85, -0.02, 0.0), 0.49 * scale, 0.44 * scale, JET_NAVY, segments=16, metallic=0.45, caps=False)
-        sc.add_cylinder(_p(0.70, 0.02, 0.0), _p(-0.80, 0.02, 0.0), 0.495 * scale, 0.445 * scale, JET_YELLOW, segments=16, metallic=0.50, caps=False)
+        # Clean crisp navy accent collar band (non-overlapping narrow ring at nose root)
+        sc.add_cylinder(_p(0.88, 0.0, 0.0), _p(0.72, 0.0, 0.0), 0.415 * scale, 0.445 * scale, JET_NAVY, segments=22, metallic=0.42, caps=False)
 
-        # Open cockpit rim + front sapphire windscreen
-        sc.add_cylinder(_p(0.28, 0.34, 0.0), _p(0.22, 0.56, 0.0), 0.36 * scale, 0.32 * scale, JET_NAVY, segments=14, metallic=0.55)
-        sc.add_sphere(_p(0.58, 0.42, 0.0), 0.24 * scale, GLASS_BLUE, metallic=0.78, rim_rgb=CYAN)
+        # Open cockpit coaming rim + dark interior well + front sapphire windscreen
+        sc.add_cylinder(_p(0.26, 0.34, 0.0), _p(0.22, 0.58, 0.0), 0.38 * scale, 0.34 * scale, JET_NAVY, segments=18, metallic=0.55)
+        sc.add_cylinder(_p(0.24, 0.56, 0.0), _p(0.24, 0.60, 0.0), 0.30 * scale, 0.30 * scale, (14, 20, 32), segments=16, metallic=0.15)
+        sc.add_sphere(_p(0.60, 0.44, 0.0), 0.24 * scale, GLASS_BLUE, metallic=0.78, rim_rgb=CYAN)
 
-        # Swept yellow main wings + cyan navigation wingtip LEDs + underwing mini-turbofans!
+        # Swept yellow main wings + underwing mini-turbofan pods (independent left/right thrust!)
         for sz in (-1, 1):
-            sc.add_box(_p(-0.18, -0.04, sz * 1.05), (0.68 * scale, 0.075 * scale, 1.38 * scale), JET_YELLOW_DARK, rot=(roll, yaw - sz * 0.26, pitch), metallic=0.54)
-            # Wingtip glowing nav beacon
+            sc.add_box(_p(-0.18, -0.04, sz * 1.06), (0.68 * scale, 0.068 * scale, 1.40 * scale), JET_YELLOW_DARK, rot=(roll, yaw - sz * 0.26, pitch), metallic=0.48, texture="painted_metal")
             tip_col = EMERALD if sz > 0 else DANGER
-            sc.add_sphere(_p(-0.42, -0.02, sz * 1.72), 0.075 * scale, tip_col, emissive=0.92, bloom=True)
-            # Underwing turbofan engine pod
-            sc.add_cylinder(_p(0.22, -0.32, sz * 0.82), _p(-0.46, -0.32, sz * 0.82), 0.24 * scale, 0.20 * scale, TITANIUM_LIGHT, segments=12, metallic=0.78)
-            sc.add_sphere(_p(0.24, -0.32, sz * 0.82), 0.14 * scale, CARBON_DARK, metallic=0.60)
-            if afterburner:
-                sc.add_cylinder(_p(-0.48, -0.32, sz * 0.82), _p(-0.82, -0.32, sz * 0.82), 0.13 * scale, 0.03 * scale, CYAN, segments=8, emissive=0.90, bloom=True)
+            sc.add_sphere(_p(-0.42, -0.02, sz * 1.74), 0.072 * scale, tip_col, emissive=0.85, bloom=True)
+            is_on = afterburner_right if sz > 0 else afterburner_left
+            pod_col = TITANIUM_LIGHT if is_on else TITANIUM_DARK
+            sc.add_cylinder(_p(0.24, -0.32, sz * 0.82), _p(-0.48, -0.32, sz * 0.82), 0.24 * scale, 0.20 * scale, pod_col, segments=16, metallic=0.78)
+            sc.add_sphere(_p(0.26, -0.32, sz * 0.82), 0.14 * scale, CARBON_DARK if is_on else DANGER, metallic=0.55, emissive=0.0 if is_on else 0.45)
+            if is_on:
+                sc.add_cylinder(_p(-0.50, -0.32, sz * 0.82), _p(-0.88, -0.32, sz * 0.82), 0.13 * scale, 0.03 * scale, CYAN, segments=10, emissive=0.82, bloom=True)
+            else:
+                # Subtle dark smoke puff trail showing failed engine cleanly shut down!
+                for sk in range(3):
+                    ph = (t * 1.6 + sk * 0.33) % 1.0
+                    sc.add_sphere(_p(-0.56 - ph * 0.72, -0.30 + ph * 0.16, sz * 0.82), (0.09 + ph * 0.07) * scale, (95, 102, 118), metallic=0.05)
 
         # Swept vertical tail fin + horizontal stabilizers
-        sc.add_box(_p(-1.26, 0.46, 0.0), (0.58 * scale, 0.72 * scale, 0.07 * scale), JET_YELLOW_DARK, rot=(roll, yaw, pitch - 0.22), metallic=0.56)
-        sc.add_box(_p(-1.32, 0.08, 0.0), (0.40 * scale, 0.06 * scale, 1.18 * scale), JET_NAVY, rot=(roll, yaw, pitch), metallic=0.58)
+        sc.add_box(_p(-1.26, 0.46, 0.0), (0.58 * scale, 0.72 * scale, 0.065 * scale), JET_YELLOW_DARK, rot=(roll, yaw, pitch - 0.22), metallic=0.50, texture="painted_metal")
+        sc.add_box(_p(-1.32, 0.08, 0.0), (0.40 * scale, 0.058 * scale, 1.18 * scale), JET_NAVY, rot=(roll, yaw, pitch), metallic=0.52, texture="painted_metal")
 
         # Rear exhaust nozzle
-        sc.add_cylinder(_p(-1.52, 0.0, 0.0), _p(-1.74, 0.0, 0.0), 0.25 * scale, 0.20 * scale, TITANIUM_DARK, segments=12, metallic=0.78)
-        if afterburner:
-            flicker = 0.88 + 0.18 * math.sin(t * 28.0)
-            sc.add_cylinder(_p(-1.74, 0.0, 0.0), _p(-1.74 - 0.58 * flicker, 0.0, 0.0), 0.17 * scale, 0.04 * scale, CORE_ORANGE, segments=10, emissive=0.95, bloom=True)
+        sc.add_cylinder(_p(-1.52, 0.0, 0.0), _p(-1.74, 0.0, 0.0), 0.25 * scale, 0.20 * scale, TITANIUM_DARK, segments=16, metallic=0.78)
+        if afterburner_main:
+            flicker = 0.88 + 0.16 * math.sin(t * 28.0)
+            sc.add_cylinder(_p(-1.74, 0.0, 0.0), _p(-1.74 - 0.56 * flicker, 0.0, 0.0), 0.16 * scale, 0.04 * scale, CORE_ORANGE, segments=10, emissive=0.88, bloom=True)
 
+        # Seated pilot cleanly inside cockpit rim (show_legs=False guarantees zero fuselage clipping!)
         if with_pilot:
             add_crash_test_dummy(
                 sc,
-                pos=_p(0.24, 0.46, 0.0),
+                pos=_p(0.22, 0.56, 0.0),
                 scale=0.56 * scale,
-                yaw=yaw + 0.22,
+                yaw=yaw + 0.18,
                 pose=pilot_pose,
                 emotion=pilot_emotion,
                 t=t,
                 ground_shadow=False,
+                show_legs=False,
             )
 
     def _add_kinetic_bird_silhouette(
         self,
         sc: Scene3D,
         pos: tuple[float, float, float],
-        scale: float = 0.34,
+        scale: float = 0.52,
         wing_t: float = 0.0,
-        glow: float = 0.5,
     ) -> None:
-        """Clean geometric high-speed aerospace test-mass / bird silhouette (non-graphic, engineering style)."""
+        """Unmistakable aerodynamic bird silhouette flying leftward (-X) toward the turbofan intake."""
         x, y, z = pos
-        flap = math.sin(wing_t * 16.0) * 0.22
-        body_col = lerp_color((226, 236, 248), AMBER, glow * 0.45)
-        sc.add_cylinder((x - 0.35 * scale, y, z), (x + 0.38 * scale, y + 0.04 * scale, z), 0.14 * scale, 0.18 * scale, body_col, metallic=0.30, emissive=0.35 * glow, segments=10)
+        flap = math.sin(wing_t * 14.0) * 0.20
+        body_col = (232, 238, 246)
+        wing_col = (186, 200, 218)
+        # Sleek teardrop torso + neck + head + amber beak pointing LEFT (-X into engine!)
+        sc.add_cylinder((x + 0.45 * scale, y - 0.04 * scale, z), (x - 0.32 * scale, y + 0.04 * scale, z), 0.08 * scale, 0.17 * scale, body_col, segments=12, metallic=0.22)
+        sc.add_sphere((x - 0.40 * scale, y + 0.08 * scale, z), 0.13 * scale, body_col, metallic=0.20)
+        sc.add_cylinder((x - 0.48 * scale, y + 0.08 * scale, z), (x - 0.72 * scale, y + 0.05 * scale, z), 0.055 * scale, 0.012 * scale, AMBER, segments=8, metallic=0.25)
+        # Swept V-shaped wings (clearly readable silhouette from 3/4 view!)
         for sz in (-1, 1):
-            sc.add_box((x - 0.04 * scale, y + flap * scale, z + sz * 0.42 * scale), (0.28 * scale, 0.05 * scale, 0.64 * scale), body_col, rot=(sz * flap, 0.0, 0.0), metallic=0.25, emissive=0.25 * glow)
+            sc.add_box(
+                (x + 0.02 * scale, y + (0.18 + flap) * scale, z + sz * 0.42 * scale),
+                (0.32 * scale, 0.045 * scale, 0.78 * scale),
+                wing_col,
+                rot=(sz * (0.38 + flap), sz * 0.25, 0.0),
+                metallic=0.22,
+                texture="matte",
+            )
+            # Wingtip feather extension
+            sc.add_box(
+                (x + 0.16 * scale, y + (0.34 + flap * 1.4) * scale, z + sz * 0.88 * scale),
+                (0.22 * scale, 0.038 * scale, 0.44 * scale),
+                (110, 128, 152),
+                rot=(sz * (0.55 + flap), sz * 0.35, 0.0),
+                metallic=0.20,
+                texture="matte",
+            )
 
     def _render_scene_3d(
         self,
@@ -358,6 +428,7 @@ class JetEngineBirdStrikeScene(EpisodeScene):
         t: float,
         prog: float,
         rms: float,
+        is_cover: bool = False,
     ) -> tuple[np.ndarray, list]:
         assert self.brand is not None and self.palette is not None
         p = self.palette
@@ -377,155 +448,144 @@ class JetEngineBirdStrikeScene(EpisodeScene):
         sc = Scene3D(cam)
 
         if scene_key == "turbofan_impact_hero":
-            shake = math.sin(t * 48.0) * 0.12 if prog > 0.45 else 0.0
-            cam.eye = (0.8 + shake, 0.65, 6.9)
-            cam.target = (0.0, -0.05, 0.0)
-            self._add_3d_turbofan(sc, center=(-0.35, 0.0, 0.0), scale=1.08, yaw=-0.42, spin=t * 14.0, kevlar_glow=0.35)
-            # High-speed test bird silhouette approaching intake with glowing cyan/red velocity streaks
-            bx = 2.65 - ease_out_cubic(min(1.0, prog * 1.45)) * 1.95
-            self._add_kinetic_bird_silhouette(sc, (bx, 0.18, 0.65), scale=0.48, wing_t=t, glow=0.85)
-            for k in range(4):
-                sc.add_cylinder((bx + 0.35 + k * 0.12, 0.18 + (k - 1.5) * 0.12, 0.65), (bx + 1.05 + k * 0.12, 0.18 + (k - 1.5) * 0.12, 0.65), 0.025, 0.01, DANGER, segments=6, emissive=0.90, bloom=True)
-            if prog > 0.48:
-                impact_p = clamp((prog - 0.48) / 0.52, 0.0, 1.0)
-                overlays_2d.append(lambda d, ip=impact_p: draw_sparks(d, 540, 880, ip, 16, 170, 140, p, seed=701))
+            shake = math.sin(t * 48.0) * 0.09 if (prog > 0.45 and not is_cover) else 0.0
+            cam.eye = (0.75 + shake, 0.62, 7.4 if is_cover else 7.1)
+            cam.target = (0.10, 0.18 if is_cover else -0.05, 0.0)
+            self._add_3d_turbofan(sc, center=(-0.72, -0.10, 0.0), scale=0.96, yaw=-0.46, spin=t * 14.0, cutaway=False, kevlar_glow=0.35, show_core_fire=False)
+            # Clear bird silhouette flying leftward into the intake with cyan/amber slipstream trails BEHIND it!
+            bx = 2.05 - ease_out_cubic(min(1.0, prog * 1.15)) * 1.15 if not is_cover else 1.48
+            self._add_kinetic_bird_silhouette(sc, (bx, 0.12, 0.48), scale=0.62, wing_t=t)
+            for k in range(3):
+                ky = 0.12 + (k - 1) * 0.16
+                sc.add_cylinder((bx + 0.45, ky, 0.48), (bx + 1.15, ky, 0.48), 0.024, 0.008, CYAN, segments=6, emissive=0.75, bloom=True)
+            if prog > 0.55 and not is_cover:
+                impact_p = clamp((prog - 0.55) / 0.45, 0.0, 1.0)
+                overlays_2d.append(lambda d, ip=impact_p: draw_sparks(d, 590, 940, ip, 16, 150, 130, p, seed=701))
 
         elif scene_key == "bolt_jet_wave_intro":
             # Narrator directly greets BOLT: "Hey Bolt, wave before we fire the test cannon!"
-            cam.eye = (0.4, 0.72, 6.7)
-            cam.target = (0.0, 0.10, 0.0)
-            # Spinning test turbofan in rear right + BOLT waving happily from his 3D Yellow Mini-Jet!
-            self._add_3d_turbofan(sc, center=(1.55, -0.15, -1.65), scale=0.72, yaw=-0.55, spin=t * 11.0, kevlar_glow=0.25)
-            bob = math.sin(t * 3.0) * 0.06
+            cam.eye = (0.2, 0.72, 7.2)
+            cam.target = (0.0, 0.12, 0.0)
+            sc.add_floor_grid(y_level=-1.55, span=7.0, step=1.0, t=t, particles=True)
+            # Test cannon rig on right + spinning test turbofan cleanly separated behind!
+            self._add_3d_turbofan(sc, center=(1.85, 0.45, -2.35), scale=0.62, yaw=-0.52, spin=t * 11.0, kevlar_glow=0.20, show_core_fire=False)
+            bob = math.sin(t * 3.0) * 0.05
             self._add_3d_yellow_minijet(
                 sc,
-                center=(-0.32, -0.35 + bob, 0.35),
-                scale=1.08,
-                yaw=0.24,
-                pitch=0.05,
+                center=(-0.25, -0.35 + bob, 0.40),
+                scale=1.06,
+                yaw=0.22,
+                pitch=0.04,
                 t=t,
-                with_pilot=False,
-                afterburner=False,
+                with_pilot=True,
+                pilot_pose="relief_wave",
+                pilot_emotion="cta",
+                afterburner_left=False,
+                afterburner_right=False,
+                afterburner_main=False,
             )
-            # Large expressive BOLT standing right in the open cockpit WAVING directly at the viewer!
-            add_crash_test_dummy(
-                sc,
-                pos=(-0.05, 0.42 + bob, 0.48),
-                scale=0.92,
-                yaw=0.05 + math.sin(t * 2.4) * 0.10,
-                pose="relief_wave",
-                emotion="cta",
-                t=t,
-                ground_shadow=False,
-            )
-
-            def _wave_tag(d: ImageDraw.ImageDraw) -> None:
-                # Subtle friendly radar pulse arc near Bolt's waving hand
-                pulse = (t * 2.2) % 1.0
-                r = int(28 + pulse * 44)
-                cx, cy = 620, 625
-                d.arc([cx - r, cy - r, cx + r, cy + r], start=-55, end=25, fill=p.cyan, width=4)
-
-            overlays_2d.append(_wave_tag)
 
         elif scene_key == "spinner_cone_deflect":
-            cam.eye = (1.6, 0.55, 5.4)
-            cam.target = (0.65, 0.0, 0.0)
-            self._add_3d_turbofan(sc, center=(-0.45, 0.0, 0.0), scale=1.18, yaw=-0.35, spin=t * 12.0, cutaway=False)
-            # Glowing outward deflection ribbons peeling off the sharp nose cone
-            for ang in (-0.85, -0.35, 0.35, 0.85):
-                ph = (t * 2.4 + abs(ang)) % 1.0
-                x0 = 1.65 - ph * 1.15
-                rad = 0.08 + (ph ** 1.3) * 1.05
-                sc.add_sphere((x0, math.sin(ang) * rad, math.cos(ang) * rad * 0.6 + 0.2), 0.09, AMBER, emissive=0.92, bloom=True)
+            cam.eye = (1.1, 0.55, 6.6)
+            cam.target = (0.15, -0.05, 0.0)
+            self._add_3d_turbofan(sc, center=(-0.45, -0.10, 0.0), scale=1.02, yaw=-0.38, spin=t * 12.0, cutaway=False, show_core_fire=False)
+            # Clean curved outward deflection arcs peeling off the sharp nose cone
+            for ang in (-0.80, -0.32, 0.32, 0.80):
+                ph = (t * 2.2 + abs(ang)) % 1.0
+                x0 = 1.65 - ph * 1.05
+                rad = 0.08 + (ph ** 1.35) * 0.95
+                sc.add_sphere((x0, -0.10 + math.sin(ang) * rad, math.cos(ang) * rad * 0.55 + 0.2), 0.085, AMBER, emissive=0.78, bloom=True)
                 sc.add_cylinder(
-                    (1.55, 0.0, 0.25),
-                    (0.55, math.sin(ang) * 1.05, math.cos(ang) * 0.65 + 0.25),
-                    0.028,
-                    0.045,
+                    (1.50, -0.10, 0.22),
+                    (0.65, -0.10 + math.sin(ang) * 0.98, math.cos(ang) * 0.58 + 0.22),
+                    0.024,
+                    0.038,
                     CYAN,
                     segments=6,
-                    emissive=0.75,
+                    emissive=0.62,
                     bloom=True,
                 )
 
         elif scene_key == "titanium_fan_blades":
-            cam.eye = (0.2, 0.55, 6.2)
+            # Swept curved scimitar hollow titanium fan blade (true twisted airfoil silhouette, NOT stacked blocks with X!)
+            cam.eye = (0.2, 0.55, 6.4)
             cam.target = (0.0, 0.0, 0.0)
-            # Exploded 3D close-up of curved wide-chord hollow titanium fan blade + truss core
-            rot_y = -0.35 + math.sin(t * 1.6) * 0.28
-            # Blade root dovetail
-            sc.add_box((0.0, -1.55, 0.0), (0.65, 0.42, 0.34), TITANIUM_DARK, rot=(0.0, rot_y, 0.0), metallic=0.80)
-            # Curved wide-chord titanium shell panels (cutaway showing internal truss ribs!)
-            for seg in range(6):
-                sy = -1.15 + seg * 0.44
-                twist = rot_y + seg * 0.09
-                w_seg = 0.85 + seg * 0.08
-                sc.add_box((0.0, sy, -0.10), (w_seg, 0.40, 0.07), TITANIUM_LIGHT, rot=(0.0, twist, 0.05), metallic=0.86)
-                # Glowing cyan internal hollow honeycomb/truss ribs!
-                sc.add_cylinder((-w_seg * 0.38, sy - 0.16, 0.04), (w_seg * 0.38, sy + 0.16, 0.04), 0.032, 0.032, CYAN, segments=6, emissive=0.85, bloom=True)
-                sc.add_cylinder((w_seg * 0.38, sy - 0.16, 0.04), (-w_seg * 0.38, sy + 0.16, 0.04), 0.032, 0.032, CYAN, segments=6, emissive=0.85, bloom=True)
-            add_crash_test_dummy(sc, pos=(-1.62, -0.65, 0.45), scale=0.82, yaw=0.35, pose="point_right", emotion="curious", t=t)
+            sc.add_floor_grid(y_level=-1.85, span=6.5, step=1.0, t=t, particles=True)
+            rot_y = -0.32 + math.sin(t * 1.8) * 0.30
+            # Machined dovetail root with contact shadow
+            sc.add_ground_shadow((0.25, -1.78, 0.0), 0.72, 0.55, opacity=0.45)
+            sc.add_box((0.25, -1.48, 0.0), (0.68, 0.38, 0.34), TITANIUM_DARK, rot=(0.0, rot_y, 0.0), metallic=0.80)
+            # Smooth scimitar curved airfoil segments with hollow titanium truss cutaway window
+            for seg in range(9):
+                st = seg / 8.0
+                sy = -1.16 + st * 2.38
+                sx = 0.25 + math.sin(st * math.pi) * 0.34  # Real curved scimitar sweep!
+                twist = rot_y + st * 0.42
+                w_seg = 0.78 + math.sin(st * math.pi * 0.85) * 0.28
+                # Leading & trailing titanium airfoil edges
+                sc.add_box((sx, sy, -0.06), (w_seg, 0.30, 0.065), TITANIUM_LIGHT if seg % 2 == 0 else TITANIUM_MID, rot=(0.0, twist, -0.18 * math.cos(st * math.pi)), metallic=0.86)
+                # Subtle internal titanium honeycomb spar ribs inside mid-span
+                if 2 <= seg <= 6:
+                    sc.add_cylinder((sx - w_seg * 0.28, sy - 0.11, 0.04), (sx + w_seg * 0.28, sy + 0.11, 0.04), 0.022, 0.022, CYAN, segments=6, emissive=0.55)
+            add_crash_test_dummy(sc, pos=(-1.55, -0.60, 0.45), scale=0.80, yaw=0.35, pose="point_right", emotion="curious", t=t)
 
         elif scene_key == "blade_radial_fling":
-            cam.eye = (0.9, 0.6, 6.4)
+            cam.eye = (0.85, 0.55, 6.7)
             cam.target = (0.0, 0.0, 0.0)
-            self._add_3d_turbofan(sc, center=(0.0, 0.0, 0.0), scale=1.08, yaw=-0.55, spin=t * 15.0, cutaway=True, bypass_highlight=0.75)
-            # Centrifugal outward spiraling glowing amber debris streams
+            self._add_3d_turbofan(sc, center=(0.0, 0.0, 0.0), scale=1.04, yaw=-0.52, spin=t * 15.0, cutaway=True, bypass_highlight=0.75)
             for i in range(10):
                 ph = (t * 2.2 + i * 0.11) % 1.0
                 ang = i * 0.62 + ph * 2.2
-                rad = 0.35 + ph * 1.05
-                sc.add_sphere((0.55 - ph * 1.45, math.sin(ang) * rad, math.cos(ang) * rad), 0.085, AMBER, emissive=0.90, bloom=True)
+                rad = 0.35 + ph * 1.02
+                sc.add_sphere((0.55 - ph * 1.45, math.sin(ang) * rad, math.cos(ang) * rad), 0.075, AMBER, emissive=0.78, bloom=True)
 
         elif scene_key == "bypass_duct_xray":
-            cam.eye = (0.0, 0.5, 7.2)
-            cam.target = (0.0, 0.0, 0.0)
-            self._add_3d_turbofan(sc, center=(0.0, 0.05, 0.0), scale=1.12, yaw=-0.12, spin=t * 12.0, cutaway=True, show_core_fire=True, bypass_highlight=1.0)
-            # Highlight rings showing 80% outer bypass vs 20% inner core
+            cam.eye = (0.0, 0.48, 7.4)
+            cam.target = (0.0, 0.05, 0.0)
+            self._add_3d_turbofan(sc, center=(0.0, 0.10, 0.0), scale=1.06, yaw=-0.12, spin=t * 12.0, cutaway=True, show_core_fire=True, bypass_highlight=1.0)
+
             def _bypass_labels(d: ImageDraw.ImageDraw) -> None:
-                f_b = load_font(self.font_black, 30)
-                f_s = load_font(self.font_bold, 22)
-                d.rounded_rectangle([72, 540, 412, 626], radius=14, fill=p.surface_panel, outline=p.cyan, width=3)
-                d.text((92, 554), "80% BYPASS DUCT", font=f_b, fill=p.cyan)
-                d.text((92, 592), "WIDE HOLLOW TUNNEL", font=f_s, fill=TITANIUM_LIGHT)
-                d.rounded_rectangle([658, 1140, 1008, 1226], radius=14, fill=p.surface_panel, outline=p.amber, width=3)
-                d.text((678, 1154), "20% INNER CORE", font=f_b, fill=p.amber)
-                d.text((678, 1192), "STAYS UNTOUCHED", font=f_s, fill=TITANIUM_LIGHT)
+                f_b = load_font(self.font_black, 26)
+                f_s = load_font(self.font_bold, 20)
+                # Placed cleanly BELOW the HUD badge (y=620+) and strictly inside x <= 850!
+                d.rounded_rectangle([84, 628, 430, 706], radius=14, fill=p.surface_panel, outline=p.cyan, width=3)
+                d.text((102, 638), "80% BYPASS DUCT", font=f_b, fill=p.cyan)
+                d.text((102, 672), "HOLLOW OUTER TUNNEL", font=f_s, fill=TITANIUM_LIGHT)
+                d.rounded_rectangle([470, 1218, 848, 1296], radius=14, fill=p.surface_panel, outline=p.amber, width=3)
+                d.text((488, 1228), "20% INNER CORE", font=f_b, fill=p.amber)
+                d.text((488, 1262), "PROTECTED CENTER", font=f_s, fill=TITANIUM_LIGHT)
 
             overlays_2d.append(_bypass_labels)
 
         elif scene_key == "debris_bypass_exit":
-            # Narrator: "Hold tight, Bolt!" -> BOLT braces inside his cockpit as debris shoots cleanly out the bypass exit!
-            cam.eye = (0.0, 0.65, 7.3)
+            # Narrator: "Hold tight, Bolt!" -> BOLT safely to the foreground-left on observation deck (NOT behind hot exhaust!)
+            cam.eye = (0.0, 0.65, 7.6)
             cam.target = (0.0, 0.0, 0.0)
-            self._add_3d_turbofan(sc, center=(0.45, 0.20, -0.35), scale=0.98, yaw=-0.20, spin=t * 16.0, cutaway=True, show_core_fire=True, bypass_highlight=1.0)
-            # Debris streaks exiting cleanly behind the engine far away from the inner core
-            for i in range(12):
-                ph = (t * 2.8 + i * 0.09) % 1.0
-                ex = 0.95 - ph * 3.1
-                ey = (0.98 if i % 2 == 0 else -0.92) + math.sin(ph * 6.0 + i) * 0.08
-                sc.add_cylinder((ex + 0.24, ey + 0.20, -0.15), (ex, ey + 0.20, -0.15), 0.042, 0.025, AMBER, emissive=0.92, bloom=True, segments=6)
-            # BOLT bracing tightly on the left foreground!
+            self._add_3d_turbofan(sc, center=(0.35, 0.35, -0.55), scale=0.92, yaw=-0.22, spin=t * 16.0, cutaway=True, show_core_fire=True, bypass_highlight=1.0)
+            for i in range(10):
+                ph = (t * 2.6 + i * 0.10) % 1.0
+                ex = 0.85 - ph * 2.45
+                ey = (0.94 if i % 2 == 0 else -0.86) + 0.35
+                sc.add_cylinder((ex + 0.22, ey, -0.35), (ex, ey, -0.35), 0.038, 0.022, AMBER, emissive=0.78, bloom=True, segments=6)
             add_crash_test_dummy(
                 sc,
-                pos=(-1.55, -0.68, 0.72),
-                scale=0.88,
-                yaw=0.35,
+                pos=(-1.55, -0.95, 1.05),
+                scale=0.76,
+                yaw=0.38,
                 pose="brace_impact",
                 emotion="brace",
                 t=t,
             )
 
         elif scene_key == "blade_off_snap":
-            shake = math.sin(t * 54.0) * 0.14 * clamp((prog - 0.25) * 2.5, 0.0, 1.0)
-            cam.eye = (0.85 + shake, 0.45, 5.7)
+            shake = math.sin(t * 54.0) * 0.11 * clamp((prog - 0.25) * 2.5, 0.0, 1.0)
+            cam.eye = (0.85 + shake, 0.45, 6.0)
             cam.target = (0.15, 0.15, 0.0)
             snap_t = ease_out_cubic(clamp((prog - 0.22) / 0.78, 0.0, 1.0))
             self._add_3d_turbofan(
                 sc,
                 center=(-0.20, 0.0, 0.0),
-                scale=1.15,
+                scale=1.10,
                 yaw=-0.45,
                 spin=t * 16.0,
                 cutaway=True,
@@ -535,44 +595,61 @@ class JetEngineBirdStrikeScene(EpisodeScene):
                 detached_blade_t=snap_t,
             )
             if prog > 0.25:
-                overlays_2d.append(lambda d, sp=snap_t: draw_sparks(d, 610, 740, sp, 20, 175, 145, p, seed=708))
+                overlays_2d.append(lambda d, sp=snap_t: draw_sparks(d, 560, 740, sp, 18, 155, 130, p, seed=708))
 
         elif scene_key == "kevlar_catch_climax":
-            cam.eye = (0.55, 0.52, 5.9)
+            cam.eye = (0.55, 0.52, 6.2)
             cam.target = (0.0, 0.12, 0.0)
             catch_p = ease_out_cubic(clamp(prog * 1.25, 0.0, 1.0))
-            bulge = math.sin(catch_p * math.pi) * 0.34 + 0.12 * catch_p
+            bulge = math.sin(catch_p * math.pi) * 0.28 + 0.14 * catch_p
             self._add_3d_turbofan(
                 sc,
-                center=(-0.15, 0.0, 0.0),
-                scale=1.12,
+                center=(-0.15, 0.05, 0.0),
+                scale=1.06,
                 yaw=-0.42,
                 spin=t * (10.0 * (1.0 - catch_p * 0.7)),
                 cutaway=True,
                 kevlar_glow=1.0,
                 kevlar_bulge=bulge,
                 missing_blade_idx=3,
-                detached_blade_t=0.95,
+                detached_blade_t=1.0,
             )
-            overlays_2d.append(lambda d, cp=catch_p: draw_sparks(d, 625, 725, cp, 18, 170, 140, p, seed=709))
-            overlays_2d.append(lambda d, cp=catch_p: draw_pressure_gauge(d, 165, 1140, 96, 0.25 + 0.70 * cp, "KEVLAR LOAD", f"{int(45 + cp * 55)}% CAUGHT", p, self.font_black))
+            overlays_2d.append(lambda d, cp=catch_p: draw_sparks(d, 540, 720, cp, 16, 150, 125, p, seed=709))
+            overlays_2d.append(
+                lambda d, cp=catch_p: draw_pressure_gauge(
+                    d, 175, 1185, 88, 0.35 + 0.65 * cp, "KEVLAR BELT", "100% CAUGHT", p, self.font_black, invert_scale=True
+                )
+            )
 
         elif scene_key == "thrust_margin_bars":
-            cam.eye = (0.0, 0.65, 7.6)
-            cam.target = (0.0, 0.15, 0.0)
-            self._add_3d_yellow_minijet(sc, center=(0.45, 0.68, -0.2), scale=0.86, yaw=-0.45, pitch=0.10, t=t, with_pilot=True, pilot_pose="pilot_sub", pilot_emotion="relief", afterburner=True)
-            add_crash_test_dummy(sc, pos=(-1.55, -0.30, 0.55), scale=0.82, yaw=0.38, pose="point_right", emotion="engineer", t=t)
+            # SINGLE BOLT piloting the Yellow Mini-Jet with LEFT engine shut down & smoking, RIGHT engine at 100% climb!
+            cam.eye = (0.0, 0.68, 7.4)
+            cam.target = (0.0, -0.15, 0.0)
+            self._add_3d_yellow_minijet(
+                sc,
+                center=(0.0, 0.68, 0.0),
+                scale=0.98,
+                yaw=-0.38,
+                pitch=0.14,
+                t=t,
+                with_pilot=True,
+                pilot_pose="pilot_sub",
+                pilot_emotion="relief",
+                afterburner_left=False,
+                afterburner_right=True,
+                afterburner_main=False,
+            )
             bar_p = ease_out_cubic(clamp(prog * 1.4, 0.0, 1.0))
             overlays_2d.append(
                 lambda d, bp=bar_p: draw_comparison_bars(
                     d,
-                    115,
-                    1100,
-                    850,
-                    245,
+                    82,
+                    1115,
+                    774,
+                    225,
                     [
                         ("2 ENGINES NORMAL", "200% THRUST", 1.0, p.cyan),
-                        ("1 ENGINE FAILED", "100% SAFE CLIMB", 0.58, p.emerald),
+                        ("1 ENGINE FAILED", "100% SAFE CLIMB", 0.50, p.emerald),
                     ],
                     bp,
                     p,
@@ -581,69 +658,52 @@ class JetEngineBirdStrikeScene(EpisodeScene):
             )
 
         elif scene_key == "bolt_jet_safe_cruise":
-            # Open-sky twilight finale! Narrator: "Nice landing, Bolt."
-            cam.eye = (0.0, 0.68, 7.1)
+            # Narrator: "Nice landing, Bolt!" -> 3D runway tarmac strip below the twilight sky!
+            cam.eye = (0.0, 0.72, 7.3)
             cam.target = (0.0, 0.05, 0.0)
+            # Clean 3D asphalt runway with centerline dashes beneath the jet!
+            sc.add_box((0.0, -1.35, 0.0), (9.0, 0.16, 2.4), (44, 52, 66), metallic=0.12, texture="concrete")
+            for dx in (-2.6, -1.3, 0.0, 1.3, 2.6):
+                sc.add_box((dx, -1.25, 0.0), (0.68, 0.03, 0.14), (238, 242, 248), metallic=0.10, texture="matte")
             glide = ease_in_out_cubic(prog)
-            bob = math.sin(t * 3.2) * 0.08
+            # Jet touches down smoothly onto the runway!
+            jet_y = -0.38 - glide * 0.34
             self._add_3d_yellow_minijet(
                 sc,
-                center=(-0.35 + glide * 0.45, -0.08 + bob, 0.25),
-                scale=1.18,
-                yaw=-0.28 + glide * 0.22,
-                pitch=0.06,
-                roll=math.sin(t * 2.2) * 0.05,
+                center=(-0.35 + glide * 0.42, jet_y, 0.18),
+                scale=1.08,
+                yaw=-0.22 + glide * 0.16,
+                pitch=0.08 * (1.0 - glide),
                 t=t,
-                with_pilot=False,
-                afterburner=True,
-            )
-            add_crash_test_dummy(
-                sc,
-                pos=(-0.08 + glide * 0.45, 0.72 + bob, 0.42),
-                scale=0.86,
-                yaw=0.08,
-                pose="relief_wave",
-                emotion="relief",
-                t=t,
-                ground_shadow=False,
+                with_pilot=True,
+                pilot_pose="relief_wave",
+                pilot_emotion="relief",
+                afterburner_left=False,
+                afterburner_right=True,
+                afterburner_main=False,
             )
 
         else:  # verdict_cta_card
-            cam.eye = (0.0, 0.72, 7.2)
-            cam.target = (0.0, 0.10, 0.0)
-            bob = math.sin(t * 3.0) * 0.06
+            cam.eye = (0.0, 0.72, 7.4)
+            cam.target = (0.0, 0.05, 0.0)
+            sc.add_box((0.0, -1.35, 0.0), (9.0, 0.16, 2.4), (44, 52, 66), metallic=0.12, texture="concrete")
+            for dx in (-2.6, -1.3, 0.0, 1.3, 2.6):
+                sc.add_box((dx, -1.25, 0.0), (0.68, 0.03, 0.14), (238, 242, 248), metallic=0.10, texture="matte")
             self._add_3d_yellow_minijet(
                 sc,
-                center=(0.0, -0.34 + bob, 0.15),
-                scale=1.10,
-                yaw=-0.22,
-                pitch=0.04,
+                center=(0.0, -0.68, 0.10),
+                scale=1.05,
+                yaw=-0.18,
+                pitch=0.0,
                 t=t,
-                with_pilot=False,
-                afterburner=True,
+                with_pilot=True,
+                pilot_pose="cta_shrug",
+                pilot_emotion="cta",
+                afterburner_left=False,
+                afterburner_right=False,
+                afterburner_main=False,
             )
-            add_crash_test_dummy(
-                sc,
-                pos=(0.0, 0.56 + bob, 0.35),
-                scale=0.86,
-                yaw=math.sin(t * 2.2) * 0.14,
-                pose="cta_shrug",
-                emotion="cta",
-                t=t,
-                ground_shadow=False,
-            )
-
-            def _cta_buttons(d: ImageDraw.ImageDraw) -> None:
-                pulse = 1.0 + 0.04 * math.sin(t * 7.0)
-                for label, bx, col in (("YES", 198, p.cyan), ("NO", 882, p.amber)):
-                    bw, bh = int(130 * pulse), int(82 * pulse)
-                    by = 875
-                    d.rounded_rectangle([bx - bw, by, bx + bw, by + bh], radius=18, fill=p.surface_panel, outline=col, width=5)
-                    f = load_font(self.font_black, 44)
-                    bb = d.textbbox((0, 0), label, font=f)
-                    d.text((bx - (bb[2] - bb[0]) / 2, by + (bh - (bb[3] - bb[1])) / 2 - 4), label, font=f, fill=col)
-
-            overlays_2d.append(_cta_buttons)
+            overlays_2d.append(lambda d: draw_cta_buttons(d, t, p, self.font_black, by=1145))
 
         rendered_bgr = sc.render_to_bgr(bg)
         return rendered_bgr, overlays_2d
@@ -666,7 +726,7 @@ class JetEngineBirdStrikeScene(EpisodeScene):
             fn(draw)
 
     def render_cover_hero(self, img: Image.Image, draw: ImageDraw.ImageDraw) -> None:
-        rendered_bgr, overlays_2d = self._render_scene_3d("turbofan_impact_hero", t=0.45, prog=0.52, rms=0.4)
+        rendered_bgr, overlays_2d = self._render_scene_3d("turbofan_impact_hero", t=0.45, prog=0.45, rms=0.4, is_cover=True)
         rgb = cv2.cvtColor(rendered_bgr, cv2.COLOR_BGR2RGB)
         img.paste(Image.fromarray(rgb, mode="RGB"))
         for fn in overlays_2d:
