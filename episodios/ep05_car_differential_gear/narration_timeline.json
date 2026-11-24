@@ -1,0 +1,93 @@
+{
+  "total_duration_s": 66.5,
+  "sample_rate_hz": 48000,
+  "beats": [
+    {
+      "id": "b01_hook",
+      "start_s": 0.05,
+      "end_s": 4.9427,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b01_hook_908f5dff0ab8.wav",
+      "narration_text": "Every time your car turns a corner, your outside tire spins faster than the inside one."
+    },
+    {
+      "id": "b02_solid_axle_problem",
+      "start_s": 5.4511,
+      "end_s": 9.912,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b02_solid_axle_problem_76953767ae0e.wav",
+      "narration_text": "Weld both wheels to one solid axle and your tires shred rubber around every turn."
+    },
+    {
+      "id": "b03_path_geometry",
+      "start_s": 10.5334,
+      "end_s": 15.6774,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b03_path_geometry_912ea8848da6.wav",
+      "narration_text": "From above, the outer tire traces a wider arc, so it must rotate more times per second."
+    },
+    {
+      "id": "b04_exploded_diff",
+      "start_s": 16.2987,
+      "end_s": 21.3275,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b04_exploded_diff_e9cb96213e10.wav",
+      "narration_text": "The fix uses zero computers: a mechanical differential built from beveled steel gears."
+    },
+    {
+      "id": "b05_pinion_ring_carrier",
+      "start_s": 21.9489,
+      "end_s": 27.0819,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b05_pinion_ring_carrier_00b17d733f72.wav",
+      "narration_text": "Your driveshaft spins a pinion gear that turns a giant ring gear on a rotating cage."
+    },
+    {
+      "id": "b06_straight_drive_lock",
+      "start_s": 27.7032,
+      "end_s": 33.4443,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b06_straight_drive_lock_a19d54b70796.wav",
+      "narration_text": "Inside sit orbiting spider gears meshing with both axles. Driving straight, they never spin."
+    },
+    {
+      "id": "b07_corner_spider_spin",
+      "start_s": 34.1221,
+      "end_s": 38.7497,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b07_corner_spider_spin_144ace9df1fd.wav",
+      "narration_text": "Steer into a turn and those spider gears instantly spin like tiny mechanical seesaws."
+    },
+    {
+      "id": "b08_rpm_conservation",
+      "start_s": 39.4558,
+      "end_s": 43.9793,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b08_rpm_conservation_0d6afc2066c4.wav",
+      "narration_text": "Every RPM lost by the inside tire gets handed straight to the outside tire automatically."
+    },
+    {
+      "id": "b09_ice_patch_flaw",
+      "start_s": 44.6854,
+      "end_s": 48.9218,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b09_ice_patch_flaw_aabd32e25242.wav",
+      "narration_text": "There is one catch. Put one tire on slick ice and all power dumps there."
+    },
+    {
+      "id": "b10_zero_grip_stuck",
+      "start_s": 49.7126,
+      "end_s": 54.5023,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b10_zero_grip_stuck_3e39ad5bbad4.wav",
+      "narration_text": "Because an open differential takes the easiest path, the tire on dry pavement sits frozen."
+    },
+    {
+      "id": "b11_lsd_clutch_fix",
+      "start_s": 55.2084,
+      "end_s": 59.4373,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b11_lsd_clutch_fix_6cfe2b321d13.wav",
+      "narration_text": "Performance cars add limited-slip clutch packs that clamp both axles together under slip."
+    },
+    {
+      "id": "b12_cta",
+      "start_s": 60.2281,
+      "end_s": 64.6139,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/cache/tts/b12_cta_9c1e04cfb0b6.wav",
+      "narration_text": "Have you ever gotten one tire stuck spinning on ice? Comment YES or NO."
+    }
+  ],
+  "narration_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/narration_clean.wav",
+  "master_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/audio_master.wav",
+  "envelope_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep05_car_differential_gear/narration_envelope.npy"
+}

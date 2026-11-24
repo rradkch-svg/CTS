@@ -1,0 +1,1342 @@
+{
+  "blocks": [
+    {
+      "start_s": 0.05,
+      "end_s": 1.32,
+      "words": [
+        {
+          "text": "Two",
+          "start_s": 0.05,
+          "end_s": 0.3,
+          "emphasize": false
+        },
+        {
+          "text": "blueprints",
+          "start_s": 0.3,
+          "end_s": 0.74,
+          "emphasize": false
+        },
+        {
+          "text": "look",
+          "start_s": 0.74,
+          "end_s": 1.0,
+          "emphasize": false
+        },
+        {
+          "text": "nearly",
+          "start_s": 1.0,
+          "end_s": 1.32,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 1.32,
+      "end_s": 3.32,
+      "words": [
+        {
+          "text": "identical,",
+          "start_s": 1.32,
+          "end_s": 1.9,
+          "emphasize": false
+        },
+        {
+          "text": "yet",
+          "start_s": 2.56,
+          "end_s": 2.76,
+          "emphasize": false
+        },
+        {
+          "text": "moving",
+          "start_s": 2.76,
+          "end_s": 3.0,
+          "emphasize": false
+        },
+        {
+          "text": "one",
+          "start_s": 3.0,
+          "end_s": 3.32,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 3.32,
+      "end_s": 4.78,
+      "words": [
+        {
+          "text": "steel",
+          "start_s": 3.32,
+          "end_s": 3.64,
+          "emphasize": false
+        },
+        {
+          "text": "rod",
+          "start_s": 3.64,
+          "end_s": 3.96,
+          "emphasize": false
+        },
+        {
+          "text": "doubled",
+          "start_s": 3.96,
+          "end_s": 4.42,
+          "emphasize": false
+        },
+        {
+          "text": "stress",
+          "start_s": 4.42,
+          "end_s": 4.78,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 4.78,
+      "end_s": 6.02,
+      "words": [
+        {
+          "text": "on",
+          "start_s": 4.78,
+          "end_s": 5.1,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 5.1,
+          "end_s": 5.2,
+          "emphasize": false
+        },
+        {
+          "text": "single",
+          "start_s": 5.2,
+          "end_s": 5.44,
+          "emphasize": false
+        },
+        {
+          "text": "nut.",
+          "start_s": 5.44,
+          "end_s": 6.02,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 6.79,
+      "end_s": 7.6,
+      "words": [
+        {
+          "text": "This",
+          "start_s": 6.79,
+          "end_s": 6.94,
+          "emphasize": false
+        },
+        {
+          "text": "famous",
+          "start_s": 6.94,
+          "end_s": 7.16,
+          "emphasize": false
+        },
+        {
+          "text": "engineering",
+          "start_s": 7.16,
+          "end_s": 7.6,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 7.6,
+      "end_s": 8.98,
+      "words": [
+        {
+          "text": "statics",
+          "start_s": 7.6,
+          "end_s": 7.98,
+          "emphasize": false
+        },
+        {
+          "text": "lesson",
+          "start_s": 7.98,
+          "end_s": 8.46,
+          "emphasize": false
+        },
+        {
+          "text": "still",
+          "start_s": 8.46,
+          "end_s": 8.8,
+          "emphasize": false
+        },
+        {
+          "text": "tricks",
+          "start_s": 8.8,
+          "end_s": 8.98,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 8.98,
+      "end_s": 10.18,
+      "words": [
+        {
+          "text": "almost",
+          "start_s": 8.98,
+          "end_s": 9.3,
+          "emphasize": false
+        },
+        {
+          "text": "everyone",
+          "start_s": 9.3,
+          "end_s": 9.76,
+          "emphasize": false
+        },
+        {
+          "text": "at",
+          "start_s": 9.76,
+          "end_s": 10.02,
+          "emphasize": false
+        },
+        {
+          "text": "first",
+          "start_s": 10.02,
+          "end_s": 10.18,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 10.18,
+      "end_s": 10.44,
+      "words": [
+        {
+          "text": "glance.",
+          "start_s": 10.18,
+          "end_s": 10.44,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 11.539,
+      "end_s": 12.54,
+      "words": [
+        {
+          "text": "Originally,",
+          "start_s": 11.539,
+          "end_s": 11.86,
+          "emphasize": false
+        },
+        {
+          "text": "two",
+          "start_s": 12.06,
+          "end_s": 12.32,
+          "emphasize": false
+        },
+        {
+          "text": "stacked",
+          "start_s": 12.32,
+          "end_s": 12.54,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 12.54,
+      "end_s": 13.8,
+      "words": [
+        {
+          "text": "walkways",
+          "start_s": 12.54,
+          "end_s": 13.06,
+          "emphasize": false
+        },
+        {
+          "text": "hung",
+          "start_s": 13.06,
+          "end_s": 13.28,
+          "emphasize": false
+        },
+        {
+          "text": "from",
+          "start_s": 13.28,
+          "end_s": 13.52,
+          "emphasize": false
+        },
+        {
+          "text": "one",
+          "start_s": 13.52,
+          "end_s": 13.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 13.8,
+      "end_s": 15.3,
+      "words": [
+        {
+          "text": "continuous",
+          "start_s": 13.8,
+          "end_s": 14.22,
+          "emphasize": false
+        },
+        {
+          "text": "steel",
+          "start_s": 14.22,
+          "end_s": 14.68,
+          "emphasize": false
+        },
+        {
+          "text": "rod",
+          "start_s": 14.68,
+          "end_s": 15.0,
+          "emphasize": false
+        },
+        {
+          "text": "anchored",
+          "start_s": 15.0,
+          "end_s": 15.3,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 15.3,
+      "end_s": 15.92,
+      "words": [
+        {
+          "text": "to",
+          "start_s": 15.3,
+          "end_s": 15.6,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 15.6,
+          "end_s": 15.68,
+          "emphasize": false
+        },
+        {
+          "text": "ceiling.",
+          "start_s": 15.68,
+          "end_s": 15.92,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 16.804,
+      "end_s": 17.24,
+      "words": [
+        {
+          "text": "Check",
+          "start_s": 16.804,
+          "end_s": 16.96,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 16.96,
+          "end_s": 17.08,
+          "emphasize": false
+        },
+        {
+          "text": "forces.",
+          "start_s": 17.08,
+          "end_s": 17.24,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 18.04,
+      "end_s": 18.74,
+      "words": [
+        {
+          "text": "The",
+          "start_s": 18.04,
+          "end_s": 18.08,
+          "emphasize": false
+        },
+        {
+          "text": "bottom",
+          "start_s": 18.08,
+          "end_s": 18.28,
+          "emphasize": false
+        },
+        {
+          "text": "nut",
+          "start_s": 18.28,
+          "end_s": 18.5,
+          "emphasize": false
+        },
+        {
+          "text": "holds",
+          "start_s": 18.5,
+          "end_s": 18.74,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 18.74,
+      "end_s": 19.38,
+      "words": [
+        {
+          "text": "one",
+          "start_s": 18.74,
+          "end_s": 18.98,
+          "emphasize": false
+        },
+        {
+          "text": "walkway,",
+          "start_s": 18.98,
+          "end_s": 19.38,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 19.62,
+      "end_s": 20.22,
+      "words": [
+        {
+          "text": "and",
+          "start_s": 19.62,
+          "end_s": 19.68,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 19.68,
+          "end_s": 19.82,
+          "emphasize": false
+        },
+        {
+          "text": "upper",
+          "start_s": 19.82,
+          "end_s": 19.96,
+          "emphasize": false
+        },
+        {
+          "text": "nut",
+          "start_s": 19.96,
+          "end_s": 20.22,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 20.22,
+      "end_s": 21.16,
+      "words": [
+        {
+          "text": "holds",
+          "start_s": 20.22,
+          "end_s": 20.4,
+          "emphasize": false
+        },
+        {
+          "text": "one",
+          "start_s": 20.4,
+          "end_s": 20.7,
+          "emphasize": false
+        },
+        {
+          "text": "walkway.",
+          "start_s": 20.7,
+          "end_s": 21.16,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 22.023,
+      "end_s": 23.08,
+      "words": [
+        {
+          "text": "Threading",
+          "start_s": 22.023,
+          "end_s": 22.4,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 22.4,
+          "end_s": 22.54,
+          "emphasize": false
+        },
+        {
+          "text": "forty-foot",
+          "start_s": 22.54,
+          "end_s": 23.08,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 23.08,
+      "end_s": 23.74,
+      "words": [
+        {
+          "text": "rod",
+          "start_s": 23.08,
+          "end_s": 23.32,
+          "emphasize": false
+        },
+        {
+          "text": "was",
+          "start_s": 23.32,
+          "end_s": 23.52,
+          "emphasize": false
+        },
+        {
+          "text": "slow,",
+          "start_s": 23.52,
+          "end_s": 23.74,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 24.02,
+      "end_s": 24.9,
+      "words": [
+        {
+          "text": "so",
+          "start_s": 24.02,
+          "end_s": 24.14,
+          "emphasize": false
+        },
+        {
+          "text": "builders",
+          "start_s": 24.14,
+          "end_s": 24.36,
+          "emphasize": false
+        },
+        {
+          "text": "swapped",
+          "start_s": 24.36,
+          "end_s": 24.68,
+          "emphasize": false
+        },
+        {
+          "text": "it",
+          "start_s": 24.68,
+          "end_s": 24.9,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 24.9,
+      "end_s": 25.96,
+      "words": [
+        {
+          "text": "for",
+          "start_s": 24.9,
+          "end_s": 25.04,
+          "emphasize": false
+        },
+        {
+          "text": "two",
+          "start_s": 25.04,
+          "end_s": 25.2,
+          "emphasize": false
+        },
+        {
+          "text": "shorter",
+          "start_s": 25.2,
+          "end_s": 25.56,
+          "emphasize": false
+        },
+        {
+          "text": "offset",
+          "start_s": 25.56,
+          "end_s": 25.96,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 25.96,
+      "end_s": 26.3,
+      "words": [
+        {
+          "text": "rods.",
+          "start_s": 25.96,
+          "end_s": 26.3,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 27.281,
+      "end_s": 28.46,
+      "words": [
+        {
+          "text": "Both",
+          "start_s": 27.281,
+          "end_s": 27.4,
+          "emphasize": false
+        },
+        {
+          "text": "drawings",
+          "start_s": 27.4,
+          "end_s": 27.64,
+          "emphasize": false
+        },
+        {
+          "text": "look",
+          "start_s": 27.64,
+          "end_s": 28.1,
+          "emphasize": false
+        },
+        {
+          "text": "almost",
+          "start_s": 28.1,
+          "end_s": 28.46,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 28.46,
+      "end_s": 28.8,
+      "words": [
+        {
+          "text": "identical.",
+          "start_s": 28.46,
+          "end_s": 28.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 29.84,
+      "end_s": 30.7,
+      "words": [
+        {
+          "text": "Now",
+          "start_s": 29.84,
+          "end_s": 29.88,
+          "emphasize": false
+        },
+        {
+          "text": "trace",
+          "start_s": 29.88,
+          "end_s": 30.24,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 30.24,
+          "end_s": 30.46,
+          "emphasize": false
+        },
+        {
+          "text": "invisible",
+          "start_s": 30.46,
+          "end_s": 30.7,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 30.7,
+      "end_s": 32.06,
+      "words": [
+        {
+          "text": "load",
+          "start_s": 30.7,
+          "end_s": 31.1,
+          "emphasize": false
+        },
+        {
+          "text": "path",
+          "start_s": 31.1,
+          "end_s": 31.34,
+          "emphasize": false
+        },
+        {
+          "text": "inside",
+          "start_s": 31.34,
+          "end_s": 31.66,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 31.66,
+          "end_s": 32.06,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 32.06,
+      "end_s": 32.42,
+      "words": [
+        {
+          "text": "upper",
+          "start_s": 32.06,
+          "end_s": 32.2,
+          "emphasize": false
+        },
+        {
+          "text": "beam.",
+          "start_s": 32.2,
+          "end_s": 32.42,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 33.374,
+      "end_s": 34.32,
+      "words": [
+        {
+          "text": "The",
+          "start_s": 33.374,
+          "end_s": 33.48,
+          "emphasize": false
+        },
+        {
+          "text": "lower",
+          "start_s": 33.48,
+          "end_s": 33.68,
+          "emphasize": false
+        },
+        {
+          "text": "walkway",
+          "start_s": 33.68,
+          "end_s": 34.1,
+          "emphasize": false
+        },
+        {
+          "text": "now",
+          "start_s": 34.1,
+          "end_s": 34.32,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 34.32,
+      "end_s": 35.1,
+      "words": [
+        {
+          "text": "hangs",
+          "start_s": 34.32,
+          "end_s": 34.62,
+          "emphasize": false
+        },
+        {
+          "text": "from",
+          "start_s": 34.62,
+          "end_s": 34.82,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 34.82,
+          "end_s": 34.94,
+          "emphasize": false
+        },
+        {
+          "text": "upper",
+          "start_s": 34.94,
+          "end_s": 35.1,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 35.1,
+      "end_s": 35.36,
+      "words": [
+        {
+          "text": "beam.",
+          "start_s": 35.1,
+          "end_s": 35.36,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 35.96,
+      "end_s": 36.98,
+      "words": [
+        {
+          "text": "One",
+          "start_s": 35.96,
+          "end_s": 36.1,
+          "emphasize": false
+        },
+        {
+          "text": "upper",
+          "start_s": 36.1,
+          "end_s": 36.36,
+          "emphasize": false
+        },
+        {
+          "text": "nut",
+          "start_s": 36.36,
+          "end_s": 36.6,
+          "emphasize": false
+        },
+        {
+          "text": "carries",
+          "start_s": 36.6,
+          "end_s": 36.98,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 36.98,
+      "end_s": 37.8,
+      "words": [
+        {
+          "text": "both",
+          "start_s": 36.98,
+          "end_s": 37.24,
+          "emphasize": false
+        },
+        {
+          "text": "walkways.",
+          "start_s": 37.24,
+          "end_s": 37.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 38.826,
+      "end_s": 40.04,
+      "words": [
+        {
+          "text": "Worse,",
+          "start_s": 38.826,
+          "end_s": 39.12,
+          "emphasize": false
+        },
+        {
+          "text": "two",
+          "start_s": 39.38,
+          "end_s": 39.46,
+          "emphasize": false
+        },
+        {
+          "text": "welded",
+          "start_s": 39.46,
+          "end_s": 39.84,
+          "emphasize": false
+        },
+        {
+          "text": "steel",
+          "start_s": 39.84,
+          "end_s": 40.04,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 40.04,
+      "end_s": 41.2,
+      "words": [
+        {
+          "text": "channels",
+          "start_s": 40.04,
+          "end_s": 40.52,
+          "emphasize": false
+        },
+        {
+          "text": "left",
+          "start_s": 40.52,
+          "end_s": 40.76,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 40.76,
+          "end_s": 40.98,
+          "emphasize": false
+        },
+        {
+          "text": "thin",
+          "start_s": 40.98,
+          "end_s": 41.2,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 41.2,
+      "end_s": 42.42,
+      "words": [
+        {
+          "text": "hollow",
+          "start_s": 41.2,
+          "end_s": 41.5,
+          "emphasize": false
+        },
+        {
+          "text": "seam",
+          "start_s": 41.5,
+          "end_s": 41.86,
+          "emphasize": false
+        },
+        {
+          "text": "right",
+          "start_s": 41.86,
+          "end_s": 42.18,
+          "emphasize": false
+        },
+        {
+          "text": "above",
+          "start_s": 42.18,
+          "end_s": 42.42,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 42.42,
+      "end_s": 43.0,
+      "words": [
+        {
+          "text": "that",
+          "start_s": 42.42,
+          "end_s": 42.64,
+          "emphasize": false
+        },
+        {
+          "text": "washer.",
+          "start_s": 42.64,
+          "end_s": 43.0,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 43.96,
+      "end_s": 44.9,
+      "words": [
+        {
+          "text": "Under",
+          "start_s": 43.96,
+          "end_s": 44.16,
+          "emphasize": false
+        },
+        {
+          "text": "two",
+          "start_s": 44.16,
+          "end_s": 44.407,
+          "emphasize": false
+        },
+        {
+          "text": "hundred",
+          "start_s": 44.407,
+          "end_s": 44.653,
+          "emphasize": true
+        },
+        {
+          "text": "percent",
+          "start_s": 44.653,
+          "end_s": 44.9,
+          "emphasize": true
+        }
+      ]
+    },
+    {
+      "start_s": 44.9,
+      "end_s": 45.48,
+      "words": [
+        {
+          "text": "bearing",
+          "start_s": 44.9,
+          "end_s": 45.14,
+          "emphasize": false
+        },
+        {
+          "text": "stress,",
+          "start_s": 45.14,
+          "end_s": 45.48,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 45.82,
+      "end_s": 47.2,
+      "words": [
+        {
+          "text": "the",
+          "start_s": 45.82,
+          "end_s": 45.92,
+          "emphasize": false
+        },
+        {
+          "text": "flange",
+          "start_s": 45.92,
+          "end_s": 46.24,
+          "emphasize": false
+        },
+        {
+          "text": "curled",
+          "start_s": 46.24,
+          "end_s": 46.62,
+          "emphasize": false
+        },
+        {
+          "text": "downward",
+          "start_s": 46.62,
+          "end_s": 47.2,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 47.2,
+      "end_s": 48.22,
+      "words": [
+        {
+          "text": "until",
+          "start_s": 47.2,
+          "end_s": 47.64,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 47.64,
+          "end_s": 47.78,
+          "emphasize": false
+        },
+        {
+          "text": "nut",
+          "start_s": 47.78,
+          "end_s": 47.98,
+          "emphasize": false
+        },
+        {
+          "text": "pulled",
+          "start_s": 47.98,
+          "end_s": 48.22,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 48.22,
+      "end_s": 48.54,
+      "words": [
+        {
+          "text": "through.",
+          "start_s": 48.22,
+          "end_s": 48.54,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 49.621,
+      "end_s": 50.48,
+      "words": [
+        {
+          "text": "Even",
+          "start_s": 49.621,
+          "end_s": 49.8,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 49.8,
+          "end_s": 49.96,
+          "emphasize": false
+        },
+        {
+          "text": "original",
+          "start_s": 49.96,
+          "end_s": 50.18,
+          "emphasize": false
+        },
+        {
+          "text": "beam",
+          "start_s": 50.18,
+          "end_s": 50.48,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 50.48,
+      "end_s": 51.4,
+      "words": [
+        {
+          "text": "barely",
+          "start_s": 50.48,
+          "end_s": 50.88,
+          "emphasize": false
+        },
+        {
+          "text": "met",
+          "start_s": 50.88,
+          "end_s": 51.22,
+          "emphasize": false
+        },
+        {
+          "text": "code.",
+          "start_s": 51.22,
+          "end_s": 51.4,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 52.0,
+      "end_s": 52.82,
+      "words": [
+        {
+          "text": "Doubling",
+          "start_s": 52.0,
+          "end_s": 52.24,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 52.24,
+          "end_s": 52.4,
+          "emphasize": false
+        },
+        {
+          "text": "force",
+          "start_s": 52.4,
+          "end_s": 52.56,
+          "emphasize": false
+        },
+        {
+          "text": "dropped",
+          "start_s": 52.56,
+          "end_s": 52.82,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 52.82,
+      "end_s": 53.92,
+      "words": [
+        {
+          "text": "safety",
+          "start_s": 52.82,
+          "end_s": 53.2,
+          "emphasize": false
+        },
+        {
+          "text": "below",
+          "start_s": 53.2,
+          "end_s": 53.5,
+          "emphasize": false
+        },
+        {
+          "text": "one.",
+          "start_s": 53.5,
+          "end_s": 53.92,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 54.85,
+      "end_s": 56.16,
+      "words": [
+        {
+          "text": "That",
+          "start_s": 54.85,
+          "end_s": 55.08,
+          "emphasize": false
+        },
+        {
+          "text": "edit",
+          "start_s": 55.08,
+          "end_s": 55.36,
+          "emphasize": false
+        },
+        {
+          "text": "rewrote",
+          "start_s": 55.36,
+          "end_s": 55.84,
+          "emphasize": false
+        },
+        {
+          "text": "engineering",
+          "start_s": 55.84,
+          "end_s": 56.16,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 56.16,
+      "end_s": 56.92,
+      "words": [
+        {
+          "text": "codes",
+          "start_s": 56.16,
+          "end_s": 56.64,
+          "emphasize": false
+        },
+        {
+          "text": "forever:",
+          "start_s": 56.64,
+          "end_s": 56.92,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 57.9,
+      "end_s": 58.76,
+      "words": [
+        {
+          "text": "every",
+          "start_s": 57.9,
+          "end_s": 57.94,
+          "emphasize": false
+        },
+        {
+          "text": "field",
+          "start_s": 57.94,
+          "end_s": 58.18,
+          "emphasize": false
+        },
+        {
+          "text": "change",
+          "start_s": 58.18,
+          "end_s": 58.4,
+          "emphasize": false
+        },
+        {
+          "text": "requires",
+          "start_s": 58.4,
+          "end_s": 58.76,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 58.76,
+      "end_s": 60.26,
+      "words": [
+        {
+          "text": "a",
+          "start_s": 58.76,
+          "end_s": 58.98,
+          "emphasize": false
+        },
+        {
+          "text": "fresh",
+          "start_s": 58.98,
+          "end_s": 59.28,
+          "emphasize": false
+        },
+        {
+          "text": "free-body",
+          "start_s": 59.28,
+          "end_s": 59.82,
+          "emphasize": false
+        },
+        {
+          "text": "diagram.",
+          "start_s": 59.82,
+          "end_s": 60.26,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 61.38,
+      "end_s": 61.78,
+      "words": [
+        {
+          "text": "Would",
+          "start_s": 61.38,
+          "end_s": 61.42,
+          "emphasize": false
+        },
+        {
+          "text": "you",
+          "start_s": 61.42,
+          "end_s": 61.52,
+          "emphasize": false
+        },
+        {
+          "text": "have",
+          "start_s": 61.52,
+          "end_s": 61.62,
+          "emphasize": false
+        },
+        {
+          "text": "caught",
+          "start_s": 61.62,
+          "end_s": 61.78,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 61.78,
+      "end_s": 62.58,
+      "words": [
+        {
+          "text": "that",
+          "start_s": 61.78,
+          "end_s": 62.0,
+          "emphasize": false
+        },
+        {
+          "text": "blueprint",
+          "start_s": 62.0,
+          "end_s": 62.22,
+          "emphasize": false
+        },
+        {
+          "text": "shortcut?",
+          "start_s": 62.22,
+          "end_s": 62.58,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 63.3,
+      "end_s": 64.44,
+      "words": [
+        {
+          "text": "Comment",
+          "start_s": 63.3,
+          "end_s": 63.46,
+          "emphasize": false
+        },
+        {
+          "text": "YES",
+          "start_s": 63.46,
+          "end_s": 63.72,
+          "emphasize": true
+        },
+        {
+          "text": "or",
+          "start_s": 63.72,
+          "end_s": 64.24,
+          "emphasize": false
+        },
+        {
+          "text": "NO.",
+          "start_s": 64.24,
+          "end_s": 64.44,
+          "emphasize": true
+        }
+      ]
+    }
+  ]
+}

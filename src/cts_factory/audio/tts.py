@@ -18,25 +18,40 @@ from cts_factory.config import AudioBeatTiming, AudioTimeline, BrandConfig, Epis
 TARGET_SR = 48000
 
 
-def _load_api_key(repo_root: Path | None = None) -> str:
-    key = os.environ.get("GEMINI_API_KEY", "").strip()
-    if key:
-        return key
+def _load_api_keys(repo_root: Path | None = None) -> list[str]:
+    """Load primary GEMINI_API_KEY and optional GEMINI_API_KEY_FALLBACK from env or local .env."""
+    keys: list[str] = []
+    for var in ("GEMINI_API_KEY", "GEMINI_API_KEY_FALLBACK"):
+        val = os.environ.get(var, "").strip()
+        if val and val not in keys:
+            keys.append(val)
+
     candidates = [Path.cwd() / ".env"]
     if repo_root is not None:
         candidates.insert(0, Path(repo_root) / ".env")
     for env_file in candidates:
         if env_file.is_file():
+            env_map: dict[str, str] = {}
             for raw_line in env_file.read_text(encoding="utf-8").splitlines():
                 line = raw_line.strip()
                 if not line or line.startswith("#") or "=" not in line:
                     continue
                 k, v = line.split("=", 1)
-                if k.strip() == "GEMINI_API_KEY":
-                    cleaned = v.strip().strip('"').strip("'")
-                    if cleaned:
-                        return cleaned
-    raise RuntimeError("GEMINI_API_KEY not found in environment or local .env file.")
+                cleaned = v.strip().strip('"').strip("'")
+                if cleaned:
+                    env_map[k.strip()] = cleaned
+            for var in ("GEMINI_API_KEY", "GEMINI_API_KEY_FALLBACK"):
+                val = env_map.get(var, "")
+                if val and val not in keys:
+                    keys.append(val)
+
+    if not keys:
+        raise RuntimeError("GEMINI_API_KEY not found in environment or local .env file.")
+    return keys
+
+
+def _load_api_key(repo_root: Path | None = None) -> str:
+    return _load_api_keys(repo_root)[0]
 
 
 def _read_wav_float(path: Path) -> tuple[np.ndarray, int]:
@@ -259,8 +274,16 @@ def _split_batched_wav_into_beats(
     samples, sr = _read_wav_float(full_wav)
     total_s = len(samples) / float(sr)
 
-    model = WhisperModel("small", device="cpu", compute_type="int8")
-    segments, _ = model.transcribe(str(full_wav), language="en", word_timestamps=True, vad_filter=False)
+    if sr == 16000:
+        audio_16k = samples.astype(np.float32, copy=False)
+    else:
+        n_out = max(1, int(round(len(samples) * 16000.0 / float(sr))))
+        x_old = np.linspace(0.0, 1.0, len(samples), endpoint=False)
+        x_new = np.linspace(0.0, 1.0, n_out, endpoint=False)
+        audio_16k = np.interp(x_new, x_old, samples).astype(np.float32)
+
+    model = WhisperModel("base.en", device="cpu", compute_type="int8")
+    segments, _ = model.transcribe(audio_16k, language="en", word_timestamps=True, vad_filter=False)
     words: list[tuple[str, float, float]] = []
     for seg in segments:
         for w in seg.words or []:
@@ -320,15 +343,32 @@ def _split_batched_wav_into_beats(
         _write_wav_mono(out_wav, samples[i0:i1], sr)
 
 
+def _build_genai_clients(api_keys: list[str], api_version: str) -> list:
+    from google import genai
+    from google.genai import types
+
+    clients = []
+    for key in api_keys:
+        if key.startswith("AQ."):
+            clients.append(genai.Client(vertexai=True, api_key=key))
+        clients.append(
+            genai.Client(
+                api_key=key,
+                http_options=types.HttpOptions(api_version=api_version),
+            )
+        )
+    return clients
+
+
 def _synthesize_episode_batched_tts(
-    client,
+    clients: list,
     models: list[str],
     voice: str,
     beats: list,
     out_paths: list[Path],
     cache_dir: Path,
 ) -> None:
-    """Synthesize an entire episode in 1 Gemini TTS API call and slice cleanly into beat WAVs."""
+    """Synthesize an entire episode in 1 Gemini TTS API call across fallback keys/models and slice into beat WAVs."""
     from google.genai import types
 
     full_text = "\n\n".join(b.narration_text.strip() for b in beats)
@@ -341,56 +381,62 @@ def _synthesize_episode_batched_tts(
             candidate_models.append("gemini-2.5-pro-preview-tts")
         last_err: Exception | None = None
         synthesized = False
-        for model in candidate_models:
-            for attempt in range(2):
-                try:
-                    resp = client.models.generate_content(
-                        model=model,
-                        contents=full_text,
-                        config=types.GenerateContentConfig(
-                            response_modalities=["AUDIO"],
-                            speech_config=types.SpeechConfig(
-                                voice_config=types.VoiceConfig(
-                                    prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                                        voice_name=voice
+        for client in clients:
+            for model in candidate_models:
+                for attempt in range(2):
+                    try:
+                        resp = client.models.generate_content(
+                            model=model,
+                            contents=full_text,
+                            config=types.GenerateContentConfig(
+                                response_modalities=["AUDIO"],
+                                speech_config=types.SpeechConfig(
+                                    voice_config=types.VoiceConfig(
+                                        prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                            voice_name=voice
+                                        )
                                     )
-                                )
+                                ),
                             ),
-                        ),
-                    )
-                    candidates = getattr(resp, "candidates", None) or []
-                    if not candidates or not candidates[0].content or not candidates[0].content.parts:
-                        raise RuntimeError(f"Empty audio response from {model}")
-                    audio_part = None
-                    for part in candidates[0].content.parts:
-                        inline = getattr(part, "inline_data", None)
-                        if inline is not None and getattr(inline, "data", None):
-                            audio_part = inline
-                            break
-                    if audio_part is None:
-                        raise RuntimeError(f"No inline_data audio part returned by {model}")
-                    _decode_tts_bytes_to_48k_wav(
-                        audio_part.data,
-                        getattr(audio_part, "mime_type", "") or "",
-                        batch_wav,
-                    )
-                    samples, sr = _read_wav_float(batch_wav)
-                    dur_s = len(samples) / float(sr)
-                    if dur_s < 40.0 or dur_s > 120.0:
-                        batch_wav.unlink(missing_ok=True)
-                        raise RuntimeError(f"Anomalous batched TTS duration {dur_s:.2f}s from {model}")
-                    synthesized = True
-                    break
-                except Exception as exc:
-                    last_err = exc
-                    msg = str(exc)
-                    if any(code in msg for code in ("404", "NOT_FOUND", "not found", "UNSUPPORTED", "RESOURCE_EXHAUSTED", "429")):
+                        )
+                        candidates = getattr(resp, "candidates", None) or []
+                        if not candidates or not candidates[0].content or not candidates[0].content.parts:
+                            raise RuntimeError(f"Empty audio response from {model}")
+                        audio_part = None
+                        for part in candidates[0].content.parts:
+                            inline = getattr(part, "inline_data", None)
+                            if inline is not None and getattr(inline, "data", None):
+                                audio_part = inline
+                                break
+                        if audio_part is None:
+                            raise RuntimeError(f"No inline_data audio part returned by {model}")
+                        _decode_tts_bytes_to_48k_wav(
+                            audio_part.data,
+                            getattr(audio_part, "mime_type", "") or "",
+                            batch_wav,
+                        )
+                        samples, sr = _read_wav_float(batch_wav)
+                        dur_s = len(samples) / float(sr)
+                        if dur_s < 40.0 or dur_s > 120.0:
+                            batch_wav.unlink(missing_ok=True)
+                            raise RuntimeError(f"Anomalous batched TTS duration {dur_s:.2f}s from {model}")
+                        synthesized = True
                         break
-                    time.sleep(2.0 * (attempt + 1))
+                    except Exception as exc:
+                        last_err = exc
+                        msg = str(exc)
+                        if any(
+                            code in msg
+                            for code in ("404", "401", "403", "NOT_FOUND", "not found", "UNSUPPORTED", "RESOURCE_EXHAUSTED", "429", "INVALID_ARGUMENT", "API_KEY_INVALID")
+                        ):
+                            break
+                        time.sleep(2.0 * (attempt + 1))
+                if synthesized:
+                    break
             if synthesized:
                 break
         if not synthesized:
-            raise RuntimeError(f"All Gemini TTS models failed ({candidate_models}): {last_err}")
+            raise RuntimeError(f"All Gemini TTS clients/models failed ({candidate_models}): {last_err}")
 
     _split_batched_wav_into_beats(batch_wav, beats, out_paths)
 
@@ -402,14 +448,8 @@ def synthesize_narration(
     repo_root: Path | None = None,
 ) -> AudioTimeline:
     """Synthesize all beats, soft-trim silence, fit inside 65-80s window, and save timeline."""
-    from google import genai
-    from google.genai import types
-
-    api_key = _load_api_key(repo_root)
-    client = genai.Client(
-        api_key=api_key,
-        http_options=types.HttpOptions(api_version=brand.narration.api_version),
-    )
+    api_keys = _load_api_keys(repo_root)
+    clients = _build_genai_clients(api_keys, brand.narration.api_version)
 
     cache_dir = episode_dir / "cache" / "tts"
     cache_dir.mkdir(parents=True, exist_ok=True)
@@ -434,7 +474,7 @@ def synthesize_narration(
     missing = [p for p in cache_paths if not (p.is_file() and p.stat().st_size > 1000)]
     if len(missing) >= 2:
         _synthesize_episode_batched_tts(
-            client=client,
+            clients=clients,
             models=models,
             voice=voice,
             beats=script.beats,
@@ -444,15 +484,24 @@ def synthesize_narration(
 
     raw_beats: list[tuple[str, str, Path, np.ndarray, float]] = []
     for beat, cache_wav in zip(script.beats, cache_paths):
-        _synthesize_beat_tts(
-            client=client,
-            models=models,
-            voice=voice,
-            global_direction=global_dir,
-            beat_direction=beat.voice_direction,
-            narration_text=beat.narration_text,
-            cache_wav=cache_wav,
-        )
+        last_err: Exception | None = None
+        for client in clients:
+            try:
+                _synthesize_beat_tts(
+                    client=client,
+                    models=models,
+                    voice=voice,
+                    global_direction=global_dir,
+                    beat_direction=beat.voice_direction,
+                    narration_text=beat.narration_text,
+                    cache_wav=cache_wav,
+                )
+                last_err = None
+                break
+            except Exception as exc:
+                last_err = exc
+        if last_err is not None:
+            raise last_err
         samples, sr = _read_wav_float(cache_wav)
         if sr != TARGET_SR:
             raise ValueError(f"Unexpected sample rate {sr} in {cache_wav}")
