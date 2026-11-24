@@ -1,0 +1,93 @@
+{
+  "total_duration_s": 68.51,
+  "sample_rate_hz": 48000,
+  "beats": [
+    {
+      "id": "b01_hook",
+      "start_s": 0.05,
+      "end_s": 6.27,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b01_hook_4f12d2c4cba2.wav",
+      "narration_text": "Dropping from orbit at seventeen thousand miles per hour wraps a capsule in five-thousand-degree plasma."
+    },
+    {
+      "id": "b02_bolt_wave_orbit",
+      "start_s": 6.45,
+      "end_s": 12.8,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b02_bolt_wave_orbit_476fc6ac6870.wav",
+      "narration_text": "Buckle up, Bolt — wave goodbye to space. Outside burns hotter than steel, yet inside stays cool."
+    },
+    {
+      "id": "b03_not_friction",
+      "start_s": 13.02,
+      "end_s": 19.07,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b03_not_friction_75bcae75a460.wav",
+      "narration_text": "Most people blame air friction. Actually, extreme air compression ahead of the hull creates that fire."
+    },
+    {
+      "id": "b04_pointy_vs_blunt",
+      "start_s": 19.29,
+      "end_s": 24.21,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b04_pointy_vs_blunt_467c7f4e7331.wav",
+      "narration_text": "A pointy nose would slice straight into the shockwave and melt. So engineers flip it backward."
+    },
+    {
+      "id": "b05_detached_bow_shock",
+      "start_s": 24.43,
+      "end_s": 29.57,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b05_detached_bow_shock_0e2bf4096b19.wav",
+      "narration_text": "Entering blunt-end first creates a detached bow shock that deflects ninety-eight percent of the heat."
+    },
+    {
+      "id": "b06_bolt_relax_gap",
+      "start_s": 29.81,
+      "end_s": 35.15,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b06_bolt_relax_gap_36309060420a.wav",
+      "narration_text": "Relax, Bolt — that curve traps a dead-air buffer ahead of you. Still, two percent is brutal."
+    },
+    {
+      "id": "b07_ablative_shield",
+      "start_s": 35.39,
+      "end_s": 40.48,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b07_ablative_shield_36c31f3ca973.wav",
+      "narration_text": "For the rest, the capsule wears a three-inch resin honeycomb shield built to burn away on purpose."
+    },
+    {
+      "id": "b08_char_vapor_carry",
+      "start_s": 40.73,
+      "end_s": 46.35,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b08_char_vapor_carry_52b0e3ded29f.wav",
+      "narration_text": "Outer resin chars into glowing gas, physically carrying heat away while cool layers insulate inside."
+    },
+    {
+      "id": "b09_temp_comparison",
+      "start_s": 46.61,
+      "end_s": 52.65,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b09_temp_comparison_9e4e09fe62c7.wav",
+      "narration_text": "Outside hits five thousand degrees Fahrenheit. Just three inches away inside Bolt's cabin, it stays seventy-two."
+    },
+    {
+      "id": "b10_chutes_deploy",
+      "start_s": 52.9,
+      "end_s": 58.12,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b10_chutes_deploy_28c7d7890a63.wav",
+      "narration_text": "Once air brakes away ninety-nine percent of orbital speed, three giant parachutes bloom open."
+    },
+    {
+      "id": "b11_splashdown_bolt",
+      "start_s": 58.37,
+      "end_s": 64.09,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b11_splashdown_bolt_2d9f90990566.wav",
+      "narration_text": "Welcome home, Bolt. From a blazing plasma fireball to a gentle seventeen mile per hour splashdown."
+    },
+    {
+      "id": "b12_cta",
+      "start_s": 64.34,
+      "end_s": 67.41,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/cache/tts/b12_cta_6eac1d68a97f.wav",
+      "narration_text": "Would you ride a capsule back from orbit? Comment YES or NO."
+    }
+  ],
+  "narration_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/narration_clean.wav",
+  "master_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/audio_master.wav",
+  "envelope_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep09_spacecraft_heat_shield/narration_envelope.npy"
+}

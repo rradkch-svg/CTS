@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep10",
+  "slug": "ep10_roller_coaster_rollback",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "Why Roller Coasters NEVER Roll Backwards",
+  "youtube_title_length": 40,
+  "youtube_description": "",
+  "ig_tiktok_caption": "Hear that loud clack-clack-clack climbing a roller coaster hill? That's an unpowered steel ratchet locking you forward — backed by zero-electricity magnetic eddy-current brakes. Would you still sit in the front row? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#rollercoaster",
+    "#howitworks",
+    "#mechanicalengineering",
+    "#physics",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Bolt waved right before we cut the 200-foot lift chain 😂 Would you sit in the front row knowing this? Comment YES or NO 👇",
+  "related_video_slot": "ep01_elevator_safety_brake",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}

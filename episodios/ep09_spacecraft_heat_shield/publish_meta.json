@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep09",
+  "slug": "ep09_spacecraft_heat_shield",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "How a 3-Inch Shield Survives 5,000°F Reentry",
+  "youtube_title_length": 44,
+  "youtube_description": "",
+  "ig_tiktok_caption": "At 17,500 mph, a spacecraft slams into Earth's atmosphere inside a 5,000°F plasma fireball — hotter than molten steel — yet stays room temperature inside thanks to a blunt bow shock and ablative charring. Would you ride a capsule back from orbit? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#space",
+    "#aerospace",
+    "#physics",
+    "#howitworks",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Bolt waved goodbye to orbit at 17,500 mph 😂 Would you ride a reentry capsule back to Earth? Comment YES or NO 👇",
+  "related_video_slot": "ep10_roller_coaster_rollback",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}

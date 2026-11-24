@@ -1,0 +1,1426 @@
+{
+  "blocks": [
+    {
+      "start_s": 0.05,
+      "end_s": 0.8,
+      "words": [
+        {
+          "text": "In",
+          "start_s": 0.05,
+          "end_s": 0.28,
+          "emphasize": false
+        },
+        {
+          "text": "nineteen",
+          "start_s": 0.28,
+          "end_s": 0.54,
+          "emphasize": false
+        },
+        {
+          "text": "eighty-three,",
+          "start_s": 0.54,
+          "end_s": 0.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 1.28,
+      "end_s": 2.86,
+      "words": [
+        {
+          "text": "tiny",
+          "start_s": 1.28,
+          "end_s": 1.58,
+          "emphasize": false
+        },
+        {
+          "text": "water",
+          "start_s": 1.58,
+          "end_s": 1.94,
+          "emphasize": false
+        },
+        {
+          "text": "bubbles",
+          "start_s": 1.94,
+          "end_s": 2.32,
+          "emphasize": false
+        },
+        {
+          "text": "chewed",
+          "start_s": 2.32,
+          "end_s": 2.86,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 2.86,
+      "end_s": 4.92,
+      "words": [
+        {
+          "text": "a",
+          "start_s": 2.86,
+          "end_s": 2.98,
+          "emphasize": false
+        },
+        {
+          "text": "forty-foot",
+          "start_s": 2.98,
+          "end_s": 3.96,
+          "emphasize": false
+        },
+        {
+          "text": "cavern",
+          "start_s": 3.96,
+          "end_s": 4.34,
+          "emphasize": false
+        },
+        {
+          "text": "straight",
+          "start_s": 4.34,
+          "end_s": 4.92,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 4.92,
+      "end_s": 6.16,
+      "words": [
+        {
+          "text": "through",
+          "start_s": 4.92,
+          "end_s": 5.36,
+          "emphasize": false
+        },
+        {
+          "text": "solid",
+          "start_s": 5.36,
+          "end_s": 5.68,
+          "emphasize": false
+        },
+        {
+          "text": "concrete.",
+          "start_s": 5.68,
+          "end_s": 6.16,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 6.96,
+      "end_s": 7.53,
+      "words": [
+        {
+          "text": "Hey",
+          "start_s": 6.96,
+          "end_s": 7.4,
+          "emphasize": false
+        },
+        {
+          "text": "Bolt,",
+          "start_s": 7.48,
+          "end_s": 7.53,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 7.53,
+      "end_s": 8.4,
+      "words": [
+        {
+          "text": "give",
+          "start_s": 7.53,
+          "end_s": 8.0,
+          "emphasize": false
+        },
+        {
+          "text": "us",
+          "start_s": 8.0,
+          "end_s": 8.12,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 8.12,
+          "end_s": 8.2,
+          "emphasize": false
+        },
+        {
+          "text": "wave",
+          "start_s": 8.2,
+          "end_s": 8.4,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 8.4,
+      "end_s": 9.28,
+      "words": [
+        {
+          "text": "before",
+          "start_s": 8.4,
+          "end_s": 8.76,
+          "emphasize": false
+        },
+        {
+          "text": "we",
+          "start_s": 8.76,
+          "end_s": 8.94,
+          "emphasize": false
+        },
+        {
+          "text": "open",
+          "start_s": 8.94,
+          "end_s": 9.16,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 9.16,
+          "end_s": 9.28,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 9.28,
+      "end_s": 9.76,
+      "words": [
+        {
+          "text": "floodgates.",
+          "start_s": 9.28,
+          "end_s": 9.76,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 10.44,
+      "end_s": 11.76,
+      "words": [
+        {
+          "text": "Water",
+          "start_s": 10.44,
+          "end_s": 10.66,
+          "emphasize": false
+        },
+        {
+          "text": "should",
+          "start_s": 10.66,
+          "end_s": 11.0,
+          "emphasize": false
+        },
+        {
+          "text": "never",
+          "start_s": 11.0,
+          "end_s": 11.34,
+          "emphasize": true
+        },
+        {
+          "text": "carve",
+          "start_s": 11.34,
+          "end_s": 11.76,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 11.76,
+      "end_s": 12.86,
+      "words": [
+        {
+          "text": "rock",
+          "start_s": 11.76,
+          "end_s": 12.14,
+          "emphasize": false
+        },
+        {
+          "text": "this",
+          "start_s": 12.14,
+          "end_s": 12.48,
+          "emphasize": false
+        },
+        {
+          "text": "fast.",
+          "start_s": 12.48,
+          "end_s": 12.86,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 13.6,
+      "end_s": 14.6,
+      "words": [
+        {
+          "text": "When",
+          "start_s": 13.6,
+          "end_s": 13.64,
+          "emphasize": false
+        },
+        {
+          "text": "floodwater",
+          "start_s": 13.64,
+          "end_s": 14.18,
+          "emphasize": false
+        },
+        {
+          "text": "rockets",
+          "start_s": 14.18,
+          "end_s": 14.6,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 14.6,
+      "end_s": 15.72,
+      "words": [
+        {
+          "text": "down",
+          "start_s": 14.6,
+          "end_s": 14.9,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 14.9,
+          "end_s": 15.06,
+          "emphasize": false
+        },
+        {
+          "text": "spillway",
+          "start_s": 15.06,
+          "end_s": 15.56,
+          "emphasize": false
+        },
+        {
+          "text": "at",
+          "start_s": 15.56,
+          "end_s": 15.72,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 15.72,
+      "end_s": 17.0,
+      "words": [
+        {
+          "text": "one",
+          "start_s": 15.72,
+          "end_s": 15.98,
+          "emphasize": false
+        },
+        {
+          "text": "hundred",
+          "start_s": 15.98,
+          "end_s": 16.24,
+          "emphasize": true
+        },
+        {
+          "text": "miles",
+          "start_s": 16.24,
+          "end_s": 16.7,
+          "emphasize": false
+        },
+        {
+          "text": "per",
+          "start_s": 16.7,
+          "end_s": 17.0,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 17.0,
+      "end_s": 18.58,
+      "words": [
+        {
+          "text": "hour,",
+          "start_s": 17.0,
+          "end_s": 17.26,
+          "emphasize": false
+        },
+        {
+          "text": "one",
+          "start_s": 17.78,
+          "end_s": 17.82,
+          "emphasize": false
+        },
+        {
+          "text": "tiny",
+          "start_s": 17.82,
+          "end_s": 18.2,
+          "emphasize": false
+        },
+        {
+          "text": "bump",
+          "start_s": 18.2,
+          "end_s": 18.58,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 18.58,
+      "end_s": 19.64,
+      "words": [
+        {
+          "text": "changes",
+          "start_s": 18.58,
+          "end_s": 18.94,
+          "emphasize": false
+        },
+        {
+          "text": "everything.",
+          "start_s": 18.94,
+          "end_s": 19.64,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 20.46,
+      "end_s": 21.54,
+      "words": [
+        {
+          "text": "Speeding",
+          "start_s": 20.46,
+          "end_s": 20.66,
+          "emphasize": false
+        },
+        {
+          "text": "water",
+          "start_s": 20.66,
+          "end_s": 20.9,
+          "emphasize": false
+        },
+        {
+          "text": "lifts",
+          "start_s": 20.9,
+          "end_s": 21.24,
+          "emphasize": false
+        },
+        {
+          "text": "off,",
+          "start_s": 21.24,
+          "end_s": 21.54,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 21.84,
+      "end_s": 22.8,
+      "words": [
+        {
+          "text": "dropping",
+          "start_s": 21.84,
+          "end_s": 22.08,
+          "emphasize": false
+        },
+        {
+          "text": "local",
+          "start_s": 22.08,
+          "end_s": 22.48,
+          "emphasize": false
+        },
+        {
+          "text": "pressure",
+          "start_s": 22.48,
+          "end_s": 22.8,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 22.8,
+      "end_s": 24.14,
+      "words": [
+        {
+          "text": "so",
+          "start_s": 22.8,
+          "end_s": 23.24,
+          "emphasize": false
+        },
+        {
+          "text": "low",
+          "start_s": 23.24,
+          "end_s": 23.56,
+          "emphasize": false
+        },
+        {
+          "text": "that",
+          "start_s": 23.56,
+          "end_s": 23.84,
+          "emphasize": false
+        },
+        {
+          "text": "freezing",
+          "start_s": 23.84,
+          "end_s": 24.14,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 24.14,
+      "end_s": 26.14,
+      "words": [
+        {
+          "text": "water",
+          "start_s": 24.14,
+          "end_s": 24.8,
+          "emphasize": false
+        },
+        {
+          "text": "actually",
+          "start_s": 24.8,
+          "end_s": 25.34,
+          "emphasize": false
+        },
+        {
+          "text": "boils",
+          "start_s": 25.34,
+          "end_s": 25.64,
+          "emphasize": false
+        },
+        {
+          "text": "into",
+          "start_s": 25.64,
+          "end_s": 26.14,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 26.14,
+      "end_s": 26.36,
+      "words": [
+        {
+          "text": "bubbles.",
+          "start_s": 26.14,
+          "end_s": 26.36,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 27.0,
+      "end_s": 27.94,
+      "words": [
+        {
+          "text": "Milliseconds",
+          "start_s": 27.0,
+          "end_s": 27.54,
+          "emphasize": true
+        },
+        {
+          "text": "downstream,",
+          "start_s": 27.54,
+          "end_s": 27.94,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 28.46,
+      "end_s": 29.96,
+      "words": [
+        {
+          "text": "pressure",
+          "start_s": 28.46,
+          "end_s": 28.66,
+          "emphasize": false
+        },
+        {
+          "text": "returns",
+          "start_s": 28.66,
+          "end_s": 29.08,
+          "emphasize": false
+        },
+        {
+          "text": "and",
+          "start_s": 29.08,
+          "end_s": 29.46,
+          "emphasize": false
+        },
+        {
+          "text": "crushes",
+          "start_s": 29.46,
+          "end_s": 29.96,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 29.96,
+      "end_s": 31.16,
+      "words": [
+        {
+          "text": "every",
+          "start_s": 29.96,
+          "end_s": 30.3,
+          "emphasize": false
+        },
+        {
+          "text": "bubble",
+          "start_s": 30.3,
+          "end_s": 30.82,
+          "emphasize": false
+        },
+        {
+          "text": "in",
+          "start_s": 30.82,
+          "end_s": 31.08,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 31.08,
+          "end_s": 31.16,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 31.16,
+      "end_s": 33.26,
+      "words": [
+        {
+          "text": "violent",
+          "start_s": 31.16,
+          "end_s": 31.56,
+          "emphasize": false
+        },
+        {
+          "text": "microscopic",
+          "start_s": 31.56,
+          "end_s": 32.46,
+          "emphasize": false
+        },
+        {
+          "text": "implosion.",
+          "start_s": 32.46,
+          "end_s": 33.26,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 33.92,
+      "end_s": 34.84,
+      "words": [
+        {
+          "text": "Each",
+          "start_s": 33.92,
+          "end_s": 33.98,
+          "emphasize": false
+        },
+        {
+          "text": "bubble",
+          "start_s": 33.98,
+          "end_s": 34.18,
+          "emphasize": false
+        },
+        {
+          "text": "fires",
+          "start_s": 34.18,
+          "end_s": 34.54,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 34.54,
+          "end_s": 34.84,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 34.84,
+      "end_s": 36.18,
+      "words": [
+        {
+          "text": "needle-thin",
+          "start_s": 34.84,
+          "end_s": 35.36,
+          "emphasize": false
+        },
+        {
+          "text": "water",
+          "start_s": 35.36,
+          "end_s": 35.66,
+          "emphasize": false
+        },
+        {
+          "text": "jet",
+          "start_s": 35.66,
+          "end_s": 35.94,
+          "emphasize": false
+        },
+        {
+          "text": "at",
+          "start_s": 35.94,
+          "end_s": 36.18,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 36.18,
+      "end_s": 37.88,
+      "words": [
+        {
+          "text": "over",
+          "start_s": 36.18,
+          "end_s": 36.44,
+          "emphasize": false
+        },
+        {
+          "text": "one",
+          "start_s": 36.44,
+          "end_s": 36.92,
+          "emphasize": false
+        },
+        {
+          "text": "hundred",
+          "start_s": 36.92,
+          "end_s": 37.4,
+          "emphasize": true
+        },
+        {
+          "text": "thousand",
+          "start_s": 37.4,
+          "end_s": 37.88,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 37.88,
+      "end_s": 39.06,
+      "words": [
+        {
+          "text": "pounds",
+          "start_s": 37.88,
+          "end_s": 38.24,
+          "emphasize": false
+        },
+        {
+          "text": "per",
+          "start_s": 38.24,
+          "end_s": 38.54,
+          "emphasize": false
+        },
+        {
+          "text": "square",
+          "start_s": 38.54,
+          "end_s": 38.74,
+          "emphasize": false
+        },
+        {
+          "text": "inch.",
+          "start_s": 38.74,
+          "end_s": 39.06,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 39.52,
+      "end_s": 40.099999999999994,
+      "words": [
+        {
+          "text": "Watch",
+          "start_s": 39.52,
+          "end_s": 39.7,
+          "emphasize": false
+        },
+        {
+          "text": "out,",
+          "start_s": 39.7,
+          "end_s": 39.88,
+          "emphasize": false
+        },
+        {
+          "text": "Bolt.",
+          "start_s": 39.98,
+          "end_s": 40.04,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 41.04,
+      "end_s": 42.04,
+      "words": [
+        {
+          "text": "Millions",
+          "start_s": 41.04,
+          "end_s": 41.08,
+          "emphasize": false
+        },
+        {
+          "text": "of",
+          "start_s": 41.08,
+          "end_s": 41.28,
+          "emphasize": false
+        },
+        {
+          "text": "micro-hammers",
+          "start_s": 41.28,
+          "end_s": 42.04,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 42.04,
+      "end_s": 42.82,
+      "words": [
+        {
+          "text": "dig",
+          "start_s": 42.04,
+          "end_s": 42.3,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 42.3,
+          "end_s": 42.56,
+          "emphasize": false
+        },
+        {
+          "text": "pit,",
+          "start_s": 42.56,
+          "end_s": 42.82,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 43.24,
+      "end_s": 44.28,
+      "words": [
+        {
+          "text": "triggering",
+          "start_s": 43.24,
+          "end_s": 43.5,
+          "emphasize": false
+        },
+        {
+          "text": "even",
+          "start_s": 43.5,
+          "end_s": 43.9,
+          "emphasize": false
+        },
+        {
+          "text": "bigger",
+          "start_s": 43.9,
+          "end_s": 44.28,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 44.28,
+      "end_s": 45.16,
+      "words": [
+        {
+          "text": "bubbles",
+          "start_s": 44.28,
+          "end_s": 44.64,
+          "emphasize": false
+        },
+        {
+          "text": "in",
+          "start_s": 44.64,
+          "end_s": 44.9,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 44.9,
+          "end_s": 45.0,
+          "emphasize": false
+        },
+        {
+          "text": "chain",
+          "start_s": 45.0,
+          "end_s": 45.16,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 45.16,
+      "end_s": 45.6,
+      "words": [
+        {
+          "text": "reaction.",
+          "start_s": 45.16,
+          "end_s": 45.6,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 46.19,
+      "end_s": 47.0,
+      "words": [
+        {
+          "text": "Within",
+          "start_s": 46.19,
+          "end_s": 46.4,
+          "emphasize": false
+        },
+        {
+          "text": "hours,",
+          "start_s": 46.4,
+          "end_s": 47.0,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 47.36,
+      "end_s": 49.06,
+      "words": [
+        {
+          "text": "roaring",
+          "start_s": 47.36,
+          "end_s": 47.54,
+          "emphasize": false
+        },
+        {
+          "text": "water",
+          "start_s": 47.54,
+          "end_s": 48.0,
+          "emphasize": false
+        },
+        {
+          "text": "ripped",
+          "start_s": 48.0,
+          "end_s": 48.34,
+          "emphasize": false
+        },
+        {
+          "text": "away",
+          "start_s": 48.34,
+          "end_s": 49.06,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 49.06,
+      "end_s": 50.18,
+      "words": [
+        {
+          "text": "steel",
+          "start_s": 49.06,
+          "end_s": 49.1,
+          "emphasize": false
+        },
+        {
+          "text": "rebar",
+          "start_s": 49.1,
+          "end_s": 49.52,
+          "emphasize": false
+        },
+        {
+          "text": "and",
+          "start_s": 49.52,
+          "end_s": 49.92,
+          "emphasize": false
+        },
+        {
+          "text": "carved",
+          "start_s": 49.92,
+          "end_s": 50.18,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 50.18,
+      "end_s": 52.24,
+      "words": [
+        {
+          "text": "a",
+          "start_s": 50.18,
+          "end_s": 50.46,
+          "emphasize": false
+        },
+        {
+          "text": "four-story",
+          "start_s": 50.46,
+          "end_s": 51.32,
+          "emphasize": false
+        },
+        {
+          "text": "crater",
+          "start_s": 51.32,
+          "end_s": 51.64,
+          "emphasize": false
+        },
+        {
+          "text": "inside",
+          "start_s": 51.64,
+          "end_s": 52.24,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 52.24,
+      "end_s": 52.74,
+      "words": [
+        {
+          "text": "the",
+          "start_s": 52.24,
+          "end_s": 52.5,
+          "emphasize": false
+        },
+        {
+          "text": "tunnel.",
+          "start_s": 52.5,
+          "end_s": 52.74,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 53.28,
+      "end_s": 54.2,
+      "words": [
+        {
+          "text": "The",
+          "start_s": 53.28,
+          "end_s": 53.38,
+          "emphasize": false
+        },
+        {
+          "text": "fix",
+          "start_s": 53.38,
+          "end_s": 53.54,
+          "emphasize": false
+        },
+        {
+          "text": "sounds",
+          "start_s": 53.54,
+          "end_s": 53.92,
+          "emphasize": false
+        },
+        {
+          "text": "crazy:",
+          "start_s": 53.92,
+          "end_s": 54.2,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 54.98,
+      "end_s": 56.24,
+      "words": [
+        {
+          "text": "angled",
+          "start_s": 54.98,
+          "end_s": 55.16,
+          "emphasize": false
+        },
+        {
+          "text": "steel",
+          "start_s": 55.16,
+          "end_s": 55.44,
+          "emphasize": false
+        },
+        {
+          "text": "ramps",
+          "start_s": 55.44,
+          "end_s": 55.82,
+          "emphasize": false
+        },
+        {
+          "text": "launch",
+          "start_s": 55.82,
+          "end_s": 56.24,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 56.24,
+      "end_s": 57.84,
+      "words": [
+        {
+          "text": "water",
+          "start_s": 56.24,
+          "end_s": 56.78,
+          "emphasize": false
+        },
+        {
+          "text": "cleanly",
+          "start_s": 56.78,
+          "end_s": 57.46,
+          "emphasize": false
+        },
+        {
+          "text": "off",
+          "start_s": 57.46,
+          "end_s": 57.7,
+          "emphasize": false
+        },
+        {
+          "text": "the",
+          "start_s": 57.7,
+          "end_s": 57.84,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 57.84,
+      "end_s": 58.38,
+      "words": [
+        {
+          "text": "concrete",
+          "start_s": 57.84,
+          "end_s": 58.04,
+          "emphasize": false
+        },
+        {
+          "text": "floor.",
+          "start_s": 58.04,
+          "end_s": 58.38,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 58.98,
+      "end_s": 59.559999999999995,
+      "words": [
+        {
+          "text": "Nice",
+          "start_s": 58.98,
+          "end_s": 59.14,
+          "emphasize": false
+        },
+        {
+          "text": "move,",
+          "start_s": 59.14,
+          "end_s": 59.3,
+          "emphasize": false
+        },
+        {
+          "text": "Bolt.",
+          "start_s": 59.44,
+          "end_s": 59.48,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 60.28,
+      "end_s": 61.34,
+      "words": [
+        {
+          "text": "That",
+          "start_s": 60.28,
+          "end_s": 60.32,
+          "emphasize": false
+        },
+        {
+          "text": "slot",
+          "start_s": 60.32,
+          "end_s": 60.6,
+          "emphasize": false
+        },
+        {
+          "text": "sucks",
+          "start_s": 60.6,
+          "end_s": 61.1,
+          "emphasize": false
+        },
+        {
+          "text": "air",
+          "start_s": 61.1,
+          "end_s": 61.34,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 61.34,
+      "end_s": 62.84,
+      "words": [
+        {
+          "text": "underneath,",
+          "start_s": 61.34,
+          "end_s": 61.84,
+          "emphasize": false
+        },
+        {
+          "text": "creating",
+          "start_s": 62.2,
+          "end_s": 62.58,
+          "emphasize": false
+        },
+        {
+          "text": "a",
+          "start_s": 62.58,
+          "end_s": 62.84,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 62.84,
+      "end_s": 64.08,
+      "words": [
+        {
+          "text": "soft",
+          "start_s": 62.84,
+          "end_s": 63.14,
+          "emphasize": false
+        },
+        {
+          "text": "cushion",
+          "start_s": 63.14,
+          "end_s": 63.5,
+          "emphasize": false
+        },
+        {
+          "text": "that",
+          "start_s": 63.5,
+          "end_s": 63.8,
+          "emphasize": false
+        },
+        {
+          "text": "absorbs",
+          "start_s": 63.8,
+          "end_s": 64.08,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 64.08,
+      "end_s": 65.3,
+      "words": [
+        {
+          "text": "every",
+          "start_s": 64.08,
+          "end_s": 64.76,
+          "emphasize": false
+        },
+        {
+          "text": "shockwave.",
+          "start_s": 64.76,
+          "end_s": 65.3,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 65.9,
+      "end_s": 66.9,
+      "words": [
+        {
+          "text": "Just",
+          "start_s": 65.9,
+          "end_s": 66.02,
+          "emphasize": false
+        },
+        {
+          "text": "eight",
+          "start_s": 66.02,
+          "end_s": 66.24,
+          "emphasize": true
+        },
+        {
+          "text": "percent",
+          "start_s": 66.24,
+          "end_s": 66.46,
+          "emphasize": true
+        },
+        {
+          "text": "air",
+          "start_s": 66.46,
+          "end_s": 66.9,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 66.9,
+      "end_s": 68.1,
+      "words": [
+        {
+          "text": "drops",
+          "start_s": 66.9,
+          "end_s": 67.36,
+          "emphasize": false
+        },
+        {
+          "text": "concrete",
+          "start_s": 67.36,
+          "end_s": 67.8,
+          "emphasize": false
+        },
+        {
+          "text": "erosion",
+          "start_s": 67.8,
+          "end_s": 68.1,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 68.1,
+      "end_s": 69.26,
+      "words": [
+        {
+          "text": "to",
+          "start_s": 68.1,
+          "end_s": 68.58,
+          "emphasize": false
+        },
+        {
+          "text": "near",
+          "start_s": 68.58,
+          "end_s": 68.82,
+          "emphasize": false
+        },
+        {
+          "text": "zero,",
+          "start_s": 68.82,
+          "end_s": 69.26,
+          "emphasize": true
+        }
+      ]
+    },
+    {
+      "start_s": 69.62,
+      "end_s": 71.26,
+      "words": [
+        {
+          "text": "protecting",
+          "start_s": 69.62,
+          "end_s": 69.98,
+          "emphasize": false
+        },
+        {
+          "text": "mega-dams",
+          "start_s": 69.98,
+          "end_s": 70.64,
+          "emphasize": false
+        },
+        {
+          "text": "for",
+          "start_s": 70.64,
+          "end_s": 71.02,
+          "emphasize": false
+        },
+        {
+          "text": "decades.",
+          "start_s": 71.02,
+          "end_s": 71.26,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 72.16,
+      "end_s": 73.26,
+      "words": [
+        {
+          "text": "Would",
+          "start_s": 72.16,
+          "end_s": 72.64,
+          "emphasize": false
+        },
+        {
+          "text": "you",
+          "start_s": 72.64,
+          "end_s": 72.74,
+          "emphasize": false
+        },
+        {
+          "text": "stand",
+          "start_s": 72.74,
+          "end_s": 72.96,
+          "emphasize": false
+        },
+        {
+          "text": "below",
+          "start_s": 72.96,
+          "end_s": 73.26,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 73.26,
+      "end_s": 74.0,
+      "words": [
+        {
+          "text": "a",
+          "start_s": 73.26,
+          "end_s": 73.44,
+          "emphasize": false
+        },
+        {
+          "text": "full",
+          "start_s": 73.44,
+          "end_s": 73.6,
+          "emphasize": false
+        },
+        {
+          "text": "spillway?",
+          "start_s": 73.6,
+          "end_s": 74.0,
+          "emphasize": false
+        }
+      ]
+    },
+    {
+      "start_s": 74.48,
+      "end_s": 75.36,
+      "words": [
+        {
+          "text": "Comment",
+          "start_s": 74.48,
+          "end_s": 74.72,
+          "emphasize": false
+        },
+        {
+          "text": "YES",
+          "start_s": 74.72,
+          "end_s": 75.06,
+          "emphasize": true
+        },
+        {
+          "text": "or",
+          "start_s": 75.06,
+          "end_s": 75.22,
+          "emphasize": false
+        },
+        {
+          "text": "NO.",
+          "start_s": 75.22,
+          "end_s": 75.36,
+          "emphasize": true
+        }
+      ]
+    }
+  ]
+}
