@@ -1,0 +1,134 @@
+"""Orchestrator for automated batch publishing from publish_queue.json."""
+
+from __future__ import annotations
+
+import os
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+from cts_factory.publish.connectors import PublishPayload, dispatch_publish
+from cts_factory.publish.queue import QueueItem, sync_publish_queue, validate_episode_ready_to_publish
+
+
+def _resolve_media_urls(slug: str) -> tuple[str, str]:
+    """Compute public HTTPS URLs for video & cover (GitHub raw default or custom PUBLISH_MEDIA_BASE_URL)."""
+    custom_base = os.environ.get("PUBLISH_MEDIA_BASE_URL", "").strip().rstrip("/")
+    if custom_base:
+        return f"{custom_base}/{slug}/{slug}.mp4", f"{custom_base}/{slug}/cover.png"
+
+    repo = os.environ.get("GITHUB_REPOSITORY", "rradkch-svg/CTS").strip()
+    ref = os.environ.get("GITHUB_REF_NAME", "main").strip()
+    raw_base = f"https://raw.githubusercontent.com/{repo}/{ref}/episodios/{slug}"
+    return f"{raw_base}/{slug}.mp4", f"{raw_base}/cover.png"
+
+
+def _resolve_provider(explicit: str | None) -> str:
+    if explicit and explicit != "auto":
+        return explicit.strip().lower()
+    env_prov = os.environ.get("PUBLISH_PROVIDER", "").strip().lower()
+    if env_prov:
+        return env_prov
+    if os.environ.get("PUBLISH_WEBHOOK_URL", "").strip():
+        return "webhook"
+    return "dry_run"
+
+
+def _select_targets(
+    items: list[QueueItem],
+    now_utc: datetime,
+    count: int,
+    episode: str | None,
+    batch: str | None,
+) -> list[QueueItem]:
+    if episode:
+        return [it for it in items if it.slug == episode and it.status == "pending"]
+    selected: list[QueueItem] = []
+    for it in items:
+        if batch and it.batch != batch:
+            continue
+        if it.is_due(now_utc):
+            selected.append(it)
+            if len(selected) >= count:
+                break
+    return selected
+
+
+def run_publish_batch(
+    repo_root: Path,
+    count: int = 1,
+    episode: str | None = None,
+    batch: str | None = None,
+    provider: str | None = None,
+    dry_run: bool = False,
+    queue_path: Path | None = None,
+) -> dict[str, Any]:
+    """Publish up to `count` pending QA-verified episodes and persist updated publish_queue.json."""
+    qpath = queue_path or (repo_root / "publish_queue.json")
+    queue = sync_publish_queue(repo_root, queue_path=qpath)
+    resolved_provider = _resolve_provider(provider)
+    effective_dry_run = dry_run or (resolved_provider == "dry_run")
+    now_utc = datetime.now(timezone.utc)
+
+    targets = _select_targets(queue.items, now_utc, count=max(1, count), episode=episode, batch=batch)
+    results: list[dict[str, Any]] = []
+    failures = 0
+
+    for item in targets:
+        ready, reason, info = validate_episode_ready_to_publish(repo_root, item.slug)
+        if not ready:
+            failures += 1
+            item.last_error = reason
+            results.append({"slug": item.slug, "status": "blocked_qa", "error": reason})
+            continue
+
+        meta = info["meta"]
+        video_url, cover_url = _resolve_media_urls(item.slug)
+        payload = PublishPayload(
+            episode_id=item.episode_id,
+            slug=item.slug,
+            platforms=list(item.platforms),
+            youtube_title=str(meta["youtube_title"]),
+            youtube_description=str(meta.get("youtube_description", "")),
+            caption=str(meta.get("ig_tiktok_caption", "")),
+            hashtags=list(meta.get("hashtags", [])),
+            pinned_comment=str(meta.get("pinned_comment", "")),
+            mp4_path=info["mp4_path"],
+            cover_path=info["cover_path"],
+            video_url=video_url,
+            cover_url=cover_url,
+        )
+
+        try:
+            resp = dispatch_publish(resolved_provider, payload, dry_run=effective_dry_run)
+            if not effective_dry_run:
+                item.status = "published"
+                item.published_at_utc = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+                item.provider = resolved_provider
+                item.external_ids = resp if isinstance(resp, dict) else {"raw": str(resp)}
+                item.last_error = None
+            results.append(
+                {
+                    "slug": item.slug,
+                    "status": "dry_run" if effective_dry_run else "published",
+                    "provider": resolved_provider,
+                    "response": resp,
+                }
+            )
+        except Exception as exc:
+            failures += 1
+            item.status = "failed"
+            item.provider = resolved_provider
+            item.last_error = str(exc)
+            results.append({"slug": item.slug, "status": "failed", "provider": resolved_provider, "error": str(exc)})
+
+    if not effective_dry_run and targets:
+        queue.save(qpath)
+
+    return {
+        "provider": resolved_provider,
+        "dry_run": effective_dry_run,
+        "selected": len(targets),
+        "failures": failures,
+        "results": results,
+    }

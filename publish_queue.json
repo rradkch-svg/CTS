@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "channel_name": "FailSafe Lab",
+  "default_platforms": [
+    "youtube",
+    "tiktok",
+    "instagram"
+  ],
+  "items": [
+    {
+      "episode_id": "ep01",
+      "slug": "ep01_elevator_safety_brake",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "launch-3",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep02",
+      "slug": "ep02_submersible_implosion_physics",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "launch-3",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep03",
+      "slug": "ep03_bank_vault_lock",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "launch-3",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep04",
+      "slug": "ep04_tacoma_bridge_flutter",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "daily",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep05",
+      "slug": "ep05_car_differential_gear",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "daily",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep06",
+      "slug": "ep06_skywalk_bolt_load",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "daily",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep07",
+      "slug": "ep07_jet_engine_bird_strike",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "daily",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep08",
+      "slug": "ep08_dam_spillway_cavitation",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "daily",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep09",
+      "slug": "ep09_spacecraft_heat_shield",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "daily",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    },
+    {
+      "episode_id": "ep10",
+      "slug": "ep10_roller_coaster_rollback",
+      "status": "pending",
+      "platforms": [
+        "youtube",
+        "tiktok",
+        "instagram"
+      ],
+      "batch": "daily",
+      "publish_after_utc": null,
+      "published_at_utc": null,
+      "provider": null,
+      "external_ids": {},
+      "last_error": null
+    }
+  ]
+}
