@@ -70,7 +70,7 @@ def build_channel_banner(
 
     tag_y = bar_y + 24
     draw.text((text_x, tag_y), brand.tagline.upper(), font=f_tag, fill=p.text_primary)
-    draw.text((text_x, tag_y + 56), f"{brand.handle}   //   3D ENGINEERING & CRASH-TEST PHYSICS", font=f_handle, fill=p.cyan)
+    draw.text((text_x, tag_y + 56), f"{brand.handle}   //   3D ENGINEERING WITH BOLT (UNIT-01)", font=f_handle, fill=p.cyan)
 
     banner_path = marca_dir / "youtube_banner.png"
     img.save(banner_path, format="PNG", optimize=True)
