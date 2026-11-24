@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep05",
+  "slug": "ep05_car_differential_gear",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "The Genius Gear That Lets Cars TURN Smoothly",
+  "youtube_title_length": 44,
+  "youtube_description": "",
+  "ig_tiktok_caption": "One engine drives two wheels at completely different speeds around every corner using zero computers — just pure bevel gear geometry. Have you ever gotten one tire stuck spinning helplessly on ice? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#cars",
+    "#howitworks",
+    "#mechanicalengineering",
+    "#gears",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Have you ever had one tire spin helplessly on ice while the other stood completely still? Comment YES or NO",
+  "related_video_slot": "ep06_skywalk_bolt_load",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}

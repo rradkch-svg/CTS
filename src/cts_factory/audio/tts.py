@@ -241,11 +241,158 @@ def _synthesize_beat_tts(
             except Exception as exc:
                 last_err = exc
                 msg = str(exc)
-                if any(code in msg for code in ("404", "NOT_FOUND", "not found", "UNSUPPORTED")):
+                if any(code in msg for code in ("404", "NOT_FOUND", "not found", "UNSUPPORTED", "RESOURCE_EXHAUSTED", "429")):
                     break
                 time.sleep(1.5 * (attempt + 1))
 
     raise RuntimeError(f"All Gemini TTS models failed ({models}): {last_err}")
+
+
+def _split_batched_wav_into_beats(
+    full_wav: Path,
+    beats: list,
+    out_paths: list[Path],
+) -> None:
+    """Use faster-whisper word timestamps to slice a single full-episode WAV cleanly into per-beat WAVs."""
+    from faster_whisper import WhisperModel
+
+    samples, sr = _read_wav_float(full_wav)
+    total_s = len(samples) / float(sr)
+
+    model = WhisperModel("small", device="cpu", compute_type="int8")
+    segments, _ = model.transcribe(str(full_wav), language="en", word_timestamps=True, vad_filter=False)
+    words: list[tuple[str, float, float]] = []
+    for seg in segments:
+        for w in seg.words or []:
+            tok = re.sub(r"[^a-z0-9]", "", (w.word or "").lower())
+            if tok:
+                words.append((tok, float(w.start), float(w.end)))
+
+    # Greedy monotonic alignment of each beat's word count / anchor tokens onto Whisper word timeline
+    beat_word_lists = [
+        [re.sub(r"[^a-z0-9]", "", t.lower()) for t in b.narration_text.split() if re.sub(r"[^a-z0-9]", "", t.lower())]
+        for b in beats
+    ]
+    total_target_words = max(1, sum(len(wl) for wl in beat_word_lists))
+
+    # Build start/end timestamps per beat by matching anchor words around expected cumulative position
+    boundaries: list[float] = [0.0]
+    w_cursor = 0
+    n_w = len(words)
+    cum_target = 0
+    for bi in range(len(beats) - 1):
+        wl = beat_word_lists[bi]
+        next_wl = beat_word_lists[bi + 1]
+        cum_target += len(wl)
+        est_idx = int(round((cum_target / float(total_target_words)) * n_w))
+        lo = max(w_cursor + 2, est_idx - 7)
+        hi = min(n_w - 2, est_idx + 7)
+        best_idx = max(w_cursor + 1, min(n_w - 1, est_idx))
+        best_score = -1.0
+        tail_tok = wl[-1] if wl else ""
+        head_tok = next_wl[0] if next_wl else ""
+        head2_tok = next_wl[1] if len(next_wl) > 1 else ""
+        for idx in range(lo, hi + 1):
+            score = 0.0
+            if tail_tok and words[idx - 1][0] == tail_tok:
+                score += 3.0
+            if head_tok and words[idx][0] == head_tok:
+                score += 3.0
+            if head2_tok and idx + 1 < n_w and words[idx + 1][0] == head2_tok:
+                score += 1.5
+            # Slight preference for longer natural pause gap between words
+            gap = max(0.0, words[idx][1] - words[idx - 1][2])
+            score += min(1.5, gap * 2.5)
+            score -= abs(idx - est_idx) * 0.08
+            if score > best_score:
+                best_score = score
+                best_idx = idx
+        w_cursor = best_idx
+        cut_s = 0.5 * (words[best_idx - 1][2] + words[best_idx][1])
+        boundaries.append(max(boundaries[-1] + 0.5, min(total_s - 0.5, cut_s)))
+    boundaries.append(total_s)
+
+    for bi, out_wav in enumerate(out_paths):
+        i0 = max(0, int(round(boundaries[bi] * sr)))
+        i1 = min(len(samples), int(round(boundaries[bi + 1] * sr)))
+        if i1 - i0 < int(0.4 * sr):
+            raise RuntimeError(f"Batched TTS slice too short for beat {beats[bi].id}: {(i1 - i0) / sr:.2f}s")
+        _write_wav_mono(out_wav, samples[i0:i1], sr)
+
+
+def _synthesize_episode_batched_tts(
+    client,
+    models: list[str],
+    voice: str,
+    beats: list,
+    out_paths: list[Path],
+    cache_dir: Path,
+) -> None:
+    """Synthesize an entire episode in 1 Gemini TTS API call and slice cleanly into beat WAVs."""
+    from google.genai import types
+
+    full_text = "\n\n".join(b.narration_text.strip() for b in beats)
+    batch_digest = hashlib.sha256(f"v2_batch|{voice}|{full_text}".encode("utf-8")).hexdigest()[:12]
+    batch_wav = cache_dir / f"_episode_batch_{batch_digest}.wav"
+
+    if not (batch_wav.is_file() and batch_wav.stat().st_size > 10000):
+        candidate_models = list(models)
+        if "gemini-2.5-pro-preview-tts" not in candidate_models:
+            candidate_models.append("gemini-2.5-pro-preview-tts")
+        last_err: Exception | None = None
+        synthesized = False
+        for model in candidate_models:
+            for attempt in range(2):
+                try:
+                    resp = client.models.generate_content(
+                        model=model,
+                        contents=full_text,
+                        config=types.GenerateContentConfig(
+                            response_modalities=["AUDIO"],
+                            speech_config=types.SpeechConfig(
+                                voice_config=types.VoiceConfig(
+                                    prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                        voice_name=voice
+                                    )
+                                )
+                            ),
+                        ),
+                    )
+                    candidates = getattr(resp, "candidates", None) or []
+                    if not candidates or not candidates[0].content or not candidates[0].content.parts:
+                        raise RuntimeError(f"Empty audio response from {model}")
+                    audio_part = None
+                    for part in candidates[0].content.parts:
+                        inline = getattr(part, "inline_data", None)
+                        if inline is not None and getattr(inline, "data", None):
+                            audio_part = inline
+                            break
+                    if audio_part is None:
+                        raise RuntimeError(f"No inline_data audio part returned by {model}")
+                    _decode_tts_bytes_to_48k_wav(
+                        audio_part.data,
+                        getattr(audio_part, "mime_type", "") or "",
+                        batch_wav,
+                    )
+                    samples, sr = _read_wav_float(batch_wav)
+                    dur_s = len(samples) / float(sr)
+                    if dur_s < 40.0 or dur_s > 120.0:
+                        batch_wav.unlink(missing_ok=True)
+                        raise RuntimeError(f"Anomalous batched TTS duration {dur_s:.2f}s from {model}")
+                    synthesized = True
+                    break
+                except Exception as exc:
+                    last_err = exc
+                    msg = str(exc)
+                    if any(code in msg for code in ("404", "NOT_FOUND", "not found", "UNSUPPORTED", "RESOURCE_EXHAUSTED", "429")):
+                        break
+                    time.sleep(2.0 * (attempt + 1))
+            if synthesized:
+                break
+        if not synthesized:
+            raise RuntimeError(f"All Gemini TTS models failed ({candidate_models}): {last_err}")
+
+    _split_batched_wav_into_beats(batch_wav, beats, out_paths)
 
 
 def synthesize_narration(
@@ -270,7 +417,7 @@ def synthesize_narration(
     models = list(brand.narration.models)
     global_dir = brand.narration.style_direction
 
-    raw_beats: list[tuple[str, str, Path, np.ndarray, float]] = []
+    cache_paths: list[Path] = []
     for beat in script.beats:
         key_payload = "|".join(
             [
@@ -281,7 +428,22 @@ def synthesize_narration(
             ]
         )
         digest = hashlib.sha256(key_payload.encode("utf-8")).hexdigest()[:12]
-        cache_wav = cache_dir / f"{beat.id}_{digest}.wav"
+        cache_paths.append(cache_dir / f"{beat.id}_{digest}.wav")
+
+    # If multiple beats are uncached, synthesize the entire episode in 1 Gemini TTS API call (12x quota efficiency!)
+    missing = [p for p in cache_paths if not (p.is_file() and p.stat().st_size > 1000)]
+    if len(missing) >= 2:
+        _synthesize_episode_batched_tts(
+            client=client,
+            models=models,
+            voice=voice,
+            beats=script.beats,
+            out_paths=cache_paths,
+            cache_dir=cache_dir,
+        )
+
+    raw_beats: list[tuple[str, str, Path, np.ndarray, float]] = []
+    for beat, cache_wav in zip(script.beats, cache_paths):
         _synthesize_beat_tts(
             client=client,
             models=models,

@@ -1,0 +1,26 @@
+{
+  "episode_id": "ep06",
+  "slug": "ep06_skywalk_bolt_load",
+  "channel_name": "FailSafe Lab",
+  "handle": "@FailSafeLab",
+  "language": "en-US",
+  "youtube_title": "How One Tiny Bolt Change DOUBLED Steel Stress",
+  "youtube_title_length": 45,
+  "youtube_description": "",
+  "ig_tiktok_caption": "Two engineering drawings look almost identical — yet offsetting one steel hanger rod by four inches doubled the stress on a single nut to 200%. Would you have caught that blueprint shortcut? Comment YES or NO.",
+  "hashtags": [
+    "#engineering",
+    "#structuralengineering",
+    "#physics",
+    "#statics",
+    "#architecture",
+    "#failsafelab"
+  ],
+  "pinned_comment": "Be honest — at first glance, would you have spotted why two offset rods doubled the load on the upper nut? Comment YES or NO",
+  "related_video_slot": "ep01_elevator_safety_brake",
+  "schedule_hour": "12:00",
+  "ai_disclosure": false,
+  "never_delete_stalled_shorts": true,
+  "review_metrics_after_hours": 48,
+  "stayed_to_watch_target_pct": 75.0
+}

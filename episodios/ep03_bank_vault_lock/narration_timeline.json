@@ -1,0 +1,93 @@
+{
+  "total_duration_s": 67.5,
+  "sample_rate_hz": 48000,
+  "beats": [
+    {
+      "id": "b01_hook",
+      "start_s": 0.05,
+      "end_s": 5.85,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b01_hook_9adcb777117d.wav",
+      "narration_text": "Even with the exact vault code tonight, this twenty-ton steel door refuses to budge."
+    },
+    {
+      "id": "b02_armor_layers",
+      "start_s": 6.03,
+      "end_s": 10.28,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b02_armor_layers_9f20c3cf8941.wav",
+      "narration_text": "Modern bank vaults are layered traps built to turn brute force right against you."
+    },
+    {
+      "id": "b03_copper_torch_shield",
+      "start_s": 10.5,
+      "end_s": 15.58,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b03_copper_torch_shield_66e2d0ad839b.wav",
+      "narration_text": "Behind the skin sit manganese steel and copper plates that drain away torch heat."
+    },
+    {
+      "id": "b04_radial_bolts",
+      "start_s": 15.8,
+      "end_s": 21.1,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b04_radial_bolts_b4fd096bf188.wav",
+      "narration_text": "Spin the wheel and a cam ring drives twenty-four solid steel bolts outward."
+    },
+    {
+      "id": "b05_dual_tumblers",
+      "start_s": 21.32,
+      "end_s": 27.88,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b05_dual_tumblers_24db5bfedde2.wav",
+      "narration_text": "Two separate three-wheel brass locks guard that cam. Every wheel must align one tiny gate."
+    },
+    {
+      "id": "b06_time_lock",
+      "start_s": 28.1,
+      "end_s": 33.55,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b06_time_lock_d3c6cb80b1c6.wav",
+      "narration_text": "Even with both codes, a triple wind-up time lock blocks the bolts until morning."
+    },
+    {
+      "id": "b07_no_override",
+      "start_s": 33.8,
+      "end_s": 40.89,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b07_no_override_e996a350d032.wav",
+      "narration_text": "No Wi-Fi, no keypad, no manager override. If one clock stops, two backups keep ticking."
+    },
+    {
+      "id": "b08_drill_attempt",
+      "start_s": 41.14,
+      "end_s": 45.0,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b08_drill_attempt_207b73fbf09a.wav",
+      "narration_text": "So what happens if a thief drives a carbide drill straight toward the lock?"
+    },
+    {
+      "id": "b09_glass_relocker_shatter",
+      "start_s": 45.25,
+      "end_s": 50.01,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b09_glass_relocker_shatter_356ffcbf1c8c.wav",
+      "narration_text": "Hidden inside sits tempered glass holding steel cables under heavy spring tension."
+    },
+    {
+      "id": "b10_deadbolts_fire",
+      "start_s": 50.29,
+      "end_s": 55.61,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b10_deadbolts_fire_6499616ef4f2.wav",
+      "narration_text": "The instant a drill touches that glass, it shatters and fires permanent deadbolts."
+    },
+    {
+      "id": "b11_vault_sealed",
+      "start_s": 55.91,
+      "end_s": 61.71,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b11_vault_sealed_0c09e30bd46d.wav",
+      "narration_text": "Not even the real code works after that. Technicians spend days cutting open their own vault."
+    },
+    {
+      "id": "b12_cta",
+      "start_s": 61.99,
+      "end_s": 66.4,
+      "wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/cache/tts/b12_cta_c4747bc9d1f8.wav",
+      "narration_text": "Could any heist crew beat that glass trap? Comment YES or NO."
+    }
+  ],
+  "narration_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/narration_clean.wav",
+  "master_wav_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/audio_master.wav",
+  "envelope_path": "/home/antigravity/rradkch-svg/CTS/episodios/ep03_bank_vault_lock/narration_envelope.npy"
+}
