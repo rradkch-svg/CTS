@@ -38,9 +38,15 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("publish-sync", help="Sync publish_queue.json with all QA-passed episodes")
 
     p_pub = sub.add_parser("publish", help="Auto-publish pending QA-passed episodes via unified connector")
+    p_pub.add_argument("--check-account", action="store_true", help="Inspect Upload-Post profiles & connected accounts")
     p_pub.add_argument("--count", type=int, default=1, help="Max episodes to publish in this run (default: 1)")
     p_pub.add_argument("--episode", default=None, help="Optional single episode slug to publish")
     p_pub.add_argument("--batch", default=None, help="Optional batch tag filter (e.g. launch-3, daily)")
+    p_pub.add_argument("--platforms", default=None, help="Optional comma-separated platform override")
+    p_pub.add_argument("--scheduled-date", default=None, help="Optional ISO-8601 schedule timestamp")
+    p_pub.add_argument("--timezone", default=None, help="Optional IANA timezone (e.g. America/Sao_Paulo)")
+    p_pub.add_argument("--add-to-queue", action="store_true", help="Schedule in Upload-Post next queue slot")
+    p_pub.add_argument("--retry-failed", action="store_true", help="Retry previously failed queue items")
     p_pub.add_argument(
         "--provider",
         default="auto",
@@ -82,12 +88,21 @@ def main(argv: list[str] | None = None) -> int:
             "total": len(queue.items),
             "pending": sum(1 for i in queue.items if i.status == "pending"),
             "published": sum(1 for i in queue.items if i.status == "published"),
+            "scheduled": sum(1 for i in queue.items if i.status == "scheduled"),
+            "failed": sum(1 for i in queue.items if i.status == "failed"),
             "queue_file": str(root / "publish_queue.json"),
         }
         print(json.dumps(summary, indent=2))
         return 0
 
     if args.cmd == "publish":
+        if args.check_account:
+            from cts_factory.publish import inspect_upload_post_account
+
+            info = inspect_upload_post_account()
+            print(json.dumps(info, indent=2, ensure_ascii=False))
+            return 0 if not info.get("resolution_error") else 2
+        platforms_override = [p.strip().lower() for p in (args.platforms or "").split(",") if p.strip()] or None
         res = run_publish_batch(
             repo_root=root,
             count=args.count,
@@ -95,6 +110,11 @@ def main(argv: list[str] | None = None) -> int:
             batch=args.batch or None,
             provider=args.provider,
             dry_run=bool(args.dry_run),
+            platforms_override=platforms_override,
+            scheduled_date=args.scheduled_date or None,
+            tz_name=args.timezone or None,
+            add_to_queue=bool(args.add_to_queue),
+            retry_failed=bool(args.retry_failed),
         )
         print(json.dumps(res, indent=2, ensure_ascii=False))
         return 0 if res["failures"] == 0 else 2

@@ -127,6 +127,9 @@ def build_episode_package(
 
     cover_path = episode_dir / "cover.png"
     cover.save(cover_path, format="PNG", optimize=True)
+    # Instagram Reels Graph API / Upload-Post cover_image strictly requires JPEG (<= 8 MB)
+    cover_jpg_path = episode_dir / "cover.jpg"
+    cover.convert("RGB").save(cover_jpg_path, format="JPEG", quality=92, optimize=True, progressive=True)
 
     # --- Side-by-side grid crop verification sheet ---
     # Panel 1: full 9:16 with safe guides; Panel 2: 3:4 crop; Panel 3: Reels tight grid crop
@@ -209,6 +212,7 @@ def build_episode_package(
 
     return {
         "cover": cover_path,
+        "cover_jpg": cover_jpg_path,
         "cover_grid_preview": preview_path,
         "publish_meta": meta_path,
         "publish_checklist": checklist_path,

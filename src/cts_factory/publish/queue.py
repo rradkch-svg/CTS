@@ -15,7 +15,7 @@ DEFAULT_PLATFORMS = ["youtube", "tiktok", "instagram"]
 class QueueItem:
     episode_id: str
     slug: str
-    status: str = "pending"  # pending | published | failed | skipped
+    status: str = "pending"  # pending | published | scheduled | submitted | failed | skipped
     platforms: list[str] = field(default_factory=lambda: list(DEFAULT_PLATFORMS))
     batch: str = "daily"
     publish_after_utc: str | None = None
@@ -24,8 +24,9 @@ class QueueItem:
     external_ids: dict[str, Any] = field(default_factory=dict)
     last_error: str | None = None
 
-    def is_due(self, now_utc: datetime) -> bool:
-        if self.status != "pending":
+    def is_due(self, now_utc: datetime, include_failed: bool = False) -> bool:
+        allowed = ("pending", "failed") if include_failed else ("pending",)
+        if self.status not in allowed:
             return False
         if not self.publish_after_utc:
             return True
@@ -76,6 +77,7 @@ def validate_episode_ready_to_publish(repo_root: Path, slug: str) -> tuple[bool,
     ep_dir = repo_root / "episodios" / slug
     mp4_path = ep_dir / f"{slug}.mp4"
     cover_path = ep_dir / "cover.png"
+    cover_jpg_path = ep_dir / "cover.jpg"
     meta_path = ep_dir / "publish_meta.json"
     qa_path = ep_dir / "qa_report.json"
 
@@ -91,6 +93,7 @@ def validate_episode_ready_to_publish(repo_root: Path, slug: str) -> tuple[bool,
     return True, "ok", {
         "mp4_path": mp4_path,
         "cover_path": cover_path,
+        "cover_jpg_path": cover_jpg_path if cover_jpg_path.is_file() else None,
         "meta": meta,
         "qa": qa,
     }

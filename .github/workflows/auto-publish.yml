@@ -26,6 +26,31 @@ on:
         required: false
         default: ""
         type: string
+      scheduled_date:
+        description: "Optional ISO-8601 future timestamp to schedule via Upload-Post (e.g. 2026-11-26T15:00:00Z)"
+        required: false
+        default: ""
+        type: string
+      timezone:
+        description: "Optional IANA timezone for scheduled_date (e.g. America/Sao_Paulo)"
+        required: false
+        default: ""
+        type: string
+      add_to_queue:
+        description: "Add post to Upload-Post's next queue slot instead of posting immediately"
+        required: false
+        default: false
+        type: boolean
+      retry_failed:
+        description: "Include previously failed episodes from publish_queue.json"
+        required: false
+        default: false
+        type: boolean
+      check_account:
+        description: "Read-only check: list your Upload-Post profiles & connected accounts (no upload)"
+        required: false
+        default: false
+        type: boolean
       dry_run:
         description: "Test safely without calling external social APIs"
         required: false
@@ -63,28 +88,53 @@ jobs:
           PUBLISH_PLATFORMS: ${{ github.event.inputs.platforms || secrets.PUBLISH_PLATFORMS }}
           UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
           UPLOAD_POST_BASE_URL: ${{ secrets.UPLOAD_POST_BASE_URL }}
+          YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
+          IG_AUDIO_NAME: ${{ secrets.IG_AUDIO_NAME }}
+          TIKTOK_POST_MODE: ${{ secrets.TIKTOK_POST_MODE }}
           POSTIZ_BASE_URL: ${{ secrets.POSTIZ_BASE_URL }}
           POSTIZ_INTEGRATION_IDS: ${{ secrets.POSTIZ_INTEGRATION_IDS }}
+          INPUT_COUNT: ${{ github.event.inputs.count || '1' }}
+          INPUT_BATCH: ${{ github.event.inputs.batch || '' }}
+          INPUT_EPISODE: ${{ github.event.inputs.episode || '' }}
+          INPUT_SCHEDULED_DATE: ${{ github.event.inputs.scheduled_date || '' }}
+          INPUT_TIMEZONE: ${{ github.event.inputs.timezone || '' }}
+          INPUT_ADD_TO_QUEUE: ${{ github.event.inputs.add_to_queue || 'false' }}
+          INPUT_RETRY_FAILED: ${{ github.event.inputs.retry_failed || 'false' }}
+          INPUT_CHECK_ACCOUNT: ${{ github.event.inputs.check_account || 'false' }}
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: |
-          COUNT="${{ github.event.inputs.count || '1' }}"
-          BATCH="${{ github.event.inputs.batch || '' }}"
-          EPISODE="${{ github.event.inputs.episode || '' }}"
-          DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
+          if [ "$INPUT_CHECK_ACCOUNT" = "true" ]; then
+            python -m cts_factory.publish --check-account
+            exit $?
+          fi
 
-          ARGS=(--count "$COUNT")
-          if [ -n "$BATCH" ]; then
-            ARGS+=(--batch "$BATCH")
+          ARGS=(--count "$INPUT_COUNT")
+          if [ -n "$INPUT_BATCH" ]; then
+            ARGS+=(--batch "$INPUT_BATCH")
           fi
-          if [ -n "$EPISODE" ]; then
-            ARGS+=(--episode "$EPISODE")
+          if [ -n "$INPUT_EPISODE" ]; then
+            ARGS+=(--episode "$INPUT_EPISODE")
           fi
-          if [ "$DRY_RUN" = "true" ]; then
+          if [ -n "$INPUT_SCHEDULED_DATE" ]; then
+            ARGS+=(--scheduled-date "$INPUT_SCHEDULED_DATE")
+          fi
+          if [ -n "$INPUT_TIMEZONE" ]; then
+            ARGS+=(--timezone "$INPUT_TIMEZONE")
+          fi
+          if [ "$INPUT_ADD_TO_QUEUE" = "true" ]; then
+            ARGS+=(--add-to-queue)
+          fi
+          if [ "$INPUT_RETRY_FAILED" = "true" ]; then
+            ARGS+=(--retry-failed)
+          fi
+          if [ "$INPUT_DRY_RUN" = "true" ]; then
             ARGS+=(--dry-run)
           fi
 
           python -m cts_factory.publish "${ARGS[@]}"
 
       - name: Persist updated publish_queue.json (idempotent state)
+        if: always()
         run: |
           if [ -n "$(git status --porcelain publish_queue.json)" ]; then
             git config user.name "github-actions[bot]"
