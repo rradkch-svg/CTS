@@ -12,9 +12,12 @@ No GitHub, abra **Settings → Secrets and variables → Actions → New reposit
 
 ### Opção A (Mais Simples — Recomendada p/ repo privado): `upload_post` ([Upload-Post.com](https://upload-post.com))
 Envia o `.mp4` em binário direto (funciona mesmo se o repositório `CTS` for **privado**!):
-- `PUBLISH_PROVIDER` = `upload_post`
-- `PUBLISH_API_KEY` = sua API key da Upload-Post
-- `UPLOAD_POST_USER` = seu perfil/usuário conectado ao YouTube + TikTok + Instagram na Upload-Post
+1. Crie uma conta na Upload-Post e, no painel deles, crie um **Profile** (um apelido para agrupar as redes desse canal — por exemplo: `failsafelab`).
+2. Dentro desse profile `failsafelab`, conecte uma única vez seu **YouTube**, **TikTok** e **Instagram**.
+3. Gere sua **API Key** no painel deles e crie estes 3 secrets no GitHub:
+   - `PUBLISH_PROVIDER` = `upload_post`
+   - `PUBLISH_API_KEY` = sua API key da Upload-Post
+   - `UPLOAD_POST_USER` = o **nome exato do Profile** que você criou no passo 1 (ex.: `failsafelab`) — é assim que a API sabe em qual dos seus canais postar.
 
 ### Opção B (Open-Source / Self-hosted ou Cloud): `postiz` ([Postiz](https://postiz.com))
 Também envia o `.mp4` em binário direto (2 etapas: `/upload` + `/posts`):
