@@ -121,7 +121,7 @@
     {
       "episode_id": "ep04",
       "slug": "ep04_tacoma_bridge_flutter",
-      "status": "pending",
+      "status": "scheduled",
       "platforms": [
         "youtube",
         "tiktok",
@@ -129,9 +129,31 @@
       ],
       "batch": "daily",
       "publish_after_utc": null,
-      "published_at_utc": null,
-      "provider": null,
-      "external_ids": {},
+      "published_at_utc": "2026-11-25T23:27:11Z",
+      "provider": "upload_post",
+      "external_ids": {
+        "ok": true,
+        "dispatch_state": "scheduled",
+        "resolved_user": "default",
+        "effective_platforms": [
+          "youtube",
+          "instagram"
+        ],
+        "job_id": "befcbe10b3974b309bb71d6e09fe2480",
+        "scheduled_date": null,
+        "external_id": "ep04_tacoma_bridge_flutter",
+        "notes": [
+          "Resolved UPLOAD_POST_USER='FailSafeLabs' via profile display_name to username='default'.",
+          "Skipped 'tiktok': not connected on Upload-Post profile 'default'."
+        ],
+        "raw_response": {
+          "success": true,
+          "message": "Upload queued successfully in the durable worker.",
+          "request_id": "cts-ep04_tacoma_bridge_flutter-706506771c",
+          "total_platforms": 2,
+          "job_id": "befcbe10b3974b309bb71d6e09fe2480"
+        }
+      },
       "last_error": null
     },
     {
