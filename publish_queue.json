@@ -10,7 +10,7 @@
     {
       "episode_id": "ep01",
       "slug": "ep01_elevator_safety_brake",
-      "status": "pending",
+      "status": "scheduled",
       "platforms": [
         "youtube",
         "tiktok",
@@ -18,15 +18,36 @@
       ],
       "batch": "launch-3",
       "publish_after_utc": null,
-      "published_at_utc": null,
-      "provider": null,
-      "external_ids": {},
+      "published_at_utc": "2026-11-25T16:24:39Z",
+      "provider": "upload_post",
+      "external_ids": {
+        "ok": true,
+        "dispatch_state": "scheduled",
+        "resolved_user": "default",
+        "effective_platforms": [
+          "youtube",
+          "instagram"
+        ],
+        "job_id": "bc80d28327d54b1fa021f474abd1ce69",
+        "scheduled_date": null,
+        "external_id": "ep01_elevator_safety_brake",
+        "notes": [
+          "Resolved UPLOAD_POST_USER='FailSafeLabs' via profile display_name to username='default'."
+        ],
+        "raw_response": {
+          "success": true,
+          "message": "Upload queued successfully in the durable worker.",
+          "request_id": "cts-ep01_elevator_safety_brake-73a36a4746",
+          "total_platforms": 2,
+          "job_id": "bc80d28327d54b1fa021f474abd1ce69"
+        }
+      },
       "last_error": null
     },
     {
       "episode_id": "ep02",
       "slug": "ep02_submersible_implosion_physics",
-      "status": "pending",
+      "status": "scheduled",
       "platforms": [
         "youtube",
         "tiktok",
@@ -34,15 +55,36 @@
       ],
       "batch": "launch-3",
       "publish_after_utc": null,
-      "published_at_utc": null,
-      "provider": null,
-      "external_ids": {},
+      "published_at_utc": "2026-11-25T16:24:45Z",
+      "provider": "upload_post",
+      "external_ids": {
+        "ok": true,
+        "dispatch_state": "scheduled",
+        "resolved_user": "default",
+        "effective_platforms": [
+          "youtube",
+          "instagram"
+        ],
+        "job_id": "70319ba74e33497e94454c295fb68a66",
+        "scheduled_date": null,
+        "external_id": "ep02_submersible_implosion_physics",
+        "notes": [
+          "Resolved UPLOAD_POST_USER='FailSafeLabs' via profile display_name to username='default'."
+        ],
+        "raw_response": {
+          "success": true,
+          "message": "Upload queued successfully in the durable worker.",
+          "request_id": "cts-ep02_submersible_implosion_physics-74f10cab12",
+          "total_platforms": 2,
+          "job_id": "70319ba74e33497e94454c295fb68a66"
+        }
+      },
       "last_error": null
     },
     {
       "episode_id": "ep03",
       "slug": "ep03_bank_vault_lock",
-      "status": "pending",
+      "status": "scheduled",
       "platforms": [
         "youtube",
         "tiktok",
@@ -50,9 +92,30 @@
       ],
       "batch": "launch-3",
       "publish_after_utc": null,
-      "published_at_utc": null,
-      "provider": null,
-      "external_ids": {},
+      "published_at_utc": "2026-11-25T16:24:52Z",
+      "provider": "upload_post",
+      "external_ids": {
+        "ok": true,
+        "dispatch_state": "scheduled",
+        "resolved_user": "default",
+        "effective_platforms": [
+          "youtube",
+          "instagram"
+        ],
+        "job_id": "b644db67a94e414aa5f08cdfe456ea20",
+        "scheduled_date": null,
+        "external_id": "ep03_bank_vault_lock",
+        "notes": [
+          "Resolved UPLOAD_POST_USER='FailSafeLabs' via profile display_name to username='default'."
+        ],
+        "raw_response": {
+          "success": true,
+          "message": "Upload queued successfully in the durable worker.",
+          "request_id": "cts-ep03_bank_vault_lock-90f18773e4",
+          "total_platforms": 2,
+          "job_id": "b644db67a94e414aa5f08cdfe456ea20"
+        }
+      },
       "last_error": null
     },
     {
