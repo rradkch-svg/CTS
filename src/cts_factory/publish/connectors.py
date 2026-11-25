@@ -71,7 +71,8 @@ def _http_request(
     headers: dict[str, str],
     timeout: int = 180,
 ) -> dict[str, Any]:
-    req = urllib.request.Request(url, data=body, headers=headers, method="POST")
+    req_headers = {"User-Agent": "FailSafeLab-CTS-Publisher/1.0", **headers}
+    req = urllib.request.Request(url, data=body, headers=req_headers, method="POST")
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             raw = resp.read().decode("utf-8", errors="replace")
@@ -86,9 +87,9 @@ def _http_request(
 
 def publish_via_upload_post(payload: PublishPayload) -> dict[str, Any]:
     """Upload-Post.com unified multipart binary upload (YouTube Shorts + TikTok + Instagram Reels)."""
-    api_key = os.environ.get("PUBLISH_API_KEY", "").strip()
-    user = os.environ.get("UPLOAD_POST_USER", "").strip()
-    base_url = os.environ.get("UPLOAD_POST_BASE_URL", "https://api.upload-post.com/api/upload").strip()
+    api_key = (os.environ.get("PUBLISH_API_KEY") or "").strip()
+    user = (os.environ.get("UPLOAD_POST_USER") or "").strip()
+    base_url = (os.environ.get("UPLOAD_POST_BASE_URL") or "").strip() or "https://api.upload-post.com/api/upload"
     if not api_key or not user:
         raise RuntimeError("upload_post requires PUBLISH_API_KEY and UPLOAD_POST_USER secrets")
 
@@ -119,9 +120,9 @@ def publish_via_upload_post(payload: PublishPayload) -> dict[str, Any]:
 
 def publish_via_postiz(payload: PublishPayload) -> dict[str, Any]:
     """Postiz Cloud or self-hosted API: uploads binary MP4, then posts to all configured integration IDs."""
-    api_key = os.environ.get("PUBLISH_API_KEY", "").strip()
-    base_url = os.environ.get("POSTIZ_BASE_URL", "https://api.postiz.com/public/v1").rstrip("/")
-    raw_ids = os.environ.get("POSTIZ_INTEGRATION_IDS", "").strip()
+    api_key = (os.environ.get("PUBLISH_API_KEY") or "").strip()
+    base_url = ((os.environ.get("POSTIZ_BASE_URL") or "").strip() or "https://api.postiz.com/public/v1").rstrip("/")
+    raw_ids = (os.environ.get("POSTIZ_INTEGRATION_IDS") or "").strip()
     integration_ids = [i.strip() for i in raw_ids.split(",") if i.strip()]
     if not api_key or not integration_ids:
         raise RuntimeError("postiz requires PUBLISH_API_KEY and POSTIZ_INTEGRATION_IDS (comma-separated) secrets")

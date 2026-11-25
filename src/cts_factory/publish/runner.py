@@ -84,10 +84,12 @@ def run_publish_batch(
 
         meta = info["meta"]
         video_url, cover_url = _resolve_media_urls(item.slug)
+        env_plats = [p.strip().lower() for p in (os.environ.get("PUBLISH_PLATFORMS") or "").split(",") if p.strip()]
+        target_platforms = env_plats if env_plats else list(item.platforms)
         payload = PublishPayload(
             episode_id=item.episode_id,
             slug=item.slug,
-            platforms=list(item.platforms),
+            platforms=target_platforms,
             youtube_title=str(meta["youtube_title"]),
             youtube_description=str(meta.get("youtube_description", "")),
             caption=str(meta.get("ig_tiktok_caption", "")),
