@@ -21,6 +21,11 @@ on:
         required: false
         default: ""
         type: string
+      platforms:
+        description: "Optional comma-separated platforms (e.g. youtube,instagram or youtube,tiktok,instagram)"
+        required: false
+        default: ""
+        type: string
       dry_run:
         description: "Test safely without calling external social APIs"
         required: false
@@ -55,6 +60,7 @@ jobs:
           PUBLISH_API_KEY: ${{ secrets.PUBLISH_API_KEY }}
           PUBLISH_WEBHOOK_URL: ${{ secrets.PUBLISH_WEBHOOK_URL }}
           PUBLISH_MEDIA_BASE_URL: ${{ secrets.PUBLISH_MEDIA_BASE_URL }}
+          PUBLISH_PLATFORMS: ${{ github.event.inputs.platforms || secrets.PUBLISH_PLATFORMS }}
           UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
           UPLOAD_POST_BASE_URL: ${{ secrets.UPLOAD_POST_BASE_URL }}
           POSTIZ_BASE_URL: ${{ secrets.POSTIZ_BASE_URL }}

@@ -92,19 +92,22 @@ def test_connectors_build_valid_http_requests(tmp_path: Path, monkeypatch: pytes
         return {"ok": True, "id": "post_999"}
 
     with patch("cts_factory.publish.connectors._http_request", side_effect=_fake_http):
-        # 1. upload_post (multipart binary)
+        # 1. upload_post (multipart binary + empty UPLOAD_POST_BASE_URL like GitHub Actions unset secret!)
         monkeypatch.setenv("PUBLISH_API_KEY", "k_test")
         monkeypatch.setenv("UPLOAD_POST_USER", "failsafelab")
+        monkeypatch.setenv("UPLOAD_POST_BASE_URL", "")
         out = dispatch_publish("upload_post", payload)
         assert out["ok"] is True
+        assert calls[-1][0] == "https://api.upload-post.com/api/upload"
         assert b"MP4DATA" in calls[-1][1]
         assert calls[-1][2]["Authorization"] == "Apikey k_test"
 
-        # 2. postiz (2-step binary upload + multi-channel post)
+        # 2. postiz (2-step binary upload + empty POSTIZ_BASE_URL fallback!)
+        monkeypatch.setenv("POSTIZ_BASE_URL", "")
         monkeypatch.setenv("POSTIZ_INTEGRATION_IDS", "yt_1,tt_2,ig_3")
         out = dispatch_publish("postiz", payload)
         assert out["ok"] is True
-        assert calls[-2][0].endswith("/upload")
+        assert calls[-2][0] == "https://api.postiz.com/public/v1/upload"
         post_json = json.loads(calls[-1][1].decode("utf-8"))
         assert len(post_json["posts"]) == 3
 
