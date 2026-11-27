@@ -2,13 +2,10 @@ name: Auto-Publish Shorts (YouTube + TikTok + Reels)
 
 on:
   schedule:
-    # 3 daily off-peak slots (minute 17 avoids GitHub Actions :00 throttling):
-    # - 13:17 UTC (10:17 BRT / 08:17 EST)
-    # - 17:17 UTC (14:17 BRT / 12:17 EST)
-    # - 22:17 UTC (19:17 BRT / 17:17 EST)
-    - cron: "17 13 * * *"
+    # Warm-up cadence: 1 video/day at 17:17 UTC (14:17 BRT / 12:17 EST) while YouTube & TikTok exit new-account warm-up.
+    # Once YT & TikTok receive steady impressions, uncomment the 2nd slot (2/day = Buffer's daily YouTube ceiling):
     - cron: "17 17 * * *"
-    - cron: "17 22 * * *"
+    # - cron: "17 22 * * *"  # 22:17 UTC (19:17 BRT / 17:17 EST)
   workflow_dispatch:
     inputs:
       count:

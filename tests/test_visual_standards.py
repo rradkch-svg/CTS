@@ -21,6 +21,7 @@ from cts_factory.engine.primitives import (
     draw_comparison_bars,
     draw_cta_buttons,
     draw_pressure_gauge,
+    draw_top_hook,
 )
 from cts_factory.engine.renderer import resolve_callout_accent
 from cts_factory.engine.renderer3d import Camera3D, Scene3D
@@ -34,6 +35,26 @@ def _load_brand_and_palette() -> tuple[BrandConfig, Palette, str]:
     palette = Palette.from_brand(brand)
     font_black = str(brand.visual_style.resolve_font_path("primary", repo_root=REPO_ROOT))
     return brand, palette, font_black
+
+
+def test_top_hook_clears_instagram_reels_grid_play_badge() -> None:
+    """Frame 0 hook headline MUST stay strictly inside x <= 870 and y >= 300 so Reels grid [▶] never clips it."""
+    brand, p, _ = _load_brand_and_palette()
+    for hook in (
+        "BUBBLES ATE 40 FT OF CONCRETE",
+        "HOW A 3-INCH SHIELD SURVIVES 5,000°F",
+        "1 BOLT CHANGE = 200% LOAD",
+        "BIRD HIT AT 500 MPH",
+    ):
+        img = Image.new("RGB", (1080, 1920), (0, 0, 0))
+        draw = ImageDraw.Draw(img)
+        draw_top_hook(draw, hook, brand, p, repo_root=REPO_ROOT)
+        arr = np.asarray(img)
+        ys, xs = np.nonzero(arr.max(axis=2) > 0)
+        assert len(xs) > 0
+        assert int(xs.max()) <= 870, f"Hook '{hook}' leaked into Reels grid play badge: max_x={int(xs.max())}"
+        assert int(xs.min()) >= 195, f"Hook '{hook}' leaked past symmetric left margin: min_x={int(xs.min())}"
+        assert int(ys.min()) >= 300, f"Hook '{hook}' rendered too high for Reels/TikTok top bar: min_y={int(ys.min())}"
 
 
 def test_ui_primitives_respect_right_safe_zone() -> None:
