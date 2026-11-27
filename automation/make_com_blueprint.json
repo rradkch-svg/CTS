@@ -1,0 +1,171 @@
+{
+  "name": "FailSafe Lab — Auto-Publish Shorts (Instagram Reels + YouTube Shorts)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {},
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "notes": "1) Click 'Create a webhook', copy the generated URL, and paste it into GitHub Secret PUBLISH_WEBHOOK_URL (with PUBLISH_PROVIDER=webhook)."
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "mapper": null,
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0
+        }
+      },
+      "routes": [
+        {
+          "flow": [
+            {
+              "id": 3,
+              "module": "instagram-business:createReelPost",
+              "version": 1,
+              "parameters": {},
+              "filter": {
+                "name": "Instagram enabled",
+                "conditions": [
+                  [
+                    {
+                      "a": "{{1.publish_instagram}}",
+                      "b": "true",
+                      "o": "boolean:equal"
+                    }
+                  ]
+                ]
+              },
+              "mapper": {
+                "video_url": "{{1.media.video_url}}",
+                "caption": "{{1.instagram_tiktok.full_caption}}",
+                "cover_url": "{{1.media.cover_url}}",
+                "share_to_feed": true,
+                "audio_name": "{{1.instagram_tiktok.audio_name}}"
+              },
+              "metadata": {
+                "designer": {
+                  "x": 620,
+                  "y": -160
+                },
+                "notes": "Works 100% FREE on Make.com Free plan! Meta downloads video_url directly from your public GitHub repo (0 MB transferred through Make)."
+              }
+            },
+            {
+              "id": 4,
+              "module": "instagram-business:createComment",
+              "version": 1,
+              "parameters": {},
+              "filter": {
+                "name": "Has pinned comment",
+                "conditions": [
+                  [
+                    {
+                      "a": "{{1.instagram_tiktok.pinned_comment}}",
+                      "o": "exist"
+                    }
+                  ]
+                ]
+              },
+              "mapper": {
+                "media_id": "{{3.id}}",
+                "message": "{{1.instagram_tiktok.pinned_comment}}"
+              },
+              "metadata": {
+                "designer": {
+                  "x": 940,
+                  "y": -160
+                },
+                "notes": "Posts the first engagement CTA comment right after the Reel goes live."
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 5,
+              "module": "http:ActionGetFile",
+              "version": 3,
+              "parameters": {},
+              "filter": {
+                "name": "YouTube enabled",
+                "conditions": [
+                  [
+                    {
+                      "a": "{{1.publish_youtube}}",
+                      "b": "true",
+                      "o": "boolean:equal"
+                    }
+                  ]
+                ]
+              },
+              "mapper": {
+                "url": "{{1.media.video_url}}",
+                "serializeUrl": false,
+                "shareCookies": false
+              },
+              "metadata": {
+                "designer": {
+                  "x": 620,
+                  "y": 160
+                },
+                "notes": "Downloads the MP4 from GitHub raw URL. Note: Make Free plan limits files to 5 MB; Make Core ($9/mo) allows up to 100 MB."
+              }
+            },
+            {
+              "id": 6,
+              "module": "youtube:uploadVideo",
+              "version": 2,
+              "parameters": {},
+              "mapper": {
+                "title": "{{1.youtube.title}}",
+                "description": "{{1.youtube.description}}",
+                "categoryId": "{{1.youtube.category_id}}",
+                "privacyStatus": "{{1.youtube.privacy_status}}",
+                "tags": "{{1.youtube.tags}}",
+                "madeForKids": false,
+                "data": "{{5.data}}",
+                "fileName": "{{1.media.video_filename}}"
+              },
+              "metadata": {
+                "designer": {
+                  "x": 940,
+                  "y": 160
+                },
+                "notes": "Connect your YouTube channel with 1-click Google Sign-In inside Make."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false
+    },
+    "designer": {
+      "orphans": []
+    }
+  }
+}

@@ -749,7 +749,7 @@ def publish_via_ayrshare(payload: PublishPayload) -> dict[str, Any]:
 
 
 def publish_via_webhook(payload: PublishPayload) -> dict[str, Any]:
-    """Universal JSON webhook for n8n / Make / Zapier / custom automation workflows."""
+    """Universal JSON webhook for Make.com / n8n / Zapier / custom automation workflows."""
     webhook_url = (os.environ.get("PUBLISH_WEBHOOK_URL") or "").strip()
     if not webhook_url:
         raise RuntimeError("webhook provider requires PUBLISH_WEBHOOK_URL secret")
@@ -759,34 +759,81 @@ def publish_via_webhook(payload: PublishPayload) -> dict[str, Any]:
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
 
+    plats = [p.strip().lower() for p in payload.platforms if p.strip()]
+    yt_tags = payload.youtube_tags()
+    size_bytes = payload.mp4_path.stat().st_size
+    cover_png_url = payload.cover_url[:-4] + ".png" if payload.cover_url.endswith(".jpg") else payload.cover_url
+    ig_audio_name = (os.environ.get("IG_AUDIO_NAME") or "").strip() or DEFAULT_IG_AUDIO_NAME
+    playlist_id = (payload.youtube_playlist_id or os.environ.get("YOUTUBE_PLAYLIST_ID") or "").strip() or None
+
     body = {
         "episode_id": payload.episode_id,
         "slug": payload.slug,
-        "platforms": payload.platforms,
+        "platforms": plats,
+        "platforms_csv": ",".join(plats),
+        "publish_youtube": "youtube" in plats,
+        "publish_instagram": "instagram" in plats,
+        "publish_tiktok": "tiktok" in plats,
         "scheduled_date": payload.scheduled_date,
         "timezone": payload.timezone,
         "youtube": {
             "title": payload.youtube_title,
             "description": payload.youtube_description,
-            "tags": payload.youtube_tags(),
+            "tags": yt_tags,
+            "tags_csv": ",".join(yt_tags),
             "category_id": YOUTUBE_SCIENCE_TECH_CATEGORY_ID,
+            "privacy_status": "private" if payload.scheduled_date else "public",
+            "publish_at": payload.scheduled_date,
+            "made_for_kids": False,
+            "ai_disclosure": bool(payload.ai_disclosure),
+            "language": payload.language,
+            "playlist_id": playlist_id,
             "pinned_comment": payload.pinned_comment,
         },
         "instagram_tiktok": {
             "caption": payload.caption,
             "hashtags": payload.hashtags,
+            "hashtags_text": " ".join(h for h in payload.hashtags if h.strip()),
             "full_caption": payload.full_caption,
+            "audio_name": ig_audio_name,
             "pinned_comment": payload.pinned_comment,
         },
         "media": {
             "video_url": payload.video_url,
             "cover_url": payload.cover_url,
+            "cover_jpg_url": payload.cover_url,
+            "cover_png_url": cover_png_url,
             "video_filename": payload.mp4_path.name,
-            "video_size_bytes": payload.mp4_path.stat().st_size,
+            "video_size_bytes": size_bytes,
+            "video_size_mb": round(size_bytes / (1024 * 1024), 2),
             "has_cover_jpg": bool(payload.cover_jpg_path and payload.cover_jpg_path.is_file()),
         },
     }
     return _http_request(webhook_url, body=json.dumps(body).encode("utf-8"), headers=headers)
+
+
+def inspect_publish_account(provider: str | None = None) -> dict[str, Any]:
+    """Read-only diagnostic summary for `buffer`, `direct` (YouTube/Instagram), or `upload_post`."""
+    from cts_factory.publish.buffer import inspect_buffer_account
+    from cts_factory.publish.direct import has_direct_credentials, inspect_direct_account
+
+    prov = (provider or "").strip().lower()
+    if not prov or prov == "auto":
+        env_prov = (os.environ.get("PUBLISH_PROVIDER") or "").strip().lower()
+        if env_prov:
+            prov = env_prov
+        elif (os.environ.get("BUFFER_API_KEY") or "").strip():
+            prov = "buffer"
+        elif has_direct_credentials():
+            prov = "direct"
+        else:
+            prov = "upload_post"
+
+    if prov == "buffer":
+        return inspect_buffer_account()
+    if prov in ("direct", "youtube_direct", "instagram_direct"):
+        return inspect_direct_account()
+    return inspect_upload_post_account()
 
 
 def dispatch_publish(provider: str, payload: PublishPayload, dry_run: bool = False) -> dict[str, Any]:
@@ -811,7 +858,14 @@ def dispatch_publish(provider: str, payload: PublishPayload, dry_run: bool = Fal
             "video_size_bytes": payload.mp4_path.stat().st_size,
         }
 
+    from cts_factory.publish.buffer import publish_via_buffer
+    from cts_factory.publish.direct import publish_instagram_direct, publish_via_direct, publish_youtube_direct
+
     dispatch_map = {
+        "buffer": publish_via_buffer,
+        "direct": publish_via_direct,
+        "youtube_direct": publish_youtube_direct,
+        "instagram_direct": publish_instagram_direct,
         "upload_post": publish_via_upload_post,
         "postiz": publish_via_postiz,
         "ayrshare": publish_via_ayrshare,

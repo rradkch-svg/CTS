@@ -1,89 +1,119 @@
-# Automação 100% na Nuvem — Publicação Multi-Plataforma (`YouTube Shorts` + `TikTok` + `Instagram Reels`)
+# Automação 100% na Nuvem e 100% Gratuita (`YouTube Shorts` + `Instagram Reels`)
 
-Este repositório já está equipado com publicação automática via **GitHub Actions** ([`.github/workflows/auto-publish.yml`](.github/workflows/auto-publish.yml)) + fila idempotente ([`publish_queue.json`](publish_queue.json)) + integração completa com a **API oficial da Upload-Post** ([`src/cts_factory/publish/connectors.py`](src/cts_factory/publish/connectors.py)).
+Este repositório publica automaticamente via **GitHub Actions** ([`.github/workflows/auto-publish.yml`](.github/workflows/auto-publish.yml)) + fila idempotente ([`publish_queue.json`](publish_queue.json)).
 
-Você **não precisa deixar seu computador ligado**: o GitHub Actions acorda todo dia às **12:00 BRT (15:00 UTC)**, pega o próximo vídeo aprovado no QA (`qa_report.json -> passed: true`), posta simultaneamente nas redes conectadas e atualiza `publish_queue.json` a cada episódio (mesmo em caso de erro parcial) para nunca duplicar postagens.
+## Opção #1 (A MELHOR DE TODAS — 100% GRÁTIS nas 3 redes que monetizam!): `PUBLISH_PROVIDER = buffer`
 
----
+O plano **Free do [Buffer](https://buffer.com/)** inclui **3 canais grátis para sempre** (**YouTube Shorts + TikTok >61s + Instagram Reels**), **API GraphQL oficial grátis** (3.000 requisições/mês, 10 posts na fila *por vez* = **vídeos ilimitados no mês** com envio imediato!), **sem Google Cloud, sem política de privacidade, sem limite de 5 MB e sem vídeo travado em Privado no YouTube!**
 
-## O que a integração oficial `upload_post` envia automaticamente
-
-Totalmente alinhada com [`https://docs.upload-post.com/api/upload-video`](https://docs.upload-post.com/api/upload-video):
-
-1. **Autodescoberta de perfil (`GET /api/uploadposts/users`)**: resolve automaticamente o nome real do seu perfil na Upload-Post (por padrão **`default`**) — mesmo se `UPLOAD_POST_USER` estiver em branco ou preenchido com seu `@handle` social!
-2. **Filtro inteligente de redes conectadas**: verifica quais contas estão de fato conectadas (e sem token expirado) no seu perfil, evitando falhas por plataformas desconectadas.
-3. **Legendas & títulos específicos por plataforma**:
-   - **YouTube Shorts**: `youtube_title`, `youtube_description`, `categoryId=28` (*Science & Technology*), `tags[]`, `defaultLanguage=en`, `defaultAudioLanguage=en-US`, `selfDeclaredMadeForKids=false`, `containsSyntheticMedia=false` e playlist opcional (`YOUTUBE_PLAYLIST_ID`).
-   - **Instagram Reels**: `instagram_title` (legenda completa + hashtags — na API da Upload-Post o campo global `description` é ignorado no Instagram!), `media_type=REELS`, `share_to_feed=true`, `audio_name`.
-   - **TikTok**: `tiktok_title` (legenda completa + hashtags), `post_mode=DIRECT_POST`, `is_aigc=false` (omite `privacy_level` para usar o padrão válido da conta).
-4. **Capas customizadas (`cover.jpg` / `cover.png`) em todas as 3 redes**:
-   - YouTube: `thumbnail` (aplicada automaticamente após processamento do Short)
-   - Instagram Reels: `cover_image` (**JPEG nativo `cover.jpg`**, respeitando o limite ≤ 8 MB exigido pela Meta)
-   - TikTok: `tiktok_cover_image` (enviada quando a conta possui a capability `cover_image`)
-5. **Primeiro comentário automático (`first_comment`)**: posta o CTA de engajamento (`pinned_comment`) logo após a publicação.
-6. **Zero duplicatas & zero timeout**: envia header `Idempotency-Key`, `external_id=<slug>`, `async_upload=true` e acompanha o resultado real via polling de `GET /api/uploadposts/status?request_id=...` (intervalo de 8s conforme *Polling Best Practices*).
-7. **Agendamento nativo opcional**: suporta `scheduled_date` (ISO-8601) + `timezone` (ex.: `America/Sao_Paulo`) ou `add_to_queue=true` (`202 Accepted` + `job_id`).
+### Como configurar em 2 minutos (só 2 Secrets no GitHub!):
+1. Crie uma conta grátis em **[buffer.com](https://buffer.com/)** e conecte seus **3 canais**: **YouTube**, **TikTok** e **Instagram**.
+2. Acesse **[publish.buffer.com/settings/api](https://publish.buffer.com/settings/api)** e clique em **Create API Key** (copie a chave).
+3. No GitHub (**Settings → Secrets and variables → Actions**), adicione apenas:
+   - `PUBLISH_PROVIDER` = **`buffer`**
+   - `PUBLISH_API_KEY` = *(cole sua API key do Buffer)*
+4. Teste em 5 segundos: **Actions → Auto-Publish Shorts → Run workflow → `check_account = true`** — o log confirma seus 3 canais conectados (`youtube`, `tiktok`, `instagram`) sem postar nada!
+5. Depois rode com `count = 1` e `dry_run = false` (ou deixe o cron diário das 12:00 BRT postar `ep06` → `ep10` sozinho nos 3 canais!).
 
 ---
 
-## Passo 1 — Configurar os Secrets no GitHub (uma única vez)
+## Opção #2 (Sem Google Cloud p/ Instagram Reels): `PUBLISH_PROVIDER = webhook` + Make.com
 
-No GitHub, abra **Settings → Secrets and variables → Actions → New repository secret**:
-
-### Opção A (Recomendada — funciona em repo privado): `upload_post` ([Upload-Post.com](https://upload-post.com))
-- `PUBLISH_PROVIDER` = `upload_post`
-- `PUBLISH_API_KEY` = sua API key da Upload-Post (`Apikey ...`, cole só a chave)
-- `UPLOAD_POST_USER` = nome do seu **perfil** em **Manage Users** na Upload-Post (normalmente **`default`** — não é o seu `@` do Instagram/YouTube! Se você só tiver 1 perfil na conta, o publisher detecta `default` automaticamente!)
-- `PUBLISH_PLATFORMS` *(opcional)* = ex.: `youtube,instagram` (no plano Free da Upload-Post, TikTok requer plano pago; quando estiver no plano pago, use `youtube,tiktok,instagram` ou deixe vazio)
-- `YOUTUBE_PLAYLIST_ID` *(opcional)* = ID da playlist do YouTube (ex.: `PLxxxxxxxxxxxx`) para adicionar todos os Shorts automaticamente
-
-### Opção B (Open-Source / Self-hosted ou Cloud): `postiz` ([Postiz](https://postiz.com))
-- `PUBLISH_PROVIDER` = `postiz`
-- `PUBLISH_API_KEY` = sua API key do Postiz
-- `POSTIZ_INTEGRATION_IDS` = IDs das contas separados por vírgula (`id_yt,id_tt,id_ig`)
-- `POSTIZ_BASE_URL` *(opcional)* = padrão `https://api.postiz.com/public/v1`
-
-### Opção C (API Unificada via URL): `ayrshare` ([Ayrshare](https://www.ayrshare.com))
-- `PUBLISH_PROVIDER` = `ayrshare`
-- `PUBLISH_API_KEY` = sua API key da Ayrshare
-- `PUBLISH_MEDIA_BASE_URL` *(obrigatório se o repo for privado)* = URL HTTPS pública onde os `.mp4` ficam acessíveis
-
-### Opção D (Seu próprio fluxo no n8n / Make / Zapier): `webhook`
-- `PUBLISH_PROVIDER` = `webhook`
-- `PUBLISH_WEBHOOK_URL` = URL do webhook
-- `PUBLISH_API_KEY` *(opcional)* = token enviado em `Authorization: Bearer <token>`
+- Siga [`automation/MAKE_COM_SETUP.md`](automation/MAKE_COM_SETUP.md) e importe [`automation/make_com_blueprint.json`](automation/make_com_blueprint.json).
+- Configure `PUBLISH_PROVIDER = webhook` e `PUBLISH_WEBHOOK_URL = <URL do Make>`.
+- Nota: no Make Free, o limite de arquivo binário é 5 MB (funciona grátis no Instagram Reels via URL; YouTube pelo Make exige Make Core).
 
 ---
 
-## Passo 2 — Verificar sua conta Upload-Post em 5 segundos (`check_account = true`)
+## Opção #3 (API Oficial Direta): `PUBLISH_PROVIDER = direct`
+
+### A. YouTube Shorts — 100% Grátis (~6 vídeos/dia, ~180/mês, funciona até em repo privado!)
+Envia o `.mp4` em binário direto para a **YouTube Data API v3** (10.000 unidades/dia grátis do Google), já com:
+- Título otimizado, `categoryId=28` (*Science & Technology*), `tags[]`, idioma `en-US`, `selfDeclaredMadeForKids=false`, `containsSyntheticMedia=false`
+- Capa customizada (`cover.jpg`), primeiro comentário automático (`pinned_comment`), agendamento nativo (`scheduled_date`) e playlist opcional (`YOUTUBE_PLAYLIST_ID`).
+
+#### Como obter os 3 Secrets do YouTube em 3 minutos (100% pelo navegador, sem instalar nada!):
+1. Acesse **[Google Cloud Console](https://console.cloud.google.com/)** → crie um projeto grátis (ex.: `FailSafeLab`) → em **APIs e Serviços → Biblioteca**, ative **YouTube Data API v3**.
+2. Configure e publique o app OAuth (para o `refresh_token` **nunca expirar em 7 dias**):
+   - No menu lateral do Google Cloud Console, abra **Google Auth Platform → Público-alvo** *(ou **APIs e Serviços → Tela de permissão OAuth**)* → clique em **Começar / Primeiros passos**, escolha **Externo**, preencha o nome do app e seu e-mail, e salve.
+   - Ainda na aba **Público-alvo (Audience)**, em **Status de publicação** (onde aparece **Testando / Testing**), clique no botão **"PUBLICAR APLICATIVO" (Publish app)** → **Confirmar**.
+   - **Não precisa enviar para verificação do Google** para usar na sua própria conta! Quando você autorizar no passo 4, o Google vai mostrar o aviso *"O Google não verificou este app"* → basta clicar em **Avançado → Acessar [seu app] (não seguro) → Continuar**.
+   - *(Obs. da política do YouTube: projetos novos que ainda não fizeram a [auditoria gratuita da YouTube API](https://support.google.com/youtube/contact/yt_api_form) têm vídeos enviados bloqueados como **Privado** até você aprovar a auditoria ou mudar para Público em 1 clique no YouTube Studio — mas o vídeo já sobe 100% pronto com título, capa, tags e descrição.)*
+3. Em **Google Auth Platform → Clientes** *(ou **APIs e Serviços → Credenciais → Criar credenciais → ID do cliente OAuth**)* → tipo **Aplicativo da Web**:
+   - Em **URIs de redirecionamento autorizados**, adicione:
+     `https://developers.google.com/oauthplayground`
+   - Copie o **ID do cliente** (`YOUTUBE_CLIENT_ID`) e a **Chave secreta** (`YOUTUBE_CLIENT_SECRET`).
+4. Abra **[Google OAuth Playground](https://developers.google.com/oauthplayground/)**:
+   - Clique na **engrenagem (⚙️)** no canto superior direito → marque **"Use your own OAuth credentials"** → cole seu `Client ID` e `Client Secret`.
+   - No painel esquerdo (**Step 1**), selecione ou cole estes 3 escopos:
+     - `https://www.googleapis.com/auth/youtube.upload`
+     - `https://www.googleapis.com/auth/youtube.force-ssl`
+     - `https://www.googleapis.com/auth/youtube.readonly`
+   - Clique em **Authorize APIs** e faça login na conta do seu canal do YouTube.
+   - No **Step 2**, clique em **Exchange authorization code for tokens** e copie o **`refresh_token`**.
+   *(Se preferir rodar localmente em Python, também incluímos `python3 scripts/get_youtube_refresh_token.py`.)*
+5. No GitHub (**Settings → Secrets and variables → Actions**), configure:
+   - `PUBLISH_PROVIDER` = **`direct`**
+   - `YOUTUBE_CLIENT_ID` = *(seu Client ID)*
+   - `YOUTUBE_CLIENT_SECRET` = *(seu Client Secret)*
+   - `YOUTUBE_REFRESH_TOKEN` = *(seu Refresh Token)*
+   - `YOUTUBE_PLAYLIST_ID` *(opcional)* = ID da playlist do canal (ex.: `PLxxxxxxxxxxxx`)
+
+---
+
+### B. Instagram Reels — 100% Grátis (Meta Graph API oficial)
+Envia Reels diretamente com `cover.jpg`, legenda completa + hashtags, `share_to_feed=true`, `audio_name` e primeiro comentário automático.
+
+> **Nota importante sobre a API oficial da Meta:** diferente do YouTube (que aceita upload binário direto), a Meta baixa o vídeo por URL HTTPS. Portanto, para Instagram direto funcionar, o repositório `CTS` precisa estar **público** OU você configura `PUBLISH_MEDIA_BASE_URL` apontando para um bucket gratuito (ex.: Cloudflare R2 — 10 GB grátis). Se você só configurar o YouTube agora, o conector `direct` **já publica normalmente no YouTube** e apenas pula o Instagram até você adicionar os 2 Secrets abaixo!
+
+#### Como obter os 2 Secrets do Instagram em 3 minutos:
+1. Sua conta do Instagram deve ser **Profissional (Criador ou Comercial)** vinculada a uma **Página do Facebook**.
+2. Acesse **[Meta for Developers](https://developers.facebook.com/apps/)** → **Criar App** (tipo *Empresa / Business*) → adicione o produto **Instagram Graph API**.
+3. Abra o **[Graph API Explorer](https://developers.facebook.com/tools/explorer/)**:
+   - Selecione seu App, clique em **Generate Access Token** com as permissões `instagram_basic`, `instagram_content_publish`, `instagram_manage_comments`, `pages_show_list`.
+   - Estenda para **Long-Lived Token (60 dias)** no **[Access Token Debugger](https://developers.facebook.com/tools/debug/accesstoken/)** (*Extend Access Token*).
+   - Para pegar seu `IG_USER_ID`, consulte no Explorer: `me/accounts?fields=instagram_business_account` e copie o `id` dentro de `instagram_business_account`.
+4. No GitHub (**Settings → Secrets and variables → Actions**), adicione:
+   - `IG_USER_ID` = *(ID numérico da conta Instagram Business/Creator)*
+   - `IG_ACCESS_TOKEN` = *(seu Long-Lived Access Token)*
+
+---
+
+## Passo 2 — Testar a conexão em 5 segundos (`check_account = true`)
 
 1. Abra **Actions → Auto-Publish Shorts (YouTube + TikTok + Reels) → Run workflow**.
 2. Marque **`check_account = true`** e clique em **Run workflow**.
-3. Nos logs, você verá exatamente seu plano, o nome real do seu perfil (`resolved_user`, ex.: `default`) e quais redes sociais estão conectadas — **sem postar nada e sem expor sua API key**.
+3. Nos logs, o script confirma o nome exato do seu canal do YouTube e do seu `@` do Instagram — **sem postar nada e sem mostrar nenhum token**.
 
 ---
 
-## Passo 3 — Lançar os 3 Primeiros Episódios + Piloto Automático Diário
+## Passo 3 — Publicar agora e deixar no piloto automático diário
 
 1. Em **Actions → Auto-Publish Shorts → Run workflow**:
-   - `count`: **`3`**
-   - `batch`: **`launch-3`** *(posta `ep01`, `ep02` e `ep03` juntos!)*
-   - `platforms`: **`youtube,instagram`** *(ou `youtube,tiktok,instagram` se tiver plano pago com TikTok)*
-   - `dry_run`: **`false`**
-2. Se algum episódio falhar temporariamente (ex.: limite de taxa), rode novamente marcando **`retry_failed = true`** — os episódios que já foram postados não serão duplicados!
-3. Depois do disparo inicial, o cron (`0 15 * * *`, todo dia às 12:00 BRT) publica automaticamente `ep04` → `ep10` (e futuros `ep11+`), 1 por dia!
+   - `count`: **`1`** *(ou quantos episódios pendentes quiser postar hoje)*
+   - `dry_run`: **DESMARCADO (`false`)**
+2. Depois disso, o cron (`0 15 * * *`, todo dia às 12:00 BRT) continua publicando `ep06` → `ep10` (e futuros `ep11+`) sozinho, 1 por dia, **100% grátis**!
+
+---
+
+## Outros Conectores Suportados (opcionais)
+
+- **`upload_post`**: Upload-Post.com (`PUBLISH_API_KEY`, `UPLOAD_POST_USER` — plano Free limitado a 10 uploads/mês).
+- **`postiz`**: Postiz Cloud ou self-hosted (`PUBLISH_API_KEY`, `POSTIZ_INTEGRATION_IDS`, `POSTIZ_BASE_URL`).
+- **`ayrshare`**: Ayrshare (`PUBLISH_API_KEY`, `PUBLISH_MEDIA_BASE_URL`).
+- **`webhook`**: n8n / Make.com / Zapier (`PUBLISH_WEBHOOK_URL`, `PUBLISH_API_KEY` opcional).
 
 ---
 
 ## Comandos Úteis (Local ou CI)
 
 ```bash
-# Inspecionar perfil e contas conectadas na Upload-Post (somente leitura)
+# Testar credenciais configuradas (direct ou upload_post) sem postar nada
 PYTHONPATH=src python -m cts_factory.publish --check-account
 
 # Atualizar publish_queue.json após criar novos episódios (ep11+)
 PYTHONPATH=src python -m cts_factory.publish --sync-only
 
-# Testar o próximo envio sem chamar API externa
-PYTHONPATH=src python -m cts_factory.publish --count 3 --batch launch-3 --dry-run
+# Simular o próximo envio sem chamar API externa
+PYTHONPATH=src python -m cts_factory.publish --count 1 --dry-run
 ```

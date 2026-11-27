@@ -97,9 +97,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "publish":
         if args.check_account:
-            from cts_factory.publish import inspect_upload_post_account
+            from cts_factory.publish import inspect_publish_account
 
-            info = inspect_upload_post_account()
+            info = inspect_publish_account(provider=args.provider)
             print(json.dumps(info, indent=2, ensure_ascii=False))
             return 0 if not info.get("resolution_error") else 2
         platforms_override = [p.strip().lower() for p in (args.platforms or "").split(",") if p.strip()] or None

@@ -356,14 +356,29 @@ def test_other_connectors_build_valid_http_requests(tmp_path: Path, monkeypatch:
         assert ayr_json["platforms"] == ["youtube", "tiktok", "instagram"]
         assert ayr_json["youTubeOptions"]["shorts"] is True
 
-        # 3. webhook (n8n / Make / Zapier)
+        # 3. webhook (Make.com / n8n / Zapier)
         monkeypatch.setenv("PUBLISH_WEBHOOK_URL", "https://hooks.example.test/cts")
         out = dispatch_publish("webhook", payload)
         assert out["ok"] is True
         wh_json = json.loads(calls[-1][1].decode("utf-8"))
         assert wh_json["episode_id"] == "ep01"
+        assert wh_json["publish_youtube"] is True
+        assert wh_json["publish_instagram"] is True
+        assert wh_json["youtube"]["privacy_status"] == "public"
+        assert "Shorts" in wh_json["youtube"]["tags_csv"]
         assert wh_json["media"]["video_size_bytes"] == 7
         assert wh_json["media"]["has_cover_jpg"] is True
+        assert wh_json["media"]["cover_jpg_url"].endswith("cover.jpg")
+        assert wh_json["media"]["cover_png_url"].endswith("cover.png")
+
+    # Verify Make.com blueprint JSON parses cleanly and references expected webhook fields
+    bp_path = REPO_ROOT / "automation" / "make_com_blueprint.json"
+    bp = json.loads(bp_path.read_text(encoding="utf-8"))
+    assert bp["flow"][0]["module"] == "gateway:CustomWebHook"
+    bp_text = bp_path.read_text(encoding="utf-8")
+    assert "{{1.media.video_url}}" in bp_text
+    assert "{{1.instagram_tiktok.full_caption}}" in bp_text
+    assert "{{1.youtube.title}}" in bp_text
 
 
 def test_partial_batch_failure_persists_success_and_retry_failed_resumes_cleanly(
@@ -426,3 +441,218 @@ def test_scheduled_run_marks_queue_item_scheduled_and_never_reuploads(
     ep01 = q_after.get_by_slug("ep01_elevator_safety_brake")
     assert ep01 is not None and ep01.status == "scheduled"
     assert ep01.external_ids["job_id"] == "job_999"
+
+
+def test_direct_publisher_youtube_and_instagram_full_flow(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    payload = _sample_payload(tmp_path)
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "yt_cid")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "yt_csec")
+    monkeypatch.setenv("YOUTUBE_REFRESH_TOKEN", "yt_ref")
+    monkeypatch.setenv("YOUTUBE_PLAYLIST_ID", "PLdirect1")
+    monkeypatch.setenv("IG_USER_ID", "17841400001")
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "IG_SECRET_TOKEN")
+    monkeypatch.setenv("IG_POLL_INTERVAL_S", "0.01")
+
+    http_log: list[tuple[str, str]] = []
+    ig_poll = {"n": 0}
+
+    def _fake_http_call(method: str, url: str, *, body=None, headers=None, timeout=120):
+        http_log.append((method, url))
+        if "oauth2.googleapis.com/token" in url:
+            return 200, {}, {"access_token": "yt_access_tok"}
+        if "upload/youtube/v3/videos" in url and method == "POST":
+            meta = json.loads(body.decode("utf-8"))
+            assert meta["snippet"]["categoryId"] == "28"
+            assert meta["status"]["privacyStatus"] == "public"
+            assert meta["status"]["selfDeclaredMadeForKids"] is False
+            assert "Shorts" in meta["snippet"]["tags"]
+            return 200, {"location": "https://upload.youtube.local/session/1"}, {}
+        if url == "https://upload.youtube.local/session/1" and method == "PUT":
+            assert body == b"MP4DATA"
+            return 200, {}, {"id": "YT_VID_001"}
+        if "thumbnails/set" in url:
+            assert body == b"\xff\xd8\xffJPGDATA"
+            return 200, {}, {"items": [{}]}
+        if "youtube/v3/commentThreads" in url:
+            return 200, {}, {"id": "yt_cmt_1"}
+        if "youtube/v3/playlistItems" in url:
+            return 200, {}, {"id": "yt_pl_item_1"}
+        if "/17841400001/media" in url and not url.endswith("/media_publish"):
+            form_text = body.decode("utf-8")
+            assert "media_type=REELS" in form_text
+            assert "share_to_feed=true" in form_text
+            return 200, {}, {"id": "ig_container_1"}
+        if "/ig_container_1?" in url:
+            ig_poll["n"] += 1
+            return 200, {}, {"status_code": "IN_PROGRESS" if ig_poll["n"] == 1 else "FINISHED"}
+        if "/17841400001/media_publish" in url:
+            return 200, {}, {"id": "ig_media_99"}
+        if "/ig_media_99?" in url:
+            return 200, {}, {"permalink": "https://www.instagram.com/reel/DIRECT99/"}
+        if "/ig_media_99/comments" in url:
+            return 200, {}, {"id": "ig_cmt_99"}
+        raise AssertionError(f"Unexpected call: {method} {url}")
+
+    with patch("cts_factory.publish.direct._http_call", side_effect=_fake_http_call):
+        out = dispatch_publish("direct", payload)
+
+    assert out["ok"] is True
+    assert out["provider"] == "direct"
+    assert out["dispatch_state"] == "published"
+    assert out["succeeded_platforms"] == ["youtube", "instagram"]
+    assert out["platform_urls"]["youtube"] == "https://www.youtube.com/shorts/YT_VID_001"
+    assert out["platform_urls"]["instagram"] == "https://www.instagram.com/reel/DIRECT99/"
+    assert out["results"]["youtube"]["thumbnail_set"] is True
+    assert out["results"]["youtube"]["first_comment_id"] == "yt_cmt_1"
+    assert out["results"]["youtube"]["playlists_added"] == ["PLdirect1"]
+    assert out["results"]["instagram"]["first_comment_id"] == "ig_cmt_99"
+    assert any("tiktok" in n.lower() for n in out["notes"])
+
+
+def test_direct_publisher_youtube_only_scheduled_and_partial_failure_safety(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # Only YouTube configured + scheduled_date -> publishes/schedules YouTube cleanly without requiring IG secrets
+    payload = _sample_payload(tmp_path, scheduled_date="2026-12-05T15:00:00Z")
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "yt_cid")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "yt_csec")
+    monkeypatch.setenv("YOUTUBE_REFRESH_TOKEN", "yt_ref")
+    monkeypatch.delenv("IG_USER_ID", raising=False)
+    monkeypatch.delenv("IG_ACCESS_TOKEN", raising=False)
+
+    def _fake_yt_only(method: str, url: str, *, body=None, headers=None, timeout=120):
+        if "oauth2.googleapis.com/token" in url:
+            return 200, {}, {"access_token": "yt_tok"}
+        if "upload/youtube/v3/videos" in url:
+            meta = json.loads(body.decode("utf-8"))
+            assert meta["status"]["privacyStatus"] == "private"
+            assert meta["status"]["publishAt"] == "2026-12-05T15:00:00Z"
+            return 200, {"location": "https://upload.youtube.local/sched"}, {}
+        if url == "https://upload.youtube.local/sched":
+            return 200, {}, {"id": "YT_SCHED_77"}
+        if "thumbnails/set" in url:
+            return 200, {}, {}
+        raise AssertionError(f"Unexpected call: {method} {url}")
+
+    with patch("cts_factory.publish.direct._http_call", side_effect=_fake_yt_only):
+        out = dispatch_publish("direct", payload)
+
+    assert out["dispatch_state"] == "scheduled"
+    assert out["succeeded_platforms"] == ["youtube"]
+    assert any("instagram" in n.lower() for n in out["notes"])
+
+
+def test_direct_check_account_verifies_channels_without_leaking_secrets(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from cts_factory.publish.connectors import inspect_publish_account
+
+    monkeypatch.setenv("PUBLISH_PROVIDER", "direct")
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "cid_123")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "ULTRA_SECRET_YT_KEY")
+    monkeypatch.setenv("YOUTUBE_REFRESH_TOKEN", "ULTRA_SECRET_REFRESH")
+    monkeypatch.setenv("IG_USER_ID", "17841400001")
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "ULTRA_SECRET_IG_TOKEN")
+
+    def _fake_check(method: str, url: str, *, body=None, headers=None, timeout=120):
+        if "oauth2.googleapis.com/token" in url:
+            return 200, {}, {"access_token": "temp_tok"}
+        if "youtube/v3/channels" in url:
+            return 200, {}, {"items": [{"id": "UCfailsafe", "snippet": {"title": "FailSafe Lab", "customUrl": "@FailSafeLab"}}]}
+        if "graph.facebook.com" in url:
+            return 200, {}, {"id": "17841400001", "username": "failsafelab", "name": "FailSafe Lab"}
+        raise AssertionError(f"Unexpected {url}")
+
+    with patch("cts_factory.publish.direct._http_call", side_effect=_fake_check):
+        info = inspect_publish_account()
+
+    serialized = json.dumps(info)
+    for secret in ("ULTRA_SECRET_YT_KEY", "ULTRA_SECRET_REFRESH", "ULTRA_SECRET_IG_TOKEN"):
+        assert secret not in serialized
+    assert info["provider"] == "direct"
+    assert info["resolution_error"] is None
+    assert info["youtube"]["channel_title"] == "FailSafe Lab"
+    assert info["instagram"]["username"] == "failsafelab"
+
+
+def test_buffer_graphql_publishes_youtube_tiktok_and_instagram_free(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    payload = _sample_payload(tmp_path)
+    monkeypatch.setenv("PUBLISH_API_KEY", "BUFFER_SUPER_SECRET_KEY")
+    created_inputs: list[dict] = []
+
+    def _fake_gql(api_key: str, query: str, variables=None, timeout=90):
+        assert api_key == "BUFFER_SUPER_SECRET_KEY"
+        if "GetOrganizations" in query:
+            return {"account": {"organizations": [{"id": "org_1", "name": "FailSafe Lab"}]}}
+        if "GetChannels" in query:
+            return {
+                "channels": [
+                    {"id": "ch_yt", "name": "FailSafe Lab", "displayName": "FailSafe Lab YT", "service": "youtube"},
+                    {"id": "ch_tt", "name": "failsafelab", "displayName": "FailSafe Lab TT", "service": "tiktok"},
+                    {"id": "ch_ig", "name": "failsafelab", "displayName": "FailSafe Lab IG", "service": "instagram"},
+                ]
+            }
+        if "CreatePost" in query:
+            inp = variables["input"]
+            created_inputs.append(inp)
+            return {"createPost": {"post": {"id": f"post_{inp['channelId']}", "status": "buffer", "dueAt": None}}}
+        raise AssertionError(f"Unexpected GraphQL query: {query}")
+
+    with patch("cts_factory.publish.buffer._buffer_graphql", side_effect=_fake_gql):
+        out = dispatch_publish("buffer", payload)
+
+    assert out["ok"] is True
+    assert out["provider"] == "buffer"
+    assert out["dispatch_state"] == "published"
+    assert out["succeeded_platforms"] == ["youtube", "tiktok", "instagram"]
+    assert len(created_inputs) == 3
+
+    yt_inp = next(i for i in created_inputs if i["channelId"] == "ch_yt")
+    assert yt_inp["mode"] == "shareNow"
+    assert yt_inp["schedulingType"] == "automatic"
+    assert yt_inp["assets"][0]["video"]["url"] == payload.video_url
+    assert yt_inp["metadata"]["youtube"]["categoryId"] == "28"
+    assert yt_inp["metadata"]["youtube"]["title"] == payload.youtube_title
+    assert yt_inp["metadata"]["youtube"]["privacy"] == "public"
+    assert yt_inp["metadata"]["youtube"]["madeForKids"] is False
+
+    tt_inp = next(i for i in created_inputs if i["channelId"] == "ch_tt")
+    assert tt_inp["text"] == payload.full_caption
+    assert tt_inp["metadata"]["tiktok"]["isAiGenerated"] is False
+
+    ig_inp = next(i for i in created_inputs if i["channelId"] == "ch_ig")
+    assert ig_inp["metadata"]["instagram"]["type"] == "reel"
+    assert ig_inp["metadata"]["instagram"]["shouldShareToFeed"] is True
+    assert ig_inp["metadata"]["instagram"]["firstComment"] == "Comment YES or NO"
+
+
+def test_buffer_check_account_redacts_api_key(monkeypatch: pytest.MonkeyPatch) -> None:
+    from cts_factory.publish.connectors import inspect_publish_account
+
+    monkeypatch.setenv("PUBLISH_PROVIDER", "buffer")
+    monkeypatch.setenv("PUBLISH_API_KEY", "BUFFER_KEY_DO_NOT_LEAK")
+
+    def _fake_gql(api_key: str, query: str, variables=None, timeout=90):
+        if "GetOrganizations" in query:
+            return {"account": {"organizations": [{"id": "org_1", "name": "FailSafe Lab"}]}}
+        return {
+            "channels": [
+                {"id": "ch_yt", "displayName": "FailSafe Lab", "service": "youtube", "isQueuePaused": False},
+                {"id": "ch_tt", "displayName": "@failsafelab", "service": "tiktok", "isQueuePaused": False},
+                {"id": "ch_ig", "displayName": "@failsafelab", "service": "instagram", "isQueuePaused": False},
+            ]
+        }
+
+    with patch("cts_factory.publish.buffer._buffer_graphql", side_effect=_fake_gql):
+        info = inspect_publish_account()
+
+    assert "BUFFER_KEY_DO_NOT_LEAK" not in json.dumps(info)
+    assert info["provider"] == "buffer"
+    assert info["connected_services"] == ["instagram", "tiktok", "youtube"]
+    assert info["resolution_error"] is None
+
+

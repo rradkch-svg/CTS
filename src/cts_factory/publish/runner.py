@@ -29,6 +29,12 @@ def _resolve_provider(explicit: str | None) -> str:
     env_prov = (os.environ.get("PUBLISH_PROVIDER") or "").strip().lower()
     if env_prov:
         return env_prov
+    if (os.environ.get("BUFFER_API_KEY") or "").strip():
+        return "buffer"
+    from cts_factory.publish.direct import has_direct_credentials
+
+    if has_direct_credentials():
+        return "direct"
     if (os.environ.get("PUBLISH_WEBHOOK_URL") or "").strip():
         return "webhook"
     return "dry_run"
