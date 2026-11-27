@@ -2,15 +2,30 @@
 
 Este repositório publica automaticamente via **GitHub Actions** ([`.github/workflows/auto-publish.yml`](.github/workflows/auto-publish.yml)) + fila idempotente ([`publish_queue.json`](publish_queue.json)).
 
-## Caminho Mais Rápido (Sem Google Cloud / Sem Política de Privacidade): `PUBLISH_PROVIDER = webhook` + Make.com
+## Opção #1 (A MELHOR DE TODAS — 100% GRÁTIS nas 3 redes que monetizam!): `PUBLISH_PROVIDER = buffer`
 
-- Siga o guia de 2 minutos em **[`automation/MAKE_COM_SETUP.md`](automation/MAKE_COM_SETUP.md)** e importe o blueprint pronto **[`automation/make_com_blueprint.json`](automation/make_com_blueprint.json)** no Make.com!
-- Configure apenas 2 Secrets no GitHub: `PUBLISH_PROVIDER = webhook` e `PUBLISH_WEBHOOK_URL = <URL do Make>`.
-- Como o repositório é **público**, o **Instagram Reels funciona 100% GRÁTIS** no Make Free (0 MB transferido pelo Make). Para incluir **YouTube** pelo Make com vídeos de 9–18 MB, use o Make Core (limite de 100 MB) ou a Opção Direta abaixo.
+O plano **Free do [Buffer](https://buffer.com/)** inclui **3 canais grátis para sempre** (**YouTube Shorts + TikTok >61s + Instagram Reels**), **API GraphQL oficial grátis** (3.000 requisições/mês, 10 posts na fila *por vez* = **vídeos ilimitados no mês** com envio imediato!), **sem Google Cloud, sem política de privacidade, sem limite de 5 MB e sem vídeo travado em Privado no YouTube!**
+
+### Como configurar em 2 minutos (só 2 Secrets no GitHub!):
+1. Crie uma conta grátis em **[buffer.com](https://buffer.com/)** e conecte seus **3 canais**: **YouTube**, **TikTok** e **Instagram**.
+2. Acesse **[publish.buffer.com/settings/api](https://publish.buffer.com/settings/api)** e clique em **Create API Key** (copie a chave).
+3. No GitHub (**Settings → Secrets and variables → Actions**), adicione apenas:
+   - `PUBLISH_PROVIDER` = **`buffer`**
+   - `PUBLISH_API_KEY` = *(cole sua API key do Buffer)*
+4. Teste em 5 segundos: **Actions → Auto-Publish Shorts → Run workflow → `check_account = true`** — o log confirma seus 3 canais conectados (`youtube`, `tiktok`, `instagram`) sem postar nada!
+5. Depois rode com `count = 1` e `dry_run = false` (ou deixe o cron diário das 12:00 BRT postar `ep06` → `ep10` sozinho nos 3 canais!).
 
 ---
 
-## Opção 2 (100% Grátis para YouTube e Instagram via API Oficial): `PUBLISH_PROVIDER = direct`
+## Opção #2 (Sem Google Cloud p/ Instagram Reels): `PUBLISH_PROVIDER = webhook` + Make.com
+
+- Siga [`automation/MAKE_COM_SETUP.md`](automation/MAKE_COM_SETUP.md) e importe [`automation/make_com_blueprint.json`](automation/make_com_blueprint.json).
+- Configure `PUBLISH_PROVIDER = webhook` e `PUBLISH_WEBHOOK_URL = <URL do Make>`.
+- Nota: no Make Free, o limite de arquivo binário é 5 MB (funciona grátis no Instagram Reels via URL; YouTube pelo Make exige Make Core).
+
+---
+
+## Opção #3 (API Oficial Direta): `PUBLISH_PROVIDER = direct`
 
 ### A. YouTube Shorts — 100% Grátis (~6 vídeos/dia, ~180/mês, funciona até em repo privado!)
 Envia o `.mp4` em binário direto para a **YouTube Data API v3** (10.000 unidades/dia grátis do Google), já com:

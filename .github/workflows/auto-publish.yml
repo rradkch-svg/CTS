@@ -83,6 +83,8 @@ jobs:
           PYTHONPATH: src
           PUBLISH_PROVIDER: ${{ secrets.PUBLISH_PROVIDER }}
           PUBLISH_API_KEY: ${{ secrets.PUBLISH_API_KEY }}
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+          BUFFER_SHARE_MODE: ${{ secrets.BUFFER_SHARE_MODE }}
           PUBLISH_WEBHOOK_URL: ${{ secrets.PUBLISH_WEBHOOK_URL }}
           PUBLISH_MEDIA_BASE_URL: ${{ secrets.PUBLISH_MEDIA_BASE_URL }}
           PUBLISH_PLATFORMS: ${{ github.event.inputs.platforms || secrets.PUBLISH_PLATFORMS }}

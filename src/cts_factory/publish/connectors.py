@@ -813,7 +813,8 @@ def publish_via_webhook(payload: PublishPayload) -> dict[str, Any]:
 
 
 def inspect_publish_account(provider: str | None = None) -> dict[str, Any]:
-    """Read-only diagnostic summary for either `direct` (YouTube/Instagram) or `upload_post`."""
+    """Read-only diagnostic summary for `buffer`, `direct` (YouTube/Instagram), or `upload_post`."""
+    from cts_factory.publish.buffer import inspect_buffer_account
     from cts_factory.publish.direct import has_direct_credentials, inspect_direct_account
 
     prov = (provider or "").strip().lower()
@@ -821,11 +822,15 @@ def inspect_publish_account(provider: str | None = None) -> dict[str, Any]:
         env_prov = (os.environ.get("PUBLISH_PROVIDER") or "").strip().lower()
         if env_prov:
             prov = env_prov
+        elif (os.environ.get("BUFFER_API_KEY") or "").strip():
+            prov = "buffer"
         elif has_direct_credentials():
             prov = "direct"
         else:
             prov = "upload_post"
 
+    if prov == "buffer":
+        return inspect_buffer_account()
     if prov in ("direct", "youtube_direct", "instagram_direct"):
         return inspect_direct_account()
     return inspect_upload_post_account()
@@ -853,9 +858,11 @@ def dispatch_publish(provider: str, payload: PublishPayload, dry_run: bool = Fal
             "video_size_bytes": payload.mp4_path.stat().st_size,
         }
 
+    from cts_factory.publish.buffer import publish_via_buffer
     from cts_factory.publish.direct import publish_instagram_direct, publish_via_direct, publish_youtube_direct
 
     dispatch_map = {
+        "buffer": publish_via_buffer,
         "direct": publish_via_direct,
         "youtube_direct": publish_youtube_direct,
         "instagram_direct": publish_instagram_direct,

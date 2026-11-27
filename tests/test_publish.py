@@ -576,3 +576,83 @@ def test_direct_check_account_verifies_channels_without_leaking_secrets(
     assert info["youtube"]["channel_title"] == "FailSafe Lab"
     assert info["instagram"]["username"] == "failsafelab"
 
+
+def test_buffer_graphql_publishes_youtube_tiktok_and_instagram_free(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    payload = _sample_payload(tmp_path)
+    monkeypatch.setenv("PUBLISH_API_KEY", "BUFFER_SUPER_SECRET_KEY")
+    created_inputs: list[dict] = []
+
+    def _fake_gql(api_key: str, query: str, variables=None, timeout=90):
+        assert api_key == "BUFFER_SUPER_SECRET_KEY"
+        if "GetOrganizations" in query:
+            return {"account": {"organizations": [{"id": "org_1", "name": "FailSafe Lab"}]}}
+        if "GetChannels" in query:
+            return {
+                "channels": [
+                    {"id": "ch_yt", "name": "FailSafe Lab", "displayName": "FailSafe Lab YT", "service": "youtube"},
+                    {"id": "ch_tt", "name": "failsafelab", "displayName": "FailSafe Lab TT", "service": "tiktok"},
+                    {"id": "ch_ig", "name": "failsafelab", "displayName": "FailSafe Lab IG", "service": "instagram"},
+                ]
+            }
+        if "CreatePost" in query:
+            inp = variables["input"]
+            created_inputs.append(inp)
+            return {"createPost": {"post": {"id": f"post_{inp['channelId']}", "status": "buffer", "dueAt": None}}}
+        raise AssertionError(f"Unexpected GraphQL query: {query}")
+
+    with patch("cts_factory.publish.buffer._buffer_graphql", side_effect=_fake_gql):
+        out = dispatch_publish("buffer", payload)
+
+    assert out["ok"] is True
+    assert out["provider"] == "buffer"
+    assert out["dispatch_state"] == "published"
+    assert out["succeeded_platforms"] == ["youtube", "tiktok", "instagram"]
+    assert len(created_inputs) == 3
+
+    yt_inp = next(i for i in created_inputs if i["channelId"] == "ch_yt")
+    assert yt_inp["mode"] == "shareNow"
+    assert yt_inp["schedulingType"] == "automatic"
+    assert yt_inp["assets"][0]["video"]["url"] == payload.video_url
+    assert yt_inp["metadata"]["youtube"]["categoryId"] == "28"
+    assert yt_inp["metadata"]["youtube"]["title"] == payload.youtube_title
+    assert yt_inp["metadata"]["youtube"]["privacy"] == "public"
+    assert yt_inp["metadata"]["youtube"]["madeForKids"] is False
+
+    tt_inp = next(i for i in created_inputs if i["channelId"] == "ch_tt")
+    assert tt_inp["text"] == payload.full_caption
+    assert tt_inp["metadata"]["tiktok"]["isAiGenerated"] is False
+
+    ig_inp = next(i for i in created_inputs if i["channelId"] == "ch_ig")
+    assert ig_inp["metadata"]["instagram"]["type"] == "reel"
+    assert ig_inp["metadata"]["instagram"]["shouldShareToFeed"] is True
+    assert ig_inp["metadata"]["instagram"]["firstComment"] == "Comment YES or NO"
+
+
+def test_buffer_check_account_redacts_api_key(monkeypatch: pytest.MonkeyPatch) -> None:
+    from cts_factory.publish.connectors import inspect_publish_account
+
+    monkeypatch.setenv("PUBLISH_PROVIDER", "buffer")
+    monkeypatch.setenv("PUBLISH_API_KEY", "BUFFER_KEY_DO_NOT_LEAK")
+
+    def _fake_gql(api_key: str, query: str, variables=None, timeout=90):
+        if "GetOrganizations" in query:
+            return {"account": {"organizations": [{"id": "org_1", "name": "FailSafe Lab"}]}}
+        return {
+            "channels": [
+                {"id": "ch_yt", "displayName": "FailSafe Lab", "service": "youtube", "isQueuePaused": False},
+                {"id": "ch_tt", "displayName": "@failsafelab", "service": "tiktok", "isQueuePaused": False},
+                {"id": "ch_ig", "displayName": "@failsafelab", "service": "instagram", "isQueuePaused": False},
+            ]
+        }
+
+    with patch("cts_factory.publish.buffer._buffer_graphql", side_effect=_fake_gql):
+        info = inspect_publish_account()
+
+    assert "BUFFER_KEY_DO_NOT_LEAK" not in json.dumps(info)
+    assert info["provider"] == "buffer"
+    assert info["connected_services"] == ["instagram", "tiktok", "youtube"]
+    assert info["resolution_error"] is None
+
+
