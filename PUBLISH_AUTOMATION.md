@@ -15,8 +15,12 @@ Envia o `.mp4` em binário direto para a **YouTube Data API v3** (10.000 unidade
 
 #### Como obter os 3 Secrets do YouTube em 3 minutos (100% pelo navegador, sem instalar nada!):
 1. Acesse **[Google Cloud Console](https://console.cloud.google.com/)** → crie um projeto grátis (ex.: `FailSafeLab`) → em **APIs e Serviços → Biblioteca**, ative **YouTube Data API v3**.
-2. Em **APIs e Serviços → Tela de permissão OAuth**: escolha **Externo**, preencha o nome do app e adicione o seu e-mail do canal em **Usuários de teste** (depois pode clicar em *Publicar app* ou manter em teste se quiser renovar a cada 7 dias — **recomendado publicar o app** para o `refresh_token` nunca expirar!).
-3. Em **APIs e Serviços → Credenciais → Criar credenciais → ID do cliente OAuth** → tipo **Aplicativo da Web**:
+2. Configure e publique o app OAuth (para o `refresh_token` **nunca expirar em 7 dias**):
+   - No menu lateral do Google Cloud Console, abra **Google Auth Platform → Público-alvo** *(ou **APIs e Serviços → Tela de permissão OAuth**)* → clique em **Começar / Primeiros passos**, escolha **Externo**, preencha o nome do app e seu e-mail, e salve.
+   - Ainda na aba **Público-alvo (Audience)**, em **Status de publicação** (onde aparece **Testando / Testing**), clique no botão **"PUBLICAR APLICATIVO" (Publish app)** → **Confirmar**.
+   - **Não precisa enviar para verificação do Google** para usar na sua própria conta! Quando você autorizar no passo 4, o Google vai mostrar o aviso *"O Google não verificou este app"* → basta clicar em **Avançado → Acessar [seu app] (não seguro) → Continuar**.
+   - *(Obs. da política do YouTube: projetos novos que ainda não fizeram a [auditoria gratuita da YouTube API](https://support.google.com/youtube/contact/yt_api_form) têm vídeos enviados bloqueados como **Privado** até você aprovar a auditoria ou mudar para Público em 1 clique no YouTube Studio — mas o vídeo já sobe 100% pronto com título, capa, tags e descrição.)*
+3. Em **Google Auth Platform → Clientes** *(ou **APIs e Serviços → Credenciais → Criar credenciais → ID do cliente OAuth**)* → tipo **Aplicativo da Web**:
    - Em **URIs de redirecionamento autorizados**, adicione:
      `https://developers.google.com/oauthplayground`
    - Copie o **ID do cliente** (`YOUTUBE_CLIENT_ID`) e a **Chave secreta** (`YOUTUBE_CLIENT_SECRET`).
