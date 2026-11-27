@@ -197,7 +197,7 @@
     {
       "episode_id": "ep06",
       "slug": "ep06_skywalk_bolt_load",
-      "status": "pending",
+      "status": "published",
       "platforms": [
         "youtube",
         "tiktok",
@@ -205,9 +205,47 @@
       ],
       "batch": "daily",
       "publish_after_utc": null,
-      "published_at_utc": null,
-      "provider": null,
-      "external_ids": {},
+      "published_at_utc": "2026-11-27T04:40:10Z",
+      "provider": "buffer",
+      "external_ids": {
+        "ok": true,
+        "provider": "buffer",
+        "dispatch_state": "published",
+        "effective_platforms": [
+          "youtube",
+          "tiktok",
+          "instagram"
+        ],
+        "succeeded_platforms": [
+          "youtube",
+          "tiktok"
+        ],
+        "results": {
+          "youtube": {
+            "success": true,
+            "channel_id": "6b09076c8541f09ecbbbaae1",
+            "channel_name": "FailSafe Lab",
+            "post_id": "6b09099d049983dcfb89dd2f",
+            "status": "sent",
+            "due_at": "2026-11-27T04:39:57.510Z"
+          },
+          "tiktok": {
+            "success": true,
+            "channel_id": "6b09087f8541f09ecbbbb1ec",
+            "channel_name": "failsafe.lab",
+            "post_id": "6b09099f062ed764a8e37c8a",
+            "status": "sending",
+            "due_at": "2026-11-27T04:39:59.890Z"
+          }
+        },
+        "notes": [],
+        "warnings": [
+          "Partial failure on instagram: Buffer rejected instagram post: Invalid post: First comment requires a paid plan. Please upgrade to use this feature."
+        ],
+        "partial_failures": {
+          "instagram": "Buffer rejected instagram post: Invalid post: First comment requires a paid plan. Please upgrade to use this feature."
+        }
+      },
       "last_error": null
     },
     {
