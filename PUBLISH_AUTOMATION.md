@@ -13,8 +13,8 @@ O plano **Free do [Buffer](https://buffer.com/)** inclui **3 canais grátis para
    - `PUBLISH_PROVIDER` = **`buffer`**
    - `PUBLISH_API_KEY` = *(cole sua API key do Buffer)*
 4. Teste em 5 segundos: **Actions → Auto-Publish Shorts → Run workflow → `check_account = true`** — o log confirma seus 3 canais conectados (`youtube`, `tiktok`, `instagram`) sem postar nada!
-5. Depois rode com `count = 1` e `dry_run = false` — ou deixe os **3 horários automáticos diários** (**10:17 BRT**, **14:17 BRT** e **19:17 BRT**, usando minuto `:17` fora de pico para não atrasar no GitHub Actions) publicarem sozinhos!
-   > **Nota sobre limite diário do Buffer no YouTube:** o Buffer permite no máximo **2 envios por dia UTC no canal do YouTube** (TikTok e Instagram aceitam 3+/dia normalmente). Se quiser que **100% dos episódios saiam sincronizados nos 3 canais**, mantenha no máximo 2 disparos/dia no YouTube.
+5. Depois rode com `count = 1` e `dry_run = false` — ou deixe o cron automático de aquecimento (**1 vídeo/dia às 14:17 BRT**, minuto `:17` fora de pico) publicar sozinho!
+   > **Ritmo recomendado (aquecimento → escala):** durante o aquecimento inicial de contas novas no YouTube e TikTok, mantenha **1 vídeo/dia (`17 17 * * *`)**. Assim que YouTube e TikTok começarem a entregar views orgânicas como o Instagram, basta descomentar a 2ª linha em `.github/workflows/auto-publish.yml` para subir para **2 vídeos/dia** (teto diário do YouTube no Buffer, 100% sincronizado nos 3 canais!).
 
 ---
 

@@ -14,8 +14,11 @@ This document defines the **mandatory minimum quality floor** for every current 
    - Captions MUST use generous word spacing (`>= 0.34 * font_size`), max font size `56`, bold ink stroke, and zero opaque backing boxes.
    - Position captions so they never collide with platform bottom metadata or cut across BOLT's face/torso.
 3. **Cover 1:1 Center Crop (`y = 420..1500`):**
-   - Every episode cover (`cover.png`, `1080x1920`) MUST keep its series badge (`y = 432..484`), 2-line headline (`y = 498..636`), and bottom pill (`y = 1424..1484`) strictly inside the **1:1 center square (`y = 420..1500`)** so zero text is ever clipped in Instagram/TikTok/YouTube profile grids.
+   - Every episode cover (`cover.png` + `cover.jpg`, `1080x1920`) MUST keep its series badge (`y = 432..484`), 2-line headline (`y = 498..636`), and bottom pill (`y = 1424..1484`) strictly inside the **1:1 center square (`y = 420..1500`)** so zero text is ever clipped in Instagram/TikTok/YouTube profile grids.
    - Every episode's `render_cover_hero` MUST support dedicated cover framing (`is_cover=True`) so the 3D subject sits cleanly between the top headline and bottom pill (zero text colliding with 3D objects or BOLT's helmet), backed by dark vignette scrims (`_apply_cover_scrims`).
+4. **Frame 0 Hook Headline Safe Zone (`x = 215..865`, `y = 310..485`):**
+   - When platforms use Frame 0 as a profile grid thumbnail (e.g., Buffer Free `thumbnailOffset: 0`), Instagram overlays its top-right Reels play icon (`[▶]`) at `x ≈ 880..1040`.
+   - [`draw_top_hook`](src/cts_factory/engine/primitives.py) MUST hard-clamp the Frame 0 headline symmetrically around `cx = 540` with **`x <= 865`** (hard pixel ceiling `x <= 870`) and **`y >= 305`** so no word is ever clipped by the Reels `[▶]` badge.
 
 ---
 

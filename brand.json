@@ -47,10 +47,10 @@
     "fallback_font": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
     "safe_zones": {
       "top_hook": {
-        "x_min": 90,
-        "x_max": 990,
-        "y_min": 260,
-        "y_max": 460
+        "x_min": 215,
+        "x_max": 865,
+        "y_min": 310,
+        "y_max": 485
       },
       "captions": {
         "x_min": 110,

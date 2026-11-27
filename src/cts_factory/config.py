@@ -242,7 +242,7 @@ class SafeZoneRect(_DictLikeMixin):
 class SafeZones(_DictLikeMixin):
     """T7 safe-zone geometry for Shorts/Reels/TikTok video, covers, and YT banner."""
 
-    top_hook: SafeZoneRect = field(default_factory=lambda: SafeZoneRect(90, 990, 260, 460))
+    top_hook: SafeZoneRect = field(default_factory=lambda: SafeZoneRect(215, 865, 310, 485))
     captions: SafeZoneRect = field(
         default_factory=lambda: SafeZoneRect(110, 930, 1380, 1520, max_width_px=820)
     )

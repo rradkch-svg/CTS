@@ -451,8 +451,18 @@ def draw_top_hook(
     palette: Palette,
     repo_root: Path | None = None,
 ) -> None:
-    """Draw massive Frame 0 two-tone white + yellow outlined hook strictly inside y=260..460, x=90..990."""
+    """Draw bold Frame 0 two-tone white + yellow outlined hook strictly inside Reels/TikTok/Shorts safe zone.
+
+    Hard-clamped to x <= 865 (symmetrically centered at cx=540) and y >= 305 so the headline never collides
+    with the Instagram Reels profile grid top-right play badge when Frame 0 is used as the thumbnail.
+    """
     sz = brand.visual_style.safe_zones.top_hook
+    safe_x_max = min(sz.x_max, 865)
+    safe_x_min = max(sz.x_min, 1080 - safe_x_max)
+    safe_y_min = max(sz.y_min, 305)
+    safe_y_max = max(safe_y_min + 120, sz.y_max)
+    safe_w = max(240, safe_x_max - safe_x_min)
+    safe_h = safe_y_max - safe_y_min
     font_path = str(brand.visual_style.resolve_font_path("primary", repo_root=repo_root))
 
     words = hook_text.strip().upper().split()
@@ -465,34 +475,34 @@ def draw_top_hook(
     else:
         lines = [hook_text.strip().upper()]
 
-    font_size = 82 if len(lines) == 1 else 70
-    while font_size >= 38:
+    font_size = 74 if len(lines) == 1 else 62
+    while font_size >= 30:
         font = load_font(font_path, font_size)
-        sp_w = max(18, int(font_size * 0.34))
+        sp_w = max(14, int(font_size * 0.32))
         max_w = max(
             sum(draw.textbbox((0, 0), w, font=font, stroke_width=5)[2] for w in ln.split())
             + sp_w * max(0, len(ln.split()) - 1)
             for ln in lines
         )
         line_h = draw.textbbox((0, 0), "Ag", font=font, stroke_width=5)[3]
-        total_h = line_h * len(lines) + (14 if len(lines) > 1 else 0)
-        if max_w <= sz.width - 20 and total_h <= sz.height - 10:
+        total_h = line_h * len(lines) + (12 if len(lines) > 1 else 0)
+        if max_w <= safe_w - 16 and total_h <= safe_h - 8:
             break
-        font_size -= 4
+        font_size -= 2
 
     font = load_font(font_path, font_size)
-    sp_w = max(18, int(font_size * 0.34))
+    sp_w = max(14, int(font_size * 0.32))
     line_h = draw.textbbox((0, 0), "Ag", font=font, stroke_width=5)[3]
-    gap = 14 if len(lines) > 1 else 0
+    gap = 12 if len(lines) > 1 else 0
     total_h = line_h * len(lines) + gap
-    y = sz.y_min + max(0, (sz.height - total_h) // 2)
-    cx = (sz.x_min + sz.x_max) // 2
+    y = safe_y_min + max(0, (safe_h - total_h) // 2)
+    cx = (safe_x_min + safe_x_max) // 2
 
     for idx, ln in enumerate(lines):
         toks = ln.split()
         ws = [draw.textbbox((0, 0), w, font=font, stroke_width=5)[2] for w in toks]
         tw = sum(ws) + sp_w * max(0, len(toks) - 1)
-        x = max(sz.x_min, min(sz.x_max - tw, cx - tw // 2))
+        x = max(safe_x_min, min(safe_x_max - tw - 6, cx - tw // 2))
         fill = palette.text_highlight if idx == len(lines) - 1 else palette.text_primary
         for w, ww in zip(toks, ws):
             draw.text((x + 4, y + 5), w, font=font, fill=palette.ink, stroke_width=6, stroke_fill=palette.ink)
