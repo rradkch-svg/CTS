@@ -174,7 +174,9 @@ def _build_channel_input(service: str, channel_id: str, payload: "PublishPayload
             "shouldShareToFeed": True,
             "isAiGenerated": bool(payload.ai_disclosure),
         }
-        if payload.pinned_comment.strip():
+        # Buffer Free plan rejects Instagram firstComment ("First comment requires a paid plan").
+        # Only attach firstComment when explicitly enabled on a paid Buffer plan.
+        if (os.environ.get("BUFFER_ENABLE_FIRST_COMMENT") or "").strip() == "1" and payload.pinned_comment.strip():
             ig_meta["firstComment"] = payload.pinned_comment.strip()
         post_input["metadata"] = {"instagram": ig_meta}
     else:
@@ -227,7 +229,20 @@ def publish_via_buffer(payload: "PublishPayload") -> dict[str, Any]:
             data = _buffer_graphql(api_key, _CREATE_POST_MUTATION, variables={"input": post_input})
             res = data.get("createPost") or {}
             if res.get("message") and not res.get("post"):
-                raise RuntimeError(f"Buffer rejected {plat} post: {res['message']}")
+                msg = str(res["message"])
+                ig_meta = (post_input.get("metadata") or {}).get("instagram")
+                if (
+                    plat == "instagram"
+                    and isinstance(ig_meta, dict)
+                    and "firstComment" in ig_meta
+                    and "first comment" in msg.lower()
+                ):
+                    ig_meta.pop("firstComment", None)
+                    warnings.append(f"instagram firstComment omitted (requires paid Buffer plan): {msg}")
+                    data = _buffer_graphql(api_key, _CREATE_POST_MUTATION, variables={"input": post_input})
+                    res = data.get("createPost") or {}
+                if res.get("message") and not res.get("post"):
+                    raise RuntimeError(f"Buffer rejected {plat} post: {res['message']}")
             post = res.get("post") or {}
             if not post.get("id"):
                 raise RuntimeError(f"Buffer returned unexpected createPost response for {plat}: {res}")

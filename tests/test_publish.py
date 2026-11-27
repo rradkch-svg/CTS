@@ -627,7 +627,35 @@ def test_buffer_graphql_publishes_youtube_tiktok_and_instagram_free(
     ig_inp = next(i for i in created_inputs if i["channelId"] == "ch_ig")
     assert ig_inp["metadata"]["instagram"]["type"] == "reel"
     assert ig_inp["metadata"]["instagram"]["shouldShareToFeed"] is True
-    assert ig_inp["metadata"]["instagram"]["firstComment"] == "Comment YES or NO"
+    assert "firstComment" not in ig_inp["metadata"]["instagram"]
+
+
+def test_buffer_instagram_retries_without_first_comment_when_paid_feature_rejected(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    payload = _sample_payload(tmp_path, platforms=["instagram"])
+    monkeypatch.setenv("PUBLISH_API_KEY", "k_free")
+    monkeypatch.setenv("BUFFER_ENABLE_FIRST_COMMENT", "1")
+    calls = {"create": 0}
+
+    def _fake_gql(api_key: str, query: str, variables=None, timeout=90):
+        if "GetOrganizations" in query:
+            return {"account": {"organizations": [{"id": "org_1", "name": "FailSafe Lab"}]}}
+        if "GetChannels" in query:
+            return {"channels": [{"id": "ch_ig", "displayName": "FailSafe Lab IG", "service": "instagram"}]}
+        calls["create"] += 1
+        ig_meta = variables["input"]["metadata"]["instagram"]
+        if "firstComment" in ig_meta:
+            return {"createPost": {"message": "Invalid post: First comment requires a paid plan."}}
+        return {"createPost": {"post": {"id": "post_ig_ok", "status": "sending", "dueAt": None}}}
+
+    with patch("cts_factory.publish.buffer._buffer_graphql", side_effect=_fake_gql):
+        out = dispatch_publish("buffer", payload)
+
+    assert out["ok"] is True
+    assert out["succeeded_platforms"] == ["instagram"]
+    assert calls["create"] == 2
+    assert any("firstComment omitted" in w for w in out["warnings"])
 
 
 def test_buffer_check_account_redacts_api_key(monkeypatch: pytest.MonkeyPatch) -> None:
