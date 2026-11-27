@@ -749,7 +749,7 @@ def publish_via_ayrshare(payload: PublishPayload) -> dict[str, Any]:
 
 
 def publish_via_webhook(payload: PublishPayload) -> dict[str, Any]:
-    """Universal JSON webhook for n8n / Make / Zapier / custom automation workflows."""
+    """Universal JSON webhook for Make.com / n8n / Zapier / custom automation workflows."""
     webhook_url = (os.environ.get("PUBLISH_WEBHOOK_URL") or "").strip()
     if not webhook_url:
         raise RuntimeError("webhook provider requires PUBLISH_WEBHOOK_URL secret")
@@ -759,30 +759,53 @@ def publish_via_webhook(payload: PublishPayload) -> dict[str, Any]:
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
 
+    plats = [p.strip().lower() for p in payload.platforms if p.strip()]
+    yt_tags = payload.youtube_tags()
+    size_bytes = payload.mp4_path.stat().st_size
+    cover_png_url = payload.cover_url[:-4] + ".png" if payload.cover_url.endswith(".jpg") else payload.cover_url
+    ig_audio_name = (os.environ.get("IG_AUDIO_NAME") or "").strip() or DEFAULT_IG_AUDIO_NAME
+    playlist_id = (payload.youtube_playlist_id or os.environ.get("YOUTUBE_PLAYLIST_ID") or "").strip() or None
+
     body = {
         "episode_id": payload.episode_id,
         "slug": payload.slug,
-        "platforms": payload.platforms,
+        "platforms": plats,
+        "platforms_csv": ",".join(plats),
+        "publish_youtube": "youtube" in plats,
+        "publish_instagram": "instagram" in plats,
+        "publish_tiktok": "tiktok" in plats,
         "scheduled_date": payload.scheduled_date,
         "timezone": payload.timezone,
         "youtube": {
             "title": payload.youtube_title,
             "description": payload.youtube_description,
-            "tags": payload.youtube_tags(),
+            "tags": yt_tags,
+            "tags_csv": ",".join(yt_tags),
             "category_id": YOUTUBE_SCIENCE_TECH_CATEGORY_ID,
+            "privacy_status": "private" if payload.scheduled_date else "public",
+            "publish_at": payload.scheduled_date,
+            "made_for_kids": False,
+            "ai_disclosure": bool(payload.ai_disclosure),
+            "language": payload.language,
+            "playlist_id": playlist_id,
             "pinned_comment": payload.pinned_comment,
         },
         "instagram_tiktok": {
             "caption": payload.caption,
             "hashtags": payload.hashtags,
+            "hashtags_text": " ".join(h for h in payload.hashtags if h.strip()),
             "full_caption": payload.full_caption,
+            "audio_name": ig_audio_name,
             "pinned_comment": payload.pinned_comment,
         },
         "media": {
             "video_url": payload.video_url,
             "cover_url": payload.cover_url,
+            "cover_jpg_url": payload.cover_url,
+            "cover_png_url": cover_png_url,
             "video_filename": payload.mp4_path.name,
-            "video_size_bytes": payload.mp4_path.stat().st_size,
+            "video_size_bytes": size_bytes,
+            "video_size_mb": round(size_bytes / (1024 * 1024), 2),
             "has_cover_jpg": bool(payload.cover_jpg_path and payload.cover_jpg_path.is_file()),
         },
     }

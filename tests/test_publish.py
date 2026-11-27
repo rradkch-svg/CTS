@@ -356,14 +356,29 @@ def test_other_connectors_build_valid_http_requests(tmp_path: Path, monkeypatch:
         assert ayr_json["platforms"] == ["youtube", "tiktok", "instagram"]
         assert ayr_json["youTubeOptions"]["shorts"] is True
 
-        # 3. webhook (n8n / Make / Zapier)
+        # 3. webhook (Make.com / n8n / Zapier)
         monkeypatch.setenv("PUBLISH_WEBHOOK_URL", "https://hooks.example.test/cts")
         out = dispatch_publish("webhook", payload)
         assert out["ok"] is True
         wh_json = json.loads(calls[-1][1].decode("utf-8"))
         assert wh_json["episode_id"] == "ep01"
+        assert wh_json["publish_youtube"] is True
+        assert wh_json["publish_instagram"] is True
+        assert wh_json["youtube"]["privacy_status"] == "public"
+        assert "Shorts" in wh_json["youtube"]["tags_csv"]
         assert wh_json["media"]["video_size_bytes"] == 7
         assert wh_json["media"]["has_cover_jpg"] is True
+        assert wh_json["media"]["cover_jpg_url"].endswith("cover.jpg")
+        assert wh_json["media"]["cover_png_url"].endswith("cover.png")
+
+    # Verify Make.com blueprint JSON parses cleanly and references expected webhook fields
+    bp_path = REPO_ROOT / "automation" / "make_com_blueprint.json"
+    bp = json.loads(bp_path.read_text(encoding="utf-8"))
+    assert bp["flow"][0]["module"] == "gateway:CustomWebHook"
+    bp_text = bp_path.read_text(encoding="utf-8")
+    assert "{{1.media.video_url}}" in bp_text
+    assert "{{1.instagram_tiktok.full_caption}}" in bp_text
+    assert "{{1.youtube.title}}" in bp_text
 
 
 def test_partial_batch_failure_persists_success_and_retry_failed_resumes_cleanly(

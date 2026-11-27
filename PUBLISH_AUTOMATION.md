@@ -1,12 +1,16 @@
 # Automação 100% na Nuvem e 100% Gratuita (`YouTube Shorts` + `Instagram Reels`)
 
-Este repositório publica automaticamente via **GitHub Actions** ([`.github/workflows/auto-publish.yml`](.github/workflows/auto-publish.yml)) + fila idempotente ([`publish_queue.json`](publish_queue.json)) + **conector DIRETO oficial gratuito** ([`src/cts_factory/publish/direct.py`](src/cts_factory/publish/direct.py)) — **zero intermediário pago e zero limite de 10 vídeos/mês!**
+Este repositório publica automaticamente via **GitHub Actions** ([`.github/workflows/auto-publish.yml`](.github/workflows/auto-publish.yml)) + fila idempotente ([`publish_queue.json`](publish_queue.json)).
 
-O GitHub Actions acorda todo dia às **12:00 BRT (15:00 UTC)**, pega o próximo episódio aprovado no QA (`qa_report.json -> passed: true`), publica direto nas APIs oficiais do **YouTube** e do **Instagram**, e atualiza `publish_queue.json` a cada vídeo para nunca duplicar postagens.
+## Caminho Mais Rápido (Sem Google Cloud / Sem Política de Privacidade): `PUBLISH_PROVIDER = webhook` + Make.com
+
+- Siga o guia de 2 minutos em **[`automation/MAKE_COM_SETUP.md`](automation/MAKE_COM_SETUP.md)** e importe o blueprint pronto **[`automation/make_com_blueprint.json`](automation/make_com_blueprint.json)** no Make.com!
+- Configure apenas 2 Secrets no GitHub: `PUBLISH_PROVIDER = webhook` e `PUBLISH_WEBHOOK_URL = <URL do Make>`.
+- Como o repositório é **público**, o **Instagram Reels funciona 100% GRÁTIS** no Make Free (0 MB transferido pelo Make). Para incluir **YouTube** pelo Make com vídeos de 9–18 MB, use o Make Core (limite de 100 MB) ou a Opção Direta abaixo.
 
 ---
 
-## Opção 1 (RECOMENDADA — 100% Grátis para sempre): `PUBLISH_PROVIDER = direct`
+## Opção 2 (100% Grátis para YouTube e Instagram via API Oficial): `PUBLISH_PROVIDER = direct`
 
 ### A. YouTube Shorts — 100% Grátis (~6 vídeos/dia, ~180/mês, funciona até em repo privado!)
 Envia o `.mp4` em binário direto para a **YouTube Data API v3** (10.000 unidades/dia grátis do Google), já com:
