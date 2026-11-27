@@ -426,3 +426,138 @@ def test_scheduled_run_marks_queue_item_scheduled_and_never_reuploads(
     ep01 = q_after.get_by_slug("ep01_elevator_safety_brake")
     assert ep01 is not None and ep01.status == "scheduled"
     assert ep01.external_ids["job_id"] == "job_999"
+
+
+def test_direct_publisher_youtube_and_instagram_full_flow(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    payload = _sample_payload(tmp_path)
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "yt_cid")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "yt_csec")
+    monkeypatch.setenv("YOUTUBE_REFRESH_TOKEN", "yt_ref")
+    monkeypatch.setenv("YOUTUBE_PLAYLIST_ID", "PLdirect1")
+    monkeypatch.setenv("IG_USER_ID", "17841400001")
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "IG_SECRET_TOKEN")
+    monkeypatch.setenv("IG_POLL_INTERVAL_S", "0.01")
+
+    http_log: list[tuple[str, str]] = []
+    ig_poll = {"n": 0}
+
+    def _fake_http_call(method: str, url: str, *, body=None, headers=None, timeout=120):
+        http_log.append((method, url))
+        if "oauth2.googleapis.com/token" in url:
+            return 200, {}, {"access_token": "yt_access_tok"}
+        if "upload/youtube/v3/videos" in url and method == "POST":
+            meta = json.loads(body.decode("utf-8"))
+            assert meta["snippet"]["categoryId"] == "28"
+            assert meta["status"]["privacyStatus"] == "public"
+            assert meta["status"]["selfDeclaredMadeForKids"] is False
+            assert "Shorts" in meta["snippet"]["tags"]
+            return 200, {"location": "https://upload.youtube.local/session/1"}, {}
+        if url == "https://upload.youtube.local/session/1" and method == "PUT":
+            assert body == b"MP4DATA"
+            return 200, {}, {"id": "YT_VID_001"}
+        if "thumbnails/set" in url:
+            assert body == b"\xff\xd8\xffJPGDATA"
+            return 200, {}, {"items": [{}]}
+        if "youtube/v3/commentThreads" in url:
+            return 200, {}, {"id": "yt_cmt_1"}
+        if "youtube/v3/playlistItems" in url:
+            return 200, {}, {"id": "yt_pl_item_1"}
+        if "/17841400001/media" in url and not url.endswith("/media_publish"):
+            form_text = body.decode("utf-8")
+            assert "media_type=REELS" in form_text
+            assert "share_to_feed=true" in form_text
+            return 200, {}, {"id": "ig_container_1"}
+        if "/ig_container_1?" in url:
+            ig_poll["n"] += 1
+            return 200, {}, {"status_code": "IN_PROGRESS" if ig_poll["n"] == 1 else "FINISHED"}
+        if "/17841400001/media_publish" in url:
+            return 200, {}, {"id": "ig_media_99"}
+        if "/ig_media_99?" in url:
+            return 200, {}, {"permalink": "https://www.instagram.com/reel/DIRECT99/"}
+        if "/ig_media_99/comments" in url:
+            return 200, {}, {"id": "ig_cmt_99"}
+        raise AssertionError(f"Unexpected call: {method} {url}")
+
+    with patch("cts_factory.publish.direct._http_call", side_effect=_fake_http_call):
+        out = dispatch_publish("direct", payload)
+
+    assert out["ok"] is True
+    assert out["provider"] == "direct"
+    assert out["dispatch_state"] == "published"
+    assert out["succeeded_platforms"] == ["youtube", "instagram"]
+    assert out["platform_urls"]["youtube"] == "https://www.youtube.com/shorts/YT_VID_001"
+    assert out["platform_urls"]["instagram"] == "https://www.instagram.com/reel/DIRECT99/"
+    assert out["results"]["youtube"]["thumbnail_set"] is True
+    assert out["results"]["youtube"]["first_comment_id"] == "yt_cmt_1"
+    assert out["results"]["youtube"]["playlists_added"] == ["PLdirect1"]
+    assert out["results"]["instagram"]["first_comment_id"] == "ig_cmt_99"
+    assert any("tiktok" in n.lower() for n in out["notes"])
+
+
+def test_direct_publisher_youtube_only_scheduled_and_partial_failure_safety(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # Only YouTube configured + scheduled_date -> publishes/schedules YouTube cleanly without requiring IG secrets
+    payload = _sample_payload(tmp_path, scheduled_date="2026-12-05T15:00:00Z")
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "yt_cid")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "yt_csec")
+    monkeypatch.setenv("YOUTUBE_REFRESH_TOKEN", "yt_ref")
+    monkeypatch.delenv("IG_USER_ID", raising=False)
+    monkeypatch.delenv("IG_ACCESS_TOKEN", raising=False)
+
+    def _fake_yt_only(method: str, url: str, *, body=None, headers=None, timeout=120):
+        if "oauth2.googleapis.com/token" in url:
+            return 200, {}, {"access_token": "yt_tok"}
+        if "upload/youtube/v3/videos" in url:
+            meta = json.loads(body.decode("utf-8"))
+            assert meta["status"]["privacyStatus"] == "private"
+            assert meta["status"]["publishAt"] == "2026-12-05T15:00:00Z"
+            return 200, {"location": "https://upload.youtube.local/sched"}, {}
+        if url == "https://upload.youtube.local/sched":
+            return 200, {}, {"id": "YT_SCHED_77"}
+        if "thumbnails/set" in url:
+            return 200, {}, {}
+        raise AssertionError(f"Unexpected call: {method} {url}")
+
+    with patch("cts_factory.publish.direct._http_call", side_effect=_fake_yt_only):
+        out = dispatch_publish("direct", payload)
+
+    assert out["dispatch_state"] == "scheduled"
+    assert out["succeeded_platforms"] == ["youtube"]
+    assert any("instagram" in n.lower() for n in out["notes"])
+
+
+def test_direct_check_account_verifies_channels_without_leaking_secrets(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from cts_factory.publish.connectors import inspect_publish_account
+
+    monkeypatch.setenv("PUBLISH_PROVIDER", "direct")
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "cid_123")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "ULTRA_SECRET_YT_KEY")
+    monkeypatch.setenv("YOUTUBE_REFRESH_TOKEN", "ULTRA_SECRET_REFRESH")
+    monkeypatch.setenv("IG_USER_ID", "17841400001")
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "ULTRA_SECRET_IG_TOKEN")
+
+    def _fake_check(method: str, url: str, *, body=None, headers=None, timeout=120):
+        if "oauth2.googleapis.com/token" in url:
+            return 200, {}, {"access_token": "temp_tok"}
+        if "youtube/v3/channels" in url:
+            return 200, {}, {"items": [{"id": "UCfailsafe", "snippet": {"title": "FailSafe Lab", "customUrl": "@FailSafeLab"}}]}
+        if "graph.facebook.com" in url:
+            return 200, {}, {"id": "17841400001", "username": "failsafelab", "name": "FailSafe Lab"}
+        raise AssertionError(f"Unexpected {url}")
+
+    with patch("cts_factory.publish.direct._http_call", side_effect=_fake_check):
+        info = inspect_publish_account()
+
+    serialized = json.dumps(info)
+    for secret in ("ULTRA_SECRET_YT_KEY", "ULTRA_SECRET_REFRESH", "ULTRA_SECRET_IG_TOKEN"):
+        assert secret not in serialized
+    assert info["provider"] == "direct"
+    assert info["resolution_error"] is None
+    assert info["youtube"]["channel_title"] == "FailSafe Lab"
+    assert info["instagram"]["username"] == "failsafelab"
+

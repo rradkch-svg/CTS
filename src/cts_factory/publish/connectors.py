@@ -789,6 +789,25 @@ def publish_via_webhook(payload: PublishPayload) -> dict[str, Any]:
     return _http_request(webhook_url, body=json.dumps(body).encode("utf-8"), headers=headers)
 
 
+def inspect_publish_account(provider: str | None = None) -> dict[str, Any]:
+    """Read-only diagnostic summary for either `direct` (YouTube/Instagram) or `upload_post`."""
+    from cts_factory.publish.direct import has_direct_credentials, inspect_direct_account
+
+    prov = (provider or "").strip().lower()
+    if not prov or prov == "auto":
+        env_prov = (os.environ.get("PUBLISH_PROVIDER") or "").strip().lower()
+        if env_prov:
+            prov = env_prov
+        elif has_direct_credentials():
+            prov = "direct"
+        else:
+            prov = "upload_post"
+
+    if prov in ("direct", "youtube_direct", "instagram_direct"):
+        return inspect_direct_account()
+    return inspect_upload_post_account()
+
+
 def dispatch_publish(provider: str, payload: PublishPayload, dry_run: bool = False) -> dict[str, Any]:
     """Dispatch a single episode payload to the configured unified connector (or dry_run)."""
     prov = provider.strip().lower()
@@ -811,7 +830,12 @@ def dispatch_publish(provider: str, payload: PublishPayload, dry_run: bool = Fal
             "video_size_bytes": payload.mp4_path.stat().st_size,
         }
 
+    from cts_factory.publish.direct import publish_instagram_direct, publish_via_direct, publish_youtube_direct
+
     dispatch_map = {
+        "direct": publish_via_direct,
+        "youtube_direct": publish_youtube_direct,
+        "instagram_direct": publish_instagram_direct,
         "upload_post": publish_via_upload_post,
         "postiz": publish_via_postiz,
         "ayrshare": publish_via_ayrshare,

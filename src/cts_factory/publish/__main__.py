@@ -7,7 +7,7 @@ import json
 import sys
 from pathlib import Path
 
-from cts_factory.publish.connectors import inspect_upload_post_account
+from cts_factory.publish.connectors import inspect_publish_account
 from cts_factory.publish.queue import sync_publish_queue
 from cts_factory.publish.runner import run_publish_batch
 
@@ -21,7 +21,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--check-account",
         action="store_true",
-        help="Read-only diagnostic: query GET /api/uploadposts/users and print profiles + connected accounts",
+        help="Read-only diagnostic: inspect configured direct (YouTube/Instagram) or Upload-Post accounts",
     )
     parser.add_argument("--count", type=int, default=1, help="Max episodes to publish in this run (default: 1)")
     parser.add_argument("--episode", default=None, help="Optional single episode slug to publish")
@@ -34,7 +34,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--scheduled-date",
         default=None,
-        help="Optional ISO-8601 future timestamp for Upload-Post native scheduling (e.g. 2026-11-26T15:00:00Z)",
+        help="Optional ISO-8601 future timestamp for native scheduling (e.g. 2026-11-26T15:00:00Z)",
     )
     parser.add_argument(
         "--timezone",
@@ -54,14 +54,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--provider",
         default="auto",
-        help="Connector: auto | upload_post | postiz | ayrshare | webhook | dry_run",
+        help="Connector: auto | direct | upload_post | postiz | ayrshare | webhook | dry_run",
     )
     parser.add_argument("--dry-run", action="store_true", help="Validate & preview payload without calling external API")
     args = parser.parse_args(argv)
     root = Path.cwd()
 
     if args.check_account:
-        info = inspect_upload_post_account()
+        info = inspect_publish_account(provider=args.provider)
         print(json.dumps(info, indent=2, ensure_ascii=False))
         return 0 if not info.get("resolution_error") else 2
 
