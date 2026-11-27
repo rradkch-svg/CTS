@@ -118,9 +118,9 @@
     "continuous_ambient_bed": true
   },
   "retention_rules": {
-    "frame_0_hook": "Full-frame peak-tension 2.5D macro cutaway frozen at critical mechanical load + bold two-tone white/yellow outlined top hook text inside y=260..460, x=90..990 + immediate spoken hook at t=0.0s (zero fade-in, zero empty wide shot, zero HUD callout clutter on Beat 1).",
+    "frame_0_hook": "Full-frame peak-tension 2.5D macro cutaway frozen at critical mechanical load + bold two-tone white/yellow outlined top hook text inside y=310..485, x=215..865 (clearing Reels grid play badge) + immediate spoken hook at t=0.0s (zero fade-in, zero empty wide shot, zero HUD callout clutter on Beat 1).",
     "no_mid_video_subscribe_cta": true,
-    "ending_cta": "Low-friction 1-word or 1-number comment prompt tied directly to the engineering scenario (e.g., Comment YES or NO).",
+    "ending_cta": "Follow FailSafe Lab before the next machine breaks — and comment YES or NO.",
     "caption_chunk_words": [2, 4],
     "caption_style": "clean_outlined_no_box",
     "min_camera_angles": 4

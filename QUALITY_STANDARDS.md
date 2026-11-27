@@ -65,6 +65,10 @@ This document defines the **mandatory minimum quality floor** for every current 
 3. **Typography & Units:**
    - Always use real typographic symbols (`°F`, `°`) instead of `DEG F` / `DEG` in all new scripts and on-screen telemetry.
    - Avoid splitting numbers from their units across lines in top hooks (e.g., keep `40 FT` together).
+4. **Cross-Platform Ending CTA (YouTube Shorts + TikTok + Instagram Reels — `ep11+`):**
+   - Never say `"Subscribe"` mid-video or at the end (sounds recycled on TikTok/Instagram).
+   - In the final ~2 seconds (Beat 12, seamlessly attached to the ending question with BOLT waving), close with the canonical cross-platform line:
+     > **`"Follow FailSafe Lab before the next machine breaks — and comment YES or NO."`**
 
 ---
 
