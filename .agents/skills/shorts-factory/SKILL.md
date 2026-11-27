@@ -19,12 +19,14 @@ This skill encodes the battle-tested rules and **mandatory minimum quality floor
    - **`65–80 seconds`** (hard floor `>= 62s` for TikTok Creator Rewards eligibility while staying punchy on Shorts & Reels).
 4. **Frame 0 (`0.0s`) = Feed Cover (Most Important Retention Lever):**
    - Never open on an empty wide shot or slow fade-in.
-   - Open at `t = 0.0s` on peak-tension 3D action + short high-contrast two-tone hook text across the top (`y = 260..460`), immediately paired with a sharp spoken hook.
+   - Open at `t = 0.0s` on peak-tension 3D action + short high-contrast two-tone hook text across the top (`x = 215..865`, `y = 310..485`, clearing the Instagram Reels grid `[▶]` badge), immediately paired with a sharp spoken hook.
 5. **Interactive BOLT Beats & Zero Mid-Video Subscribe Prompts:**
    - Never ask viewers to "like and subscribe" mid-video.
    - Include playful narrator-to-BOLT interaction beats (e.g., waving, comedic reactions tied directly to the mechanism such as sliding down a flooded dam spillway or cruising in his vehicle).
-6. **1-Word Ending CTA:**
-   - End with a low-friction **1-word / 1-number comment prompt** directly tied to the story (e.g., `"Comment YES or NO"`).
+6. **Cross-Platform Ending Follow + 1-Word Comment CTA (`ep11+`):**
+   - Never say `"Subscribe"` (breaks native feel on TikTok & Instagram).
+   - Close seamlessly in the final ~2 seconds (Beat 12, while BOLT waves) with our canonical cross-platform line + 1-word prompt:
+     > `"Follow FailSafe Lab before the next machine breaks — and comment YES or NO."`
 
 ---
 
