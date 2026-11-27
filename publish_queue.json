@@ -251,7 +251,7 @@
     {
       "episode_id": "ep07",
       "slug": "ep07_jet_engine_bird_strike",
-      "status": "pending",
+      "status": "published",
       "platforms": [
         "youtube",
         "tiktok",
@@ -259,15 +259,57 @@
       ],
       "batch": "daily",
       "publish_after_utc": null,
-      "published_at_utc": null,
-      "provider": null,
-      "external_ids": {},
+      "published_at_utc": "2026-11-27T17:35:57Z",
+      "provider": "buffer",
+      "external_ids": {
+        "ok": true,
+        "provider": "buffer",
+        "dispatch_state": "published",
+        "effective_platforms": [
+          "youtube",
+          "tiktok",
+          "instagram"
+        ],
+        "succeeded_platforms": [
+          "youtube",
+          "tiktok",
+          "instagram"
+        ],
+        "results": {
+          "youtube": {
+            "success": true,
+            "channel_id": "6b09076c8541f09ecbbbaae1",
+            "channel_name": "FailSafe Lab",
+            "post_id": "6b09bf65f34d25de1e32d08d",
+            "status": "sent",
+            "due_at": "2026-11-27T17:35:33.632Z"
+          },
+          "tiktok": {
+            "success": true,
+            "channel_id": "6b09087f8541f09ecbbbb1ec",
+            "channel_name": "failsafe.lab",
+            "post_id": "6b09bf69f34d25de1e32d2ad",
+            "status": "sending",
+            "due_at": "2026-11-27T17:35:37.097Z"
+          },
+          "instagram": {
+            "success": true,
+            "channel_id": "6b0907358541f09ecbbba952",
+            "channel_name": "failsafelab",
+            "post_id": "6b09bf73437395ca6eecf87d",
+            "status": "sending",
+            "due_at": "2026-11-27T17:35:47.603Z"
+          }
+        },
+        "notes": [],
+        "warnings": []
+      },
       "last_error": null
     },
     {
       "episode_id": "ep08",
       "slug": "ep08_dam_spillway_cavitation",
-      "status": "pending",
+      "status": "published",
       "platforms": [
         "youtube",
         "tiktok",
@@ -275,9 +317,47 @@
       ],
       "batch": "daily",
       "publish_after_utc": null,
-      "published_at_utc": null,
-      "provider": null,
-      "external_ids": {},
+      "published_at_utc": "2026-11-27T17:36:19Z",
+      "provider": "buffer",
+      "external_ids": {
+        "ok": true,
+        "provider": "buffer",
+        "dispatch_state": "published",
+        "effective_platforms": [
+          "youtube",
+          "tiktok",
+          "instagram"
+        ],
+        "succeeded_platforms": [
+          "tiktok",
+          "instagram"
+        ],
+        "results": {
+          "tiktok": {
+            "success": true,
+            "channel_id": "6b09087f8541f09ecbbbb1ec",
+            "channel_name": "failsafe.lab",
+            "post_id": "6b09bf7e446d2e47aaa764e0",
+            "status": "sending",
+            "due_at": "2026-11-27T17:35:58.816Z"
+          },
+          "instagram": {
+            "success": true,
+            "channel_id": "6b0907358541f09ecbbba952",
+            "channel_name": "failsafelab",
+            "post_id": "6b09bf89446d2e47aaa7686c",
+            "status": "sending",
+            "due_at": "2026-11-27T17:36:09.452Z"
+          }
+        },
+        "notes": [],
+        "warnings": [
+          "Partial failure on youtube: Buffer rejected youtube post: You have already scheduled the maximum number of posts YouTube allows in a day (2). Please consider scheduling this post for another day."
+        ],
+        "partial_failures": {
+          "youtube": "Buffer rejected youtube post: You have already scheduled the maximum number of posts YouTube allows in a day (2). Please consider scheduling this post for another day."
+        }
+      },
       "last_error": null
     },
     {
